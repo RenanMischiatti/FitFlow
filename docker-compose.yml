@@ -1,0 +1,85 @@
+services:
+  # Frontend React
+  frontend:
+    container_name: fitflow-frontend
+    build:
+      context: ./fitflow-frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:8080"
+    volumes:
+      - ./fitflow-frontend:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+      - VITE_API_URL=http://localhost:8000/api
+    networks:
+      - fitflow-network
+    depends_on:
+      - backend
+
+  # Backend Laravel
+  backend:
+    container_name: fitflow-backend
+    build:
+      context: ./fitflow-backend
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./fitflow-backend:/var/www/html
+      - ./fitflow-backend/storage:/var/www/html/storage
+    environment:
+      - DB_CONNECTION=${DB_CONNECTION:-mysql}
+      - DB_HOST=${DB_HOST:-mysql}
+      - DB_PORT=${DB_PORT:-3306}
+      - DB_DATABASE=${DB_DATABASE:-fitflow}
+      - DB_USERNAME=${DB_USERNAME:-fitflow_user}
+      - DB_PASSWORD=${DB_PASSWORD:-fitflow_password}
+    networks:
+      - fitflow-network
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+  # MySQL Database
+  mysql:
+    container_name: fitflow-mysql
+    image: mysql:8.0
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_DATABASE=${DB_DATABASE:-fitflow}
+      - MYSQL_USER=${DB_USERNAME:-fitflow_user}
+      - MYSQL_PASSWORD=${DB_PASSWORD:-fitflow_password}
+      - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD:-rootpassword}
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - fitflow-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p$${MYSQL_ROOT_PASSWORD}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Nginx Reverse Proxy
+  nginx:
+    container_name: fitflow-nginx
+    image: nginx:alpine
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+    networks:
+      - fitflow-network
+    depends_on:
+      - frontend
+      - backend
+
+networks:
+  fitflow-network:
+    driver: bridge
+
+volumes:
+  mysql-data:
