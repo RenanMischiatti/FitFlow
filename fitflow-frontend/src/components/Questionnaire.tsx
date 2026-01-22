@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
   Target, Dumbbell, User, Calendar, Ruler, Scale, Clock, 
@@ -61,18 +61,33 @@ const Questionnaire = () => {
   const [showLanding, setShowLanding] = useState(true);
   const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000/api';
 
+  useEffect(() => {
+    const savedData = localStorage.getItem("fitflow_formData");
+    if (savedData) {
+      setFormData(JSON.parse(savedData));
+      setCurrentStep(questions.length); // assume que já respondeu tudo
+      setShowSummary(true); // vai direto para o resumo / checkout
+    }
+  }, []);
+
   const updateFormData = useCallback((key: keyof FormData, value: string | string[]) => {
-    setFormData(prev => ({ ...prev, [key]: value }));
+    setFormData(prev => {
+      const newData = { ...prev, [key]: value };
+      localStorage.setItem("fitflow_formData", JSON.stringify(newData));
+      return newData;
+    });
   }, []);
 
   const toggleArrayValue = useCallback((key: keyof FormData, value: string) => {
     setFormData(prev => {
       const currentArray = prev[key] as string[];
-      if (currentArray.includes(value)) {
-        return { ...prev, [key]: currentArray.filter(v => v !== value) };
-      } else {
-        return { ...prev, [key]: [...currentArray, value] };
-      }
+      const newArray = currentArray.includes(value)
+        ? currentArray.filter(v => v !== value)
+        : [...currentArray, value];
+
+      const newData = { ...prev, [key]: newArray };
+      localStorage.setItem("fitflow_formData", JSON.stringify(newData));
+      return newData;
     });
   }, []);
 
@@ -113,30 +128,47 @@ const Questionnaire = () => {
     }
   };
 
+  const handleEditResponses = () => {
+    setShowSummary(false); 
+    setCurrentStep(0); 
+  };
+  
+  const [isPurchasing, setIsPurchasing] = useState(false);
+
   const handlePurchase = async () => {
     try {
-      const response = await fetch(`${API_URL}/health`, {
+      setIsPurchasing(true); // ativa o loading
+
+      const response = await fetch(`${API_URL}/payment/start-checkout`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Accept': 'application/json',
+          Accept: 'application/json',
         },
-        body: JSON.stringify({
-          message: 'Hello from React!',
-          formData: formData 
-        }),
+        body: JSON.stringify({ formData }),
       });
 
       if (!response.ok) {
-        throw new Error('Erro na requisição');
+        throw new Error('Erro na requisição: ' + response.statusText);
       }
 
       const data = await response.json();
-      alert(data.message); // Alert com resposta do Laravel
 
-    } catch (error) {
-      alert('Erro ao conectar com o backend: ' + error);
-      console.error('Error:', error);
+      if (!data.checkout_url) {
+        throw new Error('URL do checkout não recebida');
+      }
+
+      // Mostra o loading por pelo menos 500ms para o usuário perceber
+      await new Promise(resolve => setTimeout(resolve, 500));
+
+      // Redireciona para Stripe (mobile-friendly)
+      window.location.href = data.checkout_url;
+      localStorage.removeItem("fitflow_formData");
+
+    } catch (error: any) {
+      console.error(error);
+      alert('Erro ao iniciar o pagamento: ' + error.message);
+      setIsPurchasing(false); // desativa o loading em caso de erro
     }
   };
 
@@ -509,7 +541,7 @@ const Questionnaire = () => {
   }
 
   if (showSummary) {
-    return <SummaryScreen items={getSummaryItems()} onPurchase={handlePurchase} />;
+    return <SummaryScreen items={getSummaryItems()} onPurchase={handlePurchase} onEdit={handleEditResponses} />;
   }
 
   const currentQuestion = questions[currentStep];

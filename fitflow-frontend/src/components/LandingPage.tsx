@@ -47,7 +47,7 @@ const LandingPage = ({ onStart }: LandingPageProps) => {
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
             >
-              PHYSIQ
+              FITFLOW
             </motion.span>
             <Button variant="outline" size="sm" onClick={onStart} className="border-border/50">
               Começar agora
@@ -218,7 +218,7 @@ const LandingPage = ({ onStart }: LandingPageProps) => {
                     <Brain className="w-6 h-6 text-primary" />
                   </div>
                   <div>
-                    <h4 className="text-lg font-semibold text-foreground">PHYSIQ AI Engine</h4>
+                    <h4 className="text-lg font-semibold text-foreground">FITFLOW AI Engine</h4>
                     <p className="text-muted-foreground text-sm">v2.0 • Atualizado em 2026</p>
                   </div>
                 </div>
@@ -269,7 +269,7 @@ const LandingPage = ({ onStart }: LandingPageProps) => {
           >
             <span className="text-primary text-sm font-medium uppercase tracking-wider">Vantagens</span>
             <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground mt-3 mb-4">
-              Por que escolher o PHYSIQ?
+              Por que escolher o FITFLOW?
             </h2>
             <p className="text-muted-foreground text-lg">
               Diferenciais que fazem a diferença no seu resultado
@@ -311,7 +311,7 @@ const LandingPage = ({ onStart }: LandingPageProps) => {
               O que dizem nossos usuários
             </h2>
             <p className="text-muted-foreground text-lg">
-              Milhares de pessoas já transformaram seus corpos com PHYSIQ
+              Milhares de pessoas já transformaram seus corpos com FITFLOW
             </p>
           </motion.div>
 
@@ -398,9 +398,9 @@ const LandingPage = ({ onStart }: LandingPageProps) => {
       {/* Footer */}
       <footer className="py-8 px-4 border-t border-border/30">
         <div className="max-w-6xl mx-auto text-center">
-          <span className="text-xl font-display font-bold gradient-text">PHYSIQ</span>
+          <span className="text-xl font-display font-bold gradient-text">FITFLOW</span>
           <p className="text-muted-foreground text-sm mt-3">
-            © 2026 PHYSIQ. Todos os direitos reservados.
+            © 2026 FITFLOW. Todos os direitos reservados.
           </p>
         </div>
       </footer>

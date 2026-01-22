@@ -1,11 +1,13 @@
 <?php
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\StripeController;
+use App\Http\Controllers\Api\TestController;
 
-Route::post('/health', function(Request $request) {
 
-    Log::info($request->all());
-    return response()->json(['message' => 'Backend confirmado'], 200);
-});
+// Rotas do Stripe
+Route::post('/payment/start-checkout', [StripeController::class, 'createCheckoutSession']);
+Route::post('/payment/check-status', [StripeController::class, 'checkStatus']);
+
+// Webhook do Stripe
+Route::post('/webhooks/stripe', [StripeController::class, 'webhook']);

@@ -40,7 +40,7 @@ const Logo = ({ size = "default" }: { size?: "small" | "default" | "large" }) =>
         </svg>
       </div>
       <span className={`${text} font-display font-bold gradient-text`}>
-        PHYSIQ
+        FITFLOW
       </span>
     </motion.div>
   );

@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Check, Sparkles, Shield, Award, Clock } from "lucide-react";
 import { Button } from "./ui/button";
+import { useState } from "react";
 
 interface SummaryItem {
   label: string;
@@ -9,30 +10,30 @@ interface SummaryItem {
 
 interface SummaryScreenProps {
   items: SummaryItem[];
-  onPurchase: () => void;
+  onPurchase: () => Promise<void>;
+  onEdit: () => void;
 }
 
-const SummaryScreen = ({ items, onPurchase }: SummaryScreenProps) => {
+const SummaryScreen = ({ items, onPurchase, onEdit }: SummaryScreenProps) => {
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleClick = async () => {
+    try {
+      setIsLoading(true);
+      await onPurchase(); // aguarda a função de pagamento
+    } finally {
+      setIsLoading(false); // desativa loading após a conclusão ou erro
+    }
+  };
+
   return (
     <div className="min-h-screen bg-background flex flex-col px-4 py-8 relative overflow-hidden">
-      {/* Subtle gradient overlay - much softer */}
       <div className="absolute inset-0 bg-gradient-to-b from-primary/[0.02] via-transparent to-secondary/[0.02] pointer-events-none" />
       
       <div className="max-w-2xl mx-auto w-full flex-1 flex flex-col relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="text-center mb-8"
-        >
-          {/* Simple text logo */}
-          <motion.span 
-            className="text-2xl font-display font-bold gradient-text"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-          >
-            PHYSIQ
-          </motion.span>
-          
+        {/* Header */}
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-8">
+          <motion.span className="text-2xl font-display font-bold gradient-text">FITFLOW</motion.span>
           <h1 className="text-3xl md:text-4xl font-display font-bold text-foreground mt-6 mb-3">
             Seu plano está pronto!
           </h1>
@@ -41,13 +42,8 @@ const SummaryScreen = ({ items, onPurchase }: SummaryScreenProps) => {
           </p>
         </motion.div>
 
-        {/* Profile Summary Card */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-          className="bg-card border border-border rounded-2xl p-6 mb-6"
-        >
+        {/* Summary Card */}
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="bg-card border border-border rounded-2xl p-6 mb-6">
           <h3 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
             <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
               <Check className="w-4 h-4 text-primary" />
@@ -71,23 +67,14 @@ const SummaryScreen = ({ items, onPurchase }: SummaryScreenProps) => {
         </motion.div>
 
         {/* Plan Card */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4 }}
-          className="bg-card border border-primary/20 rounded-2xl p-6 mb-6"
-        >
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }} className="bg-card border border-primary/20 rounded-2xl p-6 mb-6">
           <div className="flex items-center gap-4 mb-5">
             <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center">
               <Sparkles className="w-6 h-6 text-primary" />
             </div>
             <div>
-              <h3 className="text-lg font-semibold text-foreground">
-                Plano Completo de Treino + Dieta
-              </h3>
-              <p className="text-muted-foreground text-sm">
-                Personalizado com base científica
-              </p>
+              <h3 className="text-lg font-semibold text-foreground">Plano Completo de Treino + Dieta</h3>
+              <p className="text-muted-foreground text-sm">Personalizado com base científica</p>
             </div>
           </div>
           
@@ -114,30 +101,19 @@ const SummaryScreen = ({ items, onPurchase }: SummaryScreenProps) => {
             ))}
           </ul>
 
-          {/* Price Section */}
+          {/* Price */}
           <div className="text-center pt-4 border-t border-border/30">
             <div className="mb-3">
               <span className="text-muted-foreground line-through text-lg mr-3">R$ 47,00</span>
               <span className="text-4xl font-bold gradient-text">R$ 9,90</span>
             </div>
-            <p className="text-sm text-muted-foreground">
-              Pagamento único • Acesso imediato
-            </p>
+            <p className="text-sm text-muted-foreground">Pagamento único • Acesso imediato</p>
           </div>
         </motion.div>
 
-        {/* Trust Badges */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.6 }}
-          className="grid grid-cols-3 gap-3 mb-6"
-        >
-          {[
-            { icon: Shield, text: "Pagamento Seguro" },
-            { icon: Award, text: "Garantia Total" },
-            { icon: Clock, text: "Acesso Imediato" },
-          ].map((badge, index) => (
+        {/* Trust badges */}
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6 }} className="grid grid-cols-3 gap-3 mb-6">
+          {[{ icon: Shield, text: "Pagamento Seguro" }, { icon: Award, text: "Garantia Total" }, { icon: Clock, text: "Acesso Imediato" }].map((badge, index) => (
             <div key={index} className="flex flex-col items-center text-center p-3 rounded-xl bg-muted/30">
               <badge.icon className="w-5 h-5 text-primary mb-2" />
               <span className="text-xs text-muted-foreground">{badge.text}</span>
@@ -145,22 +121,41 @@ const SummaryScreen = ({ items, onPurchase }: SummaryScreenProps) => {
           ))}
         </motion.div>
 
-        {/* CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.7 }}
-          className="mt-auto"
-        >
-          <Button
-            variant="hero"
-            size="xl"
-            onClick={onPurchase}
-            className="w-full"
-          >
-            <Sparkles className="w-5 h-5 mr-2" />
-            Gerar minha Dieta + Treino — R$ 9,90
-          </Button>
+        {/* CTA Button */}
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.7 }} className="mt-auto flex flex-col gap-3">
+          <div className="flex gap-3">
+            {/* Botão de Alterar Respostas - 25% */}
+            <Button
+              variant="outline"
+              size="xl"
+              onClick={onEdit} 
+              className="w-2/5 text-sm"
+            >
+              Alterar respostas
+            </Button>
+
+            {/* Botão de Pagamento - 75% */}
+            <Button
+              variant="hero"
+              size="xl"
+              onClick={handleClick}
+              className="w-3/4 flex items-center justify-center gap-2"
+              disabled={isLoading}
+            >
+              {isLoading ? (
+                <>
+                  <span className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
+                  Processando...
+                </>
+              ) : (
+                <>
+                  <Sparkles className="w-5 h-5 mr-2" />
+                  Gerar minha Dieta + Treino
+                </>
+              )}
+            </Button>
+          </div>
+
           <p className="text-center text-xs text-muted-foreground mt-4 flex items-center justify-center gap-2">
             <Shield className="w-4 h-4" />
             Seus dados estão protegidos e seguros

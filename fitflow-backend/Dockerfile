@@ -1,4 +1,4 @@
-# fitflow-backend/Dockerfile
+# FITFLOW-backend/Dockerfile
 FROM php:8.3-fpm
 
 # Instalar dependências do sistema
