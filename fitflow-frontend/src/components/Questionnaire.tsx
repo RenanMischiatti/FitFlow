@@ -225,7 +225,6 @@ const Questionnaire = () => {
           {[
             { label: "Masculino", icon: <User className="w-6 h-6" /> },
             { label: "Feminino", icon: <User className="w-6 h-6" /> },
-            { label: "Prefiro não informar", icon: <User className="w-6 h-6" /> },
           ].map((option) => (
             <OptionButton
               key={option.label}
@@ -327,28 +326,16 @@ const Questionnaire = () => {
     },
     {
       title: "Qual tipo de limitação?",
-      subtitle: "Selecione todas que se aplicam",
+      subtitle: "Descreva sua limitação física, lesão ou restrição médica",
       content: (
-        <div className="grid gap-3">
-          {[
-            "Lesão no joelho",
-            "Lesão no ombro",
-            "Problemas na coluna",
-            "Lesão no punho/cotovelo",
-            "Problemas cardíacos",
-            "Outra limitação",
-          ].map((option) => (
-            <OptionButton
-              key={option}
-              label={option}
-              selected={formData.tipoLimitacao.includes(option)}
-              onClick={() => toggleArrayValue("tipoLimitacao", option)}
-              multiSelect
-            />
-          ))}
-        </div>
+        <QuestionTextarea
+          placeholder="Ex: Lesão no joelho, dor crônica na coluna..."
+          value={formData.tipoLimitacao.join(", ")} // converte array para string
+          onChange={(value) => updateFormData("tipoLimitacao", [value])} // salva como array de 1 item
+          rows={4}
+        />
       ),
-      canProceed: formData.tipoLimitacao.length > 0,
+      canProceed: formData.tipoLimitacao.length > 0 && !!formData.tipoLimitacao[0],
     },
     {
       title: "Quais grupos musculares quer focar?",
