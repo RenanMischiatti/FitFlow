@@ -32,6 +32,7 @@ interface FormData {
   horarioTreino: string;
   prazoPlanejado: string;
   observacoes: string;
+  mealTimes: string[];
 }
 
 const initialFormData: FormData = {
@@ -53,6 +54,7 @@ const initialFormData: FormData = {
   horarioTreino: "",
   prazoPlanejado: "",
   observacoes: "",
+  mealTimes: [],
 };
 
 const Questionnaire = () => {
@@ -82,7 +84,7 @@ const Questionnaire = () => {
 
   const toggleArrayValue = useCallback((key: keyof FormData, value: string) => {
     setFormData(prev => {
-      const currentArray = prev[key] as string[];
+      const currentArray = Array.isArray(prev[key]) ? (prev[key] as string[]) : [];
       const newArray = currentArray.includes(value)
         ? currentArray.filter(v => v !== value)
         : [...currentArray, value];
@@ -93,34 +95,75 @@ const Questionnaire = () => {
     });
   }, []);
 
+  const getNextStep = (currentIndex: number) => {
+    let nextIndex = currentIndex + 1;
+
+    while (nextIndex < questions.length) {
+      const question = questions[nextIndex];
+
+      // Pule a pergunta de tipoLimitacao se não houver limitação
+      if (question.id === "tipoLimitacao" && formData.temLimitacao === "Não") {
+        nextIndex++;
+        continue;
+      }
+
+      // Pule a pergunta de alergias se não houver alergia
+      if (question.id === "alergias" && formData.temAlergias === "Não") {
+        nextIndex++;
+        continue;
+      }
+
+      break; // encontramos o próximo índice válido
+    }
+
+    return nextIndex;
+  };
+
+  const getPrevStep = (currentIndex: number) => {
+    let prevIndex = currentIndex - 1;
+
+    while (prevIndex >= 0) {
+      const question = questions[prevIndex];
+
+      // Pule a pergunta de tipoLimitacao se não houver limitação
+      if (question.id === "tipoLimitacao" && formData.temLimitacao === "Não") {
+        prevIndex--;
+        continue;
+      }
+
+      // Pule a pergunta de alergias se não houver alergia
+      if (question.id === "alergias" && formData.temAlergias === "Não") {
+        prevIndex--;
+        continue;
+      }
+
+      break; // encontramos o índice anterior válido
+    }
+
+    return Math.max(prevIndex, 0);
+  };
+
+
   const handleNext = () => {
-    if (currentStep < questions.length - 1) {
-      if (currentStep === 7 && formData.temLimitacao === "Não") {
-        setCurrentStep(currentStep + 2);
-      }
-      else if (currentStep === 11 && formData.temAlergias === "Não") {
-        setCurrentStep(currentStep + 2);
-      } else {
-        setCurrentStep(currentStep + 1);
-      }
-    } else {
+    const nextIndex = getNextStep(currentStep);
+
+    if (nextIndex >= questions.length) {
+      // Finalizou todas as perguntas
       setShowLoading(true);
       setTimeout(() => {
         setShowLoading(false);
         setShowSummary(true);
       }, 4500);
+    } else {
+      setCurrentStep(nextIndex);
     }
   };
 
+
   const handleBack = () => {
     if (currentStep > 0) {
-      if (currentStep === 9 && formData.temLimitacao === "Não") {
-        setCurrentStep(7);
-      } else if (currentStep === 13 && formData.temAlergias === "Não") {
-        setCurrentStep(11);
-      } else {
-        setCurrentStep(currentStep - 1);
-      }
+      const prevIndex = getPrevStep(currentStep);
+      setCurrentStep(prevIndex);
     } else {
       setShowLanding(true);
     }
@@ -181,76 +224,178 @@ const Questionnaire = () => {
 
   // ✅ NOVO TIMER INPUT PADRONIZADO
   const TimerInput = ({
+          value,
+          onChange,
+          min = 10,
+          max = 180,
+    }: {
+          value: number;
+          onChange: (v: number) => void; // este onChange será chamado somente no "commit"
+          min?: number;
+          max?: number;
+    }) => {
+            const [internalValue, setInternalValue] = useState<number>(value);
+
+            useEffect(() => {
+              // atualizar internalValue quando value externo mudar (ex.: carregou do storage)
+              setInternalValue(value);
+            }, [value]);
+
+            const presets = [30, 45, 60, 75, 90, 120];
+
+            // chamado durante o arraste (atualiza apenas o estado interno)
+            const handleLiveChange = (v: number) => {
+              setInternalValue(v);
+            };
+
+            // chamado quando o usuário "soltar" o thumb (commit) — atualiza formData
+            const handleCommit = (v: number) => {
+              setInternalValue(v);
+              onChange(v);
+            };
+
+            // preset deve fazer commit imediatamente
+            const handlePreset = (p: number) => {
+              setInternalValue(p);
+              onChange(p);
+            };
+
+            return (
+              <div className="space-y-6">
+                <div className="text-center">
+                  <div className="text-4xl font-bold text-primary">
+                    {formatDuration(internalValue)}
+                  </div>
+                  <p className="text-sm text-muted-foreground mt-1">
+                    Duração média do treino
+                  </p>
+                </div>
+
+                <SliderInput
+                  value={internalValue}
+                  onChange={handleLiveChange}      // live updates só para internalValue
+                  onFinalChange={handleCommit}    // commit -> persiste no formData via onChange prop
+                  min={min}
+                  max={max}
+                  hideValue
+                />
+
+                <div className="grid grid-cols-3 gap-2">
+                  {presets.map((p) => (
+                    <button
+                      key={p}
+                      type="button"
+                      onClick={() => handlePreset(p)}
+                      className={`rounded-xl border px-3 py-2 text-sm font-medium transition
+                        ${
+                          internalValue === p
+                            ? "bg-primary text-white border-primary shadow-sm"
+                            : "bg-background border-border hover:border-primary/50 hover:bg-primary/5"
+                        }`}
+                    >
+                      {formatDuration(p)}
+                    </button>
+                  ))}
+                </div>
+              </div>
+          );
+    };
+
+    // Replace your existing TimeSliderInput with this one
+    const TimeSliderInput = ({
       value,
       onChange,
-      min = 10,
-      max = 180,
     }: {
-      value: number;
-      onChange: (v: number) => void; // este onChange será chamado somente no "commit"
-      min?: number;
-      max?: number;
+      value: string; // "HH:MM"
+      onChange: (v: string) => void; // chamado apenas no "commit"
     }) => {
-      const [internalValue, setInternalValue] = useState<number>(value);
+      const safeSplit = (val: string) => {
+        const parts = (val || "07:00").split(":").map((p) => parseInt(p, 10));
+        const h = Number.isFinite(parts[0]) ? parts[0] : 7;
+        const m = Number.isFinite(parts[1]) ? parts[1] : 0;
+        return [h, m] as const;
+      };
 
+      const [hour, setHour] = useState<number>(safeSplit(value)[0]);
+      const [minute, setMinute] = useState<number>(safeSplit(value)[1]);
+
+      // quando value externo muda (ex.: carregou do storage / edição), sincroniza
       useEffect(() => {
-        // atualizar internalValue quando value externo mudar (ex.: carregou do storage)
-        setInternalValue(value);
+        const [h, m] = safeSplit(value);
+        // apenas sincroniza se diferente (evita pisar durante arraste interno)
+        if (h !== hour) setHour(h);
+        if (m !== minute) setMinute(m);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
       }, [value]);
 
-      const presets = [30, 45, 60, 75, 90];
+      const pad = (n: number) => n.toString().padStart(2, "0");
 
-      // chamado durante o arraste (atualiza apenas o estado interno)
-      const handleLiveChange = (v: number) => {
-        setInternalValue(v);
+      // live handlers (só atualizam o estado local)
+      const handleLiveHour = (h: number) => setHour(h);
+      const handleLiveMinute = (m: number) => setMinute(m);
+
+      // commit handlers (chamados quando o usuário SOLTAR o thumb)
+      const handleCommitHour = (h: number) => {
+        setHour(h);
+        onChange(`${pad(h)}:${pad(minute)}`);
+      };
+      const handleCommitMinute = (m: number) => {
+        setMinute(m);
+        onChange(`${pad(hour)}:${pad(m)}`);
       };
 
-      // chamado quando o usuário "soltar" o thumb (commit) — atualiza formData
-      const handleCommit = (v: number) => {
-        setInternalValue(v);
-        onChange(v);
-      };
-
-      // preset deve fazer commit imediatamente
-      const handlePreset = (p: number) => {
-        setInternalValue(p);
-        onChange(p);
-      };
+      // Presets rápidos (opcional)
+      const presets = [
+        { label: "Manhã", time: "07:00" },
+        { label: "Meio-dia", time: "12:00" },
+        { label: "Tarde", time: "18:00" },
+        { label: "Noite", time: "20:00" },
+      ];
 
       return (
-        <div className="space-y-6">
-          <div className="text-center">
-            <div className="text-4xl font-bold text-primary">
-              {formatDuration(internalValue)}
+        <div className="space-y-6 text-center">
+          <div className="text-4xl font-bold text-primary">
+            {pad(hour)}:{pad(minute)}
+          </div>
+          <p className="text-sm text-muted-foreground mt-1">Horário típico do treino</p>
+
+          <div className="flex gap-4 items-center justify-center">
+            {/* Hora: 0 - 23 */}
+            <div className="w-1/2">
+              <SliderInput
+                value={hour}
+                onChange={handleLiveHour}       // atualiza apenas localmente
+                onFinalChange={handleCommitHour} // commit -> atualiza formData
+                min={0}
+                max={23}
+                step={1}
+                hideValue
+              />
             </div>
-            <p className="text-sm text-muted-foreground mt-1">
-              Duração média do treino
-            </p>
+
+            {/* Minutos: 0,15,30,45 */}
+            <div className="w-1/2">
+              <SliderInput
+                value={minute}
+                onChange={handleLiveMinute}
+                onFinalChange={handleCommitMinute}
+                min={0}
+                max={45}
+                step={15} // snap em 15min para UX mais intuitiva
+                hideValue
+              />
+            </div>
           </div>
 
-          <SliderInput
-            value={internalValue}
-            onChange={handleLiveChange}      // live updates só para internalValue
-            onFinalChange={handleCommit}    // commit -> persiste no formData via onChange prop
-            min={min}
-            max={max}
-            hideValue
-          />
-
-          <div className="grid grid-cols-3 gap-2">
+          <div className="flex justify-center gap-2">
             {presets.map((p) => (
               <button
-                key={p}
+                key={p.time}
+                className="px-3 py-1 rounded-md border text-sm hover:bg-primary/5"
+                onClick={() => onChange(p.time)}
                 type="button"
-                onClick={() => handlePreset(p)}
-                className={`rounded-xl border px-3 py-2 text-sm font-medium transition
-                  ${
-                    internalValue === p
-                      ? "bg-primary text-white border-primary shadow-sm"
-                      : "bg-background border-border hover:border-primary/50 hover:bg-primary/5"
-                  }`}
               >
-                {formatDuration(p)}
+                {p.label}
               </button>
             ))}
           </div>
@@ -258,10 +403,84 @@ const Questionnaire = () => {
       );
   };
 
+  // INSIRA DENTRO DO COMPONENTE Questionnaire, antes do array `questions`
+  const MealTimesPicker = ({
+    selectedTimes = [],
+    toggleTime,
+    disabledTime = "", // início do treino "HH:MM"
+    treinoDuration = 45, // duração em minutos (passar parseInt(formData.duracaoTreino))
+  }: {
+    selectedTimes?: string[];
+    toggleTime: (time: string) => void;
+    disabledTime?: string;
+    treinoDuration?: number;
+  }) => {
+    const pad = (n: number) => n.toString().padStart(2, "0");
+
+    // Gera horários de 6h às 22h
+    const times: string[] = [];
+    for (let h = 6; h <= 22; h++) {
+      times.push(`${pad(h)}:00`);
+    }
+
+    // Converte "HH:MM" para minutos desde 0:00
+    const timeToMinutes = (time: string) => {
+      const [h, m] = time.split(":").map(Number);
+      return (Number.isFinite(h) ? h : 0) * 60 + (Number.isFinite(m) ? m : 0);
+    };
+
+    // Calcula intervalo de treino em minutos
+    const treinoStart = disabledTime ? timeToMinutes(disabledTime) : -1;
+    const treinoEnd = treinoStart >= 0 ? treinoStart + (Number.isFinite(+treinoDuration) ? +treinoDuration : 45) : -1;
+
+    // Arredonda para cima para a próxima hora cheia (ex.: 17:30 -> 18:00)
+    const treinoEndRounded = treinoEnd > 0 ? Math.ceil(treinoEnd / 60) * 60 : -1;
+
+    // Classes de estilo
+    const base = "text-sm px-3 py-2 rounded-md border transition";
+    const selectedClass = "border-primary text-primary bg-background"; // ✅ somente borda + texto
+    const normalClass = "bg-background border-border hover:border-primary/50 hover:bg-primary/5";
+    const disabledClass = "bg-red-600 text-white border-red-700 cursor-not-allowed opacity-90";
+
+    return (
+      <div className="space-y-4">
+
+        <div className="grid grid-cols-3 sm:grid-cols-4 gap-2">
+          {times.map((t) => {
+            const safeSelectedTimes = Array.isArray(selectedTimes) ? selectedTimes : [];
+            const isSelected = safeSelectedTimes.includes(t);
+
+            // Verifica se o horário t cai dentro do treino (bloqueio do período)
+            const tMinutes = timeToMinutes(t);
+            const isDisabled = treinoStart >= 0 && tMinutes >= treinoStart && tMinutes < treinoEndRounded;
+
+            return (
+              <button
+                key={t}
+                type="button"
+                onClick={() => !isDisabled && toggleTime(t)}
+                disabled={isDisabled}
+                aria-pressed={isSelected}
+                className={`${base} ${isDisabled ? disabledClass : isSelected ? selectedClass : normalClass}`}
+              >
+                {t}
+              </button>
+            );
+          })}
+        </div>
+
+        <div className="text-xs text-muted-foreground">
+          Toque nos horários para selecionar/deselecionar. O horário do treino e o período do treino ficam bloqueados.
+        </div>
+      </div>
+    );
+  };
+
 
 
   const questions = [
     {
+      id: 'objetivo',
       title: "Qual é o seu objetivo principal?",
       subtitle: "Escolha o que mais representa sua meta",
       content: (
@@ -285,6 +504,7 @@ const Questionnaire = () => {
       canProceed: !!formData.objetivo,
     },
     {
+      id: 'nivel',
       title: "Qual seu nível na academia?",
       subtitle: "Seja honesto para termos os melhores resultados",
       content: (
@@ -306,6 +526,7 @@ const Questionnaire = () => {
       canProceed: !!formData.nivel,
     },
     {
+      id: 'genero',
       title: "Qual seu gênero?",
       subtitle: "Importante para cálculos metabólicos",
       content: (
@@ -327,6 +548,7 @@ const Questionnaire = () => {
       canProceed: !!formData.genero,
     },
     {
+      id: 'idade',
       title: "Qual sua idade?",
       subtitle: "Arraste para selecionar",
       content: (
@@ -355,6 +577,7 @@ const Questionnaire = () => {
       canProceed: !!formData.altura && parseInt(formData.altura) >= 140,
     },
     {
+      id: 'peso',
       title: "Qual seu peso atual?",
       subtitle: "Arraste para selecionar",
       content: (
@@ -369,6 +592,7 @@ const Questionnaire = () => {
       canProceed: !!formData.peso && parseInt(formData.peso) >= 40,
     },
     {
+      id: 'duracaoTreino',
       title: "Qual a duração típica do seu treino?",
       subtitle: "Escolha quanto tempo costuma treinar por sessão",
       content: (
@@ -382,6 +606,19 @@ const Questionnaire = () => {
       canProceed: !!formData.duracaoTreino && parseInt(formData.duracaoTreino) >= 10,
     },
     {
+      id: 'horarioTreino',
+      title: "Qual horário do seu treino?",
+      subtitle: "Escolha o horário que você normalmente treina",
+      content: (
+        <TimeSliderInput
+          value={formData.horarioTreino || "07:00"}
+          onChange={(value) => updateFormData("horarioTreino", value)}
+        />
+      ),
+      canProceed: !!formData.horarioTreino,
+    },
+    {
+      id: 'frequenciaTreino',
       title: "Qual sua rotina de treinos?",
       subtitle: "Quantas vezes por semana você pode treinar?",
       content: (
@@ -405,6 +642,7 @@ const Questionnaire = () => {
       canProceed: !!formData.frequenciaTreino,
     },
     {
+      id: 'temLimitacao',
       title: "Tem alguma limitação física?",
       subtitle: "Lesões, dores crônicas ou restrições médicas",
       content: (
@@ -426,6 +664,7 @@ const Questionnaire = () => {
       canProceed: !!formData.temLimitacao,
     },
     {
+      id: 'tipoLimitacao',
       title: "Qual tipo de limitação?",
       subtitle: "Descreva sua limitação física, lesão ou restrição médica",
       content: (
@@ -436,9 +675,12 @@ const Questionnaire = () => {
           rows={4}
         />
       ),
-      canProceed: formData.tipoLimitacao.length > 0 && !!formData.tipoLimitacao[0],
+      canProceed:
+        formData.temLimitacao === "Não" ||
+        (formData.tipoLimitacao.length > 0 && !!formData.tipoLimitacao[0]),
     },
     {
+      id: 'gruposMusculares',
       title: "Quais grupos musculares quer focar?",
       subtitle: "Selecione os grupos prioritários",
       content: (
@@ -465,6 +707,26 @@ const Questionnaire = () => {
       canProceed: formData.gruposMusculares.length > 0,
     },
     {
+      id: 'mealTimes',
+      title: "Quais horários você consegue fazer refeição?",
+      subtitle: "Selecione os horários do dia em que costuma/consseguir comer",
+      content: (
+        <MealTimesPicker
+          selectedTimes={formData.mealTimes}
+          toggleTime={(time: string) => {
+            // se for o horário de treino, não permite
+            if (formData.horarioTreino && formData.horarioTreino === time) return;
+
+            toggleArrayValue("mealTimes", time);
+          }}
+          disabledTime={formData.horarioTreino || ""}
+          treinoDuration={parseInt(formData.duracaoTreino) || 45}
+        />
+      ),
+      canProceed: true,
+    },
+    {
+      id: 'dietaEspecifica',
       title: "Segue alguma dieta específica?",
       subtitle: "Escolha sua preferência alimentar",
       content: (
@@ -490,6 +752,7 @@ const Questionnaire = () => {
       canProceed: !!formData.dietaEspecifica,
     },
     {
+      id: 'temAlergias',
       title: "Tem alergias ou restrições alimentares?",
       subtitle: "Alimentos que você não pode consumir",
       content: (
@@ -511,6 +774,7 @@ const Questionnaire = () => {
       canProceed: !!formData.temAlergias,
     },
     {
+      id: 'alergias',
       title: "Quais alimentos você não pode consumir?",
       subtitle: "Liste os alimentos que tem alergia ou restrição",
       content: (
@@ -524,6 +788,7 @@ const Questionnaire = () => {
       canProceed: !!formData.alergias,
     },
     {
+      id: 'apetite',
       title: "Como é seu apetite diário?",
       subtitle: "Isso influencia na distribuição das refeições",
       content: (
@@ -545,28 +810,7 @@ const Questionnaire = () => {
       canProceed: !!formData.apetite,
     },
     {
-      title: "Qual horário costuma treinar?",
-      subtitle: "Isso ajuda a otimizar suas refeições",
-      content: (
-        <div className="grid gap-3">
-          {[
-            { label: "Manhã", icon: <Sun className="w-6 h-6" /> },
-            { label: "Tarde", icon: <Sun className="w-6 h-6" /> },
-            { label: "Noite", icon: <Sun className="w-6 h-6" /> },
-          ].map((option) => (
-            <OptionButton
-              key={option.label}
-              label={option.label}
-              icon={option.icon}
-              selected={formData.horarioTreino === option.label}
-              onClick={() => updateFormData("horarioTreino", option.label)}
-            />
-          ))}
-        </div>
-      ),
-      canProceed: !!formData.horarioTreino,
-    },
-    {
+      id: 'prazoPlanejado',
       title: "Qual seu objetivo de prazo?",
       subtitle: "Em quanto tempo quer ver resultados",
       content: (
@@ -589,6 +833,7 @@ const Questionnaire = () => {
       canProceed: !!formData.prazoPlanejado,
     },
     {
+      id: 'observacoes',
       title: "Deseja adicionar observações extras?",
       subtitle: "Escreva detalhes adicionais sobre seu corpo, rotina ou preferências",
       content: (
