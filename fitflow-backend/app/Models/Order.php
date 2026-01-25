@@ -12,41 +12,7 @@ class Order extends Model
      */
     protected $fillable = [
         'user_id',
-
-        // Goal & profile
-        'goal',
-        'fitness_level',
-        'gender',
-
-        // Physical data
-        'age',
-        'height',
-        'weight',
-
-        // Training routine
-        'training_frequency',
-        'training_time',
-        'target_deadline',
-
-        // Physical limitations
-        'has_physical_limitation',
-        'physical_limitations',
-
-        // Muscle focus
-        'muscle_groups',
-
-        // Diet
-        'diet_type',
-
-        // Allergies
-        'has_allergies',
-        'allergies',
-
-        // Eating behavior
-        'appetite_level',
-
-        // Notes
-        'notes',
+        'data',
 
         // Order
         'status',
@@ -57,16 +23,6 @@ class Order extends Model
      * Attribute casting.
      */
     protected $casts = [
-        'has_physical_limitation' => 'boolean',
-        'has_allergies' => 'boolean',
-
-        'physical_limitations' => 'array',
-        'muscle_groups' => 'array',
-
-        'age' => 'integer',
-        'height' => 'integer',
-        'weight' => 'integer',
-
         'price' => 'decimal:2',
     ];
 
@@ -92,4 +48,13 @@ class Order extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function markAsPaid(): self
+    {
+        $this->status = self::STATUS_PAID;
+        $this->save();
+
+        return $this;
+    }
+
 }

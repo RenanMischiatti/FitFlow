@@ -121,7 +121,7 @@ const SummaryScreen = ({ items, onPurchase, onEdit }: SummaryScreenProps) => {
       <div className="max-w-2xl mx-auto w-full flex-1 flex flex-col relative z-10">
         {/* Header */}
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-8">
-          <motion.span className="text-2xl font-display font-bold gradient-text">FITFLOW</motion.span>
+          <motion.span className="text-2xl font-display font-bold gradient-text">HighFit AI</motion.span>
           <h1 className="text-3xl md:text-4xl font-display font-bold text-foreground mt-6 mb-3">
             Seu plano está pronto!
           </h1>

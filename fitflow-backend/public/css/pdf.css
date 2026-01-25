@@ -1,0 +1,915 @@
+/* ========================================
+   PHYSIQ - Premium PDF Report Design System
+   PDF-First: Compatible with wkhtmltopdf/Dompdf
+   ======================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+/* ========================================
+   CSS RESET & BASE
+   ======================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #1a1a1a;
+  background: #ffffff;
+  -webkit-print-color-adjust: exact !important;
+  print-color-adjust: exact !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+/* ========================================
+   COLOR PALETTE
+   ======================================== */
+:root {
+  --primary: #0f3d2e;
+  --primary-light: #1a5c44;
+  --accent: #22c55e;
+  --accent-light: #4ade80;
+  --accent-glow: #86efac;
+  --background: #ffffff;
+  --surface: #f8faf9;
+  --surface-alt: #f0fdf4;
+  --border: #e2e8f0;
+  --border-light: #f1f5f9;
+  --text-primary: #1a1a1a;
+  --text-secondary: #64748b;
+  --text-muted: #94a3b8;
+  --success: #22c55e;
+  --warning: #f59e0b;
+  --info: #3b82f6;
+  --error: #ef4444;
+}
+
+/* ========================================
+   LAYOUT & SECTIONS
+   ======================================== */
+.page {
+  width: 100%;
+  max-width: 80%;
+  margin: 0 auto;
+  background: var(--background);
+}
+
+.section {
+  padding: 40px;
+  page-break-inside: avoid;
+}
+
+.section-alt {
+  background: var(--surface);
+}
+
+.page-break {
+  page-break-before: always;
+}
+
+/* ========================================
+   COVER PAGE
+   ======================================== */
+.cover {
+  min-height: 100vh;
+  display: table;
+  width: 100%;
+  text-align: center;
+  background: linear-gradient(180deg, #ffffff 0%, #f0fdf4 50%, #dcfce7 100%);
+  position: relative;
+}
+
+.cover-inner {
+  display: table-cell;
+  vertical-align: middle;
+  padding: 60px 40px;
+}
+
+.cover-logo {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 56px;
+  font-weight: 700;
+  letter-spacing: -2px;
+  margin-bottom: 50px;
+}
+
+.cover-logo .accent {
+  color: var(--accent);
+}
+
+.cover-title {
+  font-size: 42px;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 8px;
+}
+
+.cover-subtitle {
+  font-size: 42px;
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 20px;
+}
+
+.cover-description {
+  font-size: 16px;
+  color: var(--text-secondary);
+  margin-bottom: 50px;
+}
+
+.cover-user-card {
+  display: inline-block;
+  background: #ffffff;
+  border: 2px solid var(--border);
+  border-radius: 16px;
+  padding: 24px 40px;
+  margin-bottom: 40px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.cover-user-card table {
+  border-collapse: collapse;
+}
+
+.cover-avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+  color: #ffffff;
+  font-size: 24px;
+  font-weight: 700;
+  text-align: center;
+  line-height: 64px;
+}
+
+.cover-user-name {
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--text-primary);
+  padding-left: 20px;
+  text-align: left;
+}
+
+.cover-user-info {
+  font-size: 14px;
+  color: var(--text-secondary);
+  padding-left: 20px;
+  text-align: left;
+}
+
+.cover-date {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.cover-badges {
+  margin-top: 30px;
+}
+
+.cover-badges table {
+  margin: 0 auto;
+  border-collapse: collapse;
+}
+
+.cover-badge {
+  padding: 0 20px;
+}
+
+.cover-badge-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 8px;
+}
+
+.cover-badge-dot.primary {
+  background: var(--primary);
+}
+
+.cover-badge-dot.accent {
+  background: var(--accent);
+}
+
+/* ========================================
+   SECTION HEADERS
+   ======================================== */
+.section-header {
+  margin-bottom: 30px;
+}
+
+.section-header table {
+  border-collapse: collapse;
+}
+
+.section-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--surface-alt) 0%, #dcfce7 100%);
+  text-align: center;
+  line-height: 48px;
+  font-size: 24px;
+}
+
+.section-title {
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--primary);
+  padding-left: 16px;
+  vertical-align: middle;
+}
+
+/* ========================================
+   METRIC CARDS
+   ======================================== */
+.metrics-grid {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 16px;
+}
+
+.metric-card {
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px;
+  vertical-align: top;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+}
+
+.metric-label {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+}
+
+.metric-value {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 4px;
+}
+
+.metric-unit {
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.metric-description {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-top: 8px;
+}
+
+.metric-bar-container {
+  height: 8px;
+  background: var(--border-light);
+  border-radius: 4px;
+  margin-top: 12px;
+  overflow: hidden;
+}
+
+.metric-bar {
+  height: 100%;
+  border-radius: 4px;
+  background: linear-gradient(90deg, var(--accent) 0%, var(--accent-light) 100%);
+}
+
+.metric-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  margin-top: 10px;
+}
+
+.metric-badge.success {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.metric-badge.warning {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.metric-badge.info {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+/* ========================================
+   INTERPRETATION CARDS
+   ======================================== */
+.interpretation-grid {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 16px;
+}
+
+.interpretation-card {
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px;
+  vertical-align: top;
+}
+
+.interpretation-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--primary);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+}
+
+.interpretation-icon {
+  margin-right: 10px;
+  font-size: 18px;
+}
+
+.interpretation-text {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+/* ========================================
+   WORKOUT TABLES
+   ======================================== */
+.workout-header {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+  color: #ffffff;
+  padding: 20px 24px;
+  border-radius: 16px 16px 0 0;
+}
+
+.workout-name {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.workout-objective {
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+.workout-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-top: none;
+  border-radius: 0 0 16px 16px;
+  overflow: hidden;
+}
+
+.workout-table th {
+  background: var(--surface);
+  padding: 14px 16px;
+  text-align: left;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 1px solid var(--border);
+}
+
+.workout-table td {
+  padding: 16px;
+  border-bottom: 1px solid var(--border-light);
+  font-size: 14px;
+  color: var(--text-primary);
+}
+
+.workout-table tr:last-child td {
+  border-bottom: none;
+}
+
+.workout-table tr:hover td {
+  background: var(--surface);
+}
+
+.exercise-name {
+  font-weight: 600;
+  color: var(--primary);
+}
+
+.exercise-description {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+.exercise-tip {
+  font-size: 12px;
+  color: var(--accent);
+  font-style: italic;
+}
+
+.workout-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  background: var(--surface-alt);
+  color: var(--primary);
+}
+
+/* ========================================
+   DIET / MEAL CARDS
+   ======================================== */
+.meals-grid {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 16px;
+}
+
+.meal-card {
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  vertical-align: top;
+  overflow: hidden;
+}
+
+.meal-header {
+  background: linear-gradient(135deg, var(--surface-alt) 0%, #dcfce7 100%);
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border);
+}
+
+.meal-header table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.meal-name {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.meal-objective {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-top: 2px;
+}
+
+.meal-time {
+  background: var(--primary);
+  color: #ffffff;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.meal-foods {
+  padding: 16px 20px;
+}
+
+.food-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.food-table td {
+  padding: 8px 0;
+  font-size: 14px;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.food-table tr:last-child td {
+  border-bottom: none;
+}
+
+.food-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.food-name {
+  color: var(--text-primary);
+}
+
+.food-quantity {
+  font-weight: 600;
+  color: var(--primary);
+}
+
+/* Macros mini table */
+.food-macros {
+  text-align: right;
+}
+
+.macros-mini {
+  display: inline-table;
+  border-collapse: collapse;
+  font-size: 11px;
+  background: var(--surface);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.macros-mini th {
+  padding: 4px 6px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  font-size: 9px;
+  letter-spacing: 0.3px;
+}
+
+.macros-mini td {
+  padding: 4px 6px;
+  font-weight: 600;
+  border: none;
+}
+
+.macros-mini .protein { color: #dc2626; }
+.macros-mini .carbs { color: #eab308; }
+.macros-mini .fat { color: #3b82f6; }
+.macros-mini .kcal { color: var(--primary); }
+
+.meal-alternatives {
+  background: var(--surface);
+  padding: 14px 20px;
+  border-top: 1px solid var(--border);
+}
+
+.alternatives-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+
+.alternative-tag {
+  display: inline-block;
+  padding: 5px 12px;
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin-right: 8px;
+  margin-bottom: 4px;
+}
+
+/* ========================================
+   NUTRITIONAL ANALYSIS
+   ======================================== */
+.calories-summary {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 16px;
+  margin-bottom: 24px;
+}
+
+.calorie-card {
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px;
+  text-align: center;
+  vertical-align: top;
+}
+
+.calorie-card.highlight {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+  border-color: var(--primary);
+}
+
+.calorie-card.highlight .calorie-label,
+.calorie-card.highlight .calorie-value {
+  color: #ffffff;
+}
+
+.calorie-label {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+}
+
+.calorie-value {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.calorie-unit {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.calorie-badge {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  background: rgba(255,255,255,0.2);
+  color: #ffffff;
+}
+
+.macros-container {
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px;
+}
+
+.macro-row {
+  margin-bottom: 20px;
+}
+
+.macro-row:last-child {
+  margin-bottom: 0;
+}
+
+.macro-header {
+  margin-bottom: 8px;
+}
+
+.macro-header table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.macro-name {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.macro-value {
+  font-weight: 700;
+  color: var(--primary);
+  text-align: right;
+}
+
+.macro-bar-bg {
+  height: 12px;
+  background: var(--border-light);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.macro-bar {
+  height: 100%;
+  border-radius: 6px;
+}
+
+.macro-bar.protein {
+  background: linear-gradient(90deg, #dc2626 0%, #f87171 100%);
+}
+
+.macro-bar.carbs {
+  background: linear-gradient(90deg, #eab308 0%, #fde047 100%);
+}
+
+.macro-bar.fat {
+  background: linear-gradient(90deg, #3b82f6 0%, #60a5fa 100%);
+}
+
+/* ========================================
+   EDUCATIONAL SECTION
+   ======================================== */
+.education-grid {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 16px;
+}
+
+.education-card {
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px;
+  vertical-align: top;
+}
+
+.education-card h4 {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 10px;
+}
+
+.education-card p {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+/* ========================================
+   PROJECTIONS
+   ======================================== */
+.projection-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.projection-table th {
+  background: var(--surface);
+  padding: 16px 24px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 1px solid var(--border);
+}
+
+.projection-table td {
+  padding: 20px 24px;
+  text-align: center;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.projection-table tr:last-child td {
+  border-bottom: none;
+}
+
+.projection-value {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.projection-change {
+  display: inline-block;
+  margin-top: 6px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  background: #dcfce7;
+  color: #166534;
+}
+
+.projection-disclaimer {
+  margin-top: 20px;
+  padding: 16px 20px;
+  background: var(--surface);
+  border-radius: 12px;
+  font-size: 13px;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+/* ========================================
+   FINAL RECOMMENDATIONS
+   ======================================== */
+.recommendations-grid {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 16px;
+  margin-bottom: 30px;
+}
+
+.recommendation-card {
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px;
+  text-align: center;
+  vertical-align: top;
+}
+
+.recommendation-icon {
+  font-size: 40px;
+  margin-bottom: 12px;
+}
+
+.recommendation-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 8px;
+}
+
+.recommendation-text {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.final-message {
+  background: linear-gradient(135deg, var(--surface-alt) 0%, #dcfce7 100%);
+  border: 2px solid var(--accent);
+  border-radius: 20px;
+  padding: 40px;
+  text-align: center;
+}
+
+.final-message h3 {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 12px;
+}
+
+.final-message p {
+  font-size: 15px;
+  color: var(--text-secondary);
+  max-width: 600px;
+  margin: 0 auto 30px;
+  line-height: 1.7;
+}
+
+.final-footer {
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+  display: inline-block;
+}
+
+.final-logo {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.final-logo .accent {
+  color: var(--accent);
+}
+
+.final-tagline {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-top: 8px;
+}
+
+/* ========================================
+   PRINT STYLES
+   ======================================== */
+@media print {
+  body {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    background: white !important;
+  }
+  
+  .page-break {
+    page-break-before: always;
+  }
+  
+  .no-print {
+    display: none !important;
+  }
+  
+  .section {
+    page-break-inside: avoid;
+  }
+}
+
+/* ========================================
+   UTILITY CLASSES
+   ======================================== */
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+.mb-0 { margin-bottom: 0; }
+.mb-16 { margin-bottom: 16px; }
+.mb-24 { margin-bottom: 24px; }
+.mb-32 { margin-bottom: 32px; }
+.mt-16 { margin-top: 16px; }
+.mt-24 { margin-top: 24px; }

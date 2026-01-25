@@ -2,9 +2,16 @@
 
 namespace App\Services\Payments;
 
-use App\DTO\CreateCreckoutDTO;
 use Stripe\Stripe;
+use Stripe\Webhook;
+use RuntimeException;
 use Stripe\Checkout\Session;
+use UnexpectedValueException;
+use App\DTO\CreateCreckoutDTO;
+use App\DTO\EventWebhookStripeDTO;
+use App\Models\Order;
+use Illuminate\Support\Facades\Log;
+use Stripe\Exception\SignatureVerificationException;
 
 class StripeService extends PaymentGateway
 {
@@ -42,5 +49,51 @@ class StripeService extends PaymentGateway
         ]);
 
         return $session->url;
+    }
+
+    public function getEventFromWebhook(EventWebhookStripeDTO $data)
+    {
+        try {
+            $event = Webhook::constructEvent(
+                $data->payload,
+                $data->signature,
+                $data->endpointSecret
+            );
+
+            Log::info('Stripe webhook received', [
+                'type' => $event->type,
+            ]);
+
+            return $event;
+
+        } catch (UnexpectedValueException $e) {
+            // Payload inválido (JSON malformado)
+            throw new UnexpectedValueException(
+                'Invalid Stripe webhook payload: ' . $e->getMessage()
+            );
+        } catch (SignatureVerificationException $e) {
+            // Assinatura inválida
+            throw new SignatureVerificationException(
+                'Invalid Stripe webhook signature: ' . $e->getMessage()
+            );
+        } catch (\Throwable $e) {
+            // Erro inesperado
+            throw new RuntimeException(
+                'Unexpected error while processing Stripe webhook: ' . $e->getMessage()
+            );
+        }
+    }
+
+    public function getOrderByEvent($event)
+    {
+        $session = $event->data->object;
+        $orderId = $session->metadata->order_id ?? null;
+
+        if (!$orderId) {
+            Log::warning('Stripe webhook without order_id');
+            return null;
+        }
+
+        return Order::findOrFail($orderId);
     }
 }

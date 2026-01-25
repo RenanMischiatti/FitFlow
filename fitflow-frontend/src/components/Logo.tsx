@@ -17,7 +17,7 @@ const Logo = ({ size = "default" }: { size?: "small" | "default" | "large" }) =>
       transition={{ duration: 0.5 }}
     >
       <span className={`${text} font-display font-bold gradient-text`}>
-        FITFLOW
+        HighFit AI
       </span>
     </motion.div>
   );
