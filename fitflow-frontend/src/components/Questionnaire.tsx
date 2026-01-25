@@ -20,6 +20,7 @@ interface FormData {
   idade: string;
   altura: string;
   peso: string;
+  duracaoTreino: string;
   frequenciaTreino: string;
   temLimitacao: string;
   tipoLimitacao: string[];
@@ -40,6 +41,7 @@ const initialFormData: FormData = {
   idade: "",
   altura: "",
   peso: "",
+  duracaoTreino: "45",
   frequenciaTreino: "",
   temLimitacao: "",
   tipoLimitacao: [],
@@ -65,8 +67,8 @@ const Questionnaire = () => {
     const savedData = localStorage.getItem("fitflow_formData");
     if (savedData) {
       setFormData(JSON.parse(savedData));
-      setCurrentStep(questions.length); // assume que já respondeu tudo
-      setShowSummary(true); // vai direto para o resumo / checkout
+      setCurrentStep(questions.length);
+      setShowSummary(true);
     }
   }, []);
 
@@ -93,18 +95,15 @@ const Questionnaire = () => {
 
   const handleNext = () => {
     if (currentStep < questions.length - 1) {
-      // Skip limitation type question if no limitations
       if (currentStep === 7 && formData.temLimitacao === "Não") {
         setCurrentStep(currentStep + 2);
       }
-      // Skip allergies input if no allergies
       else if (currentStep === 11 && formData.temAlergias === "Não") {
         setCurrentStep(currentStep + 2);
       } else {
         setCurrentStep(currentStep + 1);
       }
     } else {
-      // Show loading then summary
       setShowLoading(true);
       setTimeout(() => {
         setShowLoading(false);
@@ -115,7 +114,6 @@ const Questionnaire = () => {
 
   const handleBack = () => {
     if (currentStep > 0) {
-      // Handle skip cases when going back
       if (currentStep === 9 && formData.temLimitacao === "Não") {
         setCurrentStep(7);
       } else if (currentStep === 13 && formData.temAlergias === "Não") {
@@ -137,7 +135,7 @@ const Questionnaire = () => {
 
   const handlePurchase = async () => {
     try {
-      setIsPurchasing(true); // ativa o loading
+      setIsPurchasing(true);
 
       const response = await fetch(`${API_URL}/payment/start-checkout`, {
         method: 'POST',
@@ -158,19 +156,109 @@ const Questionnaire = () => {
         throw new Error('URL do checkout não recebida');
       }
 
-      // Mostra o loading por pelo menos 500ms para o usuário perceber
       await new Promise(resolve => setTimeout(resolve, 500));
 
-      // Redireciona para Stripe (mobile-friendly)
       window.location.href = data.checkout_url;
       localStorage.removeItem("fitflow_formData");
 
     } catch (error: any) {
       console.error(error);
       alert('Erro ao iniciar o pagamento: ' + error.message);
-      setIsPurchasing(false); // desativa o loading em caso de erro
+      setIsPurchasing(false);
     }
   };
+
+  // ✅ FORMATAÇÃO DE TEMPO
+  const formatDuration = (minutes: number) => {
+    if (minutes < 60) return `${minutes} min`;
+
+    const h = Math.floor(minutes / 60);
+    const m = minutes % 60;
+
+    return `${h}h${m > 0 ? ` ${m}m` : ""}`;
+  };
+
+
+  // ✅ NOVO TIMER INPUT PADRONIZADO
+  const TimerInput = ({
+      value,
+      onChange,
+      min = 10,
+      max = 180,
+    }: {
+      value: number;
+      onChange: (v: number) => void; // este onChange será chamado somente no "commit"
+      min?: number;
+      max?: number;
+    }) => {
+      const [internalValue, setInternalValue] = useState<number>(value);
+
+      useEffect(() => {
+        // atualizar internalValue quando value externo mudar (ex.: carregou do storage)
+        setInternalValue(value);
+      }, [value]);
+
+      const presets = [30, 45, 60, 75, 90];
+
+      // chamado durante o arraste (atualiza apenas o estado interno)
+      const handleLiveChange = (v: number) => {
+        setInternalValue(v);
+      };
+
+      // chamado quando o usuário "soltar" o thumb (commit) — atualiza formData
+      const handleCommit = (v: number) => {
+        setInternalValue(v);
+        onChange(v);
+      };
+
+      // preset deve fazer commit imediatamente
+      const handlePreset = (p: number) => {
+        setInternalValue(p);
+        onChange(p);
+      };
+
+      return (
+        <div className="space-y-6">
+          <div className="text-center">
+            <div className="text-4xl font-bold text-primary">
+              {formatDuration(internalValue)}
+            </div>
+            <p className="text-sm text-muted-foreground mt-1">
+              Duração média do treino
+            </p>
+          </div>
+
+          <SliderInput
+            value={internalValue}
+            onChange={handleLiveChange}      // live updates só para internalValue
+            onFinalChange={handleCommit}    // commit -> persiste no formData via onChange prop
+            min={min}
+            max={max}
+            hideValue
+          />
+
+          <div className="grid grid-cols-3 gap-2">
+            {presets.map((p) => (
+              <button
+                key={p}
+                type="button"
+                onClick={() => handlePreset(p)}
+                className={`rounded-xl border px-3 py-2 text-sm font-medium transition
+                  ${
+                    internalValue === p
+                      ? "bg-primary text-white border-primary shadow-sm"
+                      : "bg-background border-border hover:border-primary/50 hover:bg-primary/5"
+                  }`}
+              >
+                {formatDuration(p)}
+              </button>
+            ))}
+          </div>
+        </div>
+      );
+  };
+
+
 
   const questions = [
     {
@@ -279,6 +367,19 @@ const Questionnaire = () => {
         />
       ),
       canProceed: !!formData.peso && parseInt(formData.peso) >= 40,
+    },
+    {
+      title: "Qual a duração típica do seu treino?",
+      subtitle: "Escolha quanto tempo costuma treinar por sessão",
+      content: (
+        <TimerInput
+          value={parseInt(formData.duracaoTreino) || 45}
+          onChange={(minutes) => updateFormData("duracaoTreino", minutes.toString())}
+          min={10}
+          max={180}
+        />
+      ),
+      canProceed: !!formData.duracaoTreino && parseInt(formData.duracaoTreino) >= 10,
     },
     {
       title: "Qual sua rotina de treinos?",
@@ -509,6 +610,10 @@ const Questionnaire = () => {
     { label: "Idade", value: `${formData.idade} anos` },
     { label: "Altura", value: `${formData.altura} cm` },
     { label: "Peso", value: `${formData.peso} kg` },
+    { 
+      label: "Duração do treino", 
+      value: formatDuration(parseInt(formData.duracaoTreino)) 
+    },
     { label: "Frequência de treino", value: formData.frequenciaTreino },
     { label: "Limitações", value: formData.temLimitacao === "Não" ? "Nenhuma" : formData.tipoLimitacao.join(", ") },
     { label: "Foco muscular", value: formData.gruposMusculares.join(", ") },
