@@ -15,6 +15,7 @@ import LandingPage from "@/components/LandingPage";
 
 interface FormData {
   objetivo: string;
+  atividadeDiaria: string;
   nivel: string;
   genero: string;
   idade: string;
@@ -23,20 +24,23 @@ interface FormData {
   duracaoTreino: string;
   frequenciaTreino: string;
   temLimitacao: string;
+  estiloTreino: string;
   tipoLimitacao: string[];
   gruposMusculares: string[];
-  dietaEspecifica: string;
+  preferenciasAlimentares: string;
   temAlergias: string;
   alergias: string;
   apetite: string;
   horarioTreino: string;
   prazoPlanejado: string;
   observacoes: string;
+  cardio: string;
   mealTimes: string[];
 }
 
 const initialFormData: FormData = {
   objetivo: "",
+  atividadeDiaria: "",
   nivel: "",
   genero: "",
   idade: "",
@@ -44,16 +48,18 @@ const initialFormData: FormData = {
   peso: "",
   duracaoTreino: "45",
   frequenciaTreino: "",
+  estiloTreino: "",
   temLimitacao: "",
   tipoLimitacao: [],
   gruposMusculares: [],
-  dietaEspecifica: "",
+  preferenciasAlimentares: "",
   temAlergias: "",
   alergias: "",
   apetite: "",
   horarioTreino: "",
   prazoPlanejado: "",
   observacoes: "",
+  cardio: "",
   mealTimes: [],
 };
 
@@ -476,8 +482,6 @@ const Questionnaire = () => {
     );
   };
 
-
-
   const questions = [
     {
       id: 'objetivo',
@@ -502,6 +506,41 @@ const Questionnaire = () => {
         </div>
       ),
       canProceed: !!formData.objetivo,
+    },
+    {
+      id: 'atividadeDiaria',
+      title: "Qual o seu nível de atividade diária?",
+      subtitle: "Considere seu trabalho e rotina diária (fora a academia)",
+      content: (
+        <div className="grid gap-3">
+          {[
+            {
+              label: "Sedentário",
+              desc: "Trabalho sentado, pouco movimento",
+            },
+            {
+              label: "Levemente Ativo",
+              desc: "Trabalho em pé ou caminhadas leves",
+            },
+            {
+              label: "Moderadamente Ativo",
+              desc: "Trabalho físico moderado ou movimento constante",
+            },
+            {
+              label: "Muito Ativo",
+              desc: "Trabalho físico pesado ou atleta",
+            },
+          ].map((option) => (
+            <OptionButton
+              key={option.label}
+              label={option.label}
+              selected={formData.atividadeDiaria === option.label}
+              onClick={() => updateFormData("atividadeDiaria", option.label)}
+            />
+          ))}
+        </div>
+      ),
+      canProceed: !!formData.atividadeDiaria,
     },
     {
       id: 'nivel',
@@ -642,6 +681,45 @@ const Questionnaire = () => {
       canProceed: !!formData.frequenciaTreino,
     },
     {
+      id: 'estiloTreino',
+      title: "Tem preferência de estilo de treino?",
+      subtitle: "Se não tiver, podemos escolher o modelo mais eficiente para seu objetivo",
+      content: (
+        <div className="grid gap-3">
+          {[
+            {
+              label: "Sem preferência",
+              desc: "Deixe que o sistema escolha o melhor modelo",
+            },
+            {
+              label: "Upper / Lower",
+              desc: "Divisão em treino de membros superiores e inferiores",
+            },
+            {
+              label: "ABC",
+              desc: "Divisão clássica em 3 treinos diferentes",
+            },
+            {
+              label: "ABCD",
+              desc: "Divisão em 4 treinos com maior especificidade",
+            },
+            {
+              label: "ABCDE",
+              desc: "Divisão avançada, um grupo muscular por dia",
+            },
+          ].map((option) => (
+            <OptionButton
+              key={option.label}
+              label={option.label}
+              selected={formData.estiloTreino === option.label}
+              onClick={() => updateFormData("estiloTreino", option.label)}
+            />
+          ))}
+        </div>
+      ),
+      canProceed: !!formData.estiloTreino,
+    },
+    {
       id: 'temLimitacao',
       title: "Tem alguma limitação física?",
       subtitle: "Lesões, dores crônicas ou restrições médicas",
@@ -726,30 +804,21 @@ const Questionnaire = () => {
       canProceed: true,
     },
     {
-      id: 'dietaEspecifica',
-      title: "Segue alguma dieta específica?",
-      subtitle: "Escolha sua preferência alimentar",
+      id: 'preferenciasAlimentares',
+      title: "Quais alimentos ou estilo alimentar você prefere?",
+      subtitle: "Descreva suas preferências, praticidade e estilo de alimentação",
       content: (
-        <div className="grid gap-3">
-          {[
-            { label: "Sem restrições", icon: <Utensils className="w-6 h-6" /> },
-            { label: "Low-carb", icon: <Apple className="w-6 h-6" /> },
-            { label: "High-protein", icon: <Dumbbell className="w-6 h-6" /> },
-            { label: "Vegetariana", icon: <Apple className="w-6 h-6" /> },
-            { label: "Vegana", icon: <Apple className="w-6 h-6" /> },
-            { label: "Cetogênica", icon: <Flame className="w-6 h-6" /> },
-          ].map((option) => (
-            <OptionButton
-              key={option.label}
-              label={option.label}
-              icon={option.icon}
-              selected={formData.dietaEspecifica === option.label}
-              onClick={() => updateFormData("dietaEspecifica", option.label)}
-            />
-          ))}
-        </div>
+        <QuestionTextarea
+          placeholder="Estilo alimentar: vegetariano, vegano, tradicional...
+            Praticidade: refeições rápidas, marmitas, receitas simples...
+            Preferências: frango, arroz, ovos, frutas...
+            Evita: frituras, carne vermelha, doces..."
+          value={formData.preferenciasAlimentares}
+          onChange={(value) => updateFormData("preferenciasAlimentares", value)}
+          rows={4}
+        />
       ),
-      canProceed: !!formData.dietaEspecifica,
+      canProceed: true,
     },
     {
       id: 'temAlergias',
@@ -833,6 +902,28 @@ const Questionnaire = () => {
       canProceed: !!formData.prazoPlanejado,
     },
     {
+      id: 'cardio',
+      title: "Você quer incluir cardio no seu plano?",
+      subtitle: "Isso influencia na dieta e no treino",
+      content: (
+        <div className="grid gap-3">
+          {[
+            { label: "Sim, quero cardio", desc: "Corrida, bike, HIIT, etc." },
+            { label: "Não, prefiro sem cardio", desc: "Foco total em musculação" },
+            { label: "Pouco cardio", desc: "Apenas para saúde e condicionamento" },
+          ].map((option) => (
+            <OptionButton
+              key={option.label}
+              label={option.label}
+              selected={formData.cardio === option.label}
+              onClick={() => updateFormData("cardio", option.label)}
+            />
+          ))}
+        </div>
+      ),
+      canProceed: !!formData.cardio,
+    },
+    {
       id: 'observacoes',
       title: "Deseja adicionar observações extras?",
       subtitle: "Escreva detalhes adicionais sobre seu corpo, rotina ou preferências",
@@ -849,24 +940,58 @@ const Questionnaire = () => {
   ];
 
   const getSummaryItems = () => [
-    { label: "Objetivo", value: formData.objetivo },
-    { label: "Nível", value: formData.nivel },
-    { label: "Gênero", value: formData.genero },
-    { label: "Idade", value: `${formData.idade} anos` },
-    { label: "Altura", value: `${formData.altura} cm` },
-    { label: "Peso", value: `${formData.peso} kg` },
-    { 
-      label: "Duração do treino", 
-      value: formatDuration(parseInt(formData.duracaoTreino)) 
+    { label: "Objetivo", value: formData.objetivo || "—" },
+    { label: "Atividade diária", value: formData.atividadeDiaria || "—" },
+    { label: "Nível (academia)", value: formData.nivel || "—" },
+    { label: "Gênero", value: formData.genero || "—" },
+    { label: "Idade", value: formData.idade ? `${formData.idade} anos` : "—" },
+    { label: "Altura", value: formData.altura ? `${formData.altura} cm` : "—" },
+    { label: "Peso", value: formData.peso ? `${formData.peso} kg` : "—" },
+    {
+      label: "Duração do treino",
+      value: formatDuration(parseInt(formData.duracaoTreino || "0")),
     },
-    { label: "Frequência de treino", value: formData.frequenciaTreino },
-    { label: "Limitações", value: formData.temLimitacao === "Não" ? "Nenhuma" : formData.tipoLimitacao.join(", ") },
-    { label: "Foco muscular", value: formData.gruposMusculares.join(", ") },
-    { label: "Dieta", value: formData.dietaEspecifica },
-    { label: "Restrições alimentares", value: formData.temAlergias === "Não" ? "Nenhuma" : formData.alergias },
-    { label: "Apetite", value: formData.apetite },
-    { label: "Horário de treino", value: formData.horarioTreino },
-    { label: "Prazo", value: formData.prazoPlanejado },
+    { label: "Frequência de treino", value: formData.frequenciaTreino || "—" },
+    { label: "Tem limitação física?", value: formData.temLimitacao || "—" },
+    {
+      label: "Tipo de limitação",
+      value:
+        formData.temLimitacao === "Não"
+          ? "Nenhuma"
+          : formData.tipoLimitacao && formData.tipoLimitacao.length
+          ? formData.tipoLimitacao.join(", ")
+          : "—",
+    },
+    {
+      label: "Grupos musculares (foco)",
+      value:
+        formData.gruposMusculares && formData.gruposMusculares.length
+          ? formData.gruposMusculares.join(", ")
+          : "—",
+    },
+    {
+      label: "Horários de refeição",
+      value:
+        formData.mealTimes && formData.mealTimes.length
+          ? formData.mealTimes.join(", ")
+          : "—",
+    },
+    { label: "Segue dieta específica", value: formData.dietaEspecifica || "—" },
+    { label: "Tem alergias?", value: formData.temAlergias || "—" },
+    {
+      label: "Quais alergias / restrições",
+      value:
+        formData.temAlergias === "Não"
+          ? "Nenhuma"
+          : formData.alergias
+          ? formData.alergias
+          : "—",
+    },
+    { label: "Apetite", value: formData.apetite || "—" },
+    { label: "Horário do treino (tipo)", value: formData.horarioTreino || "—" },
+    { label: "Prazo planejado", value: formData.prazoPlanejado || "—" },
+    { label: "Cardio", value: formData.cardio || "—" },
+    { label: "Observações", value: formData.observacoes || "—" },
   ];
 
   if (showLanding) {

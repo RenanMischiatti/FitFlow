@@ -1,9 +1,8 @@
 import { motion } from "framer-motion";
 import { Check, Sparkles, Shield, Award, Clock, ChevronDown } from "lucide-react";
 import { Button } from "./ui/button";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import GoalsCarousel from "./GoalsCarousel"; // Ajuste o caminho se estiver em outra pasta
-
 
 interface SummaryItem {
   label: string;
@@ -20,28 +19,73 @@ const SummaryScreen = ({ items, onPurchase, onEdit }: SummaryScreenProps) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isCollapsed, setIsCollapsed] = useState(true); // Collapse do resumo do perfil
 
+  // contato
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [savedContact, setSavedContact] = useState(false);
+
+  useEffect(() => {
+    // carrega contato salvo, se houver
+    try {
+      const raw = localStorage.getItem("fitflow_contact");
+      if (raw) {
+        const parsed = JSON.parse(raw);
+        setName(parsed.name || "");
+        setEmail(parsed.email || "");
+        setPhone(parsed.phone || "");
+        setSavedContact(!!(parsed.name || parsed.email || parsed.phone));
+      }
+    } catch {
+      // ignore
+    }
+  }, []);
+
+  // salva automaticamente sempre que os campos mudarem
+  useEffect(() => {
+    try {
+      const payload = { name: name.trim(), email: email.trim(), phone: phone.trim() };
+      if (payload.name || payload.email || payload.phone) {
+        localStorage.setItem("fitflow_contact", JSON.stringify(payload));
+        setSavedContact(true);
+      } else {
+        localStorage.removeItem("fitflow_contact");
+        setSavedContact(false);
+      }
+    } catch (err) {
+      console.error("Erro ao persistir contato:", err);
+    }
+  }, [name, email, phone]);
+
   const handleClick = async () => {
     try {
       setIsLoading(true);
+
+      // garante persistência antes do purchase (redundante, mas seguro)
+      try {
+        localStorage.setItem("fitflow_contact", JSON.stringify({ name: name.trim(), email: email.trim(), phone: phone.trim() }));
+        setSavedContact(true);
+      } catch {}
+
       await onPurchase(); // aguarda a função de pagamento
     } finally {
       setIsLoading(false); // desativa loading após a conclusão ou erro
     }
   };
 
-  // ----- Helpers para extrair valores de `items` -----
-  const findItemValue = (keys: string[]) => {
-    const lowerKeys = keys.map(k => k.toLowerCase());
-    const found = items.find(it => {
-      const lbl = (it.label || "").toLowerCase();
-      return lowerKeys.some(k => lbl.includes(k));
-    });
-    return found?.value;
+  // Busca item exato (case insensitive) ou começa com
+  const findItemValue = (labels: string[]) => {
+    const found = items.find(it => 
+      labels.some(l => 
+        it.label.toLowerCase().trim() === l.toLowerCase().trim() // igualdade exata
+        || it.label.toLowerCase().trim().startsWith(l.toLowerCase().trim()) // começa com
+      )
+    );
+    return found?.value ?? "";
   };
 
   const parseNumber = (raw?: string) => {
     if (!raw) return NaN;
-    // remove unidades comuns e vírgulas, aceita "70 kg", "170 cm", "3.9"
     const cleaned = raw.replace(/[,]/g, ".").replace(/[^\d.\-]/g, "");
     const n = parseFloat(cleaned);
     return isNaN(n) ? NaN : n;
@@ -50,10 +94,11 @@ const SummaryScreen = ({ items, onPurchase, onEdit }: SummaryScreenProps) => {
   // Extrair dados que precisamos (tenta várias variações de label)
   const pesoRaw = findItemValue(["peso"]);
   const alturaRaw = findItemValue(["altura"]);
-  const idadeRaw = findItemValue(["idade", "ano", "anos"]);
+  const idadeRaw = findItemValue(["idade"]);
   const generoRaw = findItemValue(["genero", "gênero", "sexo"]);
   const nivelRaw = findItemValue(["nível", "nivel", "nível de aptidão", "aptidão"]);
 
+  console.log(idadeRaw);
   const peso = parseNumber(pesoRaw) || 0; // kg
   const alturaCm = parseNumber(alturaRaw) || 0; // cm
   const idade = Math.round(parseNumber(idadeRaw) || 0);
@@ -64,26 +109,40 @@ const SummaryScreen = ({ items, onPurchase, onEdit }: SummaryScreenProps) => {
   const alturaM = alturaCm > 0 ? alturaCm / 100 : 0;
   const imcValue = alturaM > 0 && peso > 0 ? +(peso / (alturaM * alturaM)).toFixed(1) : 0;
 
-  const IMC_MIN = 10;
-  const IMC_MAX = 100;
-  const imcPercent = Math.min(
-    100,
-    Math.max(0, ((imcValue - IMC_MIN) / (IMC_MAX - IMC_MIN)) * 100)
-  );
+  const IMC_MIN = 18.5;
+  const IMC_MAX = 40;
 
-  const status =
-    imcPercent < 20
-      ? { label: "Abaixo do peso", color: "text-blue-400" }
-      : imcPercent < 40
-      ? { label: "Peso normal", color: "text-green-400" }
-      : imcPercent < 65
-      ? { label: "Sobrepeso", color: "text-yellow-400" }
-      : { label: "Obeso", color: "text-red-500" };
+  const getImcPercentForGradient = (imc: number) => {
+    if (imc < 18.5) return (imc / 18.5) * 21; // magreza: 0 → 21%
+    if (imc >= 18.5 && imc <= 24.9) return 21 + ((imc - 18.5) / (24.9 - 18.5)) * (40 - 21);
+    if (imc >= 25 && imc <= 29.9) return 40 + ((imc - 25) / (29.9 - 25)) * (69 - 40);
+    if (imc >= 30 && imc <= 39.9) return 69 + ((imc - 30) / (39.9 - 30)) * (85 - 69);
+    return 85 + ((imc - 40) / (50 - 40)) * (100 - 85); // assumindo que IMC max 50
+  };
+
+  const imcPercent = getImcPercentForGradient(imcValue);
+
+
+
+  const getImcStatus = (imc: number) => {
+    if (imc < 18.5) {
+      return { label: "Magreza", grau: "0", color: "rgb(74, 89, 230)" };
+    } else if (imc >= 18.5 && imc <= 24.9) {
+      return { label: "Normal", grau: "0", color: "rgb(117, 198, 179)" };
+    } else if (imc >= 25 && imc <= 29.9) {
+      return { label: "Sobrepeso", grau: "I", color: "rgb(255, 229, 147)" };
+    } else if (imc >= 30 && imc <= 39.9) {
+      return { label: "Obesidade", grau: "II", color: "rgb(250, 133, 87)" };
+    } else {
+      return { label: "Obesidade Grave", grau: "III", color: "rgb(236, 62, 79)" };
+    }
+  };
+
+
+  const status = getImcStatus(imcValue);
+
 
   // ----- Metabolismo Basal (Mifflin-St Jeor) -----
-  // Fórmula:
-  // Homens:   BMR = 10*peso + 6.25*altura(cm) - 5*idade + 5
-  // Mulheres: BMR = 10*peso + 6.25*altura(cm) - 5*idade - 161
   let bmr = 0;
   if (peso > 0 && alturaCm > 0 && idade > 0) {
     if (genero.toLowerCase().includes("mascul")) {
@@ -91,7 +150,6 @@ const SummaryScreen = ({ items, onPurchase, onEdit }: SummaryScreenProps) => {
     } else if (genero.toLowerCase().includes("femin") || genero.toLowerCase().includes("fem")) {
       bmr = 10 * peso + 6.25 * alturaCm - 5 * idade - 161;
     } else {
-      // Se o gênero não estiver claro, usa média simples (fallback)
       bmr = 10 * peso + 6.25 * alturaCm - 5 * idade;
     }
   }
@@ -114,6 +172,11 @@ const SummaryScreen = ({ items, onPurchase, onEdit }: SummaryScreenProps) => {
     Math.round((aguaLitros / maxLitersForScale) * totalVisualCups)
   );
 
+  // validações simples de contato
+  const emailValid = !!email && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  const phoneDigits = phone.replace(/\D/g, "");
+  const phoneValid = phoneDigits.length >= 8; // regra simples (pode adaptar)
+
   return (
     <div className="min-h-screen bg-background flex flex-col px-4 py-8 relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-b from-primary/[0.02] via-transparent to-secondary/[0.02] pointer-events-none" />
@@ -121,7 +184,9 @@ const SummaryScreen = ({ items, onPurchase, onEdit }: SummaryScreenProps) => {
       <div className="max-w-2xl mx-auto w-full flex-1 flex flex-col relative z-10">
         {/* Header */}
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-8">
-          <motion.span className="text-2xl font-display font-bold gradient-text">HighFit AI</motion.span>
+          <motion.span className="text-2xl font-display font-bold gradient-text flex justify-center">
+              <img src="/img/logo.png" alt="HF AI Logo" className="w-[130px]"/>
+          </motion.span>
           <h1 className="text-3xl md:text-4xl font-display font-bold text-foreground mt-6 mb-3">
             Seu plano está pronto!
           </h1>
@@ -181,7 +246,7 @@ const SummaryScreen = ({ items, onPurchase, onEdit }: SummaryScreenProps) => {
           transition={{ delay: 0.3 }}
           className="space-y-8 max-w-5xl mx-auto mb-6"
         >
-          {/* ================= IMC PREMIUM ================= */}
+          {/* IMC Card */}
           {(() => {
             return (
               <div className="bg-slate-900 border border-slate-800 rounded-2xl p-7 w-full relative">
@@ -205,10 +270,9 @@ const SummaryScreen = ({ items, onPurchase, onEdit }: SummaryScreenProps) => {
                     }}
                   />
 
-                  {/* Marcador grande - FORA da barra */}
                   <motion.div
-                    initial={{ left: 0 }}
-                    animate={{ left: `${imcPercent}%` }}
+                    initial={{ left: "0%" }}
+                    animate={{ left: `calc(${imcPercent}% )` }}
                     transition={{ duration: 0.8, ease: "easeOut" }}
                     className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2"
                     style={{ zIndex: 9999 }}
@@ -217,9 +281,8 @@ const SummaryScreen = ({ items, onPurchase, onEdit }: SummaryScreenProps) => {
                   </motion.div>
                 </div>
 
-                <div className="flex justify-between text-sm font-medium text-slate-400 mt-6">
-                  <span>Abaixo do peso</span>
-                  <span className={status.color}>{status.label}</span>
+                <div className="flex justify-end text-sm font-medium text-slate-400 mt-6">
+                  <span style={{ color: status.color }}>{status.label}</span>
                 </div>
 
                 <p className="text-sm leading-relaxed text-slate-400 mt-5 max-w-2xl">
@@ -229,11 +292,11 @@ const SummaryScreen = ({ items, onPurchase, onEdit }: SummaryScreenProps) => {
             );
           })()}
 
-          {/* ================= METABOLISMO BASAL + ÁGUA (DESTAQUE VISUAL) ================= */}
+          {/* BMR + Água */}
           {(() => {
             return (
               <div className="grid md:grid-cols-2 gap-6">
-                {/* Metabolismo Basal (BMR) */}
+                {/* BMR */}
                 <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 flex flex-col gap-3 relative">
                   <div className="flex items-center gap-4 mb-2">
                     <div className="text-5xl">🍔</div>
@@ -261,7 +324,7 @@ const SummaryScreen = ({ items, onPurchase, onEdit }: SummaryScreenProps) => {
                       className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2"
                       style={{ zIndex: 9999 }}
                     >
-                      <div className="w-6 h-6 bg-orange-500 rounded-full border-3 border-slate-900" />
+                      <div className="w-6 h-6 bg-orange-500 rounded-full border-[3px] border-slate-900" />
                     </motion.div>
                   </div>
 
@@ -275,7 +338,7 @@ const SummaryScreen = ({ items, onPurchase, onEdit }: SummaryScreenProps) => {
                   </p>
                 </div>
 
-                {/* Água recomendada */}
+                {/* Água */}
                 <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 flex flex-col gap-3">
                   <div className="flex items-center gap-4 mb-2">
                     <div className="text-5xl">💧</div>
@@ -299,7 +362,6 @@ const SummaryScreen = ({ items, onPurchase, onEdit }: SummaryScreenProps) => {
                             : "bg-slate-800 border border-slate-700"
                         }`}
                       >
-                        {/* Ícone de copo */}
                         <svg 
                           viewBox="0 0 24 24" 
                           fill="none" 
@@ -335,36 +397,78 @@ const SummaryScreen = ({ items, onPurchase, onEdit }: SummaryScreenProps) => {
             );
           })()}
 
-          {/* ================= PLANO PERSONALIZADO ================= */}
-          <div className="bg-slate-900 border border-slate-800 rounded-2xl p-7">
-            <h4 className="text-2xl font-bold text-white mb-6">
-              O plano personalizado está{" "}
-              <span className="text-orange-500">pronto!</span>
+          {/* PLANO PERSONALIZADO - SUMMARY PREMIUM (dinâmico via items) */}
+          <div className="bg-card border border-border rounded-2xl p-7 relative overflow-hidden">
+
+            {/* Glow decorativo */}
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-transparent pointer-events-none" />
+
+            <h4 className="text-2xl font-bold text-foreground mb-2">
+              Seu plano personalizado está{" "}
+              <span className="text-primary">pronto</span>
             </h4>
 
-            <div className="grid md:grid-cols-2 gap-5">
-              {[
-                { label: "⏳ Duração do Treino", value: "1 hora" },
-                { label: "💪 Nível de Aptidão", value: "Intermediário" },
-                { label: "👟 Local para Treinar", value: "Casa" },
-                { label: "📆 Frequência de Treino", value: "3x por semana" },
-              ].map((item, i) => (
-                <div
-                  key={i}
-                  className="bg-gradient-to-br from-orange-500/10 to-orange-600/5 border border-orange-500/20 rounded-xl p-5 flex flex-col gap-2 hover:border-orange-500/40 transition-all"
-                >
-                  <span className="text-sm font-medium text-slate-400">{item.label}</span>
-                  <span className="text-xl font-bold text-white">
-                    {item.value}
-                  </span>
+            <p className="text-sm text-muted-foreground mb-6">
+              Criamos seu plano com base no seu perfil. Veja os principais pontos 👇
+            </p>
+
+            {/* extrair dados do items */}
+            {(() => {
+              const duracaoTreino = findItemValue(["duração", "duracao", "tempo de treino"]);
+              const nivelAptidao = findItemValue(["nível", "nivel", "aptidão"]);
+              const objetivoTreino = findItemValue(["objetivo", "meta", "goal"]);
+              const frequenciaTreino = findItemValue(["frequência", "frequencia", "vezes"]);
+
+              const normalize = (value?: string) => value?.trim() || "—";
+
+              return (
+                <div className="grid md:grid-cols-2 gap-4">
+                  {[
+                    {
+                      label: "Duração do treino",
+                      value: normalize(duracaoTreino),
+                      icon: "⏱️",
+                    },
+                    {
+                      label: "Nível de aptidão",
+                      value: normalize(nivelAptidao),
+                      icon: "💪",
+                    },
+                    {
+                      label: "Objetivo do treino",
+                      value: normalize(objetivoTreino),
+                      icon: "🎯",
+                    },
+                    {
+                      label: "Frequência semanal",
+                      value: normalize(frequenciaTreino),
+                      icon: "📅",
+                    },
+                  ].map((item, i) => (
+                    <div
+                      key={i}
+                      className="group bg-background border border-border rounded-xl p-5 flex flex-col gap-2 transition-all hover:border-primary/40 hover:bg-primary/5"
+                    >
+                      <span className="text-xs font-medium text-muted-foreground flex items-center gap-2">
+                        <span className="text-base">{item.icon}</span>
+                        {item.label}
+                      </span>
+
+                      <span className="text-xl font-semibold text-foreground tracking-tight">
+                        {item.value}
+                      </span>
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
+              );
+            })()}
+
           </div>
 
-          {/* ================= OBJETIVOS ================= */}
-          <GoalsCarousel />
 
+
+          {/* OBJETIVOS */}
+          <GoalsCarousel />
         </motion.div>
 
         {/* Plan Card */}
@@ -412,6 +516,98 @@ const SummaryScreen = ({ items, onPurchase, onEdit }: SummaryScreenProps) => {
           </div>
         </motion.div>
 
+        {/* ---------- CONTACT BOX (PDF DELIVERY) ---------- */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.45 }}
+          className="bg-slate-900 border border-slate-800 rounded-2xl p-7 mb-6"
+        >
+          <div className="space-y-5">
+            {/* Header */}
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-xl bg-primary/15 flex items-center justify-center">
+                <Sparkles className="w-5 h-5 text-primary" />
+              </div>
+              <div>
+                <h4 className="text-lg font-bold text-white">
+                  Para onde enviamos seu plano?
+                </h4>
+                <p className="text-sm text-slate-400">
+                  Insira nome e e-mail — é para esse e-mail que o PDF será enviado.
+                </p>
+              </div>
+            </div>
+
+            {/* Form */}
+            <div className="grid gap-4">
+              {/* Nome */}
+              <div className="space-y-1.5">
+                <label className="text-xs font-medium text-slate-400">
+                  Seu nome *
+                </label>
+                <input
+                  type="text"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  placeholder="Digite seu nome"
+                  className="w-full rounded-xl border border-slate-700 bg-slate-950 px-4 py-2.5 text-sm text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-primary/40 transition"
+                />
+                {!name.trim() && (
+                  <div className="text-xs text-red-400">Nome obrigatório</div>
+                )}
+              </div>
+
+              {/* Email + Telefone lado a lado */}
+              <div className="grid md:grid-cols-2 gap-3">
+                <div className="space-y-1.5">
+                  <label className="text-xs font-medium text-slate-400">
+                    E-mail (onde o PDF será enviado) *
+                  </label>
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="seuemail@gmail.com"
+                    className="w-full rounded-xl border border-slate-700 bg-slate-950 px-4 py-2.5 text-sm text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-primary/40 transition"
+                  />
+                  {!emailValid && email.length > 0 && (
+                    <div className="text-xs text-red-400">E-mail inválido</div>
+                  )}
+                </div>
+
+                <div className="space-y-1.5">
+                  <label className="text-xs font-medium text-slate-400">
+                    WhatsApp (opcional)
+                  </label>
+                  <input
+                    type="tel"
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                    placeholder="(11) 9 9999-9999"
+                    className="w-full rounded-xl border border-slate-700 bg-slate-950 px-4 py-2.5 text-sm text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-primary/40 transition"
+                  />
+                  {phone.length > 0 && !phoneValid && (
+                    <div className="text-xs text-red-400">
+                      Digite pelo menos 8 números
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              <div className="flex items-center gap-3 mt-1">
+                <div className={`text-xs ${savedContact ? "text-green-400" : "text-slate-500"}`}>
+                  {savedContact ? "Dados salvos no seu navegador ✓" : "Os dados serão salvos automaticamente"}
+                </div>
+
+                <div className="text-xs text-slate-500 ml-auto">
+                  🔒 Usaremos seus dados apenas para enviar seu plano em PDF.
+                </div>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+
         {/* Trust badges */}
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6 }} className="grid grid-cols-3 gap-3 mb-6">
           {[{ icon: Shield, text: "Pagamento Seguro" }, { icon: Award, text: "Garantia Total" }, { icon: Clock, text: "Acesso Imediato" }].map((badge, index) => (
@@ -439,7 +635,8 @@ const SummaryScreen = ({ items, onPurchase, onEdit }: SummaryScreenProps) => {
               size="xl"
               onClick={handleClick}
               className="w-3/4 flex items-center justify-center gap-2"
-              disabled={isLoading}
+              disabled={isLoading || !emailValid || !name.trim()}
+              title={!name.trim() ? "Preencha seu nome" : !emailValid ? "Insira um e-mail válido" : undefined}
             >
               {isLoading ? (
                 <>
@@ -455,10 +652,18 @@ const SummaryScreen = ({ items, onPurchase, onEdit }: SummaryScreenProps) => {
             </Button>
           </div>
 
-          <p className="text-center text-xs text-muted-foreground mt-4 flex items-center justify-center gap-2">
-            <Shield className="w-4 h-4" />
-            Seus dados estão protegidos e seguros
-          </p>
+          <div className="text-center">
+            {(!name.trim() || !emailValid) && (
+              <div className="text-xs text-red-400">
+                Preencha seu nome e e-mail válidos para receber o PDF.
+              </div>
+            )}
+
+            <p className="text-center text-xs text-muted-foreground mt-4 flex items-center justify-center gap-2">
+              <Shield className="w-4 h-4" />
+              Seus dados estão protegidos e seguros
+            </p>
+          </div>
         </motion.div>
       </div>
     </div>
