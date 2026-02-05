@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\AI;
+namespace App\Services;
 
 use OpenAI\Laravel\Facades\OpenAI;
 use Exception;

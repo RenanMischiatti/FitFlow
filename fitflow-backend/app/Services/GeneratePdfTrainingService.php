@@ -1,23 +1,43 @@
-<?php 
+<?php
 
 namespace App\Services;
 
 use App\Models\Order;
+use Spatie\Browsershot\Browsershot;
 
 class GeneratePdfTrainingService
 {
-    public function __construct(
-        public Order $order
-    ) {}
-
-
-    public function generate(): string
+    public function generate(Order $order): string
     {
-        $pdf = PDF::loadView('pdf.pdf_training', [
-            'order' => $this->order,
-        ]);
+        $fileName = 'training_' . $order->id . '.pdf';
+        $directory = storage_path('app/pdfs');
+        $path = $directory . '/' . $fileName;
 
-        return $pdf->output();
+        if (!file_exists($directory)) {
+            mkdir($directory, 0755, true);
+        }
+
+        $html = view('pdf.pdf_training', [
+            'order' => $order,
+        ])->render();
+
+        /**
+         * PDF contínuo com altura automática do conteúdo
+         * (CSS controla tudo)
+         */
+        Browsershot::html($html)
+            ->noSandbox()
+            ->setOption('args', [
+                '--disable-setuid-sandbox',
+                '--disable-dev-shm-usage',
+            ])
+            ->margins(0, 0, 0, 0)
+            ->showBackground()
+            ->setOption('printBackground', true)
+            ->setOption('preferCSSPageSize', true)
+            ->emulateMedia('print')
+            ->savePdf($path);
+
+        return $path;
     }
-
 }

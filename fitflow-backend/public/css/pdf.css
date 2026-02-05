@@ -1,915 +1,2979 @@
-/* ========================================
-   PHYSIQ - Premium PDF Report Design System
-   PDF-First: Compatible with wkhtmltopdf/Dompdf
-   ======================================== */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+/* 
+  PDF EXPORT DESIGN SYSTEM
+  Otimizado para Spatie PDF / Browsershot
+  Cada seção = 1 página A4
+  Sem animações, position:fixed, ou overflow complexo
+*/
 
-/* ========================================
-   CSS RESET & BASE
-   ======================================== */
+/* ==================== A4 PAGE SETTINGS ==================== */
+@page {
+  size: A4;
+  margin: 0;
+}
+
+:root {
+  /* A4 dimensions */
+  --page-width: 210mm;
+  --page-height: 297mm;
+  --page-padding: 12mm;
+  --page-padding-x: 16mm;
+  
+  /* Background & Foreground */
+  --background: hsl(0, 0%, 98%);
+  --foreground: hsl(220, 20%, 10%);
+
+  /* Card System */
+  --card: hsl(0, 0%, 100%);
+  --card-foreground: hsl(220, 20%, 10%);
+
+  /* Primary - Azul Profissional Escuro */
+  --primary: hsl(221, 83%, 25%);
+  --primary-foreground: hsl(0, 0%, 100%);
+  --primary-light: hsl(217, 91%, 60%);
+
+  /* Secondary */
+  --secondary: #f3f4f6;
+  --secondary-foreground: hsl(220, 20%, 10%);
+
+  /* Muted */
+  --muted: hsl(220, 14%, 96%);
+  --muted-foreground: #6b7280;
+
+  /* Accent - Verde Fitness */
+  --accent: hsl(160, 84%, 39%);
+  --accent-foreground: hsl(0, 0%, 100%);
+  --accent-light: hsl(160, 76%, 50%);
+
+  /* Success */
+  --success: hsl(160, 84%, 39%);
+  --success-foreground: hsl(0, 0%, 100%);
+
+  /* Warning */
+  --warning: hsl(25, 95%, 53%);
+  --warning-foreground: hsl(0, 0%, 100%);
+
+  /* Energy */
+  --energy: hsl(142, 71%, 45%);
+  --energy-foreground: hsl(0, 0%, 100%);
+
+  /* Gold */
+  --gold: hsl(38, 92%, 50%);
+  --gold-foreground: hsl(0, 0%, 100%);
+
+  /* Destructive */
+  --destructive: hsl(0, 84%, 60%);
+  --destructive-foreground: hsl(0, 0%, 100%);
+
+  /* Intensity Levels */
+  --intensity-low: hsl(142, 71%, 45%);
+  --intensity-medium: hsl(45, 93%, 47%);
+  --intensity-high: hsl(0, 84%, 60%);
+  --intensity-max: hsl(0, 72%, 51%);
+
+  /* Borders */
+  --border: hsl(220, 13%, 91%);
+  --ring: hsl(221, 83%, 25%);
+  --radius: 0.5rem;
+
+  /* Macro Colors */
+  --macro-protein: hsl(221, 83%, 53%);
+  --macro-carbs: hsl(142, 71%, 45%);
+  --macro-fat: hsl(38, 92%, 50%);
+  --macro-calories: hsl(0, 84%, 60%);
+
+  /* Cover gradient */
+  --cover-start: hsl(220, 20%, 10%);
+  --cover-end: hsl(220, 20%, 18%);
+
+  /* Teal for Lower */
+  --teal-50: hsl(166, 76%, 97%);
+  --teal-100: hsl(167, 85%, 89%);
+  --teal-200: hsl(168, 84%, 78%);
+  --teal-600: hsl(175, 84%, 32%);
+  --teal-700: hsl(175, 77%, 26%);
+
+  /* Indigo */
+  --indigo-50: hsl(226, 100%, 97%);
+  --indigo-100: hsl(226, 100%, 94%);
+  --indigo-200: hsl(228, 96%, 89%);
+  --indigo-600: hsl(239, 84%, 67%);
+
+  /* Purple */
+  --purple-50: hsl(270, 100%, 98%);
+  --purple-100: hsl(269, 100%, 92%);
+
+  /* Cyan */
+  --cyan-50: hsl(183, 100%, 96%);
+  --cyan-100: hsl(185, 96%, 90%);
+  --cyan-200: hsl(186, 94%, 82%);
+  --cyan-500: hsl(189, 94%, 43%);
+
+  /* Sky */
+  --sky-50: hsl(204, 100%, 97%);
+  --sky-200: hsl(201, 94%, 86%);
+}
+
+/* ==================== RESET & BASE ==================== */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  font-size: 14px;
-  line-height: 1.6;
-  color: #1a1a1a;
-  background: #ffffff;
-  -webkit-print-color-adjust: exact !important;
-  print-color-adjust: exact !important;
+html, body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background-color: var(--background);
+  color: var(--foreground);
+  line-height: 1.5;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: 'Space Grotesk', sans-serif;
-  font-weight: 700;
-  line-height: 1.2;
-}
-
-/* ========================================
-   COLOR PALETTE
-   ======================================== */
-:root {
-  --primary: #0f3d2e;
-  --primary-light: #1a5c44;
-  --accent: #22c55e;
-  --accent-light: #4ade80;
-  --accent-glow: #86efac;
-  --background: #ffffff;
-  --surface: #f8faf9;
-  --surface-alt: #f0fdf4;
-  --border: #e2e8f0;
-  --border-light: #f1f5f9;
-  --text-primary: #1a1a1a;
-  --text-secondary: #64748b;
-  --text-muted: #94a3b8;
-  --success: #22c55e;
-  --warning: #f59e0b;
-  --info: #3b82f6;
-  --error: #ef4444;
-}
-
-/* ========================================
-   LAYOUT & SECTIONS
-   ======================================== */
-.page {
-  width: 100%;
-  max-width: 80%;
-  margin: 0 auto;
-  background: var(--background);
-}
-
-.section {
-  padding: 40px;
-  page-break-inside: avoid;
-}
-
-.section-alt {
-  background: var(--surface);
-}
-
-.page-break {
-  page-break-before: always;
-}
-
-/* ========================================
-   COVER PAGE
-   ======================================== */
-.cover {
-  min-height: 100vh;
-  display: table;
-  width: 100%;
-  text-align: center;
-  background: linear-gradient(180deg, #ffffff 0%, #f0fdf4 50%, #dcfce7 100%);
+/* ==================== PDF PAGE CONTAINER ==================== */
+.pdf-page {
+  width: var(--page-width);
+  min-height: var(--page-height);
+  height: var(--page-height);
+  max-height: var(--page-height);
+  padding: var(--page-padding) var(--page-padding-x);
+  background-color: var(--background);
+  overflow: hidden;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  
+  /* PDF Break Controls */
+  page-break-after: always;
+  break-after: page;
+  page-break-inside: avoid;
+  break-inside: avoid;
 }
 
-.cover-inner {
-  display: table-cell;
-  vertical-align: middle;
-  padding: 60px 40px;
+.pdf-page:last-child {
+  page-break-after: auto;
+  break-after: auto;
 }
 
-.cover-logo {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 56px;
-  font-weight: 700;
-  letter-spacing: -2px;
-  margin-bottom: 50px;
-}
-
-.cover-logo .accent {
-  color: var(--accent);
-}
-
-.cover-title {
-  font-size: 42px;
-  font-weight: 700;
-  color: var(--primary);
-  margin-bottom: 8px;
-}
-
-.cover-subtitle {
-  font-size: 42px;
-  font-weight: 700;
-  color: var(--accent);
-  margin-bottom: 20px;
-}
-
-.cover-description {
-  font-size: 16px;
-  color: var(--text-secondary);
-  margin-bottom: 50px;
-}
-
-.cover-user-card {
-  display: inline-block;
-  background: #ffffff;
-  border: 2px solid var(--border);
-  border-radius: 16px;
-  padding: 24px 40px;
-  margin-bottom: 40px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-}
-
-.cover-user-card table {
-  border-collapse: collapse;
-}
-
-.cover-avatar {
-  width: 64px;
-  height: 64px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
-  color: #ffffff;
-  font-size: 24px;
-  font-weight: 700;
+/* Cover page special styling */
+.pdf-page.cover {
+  background: linear-gradient(145deg, var(--cover-start) 0%, var(--cover-end) 100%);
+  padding: 0;
+  justify-content: center;
+  align-items: center;
   text-align: center;
-  line-height: 64px;
 }
 
-.cover-user-name {
-  font-size: 22px;
-  font-weight: 600;
-  color: var(--text-primary);
-  padding-left: 20px;
-  text-align: left;
+/* ==================== PRINT MEDIA ==================== */
+@media print {
+  html, body {
+    width: var(--page-width);
+    height: auto;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .pdf-page {
+    margin: 0;
+    padding: var(--page-padding) var(--page-padding-x);
+    box-shadow: none;
+  }
+  
+  .pdf-page.cover {
+    padding: 0;
+  }
 }
 
-.cover-user-info {
-  font-size: 14px;
-  color: var(--text-secondary);
-  padding-left: 20px;
-  text-align: left;
+/* Screen preview - show page boundaries */
+@media screen {
+  body {
+    background-color: hsl(220, 14%, 90%);
+    padding: 20px;
+  }
+  
+  .pdf-page {
+    margin: 0 auto 20px auto;
+    box-shadow: 0 4px 20px hsla(220, 20%, 10%, 0.15);
+  }
 }
 
-.cover-date {
-  margin-top: 20px;
-  padding-top: 20px;
-  border-top: 1px solid var(--border);
-  font-size: 14px;
-  color: var(--text-muted);
+/* ==================== UTILITIES ==================== */
+.shadow-card {
+  box-shadow: 0 1px 3px hsla(220, 20%, 10%, 0.08), 0 1px 2px hsla(220, 20%, 10%, 0.06);
 }
 
-.cover-badges {
-  margin-top: 30px;
+.shadow-elevated {
+  box-shadow: 0 4px 6px -1px hsla(220, 20%, 10%, 0.1), 0 2px 4px -1px hsla(220, 20%, 10%, 0.06);
 }
 
-.cover-badges table {
-  margin: 0 auto;
-  border-collapse: collapse;
+.gradient-cover {
+  background: linear-gradient(145deg, var(--cover-start) 0%, var(--cover-end) 100%);
+}
+
+.gradient-primary {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+}
+
+.gradient-accent {
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+}
+
+/* ==================== COVER PAGE ==================== */
+.cover-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 24mm;
 }
 
 .cover-badge {
-  padding: 0 20px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1.5rem;
+  border-radius: 9999px;
+  border: 1px solid hsla(160, 84%, 39%, 0.3);
+  background-color: hsla(160, 84%, 39%, 0.1);
+  margin-bottom: 2rem;
 }
 
-.cover-badge-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  display: inline-block;
-  margin-right: 8px;
-}
-
-.cover-badge-dot.primary {
-  background: var(--primary);
-}
-
-.cover-badge-dot.accent {
-  background: var(--accent);
-}
-
-/* ========================================
-   SECTION HEADERS
-   ======================================== */
-.section-header {
-  margin-bottom: 30px;
-}
-
-.section-header table {
-  border-collapse: collapse;
-}
-
-.section-icon {
-  width: 48px;
-  height: 48px;
-  border-radius: 12px;
-  background: linear-gradient(135deg, var(--surface-alt) 0%, #dcfce7 100%);
-  text-align: center;
-  line-height: 48px;
-  font-size: 24px;
-}
-
-.section-title {
-  font-size: 26px;
-  font-weight: 700;
-  color: var(--primary);
-  padding-left: 16px;
-  vertical-align: middle;
-}
-
-/* ========================================
-   METRIC CARDS
-   ======================================== */
-.metrics-grid {
-  width: 100%;
-  border-collapse: separate;
-  border-spacing: 16px;
-}
-
-.metric-card {
-  background: #ffffff;
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 24px;
-  vertical-align: top;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
-}
-
-.metric-label {
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--text-secondary);
+.cover-badge span {
+  color: var(--accent);
+  font-weight: 600;
+  font-size: 0.8rem;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
-  margin-bottom: 8px;
+  letter-spacing: 0.15em;
 }
 
-.metric-value {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 36px;
+.cover-icon {
+  width: 5rem;
+  height: 5rem;
+  border-radius: 1rem;
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.cover-icon svg {
+  width: 2.5rem;
+  height: 2.5rem;
+  color: var(--accent-foreground);
+}
+
+.cover-title {
+  font-size: 2.25rem;
+  font-weight: 900;
+  color: var(--primary-foreground);
+  margin-bottom: 0.75rem;
+  line-height: 1.1;
+}
+
+.cover-subtitle {
+  font-size: 2.75rem;
+  font-weight: 900;
+  color: var(--accent);
+  margin-bottom: 1.5rem;
+  line-height: 1.1;
+}
+
+.cover-divider {
+  width: 5rem;
+  height: 0.25rem;
+  background-color: var(--accent);
+  border-radius: 9999px;
+  margin-bottom: 1.5rem;
+}
+
+.cover-user-label {
+  color: var(--muted-foreground);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-bottom: 0.5rem;
+}
+
+.cover-user-name {
+  font-size: 1.875rem;
   font-weight: 700;
-  color: var(--primary);
-  margin-bottom: 4px;
+  color: var(--primary-foreground);
+  margin-bottom: 2rem;
 }
 
-.metric-unit {
-  font-size: 18px;
+.cover-pillars {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.cover-pillar {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  padding: 0.625rem 1rem;
+  border-radius: 0.625rem;
+  background-color: hsla(0, 0%, 100%, 0.05);
+  border: 1px solid hsla(0, 0%, 100%, 0.1);
+}
+
+.cover-pillar svg {
+  width: 1.125rem;
+  height: 1.125rem;
+}
+
+.cover-pillar span {
+  color: var(--primary-foreground);
   font-weight: 500;
-  color: var(--text-secondary);
+  font-size: 0.875rem;
 }
 
-.metric-description {
-  font-size: 13px;
-  color: var(--text-muted);
-  margin-top: 8px;
+.cover-quote {
+  max-width: 26rem;
+  margin-bottom: 2rem;
 }
 
-.metric-bar-container {
-  height: 8px;
-  background: var(--border-light);
-  border-radius: 4px;
-  margin-top: 12px;
+.cover-quote p {
+  font-size: 1rem;
+  color: hsla(0, 0%, 100%, 0.8);
+  font-style: italic;
+  line-height: 1.6;
+}
+
+.cover-icons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.cover-icon-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.cover-icon-circle {
+  width: 3.25rem;
+  height: 3.25rem;
+  border-radius: 9999px;
+  background-color: hsla(0, 0%, 100%, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cover-icon-circle svg {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.cover-icon-label {
+  color: hsla(0, 0%, 100%, 0.7);
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.cover-icon-separator {
+  width: 1px;
+  height: 2.5rem;
+  background-color: hsla(0, 0%, 100%, 0.2);
+}
+
+.cover-info {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.cover-info-item {
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  background-color: hsla(0, 0%, 100%, 0.1);
+  color: hsla(0, 0%, 100%, 0.8);
+  font-size: 0.8rem;
+}
+
+.cover-info-item strong {
+  font-weight: 500;
+}
+
+/* ==================== PAGE HEADER ==================== */
+.page-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+  flex-shrink: 0;
+}
+
+.page-header-icon {
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 0.625rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.page-header-icon svg {
+  width: 1.125rem;
+  height: 1.125rem;
+}
+
+.page-title {
+  font-size: 1.375rem;
+  font-weight: 700;
+  color: var(--foreground);
+}
+
+/* ==================== CALORIE ANALYSIS PAGE ==================== */
+.calorie-header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  flex-shrink: 0;
+}
+
+.calorie-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 9999px;
+  background: linear-gradient(to right, hsla(221, 83%, 25%, 0.1), hsla(160, 84%, 39%, 0.1));
+  border: 1px solid hsla(221, 83%, 25%, 0.2);
+  margin-bottom: 1rem;
+}
+
+.calorie-badge svg {
+  width: 0.875rem;
+  height: 0.875rem;
+  color: var(--primary);
+}
+
+.calorie-badge span {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--primary);
+}
+
+.calorie-header h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--foreground);
+  margin-bottom: 0.5rem;
+}
+
+.calorie-header p {
+  color: var(--muted-foreground);
+  font-size: 1.4rem;
+  max-width: 90%;
+  margin: 0 auto;
+}
+
+.calorie-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  min-height: 0;
+  flex: 1;
+}
+
+.calorie-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+}
+
+.calorie-cards > div, .border {
+  border: 2px solid #00000017;
+}
+
+.calorie-card {
+  padding: 1rem;
+  border-radius: 0.875rem;
+  background-color: var(--card);
+  border: 1px solid var(--border);
+}
+
+.calorie-card-row {
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+}
+
+.calorie-card-icon {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 0.625rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.calorie-card-icon svg {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.calorie-card-info {
+  flex: 1;
+}
+
+.calorie-card-label {
+  font-weight: bold;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--muted-foreground);
+  margin-bottom: 0.125rem;
+}
+
+.calorie-card-sublabel {
+  font-size: 0.8rem;
+  color: var(--muted-foreground);
+}
+
+.calorie-card-value {
+  text-align: right;
+}
+
+.calorie-card-value .number {
+  font-size: 1.625rem;
+  font-weight: 700;
+}
+
+.calorie-card-value .unit {
+  font-size: 0.75rem;
+  color: var(--muted-foreground);
+  margin-left: 0.25rem;
+}
+
+/* Target Card */
+.calorie-card-target {
+  padding: 1.25rem;
+  border-radius: 1rem;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+  color: var(--primary-foreground);
+  position: relative;
   overflow: hidden;
 }
 
-.metric-bar {
-  height: 100%;
-  border-radius: 4px;
-  background: linear-gradient(90deg, var(--accent) 0%, var(--accent-light) 100%);
+.calorie-card-target .decorative-circle {
+  position: absolute;
+  top: -20px;
+  right: -20px;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-color: hsla(0, 0%, 100%, 0.1);
 }
 
-.metric-badge {
-  display: inline-block;
-  padding: 4px 12px;
-  border-radius: 20px;
-  font-size: 12px;
-  font-weight: 600;
-  margin-top: 10px;
+.calorie-card-target .calorie-card-icon {
+  background-color: hsla(0, 0%, 100%, 0.15);
 }
 
-.metric-badge.success {
-  background: #dcfce7;
-  color: #166534;
+.calorie-card-target .calorie-card-icon svg {
+  color: var(--primary-foreground);
 }
 
-.metric-badge.warning {
-  background: #fef3c7;
-  color: #92400e;
+.calorie-card-target .calorie-card-label,
+.calorie-card-target .calorie-card-sublabel {
+  color: hsla(0, 0%, 100%, 0.9);
 }
 
-.metric-badge.info {
-  background: #dbeafe;
-  color: #1e40af;
+.calorie-card-target .calorie-card-value .number {
+  color: var(--primary-foreground);
 }
 
-/* ========================================
-   INTERPRETATION CARDS
-   ======================================== */
-.interpretation-grid {
-  width: 100%;
-  border-collapse: separate;
-  border-spacing: 16px;
+.calorie-card-target .calorie-card-value .unit {
+  color: hsla(0, 0%, 100%, 0.8);
 }
 
-.interpretation-card {
-  background: #ffffff;
+/* Deficit Card */
+.calorie-card-deficit {
+  background-color: hsla(160, 84%, 39%, 0.08);
+  border-color: hsla(160, 84%, 39%, 0.2);
+}
+
+.calorie-card-deficit .calorie-card-icon {
+  background-color: hsla(160, 84%, 39%, 0.15);
+}
+
+.calorie-card-deficit .calorie-card-icon svg {
+  color: var(--accent);
+}
+
+.calorie-card-deficit .calorie-card-value .number {
+  color: var(--accent);
+}
+
+/* Strategy Card */
+.strategy-card {
+  padding: 0.875rem 1rem;
+  border-radius: 0.875rem;
+  background-color: var(--card);
   border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 24px;
-  vertical-align: top;
 }
 
-.interpretation-title {
-  font-size: 16px;
-  font-weight: 600;
-  color: var(--primary);
-  margin-bottom: 12px;
+.strategy-card-row {
   display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.strategy-icon {
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 0.5rem;
+  background-color: hsla(160, 84%, 39%, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.strategy-icon svg {
+  width: 1.125rem;
+  height: 1.125rem;
+  color: var(--accent);
+}
+
+.strategy-label {
+  font-size: 0.8rem;
+  font-weight: bolder;
+  color: #00000075;
+}
+
+.strategy-badge {
+  padding: 0.375rem 0.75rem;
+  border-radius: 9999px;
+  background-color: hsla(160, 84%, 39%, 0.1);
+  color: var(--accent);
+  font-size: 0.9rem;
+  font-weight: 600;
+  border: 1px solid hsla(160, 84%, 39%, 0.2);
+}
+
+/* Macros Panel */
+.macros-panel {
+  flex: 1;
+  padding: 1.25rem;
+  border-radius: 1rem;
+  background-color: var(--card);
+  display: flex;
+  flex-direction: column;
+}
+
+.macros-header {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  margin-bottom: 1rem;
+}
+
+.macros-header-icon {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 0.5rem;
+  background-color: var(--secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.macros-header-icon svg {
+  width: 1.2rem;
+  height: 1.2rem;
+  color: var(--muted-foreground);
+}
+
+.macros-header h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--foreground);
+}
+
+.macros-header p {
+  font-size: 0.9rem;
+  color: var(--muted-foreground);
+}
+
+/* Progress Circles */
+.macros-circles {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 100%;
+}
+
+.macro-item {
+  display: flex;
+  flex-direction: column;
   align-items: center;
 }
 
-.interpretation-icon {
-  margin-right: 10px;
-  font-size: 18px;
+.macro-circle {
+  position: relative;
+  width: 130px;
+  height: 130px;
 }
 
-.interpretation-text {
-  font-size: 14px;
-  color: var(--text-secondary);
-  line-height: 1.7;
-}
-
-/* ========================================
-   WORKOUT TABLES
-   ======================================== */
-.workout-header {
-  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
-  color: #ffffff;
-  padding: 20px 24px;
-  border-radius: 16px 16px 0 0;
-}
-
-.workout-name {
-  font-size: 20px;
-  font-weight: 700;
-  margin-bottom: 4px;
-}
-
-.workout-objective {
-  font-size: 14px;
-  opacity: 0.9;
-}
-
-.workout-table {
+.progress-ring {
   width: 100%;
-  border-collapse: collapse;
-  background: #ffffff;
-  border: 1px solid var(--border);
-  border-top: none;
-  border-radius: 0 0 16px 16px;
-  overflow: hidden;
+  height: 100%;
 }
 
-.workout-table th {
-  background: var(--surface);
-  padding: 14px 16px;
-  text-align: left;
-  font-size: 12px;
+.progress-bg {
+  fill: none;
+  stroke: var(--secondary);
+  stroke-width: 6;
+}
+
+.progress-bar {
+  fill: none;
+  stroke-width: 6;
+  stroke-linecap: round;
+  transform: rotate(-90deg);
+  transform-origin: 50% 50%;
+}
+
+.macro-circle-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.macro-circle-value {
+  display: block;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.macro-circle-percent {
+  display: block;
+  font-size: 1rem;
+  color: var(--muted-foreground);
+}
+
+.macro-label {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  margin-top: 0.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--foreground);
+}
+
+.macro-sublabel {
+  font-size: 0.8rem;
+  color: var(--muted-foreground);
+  margin-top: 0.125rem;
+}
+
+/* Macros Summary */
+.macros-summary {
+  margin-top: auto;
+  padding-top: 0.875rem;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.macros-summary-items {
+  display: flex;
+  gap: 1rem;
+}
+
+.macros-summary-item {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: 0.75rem;
+  color: var(--muted-foreground);
+}
+
+.macros-summary-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.macros-summary-item strong {
+  color: var(--foreground);
+}
+
+.macros-summary-total {
+  font-size: 0.8rem;
+  color: var(--muted-foreground);
+}
+
+.macros-summary-total strong {
+  color: var(--foreground);
+  font-size: 0.9rem;
+}
+
+/* ==================== PROGRESSION PAGE - ENHANCED ==================== */
+
+/* Introduction Card */
+.projection-intro {
+  padding: 1rem 1.25rem;
+  border-radius: 1rem;
+  background: linear-gradient(135deg, hsla(221, 83%, 25%, 0.05) 0%, hsla(160, 84%, 39%, 0.05) 100%);
+  border: 1px solid hsla(221, 83%, 25%, 0.15);
+  margin-bottom: 1rem;
+  flex-shrink: 0;
+}
+
+.projection-intro-header {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  margin-bottom: 0.625rem;
+}
+
+.projection-intro-icon {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 0.5rem;
+  background-color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.projection-intro-icon svg {
+  width: 1.125rem;
+  height: 1.125rem;
+  color: var(--primary-foreground);
+}
+
+.projection-intro-header h3 {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--foreground);
+}
+
+.projection-intro-text {
+  font-size: 0.8rem;
+  color: var(--muted-foreground);
+  line-height: 1.5;
+  margin-bottom: 0.75rem;
+}
+
+.projection-intro-text strong {
+  color: var(--foreground);
   font-weight: 600;
-  color: var(--text-secondary);
+}
+
+.projection-key-factors {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+
+.key-factor-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  color: var(--muted-foreground);
+}
+
+.key-factor-item svg {
+  width: 16px;
+  height: 16px;
+  color: var(--accent);
+  flex-shrink: 0;
+}
+
+/* Stats Grid */
+.projection-stats-grid {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+  flex-shrink: 0;
+}
+
+.projection-stat-card {
+  flex: 1;
+  padding: 0.875rem 1rem;
+  border-radius: 0.875rem;
+  background-color: var(--card);
+  border: 1px solid var(--border);
+  display: flex;
+  gap: 0.75rem;
+}
+
+.projection-stat-icon {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 0.625rem;
+  background-color: hsla(160, 84%, 39%, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.projection-stat-icon svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  color: var(--accent);
+}
+
+.projection-stat-content {
+  flex: 1;
+}
+
+.projection-stat-label {
+  font-size: 0.7rem;
+  color: var(--muted-foreground);
+  margin-bottom: 0.25rem;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.03em;
+}
+
+.projection-stat-value {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--foreground);
+  line-height: 1;
+}
+
+.projection-stat-value span {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--muted-foreground);
+}
+
+.projection-stat-detail {
+  font-size: 0.65rem;
+  color: var(--accent);
+  margin-top: 0.25rem;
+}
+
+/* Timeline Wrapper */
+.progression-timeline-wrapper {
+  flex-shrink: 0;
+  margin-bottom: 1rem;
+}
+
+.progression-timeline-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--foreground);
+  margin-bottom: 0.75rem;
+}
+
+.progression-cards {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.progression-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 1;
+}
+
+.progression-card {
+  padding: 1rem;
+  border-radius: 1rem;
+  background-color: var(--card);
+  border: 1px solid var(--border);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.progression-phase-label {
+  font-size: 0.6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.progression-card.phase-1 {
+  border-color: hsla(160, 84%, 39%, 0.3);
+  background-color: hsla(160, 84%, 39%, 0.03);
+}
+
+.progression-card.phase-1 .progression-phase-label {
+  color: var(--accent);
+}
+
+.progression-card.phase-2 {
+  border-color: hsla(221, 83%, 53%, 0.3);
+  background-color: hsla(221, 83%, 53%, 0.03);
+}
+
+.progression-card.phase-2 .progression-phase-label {
+  color: var(--primary);
+}
+
+.progression-card.phase-3 {
+  border-color: hsla(38, 92%, 50%, 0.3);
+  background-color: hsla(38, 92%, 50%, 0.03);
+}
+
+.progression-card.phase-3 .progression-phase-label {
+  color: var(--gold);
+}
+
+.progression-days-circle {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  background-color: var(--secondary);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 0.875rem;
+}
+
+.phase-1 .progression-days-circle { background-color: hsla(160, 84%, 39%, 0.1); }
+.phase-2 .progression-days-circle { background-color: hsla(221, 83%, 53%, 0.1); }
+.phase-3 .progression-days-circle { background-color: hsla(38, 92%, 50%, 0.1); }
+
+.progression-days-number {
+  font-size: 1.125rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.phase-1 .progression-days-number { color: var(--accent); }
+.phase-2 .progression-days-number { color: var(--primary); }
+.phase-3 .progression-days-number { color: var(--gold); }
+
+.progression-days-label {
+  font-size: 0.55rem;
+  font-weight: 600;
+  color: var(--muted-foreground);
+  letter-spacing: 0.05em;
+}
+
+.progression-metrics {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.progression-metric {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.progression-metric-label {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: 0.7rem;
+  color: var(--muted-foreground);
+}
+
+.progression-metric-label svg {
+  width: 14px;
+  height: 14px;
+}
+
+.progression-metric-value {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--foreground);
+}
+
+.progression-phase-note {
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  background-color: var(--secondary);
+  margin-top: auto;
+}
+
+.progression-phase-note p {
+  font-size: 0.65rem;
+  color: var(--muted-foreground);
+  line-height: 1.3;
+  text-align: center;
+}
+
+.progression-arrow {
+  color: var(--muted-foreground);
+  flex-shrink: 0;
+}
+
+.progression-arrow svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* Factors Section */
+.projection-factors {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 0.875rem;
+  flex-shrink: 0;
+}
+
+.projection-factor-card {
+  flex: 1;
+  padding: 0.875rem 1rem;
+  border-radius: 0.875rem;
+  border: 1px solid;
+  display: flex;
+  gap: 0.75rem;
+}
+
+.projection-factor-card.success {
+  background-color: hsla(160, 84%, 39%, 0.05);
+  border-color: hsla(160, 84%, 39%, 0.2);
+}
+
+.projection-factor-card.warning {
+  background-color: hsla(38, 92%, 50%, 0.05);
+  border-color: hsla(38, 92%, 50%, 0.2);
+}
+
+.projection-factor-icon {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.projection-factor-card.success .projection-factor-icon {
+  background-color: hsla(160, 84%, 39%, 0.15);
+}
+
+.projection-factor-card.warning .projection-factor-icon {
+  background-color: hsla(38, 92%, 50%, 0.15);
+}
+
+.projection-factor-icon svg {
+  width: 1.125rem;
+  height: 1.125rem;
+}
+
+.projection-factor-card.success .projection-factor-icon svg {
+  color: var(--accent);
+}
+
+.projection-factor-card.warning .projection-factor-icon svg {
+  color: hsl(38, 80%, 40%);
+}
+
+.projection-factor-content h4 {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--foreground);
+  margin-bottom: 0.5rem;
+}
+
+.projection-factor-content ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.projection-factor-content li {
+  font-size: 0.7rem;
+  color: var(--muted-foreground);
+  padding-left: 0.875rem;
+  position: relative;
+}
+
+.projection-factor-content li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  font-weight: 700;
+}
+
+.projection-factor-card.success li::before {
+  color: var(--accent);
+}
+
+.projection-factor-card.warning li::before {
+  color: hsl(38, 80%, 40%);
+}
+
+/* Note */
+.projection-note {
+  padding: 0.875rem 1rem;
+  border-radius: 0.75rem;
+  background-color: hsla(221, 83%, 25%, 0.05);
+  border: 1px solid hsla(221, 83%, 25%, 0.15);
+  display: flex;
+  align-items: flex-start;
+  gap: 0.625rem;
+  flex-shrink: 0;
+}
+
+.projection-note svg {
+  width: 16px;
+  height: 16px;
+  color: var(--primary);
+  flex-shrink: 0;
+  margin-top: 0.125rem;
+}
+
+.projection-note p {
+  font-size: 0.75rem;
+  color: var(--muted-foreground);
+  line-height: 1.5;
+}
+
+.projection-note strong {
+  color: var(--foreground);
+  font-weight: 600;
+}
+
+/* ==================== WORKOUT OVERVIEW PAGE ==================== */
+.workout-overview-cards {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+  flex-shrink: 0;
+}
+
+.workout-overview-card {
+  flex: 1;
+  padding: 0.875rem 1rem;
+  border-radius: 0.75rem;
+  background-color: var(--card);
+  border: 1px solid var(--border);
+}
+
+.workout-overview-card-header {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: 0.7rem;
+  color: var(--muted-foreground);
+  margin-bottom: 0.375rem;
+}
+
+.workout-overview-card-header svg {
+  width: 14px;
+  height: 14px;
+}
+
+.workout-overview-card-header.warning svg {
+  color: var(--warning);
+}
+
+.workout-overview-card p {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--foreground);
+}
+
+/* Weekly Schedule */
+.weekly-schedule-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--foreground);
+  margin-bottom: 0.875rem;
+  flex-shrink: 0;
+}
+
+.weekly-schedule-grid {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  flex-shrink: 0;
+}
+
+.schedule-item {
+  flex: 1;
+  padding: 0.75rem 0.5rem;
+  border-radius: 0.625rem;
+  background-color: var(--card);
+  border: 1px solid var(--border);
+  text-align: center;
+}
+
+.schedule-item.upper {
+  border-color: hsla(228, 96%, 89%, 1);
+  background-color: var(--indigo-50);
+}
+
+.schedule-item.lower {
+  border-color: hsla(168, 84%, 78%, 1);
+  background-color: var(--teal-50);
+}
+
+.schedule-item.combo {
+  border-color: hsla(269, 100%, 92%, 1);
+  background-color: var(--purple-50);
+}
+
+.schedule-item.cardio {
+  border-color: hsla(0, 84%, 60%, 0.2);
+  background-color: hsla(0, 84%, 60%, 0.05);
+}
+
+.schedule-item.rest {
+  border-color: var(--border);
+  background-color: var(--secondary);
+}
+
+.schedule-item-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  margin-bottom: 0.375rem;
+}
+
+.schedule-item-icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.schedule-item-icon svg {
+  width: 14px;
+  height: 14px;
+  color: var(--muted-foreground);
+}
+
+.schedule-item.upper .schedule-item-icon svg { color: var(--indigo-600); }
+.schedule-item.lower .schedule-item-icon svg { color: var(--teal-600); }
+.schedule-item.combo .schedule-item-icon svg { color: hsl(269, 60%, 50%); }
+.schedule-item.cardio .schedule-item-icon svg { color: var(--destructive); }
+
+.schedule-item-day {
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: var(--muted-foreground);
+  letter-spacing: 0.05em;
+}
+
+.schedule-item-workout {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--foreground);
+}
+
+/* Legend */
+.workout-legend {
+  padding: 0.75rem 1rem;
+  border-radius: 0.625rem;
+  background-color: var(--secondary);
+  margin-bottom: 1rem;
+  flex-shrink: 0;
+}
+
+.workout-legend-items {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.workout-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: 0.75rem;
+  color: var(--muted-foreground);
+}
+
+.workout-legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+}
+
+.workout-legend-dot.upper { background-color: var(--indigo-600); }
+.workout-legend-dot.lower { background-color: var(--teal-600); }
+.workout-legend-dot.cardio { background-color: var(--destructive); }
+.workout-legend-dot.rest { background-color: var(--muted-foreground); }
+
+/* ==================== WORKOUT CARD ==================== */
+.workout-card {
+  background-color: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  overflow: hidden;
+  margin-bottom: 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.workout-card-header {
+  padding: 1rem 1.25rem;
   border-bottom: 1px solid var(--border);
 }
 
-.workout-table td {
-  padding: 16px;
-  border-bottom: 1px solid var(--border-light);
-  font-size: 14px;
-  color: var(--text-primary);
+.workout-card-header.upper {
+  background: linear-gradient(135deg, var(--indigo-50) 0%, var(--indigo-100) 100%);
+  border-bottom-color: var(--indigo-200);
 }
 
-.workout-table tr:last-child td {
+.workout-card-header.lower {
+  background: linear-gradient(135deg, var(--teal-50) 0%, var(--teal-100) 100%);
+  border-bottom-color: var(--teal-200);
+}
+
+.workout-card-header.core {
+  background: linear-gradient(135deg, var(--purple-50) 0%, var(--purple-100) 100%);
+}
+
+.workout-card-header-row {
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+  margin-bottom: 0.625rem;
+}
+
+.workout-card-icon {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 0.625rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.workout-card-header.upper .workout-card-icon {
+  background-color: var(--indigo-200);
+}
+
+.workout-card-header.lower .workout-card-icon {
+  background-color: var(--teal-200);
+}
+
+.workout-card-icon svg {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.workout-card-header.upper .workout-card-icon svg { color: var(--indigo-600); }
+.workout-card-header.lower .workout-card-icon svg { color: var(--teal-700); }
+
+.workout-card-info {
+  flex: 1;
+}
+
+.workout-card-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--foreground);
+  margin-bottom: 0.125rem;
+}
+
+.workout-card-subtitle {
+  font-size: 0.75rem;
+  color: var(--muted-foreground);
+}
+
+.workout-card-count {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.375rem 0.75rem;
+  border-radius: 9999px;
+  background-color: hsla(0, 0%, 100%, 0.6);
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--muted-foreground);
+}
+
+.workout-card-count svg {
+  width: 14px;
+  height: 14px;
+}
+
+.workout-card-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.375rem;
+}
+
+.workout-card-badge {
+  padding: 0.25rem 0.625rem;
+  border-radius: 9999px;
+  background-color: hsla(0, 0%, 100%, 0.5);
+  font-size: 0.65rem;
+  font-weight: 500;
+  color: var(--muted-foreground);
+}
+
+/* Exercise Table */
+.exercise-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8rem;
+  flex: 1;
+}
+
+.exercise-table thead {
+  background-color: var(--secondary);
+}
+
+.exercise-table th {
+  padding: 0.625rem 0.75rem;
+  text-align: left;
+  font-weight: 600;
+  color: var(--muted-foreground);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  border-bottom: 1px solid var(--border);
+}
+
+.exercise-table th.center,
+.exercise-table td.center {
+  text-align: center;
+}
+
+.exercise-table tbody tr {
+  border-bottom: 1px solid var(--border);
+}
+
+.exercise-table tbody tr:last-child {
   border-bottom: none;
 }
 
-.workout-table tr:hover td {
-  background: var(--surface);
+.exercise-table td {
+  padding: 0.625rem 0.75rem;
+  vertical-align: top;
+}
+
+.exercise-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  font-size: 0.7rem;
+  font-weight: 600;
+}
+
+.exercise-number.upper {
+  background-color: var(--indigo-100);
+  color: var(--indigo-600);
+}
+
+.exercise-number.lower {
+  background-color: var(--teal-100);
+  color: var(--teal-700);
 }
 
 .exercise-name {
   font-weight: 600;
-  color: var(--primary);
-}
-
-.exercise-description {
-  font-size: 12px;
-  color: var(--text-muted);
-  margin-top: 4px;
+  color: var(--foreground);
+  display: block;
 }
 
 .exercise-tip {
-  font-size: 12px;
-  color: var(--accent);
-  font-style: italic;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.25rem;
+  margin-top: 0.25rem;
+  font-size: 0.7rem;
+  color: var(--muted-foreground);
+  line-height: 1.3;
 }
 
-.workout-badge {
+.exercise-tip svg {
+  width: 12px;
+  height: 12px;
+  flex-shrink: 0;
+  margin-top: 0.125rem;
+  color: var(--gold);
+}
+
+.muscle-badge {
   display: inline-block;
-  padding: 4px 10px;
-  border-radius: 6px;
-  font-size: 13px;
+  padding: 0.2rem 0.5rem;
+  border-radius: 0.25rem;
+  font-size: 0.65rem;
+  font-weight: 500;
+}
+
+.muscle-badge.upper {
+  background-color: var(--indigo-100);
+  color: var(--indigo-600);
+}
+
+.muscle-badge.lower {
+  background-color: var(--teal-100);
+  color: var(--teal-700);
+}
+
+.exercise-sets,
+.exercise-reps,
+.exercise-rest {
   font-weight: 600;
-  background: var(--surface-alt);
-  color: var(--primary);
+  color: var(--foreground);
 }
 
-/* ========================================
-   DIET / MEAL CARDS
-   ======================================== */
-.meals-grid {
-  width: 100%;
-  border-collapse: separate;
-  border-spacing: 16px;
+.rpe-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2rem;
+  padding: 0.2rem 0.4rem;
+  border-radius: 0.25rem;
+  font-size: 0.7rem;
+  font-weight: 600;
 }
 
-.meal-card {
-  background: #ffffff;
+.rpe-badge.low {
+  background-color: hsla(142, 71%, 45%, 0.15);
+  color: var(--accent);
+}
+
+.rpe-badge.medium {
+  background-color: hsla(45, 93%, 47%, 0.15);
+  color: hsl(38, 80%, 40%);
+}
+
+.rpe-badge.high {
+  background-color: hsla(0, 84%, 60%, 0.15);
+  color: var(--destructive);
+}
+
+/* Workout Card Footer */
+.workout-card-footer {
+  padding: 0.875rem 1.25rem;
+  border-top: 1px solid var(--border);
+  background-color: var(--secondary);
+}
+
+.workout-card-footer.upper { background-color: var(--indigo-50); }
+.workout-card-footer.lower { background-color: var(--teal-50); }
+
+.workout-card-footer-content {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.625rem;
+}
+
+.workout-card-footer svg {
+  width: 1rem;
+  height: 1rem;
+  color: var(--accent);
+  flex-shrink: 0;
+  margin-top: 0.125rem;
+}
+
+.progression-label {
+  font-weight: 600;
+  color: var(--foreground);
+  font-size: 0.8rem;
+}
+
+.progression-text {
+  font-size: 0.8rem;
+  color: var(--muted-foreground);
+}
+
+/* ==================== DIET PAGE ==================== */
+.diet-objective {
+  padding: 1rem 1.25rem;
+  border-radius: 1rem;
+  background-color: hsla(160, 84%, 39%, 0.05);
+  border: 1px solid hsla(160, 84%, 39%, 0.2);
+  margin-bottom: 1rem;
+  flex-shrink: 0;
+}
+
+.diet-objective-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.diet-objective-header svg {
+  width: 1.125rem;
+  height: 1.125rem;
+  color: var(--accent);
+}
+
+.diet-objective-header h3 {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--foreground);
+}
+
+.diet-objective p {
+  font-size: 0.8rem;
+  color: var(--muted-foreground);
+  line-height: 1.5;
+  margin-bottom: 0.75rem;
+}
+
+.diet-objective-badges {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.diet-objective-badge {
+  padding: 0.375rem 0.75rem;
+  border-radius: 9999px;
+  background-color: var(--card);
   border: 1px solid var(--border);
-  border-radius: 16px;
-  vertical-align: top;
-  overflow: hidden;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--foreground);
 }
 
-.meal-header {
-  background: linear-gradient(135deg, var(--surface-alt) 0%, #dcfce7 100%);
-  padding: 16px 20px;
+/* Diet Summary */
+.diet-summary {
+  padding: 1rem 1.25rem;
+  border-radius: 1rem;
+  background-color: var(--card);
+  border: 1px solid var(--border);
+  margin-bottom: 1rem;
+  flex-shrink: 0;
+}
+
+.diet-summary h3 {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--foreground);
+  margin-bottom: 0.875rem;
+}
+
+.diet-summary-grid {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.diet-summary-item {
+  flex: 1;
+  padding: 0.875rem;
+  border-radius: 0.75rem;
+  text-align: center;
+  border: 1px solid;
+}
+
+.diet-summary-item.protein {
+  background-color: hsla(221, 83%, 53%, 0.08);
+  border-color: hsla(221, 83%, 53%, 0.2);
+}
+
+.diet-summary-item.carbs {
+  background-color: hsla(142, 71%, 45%, 0.08);
+  border-color: hsla(142, 71%, 45%, 0.2);
+}
+
+.diet-summary-item.fat {
+  background-color: hsla(38, 92%, 50%, 0.08);
+  border-color: hsla(38, 92%, 50%, 0.2);
+}
+
+.diet-summary-item.calories {
+  background-color: hsla(0, 84%, 60%, 0.08);
+  border-color: hsla(0, 84%, 60%, 0.2);
+}
+
+.diet-summary-icon {
+  font-size: 1.25rem;
+  margin-bottom: 0.25rem;
+}
+
+.diet-summary-value {
+  display: block;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.diet-summary-item.protein .diet-summary-value { color: var(--macro-protein); }
+.diet-summary-item.carbs .diet-summary-value { color: var(--macro-carbs); }
+.diet-summary-item.fat .diet-summary-value { color: var(--macro-fat); }
+.diet-summary-item.calories .diet-summary-value { color: var(--macro-calories); }
+
+.diet-summary-label {
+  display: block;
+  font-size: 0.65rem;
+  color: var(--muted-foreground);
+  margin-top: 0.125rem;
+}
+
+/* Meal Card */
+.meal-card {
+  background-color: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  overflow: hidden;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.meal-card-header {
+  padding: 0.875rem 1rem;
+  background-color: hsla(160, 84%, 39%, 0.05);
   border-bottom: 1px solid var(--border);
 }
 
-.meal-header table {
-  width: 100%;
-  border-collapse: collapse;
+.meal-card-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
-.meal-name {
-  font-size: 18px;
+.meal-card-header-left {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.meal-card-icon {
+  font-size: 1.5rem;
+}
+
+.meal-card-title {
+  font-size: 0.95rem;
   font-weight: 700;
-  color: var(--primary);
+  color: var(--foreground);
 }
 
-.meal-objective {
-  font-size: 13px;
-  color: var(--text-secondary);
-  margin-top: 2px;
+.meal-card-description {
+  font-size: 0.75rem;
+  color: var(--muted-foreground);
 }
 
-.meal-time {
-  background: var(--primary);
-  color: #ffffff;
-  padding: 6px 14px;
-  border-radius: 20px;
-  font-size: 13px;
+.meal-card-time {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.375rem 0.75rem;
+  border-radius: 9999px;
+  background-color: var(--card);
+  border: 1px solid var(--border);
+  font-size: 0.8rem;
   font-weight: 600;
+  color: var(--foreground);
 }
 
-.meal-foods {
-  padding: 16px 20px;
+.meal-card-time svg {
+  width: 14px;
+  height: 14px;
+  color: var(--accent);
 }
 
+.meal-card-body {
+  padding: 0.875rem 1rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Food Table */
 .food-table {
   width: 100%;
   border-collapse: collapse;
+  font-size: 0.75rem;
+  margin-bottom: 0.75rem;
 }
 
-.food-table td {
-  padding: 8px 0;
-  font-size: 14px;
-  border-bottom: 1px solid var(--border-light);
+.food-table thead {
+  background-color: var(--secondary);
 }
 
-.food-table tr:last-child td {
-  border-bottom: none;
-}
-
-.food-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--accent);
-  display: inline-block;
-  margin-right: 10px;
-}
-
-.food-name {
-  color: var(--text-primary);
-}
-
-.food-quantity {
+.food-table th {
+  padding: 0.5rem 0.625rem;
+  text-align: left;
   font-weight: 600;
-  color: var(--primary);
-}
-
-/* Macros mini table */
-.food-macros {
-  text-align: right;
-}
-
-.macros-mini {
-  display: inline-table;
-  border-collapse: collapse;
-  font-size: 11px;
-  background: var(--surface);
-  border-radius: 6px;
-  overflow: hidden;
-}
-
-.macros-mini th {
-  padding: 4px 6px;
-  font-weight: 600;
-  color: var(--text-muted);
+  color: var(--muted-foreground);
+  font-size: 0.65rem;
   text-transform: uppercase;
-  font-size: 9px;
-  letter-spacing: 0.3px;
-}
-
-.macros-mini td {
-  padding: 4px 6px;
-  font-weight: 600;
-  border: none;
-}
-
-.macros-mini .protein { color: #dc2626; }
-.macros-mini .carbs { color: #eab308; }
-.macros-mini .fat { color: #3b82f6; }
-.macros-mini .kcal { color: var(--primary); }
-
-.meal-alternatives {
-  background: var(--surface);
-  padding: 14px 20px;
-  border-top: 1px solid var(--border);
-}
-
-.alternatives-label {
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--text-muted);
-  margin-bottom: 8px;
-}
-
-.alternative-tag {
-  display: inline-block;
-  padding: 5px 12px;
-  background: #ffffff;
-  border: 1px solid var(--border);
-  border-radius: 20px;
-  font-size: 12px;
-  color: var(--text-secondary);
-  margin-right: 8px;
-  margin-bottom: 4px;
-}
-
-/* ========================================
-   NUTRITIONAL ANALYSIS
-   ======================================== */
-.calories-summary {
-  width: 100%;
-  border-collapse: separate;
-  border-spacing: 16px;
-  margin-bottom: 24px;
-}
-
-.calorie-card {
-  background: #ffffff;
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 24px;
-  text-align: center;
-  vertical-align: top;
-}
-
-.calorie-card.highlight {
-  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
-  border-color: var(--primary);
-}
-
-.calorie-card.highlight .calorie-label,
-.calorie-card.highlight .calorie-value {
-  color: #ffffff;
-}
-
-.calorie-label {
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--text-secondary);
-  margin-bottom: 8px;
-}
-
-.calorie-value {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 32px;
-  font-weight: 700;
-  color: var(--primary);
-}
-
-.calorie-unit {
-  font-size: 16px;
-  font-weight: 500;
-}
-
-.calorie-badge {
-  display: inline-block;
-  margin-top: 10px;
-  padding: 4px 12px;
-  border-radius: 20px;
-  font-size: 12px;
-  font-weight: 600;
-  background: rgba(255,255,255,0.2);
-  color: #ffffff;
-}
-
-.macros-container {
-  background: #ffffff;
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 24px;
-}
-
-.macro-row {
-  margin-bottom: 20px;
-}
-
-.macro-row:last-child {
-  margin-bottom: 0;
-}
-
-.macro-header {
-  margin-bottom: 8px;
-}
-
-.macro-header table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-.macro-name {
-  font-weight: 600;
-  color: var(--text-primary);
-}
-
-.macro-value {
-  font-weight: 700;
-  color: var(--primary);
-  text-align: right;
-}
-
-.macro-bar-bg {
-  height: 12px;
-  background: var(--border-light);
-  border-radius: 6px;
-  overflow: hidden;
-}
-
-.macro-bar {
-  height: 100%;
-  border-radius: 6px;
-}
-
-.macro-bar.protein {
-  background: linear-gradient(90deg, #dc2626 0%, #f87171 100%);
-}
-
-.macro-bar.carbs {
-  background: linear-gradient(90deg, #eab308 0%, #fde047 100%);
-}
-
-.macro-bar.fat {
-  background: linear-gradient(90deg, #3b82f6 0%, #60a5fa 100%);
-}
-
-/* ========================================
-   EDUCATIONAL SECTION
-   ======================================== */
-.education-grid {
-  width: 100%;
-  border-collapse: separate;
-  border-spacing: 16px;
-}
-
-.education-card {
-  background: #ffffff;
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 24px;
-  vertical-align: top;
-}
-
-.education-card h4 {
-  font-size: 16px;
-  font-weight: 700;
-  color: var(--primary);
-  margin-bottom: 10px;
-}
-
-.education-card p {
-  font-size: 14px;
-  color: var(--text-secondary);
-  line-height: 1.7;
-}
-
-/* ========================================
-   PROJECTIONS
-   ======================================== */
-.projection-table {
-  width: 100%;
-  border-collapse: separate;
-  border-spacing: 0;
-  background: #ffffff;
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  overflow: hidden;
-}
-
-.projection-table th {
-  background: var(--surface);
-  padding: 16px 24px;
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--text-secondary);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
   border-bottom: 1px solid var(--border);
 }
 
-.projection-table td {
-  padding: 20px 24px;
+.food-table th.center {
   text-align: center;
-  border-bottom: 1px solid var(--border-light);
 }
 
-.projection-table tr:last-child td {
+.food-table tbody tr {
+  border-bottom: 1px solid var(--border);
+}
+
+.food-table tbody tr:last-child {
   border-bottom: none;
 }
 
-.projection-value {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 28px;
-  font-weight: 700;
-  color: var(--primary);
+.food-table td {
+  padding: 0.5rem 0.625rem;
 }
 
-.projection-change {
-  display: inline-block;
-  margin-top: 6px;
-  padding: 4px 10px;
-  border-radius: 20px;
-  font-size: 12px;
-  font-weight: 600;
-  background: #dcfce7;
-  color: #166534;
+.food-table tfoot {
+  background-color: var(--secondary);
 }
 
-.projection-disclaimer {
-  margin-top: 20px;
-  padding: 16px 20px;
-  background: var(--surface);
-  border-radius: 12px;
-  font-size: 13px;
-  color: var(--text-muted);
-  font-style: italic;
-}
-
-/* ========================================
-   FINAL RECOMMENDATIONS
-   ======================================== */
-.recommendations-grid {
-  width: 100%;
-  border-collapse: separate;
-  border-spacing: 16px;
-  margin-bottom: 30px;
-}
-
-.recommendation-card {
-  background: #ffffff;
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 24px;
-  text-align: center;
-  vertical-align: top;
-}
-
-.recommendation-icon {
-  font-size: 40px;
-  margin-bottom: 12px;
-}
-
-.recommendation-title {
-  font-size: 16px;
-  font-weight: 700;
-  color: var(--primary);
-  margin-bottom: 8px;
-}
-
-.recommendation-text {
-  font-size: 13px;
-  color: var(--text-secondary);
-  line-height: 1.6;
-}
-
-.final-message {
-  background: linear-gradient(135deg, var(--surface-alt) 0%, #dcfce7 100%);
-  border: 2px solid var(--accent);
-  border-radius: 20px;
-  padding: 40px;
-  text-align: center;
-}
-
-.final-message h3 {
-  font-size: 24px;
-  font-weight: 700;
-  color: var(--primary);
-  margin-bottom: 12px;
-}
-
-.final-message p {
-  font-size: 15px;
-  color: var(--text-secondary);
-  max-width: 600px;
-  margin: 0 auto 30px;
-  line-height: 1.7;
-}
-
-.final-footer {
-  padding-top: 24px;
+.food-table tfoot td {
+  padding: 0.625rem;
   border-top: 1px solid var(--border);
-  display: inline-block;
+  font-weight: 600;
 }
 
-.final-logo {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 32px;
+.food-name { font-weight: 500; color: var(--foreground); }
+.food-quantity { color: var(--muted-foreground); font-size: 0.7rem; }
+.food-protein { color: var(--macro-protein); font-weight: 600; }
+.food-carbs { color: var(--macro-carbs); font-weight: 600; }
+.food-fat { color: var(--macro-fat); font-weight: 600; }
+.food-calories { color: var(--macro-calories); font-weight: 600; }
+
+.macro-header {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 0.25rem;
+  font-size: 0.6rem;
   font-weight: 700;
-  color: var(--primary);
 }
 
-.final-logo .accent {
+.macro-header.protein { background-color: hsla(221, 83%, 53%, 0.15); color: var(--macro-protein); }
+.macro-header.carbs { background-color: hsla(142, 71%, 45%, 0.15); color: var(--macro-carbs); }
+.macro-header.fat { background-color: hsla(38, 92%, 50%, 0.15); color: var(--macro-fat); }
+.macro-header.kcal { background-color: hsla(0, 84%, 60%, 0.15); color: var(--macro-calories); }
+
+/* Meal Macro Badges */
+.meal-macro-badges {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.meal-macro-badge {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.375rem;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  font-size: 0.75rem;
+}
+
+.meal-macro-badge.protein { background-color: hsla(221, 83%, 53%, 0.1); color: var(--macro-protein); }
+.meal-macro-badge.carbs { background-color: hsla(142, 71%, 45%, 0.1); color: var(--macro-carbs); }
+.meal-macro-badge.fat { background-color: hsla(38, 92%, 50%, 0.1); color: var(--macro-fat); }
+.meal-macro-badge.kcal { background-color: hsla(0, 84%, 60%, 0.1); color: var(--macro-calories); }
+
+.meal-macro-badge strong {
+  font-weight: 700;
+}
+
+/* Substitutions */
+.meal-substitutions {
+  padding: 0.75rem;
+  border-radius: 0.625rem;
+  background-color: var(--secondary);
+  margin-top: auto;
+}
+
+.meal-substitutions-header {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--foreground);
+  margin-bottom: 0.5rem;
+}
+
+.meal-substitutions-header svg {
+  width: 14px;
+  height: 14px;
   color: var(--accent);
 }
 
-.final-tagline {
-  font-size: 13px;
-  color: var(--text-muted);
-  margin-top: 8px;
+.meal-substitutions ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
 }
 
-/* ========================================
-   PRINT STYLES
-   ======================================== */
-@media print {
-  body {
-    -webkit-print-color-adjust: exact !important;
-    print-color-adjust: exact !important;
-    background: white !important;
-  }
-  
-  .page-break {
-    page-break-before: always;
-  }
-  
-  .no-print {
-    display: none !important;
-  }
-  
-  .section {
-    page-break-inside: avoid;
-  }
+.meal-substitutions li {
+  display: flex;
+  gap: 0.375rem;
+  font-size: 0.7rem;
+  color: var(--muted-foreground);
 }
 
-/* ========================================
-   UTILITY CLASSES
-   ======================================== */
-.text-center { text-align: center; }
-.text-left { text-align: left; }
-.text-right { text-align: right; }
-.mb-0 { margin-bottom: 0; }
-.mb-16 { margin-bottom: 16px; }
-.mb-24 { margin-bottom: 24px; }
-.mb-32 { margin-bottom: 32px; }
-.mt-16 { margin-top: 16px; }
-.mt-24 { margin-top: 24px; }
+.meal-substitutions li span {
+  color: var(--accent);
+}
+
+/* ==================== HYDRATION PAGE ==================== */
+.hydration-card {
+  background: linear-gradient(135deg, hsla(189, 94%, 43%, 0.08) 0%, hsla(201, 94%, 86%, 0.15) 100%);
+  border: 1px solid hsla(189, 94%, 43%, 0.2);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  position: relative;
+  overflow: hidden;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.hydration-card .decorative-1 {
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background-color: hsla(189, 94%, 43%, 0.1);
+}
+
+.hydration-card .decorative-2 {
+  position: absolute;
+  bottom: -30px;
+  left: -30px;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-color: hsla(189, 94%, 43%, 0.08);
+}
+
+.hydration-content {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.hydration-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.hydration-icon {
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 1rem;
+  background: linear-gradient(135deg, var(--cyan-500) 0%, hsl(201, 94%, 60%) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hydration-icon svg {
+  width: 1.75rem;
+  height: 1.75rem;
+  color: white;
+}
+
+.hydration-title {
+  font-size: 1.375rem;
+  font-weight: 700;
+  color: var(--foreground);
+}
+
+.hydration-calc {
+  font-size: 0.8rem;
+  color: var(--muted-foreground);
+}
+
+.hydration-grid {
+  display: flex;
+  gap: 1.25rem;
+  flex: 1;
+}
+
+.hydration-goal {
+  flex: 1;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  background-color: var(--card);
+  border: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.hydration-goal-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--muted-foreground);
+  margin-bottom: 1rem;
+}
+
+.hydration-goal-label svg {
+  width: 1.125rem;
+  height: 1.125rem;
+  color: var(--cyan-500);
+}
+
+.hydration-goal-value {
+  font-size: 3rem;
+  font-weight: 800;
+  color: var(--cyan-500);
+  line-height: 1;
+}
+
+.hydration-goal-unit {
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: var(--muted-foreground);
+  margin-left: 0.25rem;
+}
+
+.hydration-goal-cups {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  margin-top: 0.75rem;
+  padding: 0.5rem 1rem;
+  border-radius: 9999px;
+  background-color: hsla(189, 94%, 43%, 0.1);
+  font-size: 0.875rem;
+  color: var(--cyan-500);
+  font-weight: 500;
+}
+
+.hydration-benefits {
+  flex: 1.5;
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+}
+
+.hydration-benefit {
+  padding: 0.875rem 1rem;
+  border-radius: 0.75rem;
+  background-color: var(--card);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.hydration-benefit-icon {
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.hydration-benefit-icon.blue { background-color: hsla(189, 94%, 43%, 0.1); }
+.hydration-benefit-icon.green { background-color: hsla(160, 84%, 39%, 0.1); }
+.hydration-benefit-icon.gold { background-color: hsla(38, 92%, 50%, 0.1); }
+
+.hydration-benefit-icon svg {
+  width: 1.125rem;
+  height: 1.125rem;
+}
+
+.hydration-benefit-icon.blue svg { color: var(--cyan-500); }
+.hydration-benefit-icon.green svg { color: var(--accent); }
+.hydration-benefit-icon.gold svg { color: var(--gold); }
+
+.hydration-benefit-title {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--foreground);
+  margin-bottom: 0.125rem;
+}
+
+.hydration-benefit-text {
+  font-size: 0.75rem;
+  color: var(--muted-foreground);
+  line-height: 1.4;
+}
+
+/* ==================== CARDIO PAGE ==================== */
+.cardio-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+  flex-shrink: 0;
+}
+
+.cardio-header-left {
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+}
+
+.cardio-icon {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 0.875rem;
+  background-color: hsla(0, 84%, 60%, 0.1);
+  border: 1px solid hsla(0, 84%, 60%, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cardio-icon svg {
+  width: 1.5rem;
+  height: 1.5rem;
+  color: var(--destructive);
+}
+
+.cardio-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--foreground);
+}
+
+.cardio-subtitle {
+  font-size: 0.8rem;
+  color: var(--muted-foreground);
+}
+
+.cardio-stats {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.cardio-stat {
+  padding: 0.75rem 1rem;
+  border-radius: 0.75rem;
+  background-color: var(--card);
+  border: 1px solid var(--border);
+}
+
+.cardio-stat-label {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: 0.7rem;
+  color: var(--muted-foreground);
+  margin-bottom: 0.25rem;
+}
+
+.cardio-stat-label svg {
+  width: 14px;
+  height: 14px;
+}
+
+.cardio-stat-value {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--foreground);
+}
+
+.cardio-stat.burn {
+  background-color: hsla(0, 84%, 60%, 0.08);
+  border-color: hsla(0, 84%, 60%, 0.2);
+}
+
+.cardio-stat.burn .cardio-stat-label { color: hsla(0, 84%, 50%, 0.8); }
+.cardio-stat.burn .cardio-stat-value { color: var(--destructive); }
+
+/* Activity Cards */
+.activity-cards {
+  display: flex;
+  gap: 0.875rem;
+  margin-bottom: 1rem;
+  flex: 1;
+}
+
+.activity-card {
+  flex: 1;
+  padding: 1rem;
+  border-radius: 1rem;
+  background-color: var(--card);
+  border: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+}
+
+.activity-card-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.activity-card-icon {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 0.625rem;
+  background-color: hsla(0, 84%, 60%, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.activity-card-icon svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  color: var(--destructive);
+}
+
+.activity-card-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--foreground);
+  margin-bottom: 0.5rem;
+}
+
+.activity-card-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.375rem;
+}
+
+.activity-badge {
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  font-size: 0.65rem;
+  font-weight: 500;
+}
+
+.activity-badge.frequency {
+  background-color: hsla(221, 83%, 53%, 0.1);
+  color: var(--primary);
+}
+
+.activity-badge.duration {
+  background-color: var(--secondary);
+  color: var(--foreground);
+}
+
+.activity-badge.intensity {
+  border: 1px solid;
+}
+
+.activity-badge.intensity.light {
+  background-color: hsla(160, 84%, 39%, 0.1);
+  color: var(--accent);
+  border-color: hsla(160, 84%, 39%, 0.2);
+}
+
+.activity-badge.intensity.moderate {
+  background-color: hsla(38, 92%, 50%, 0.1);
+  color: hsl(38, 80%, 40%);
+  border-color: hsla(38, 92%, 50%, 0.2);
+}
+
+.activity-badge.intensity.high {
+  background-color: hsla(0, 84%, 60%, 0.1);
+  color: var(--destructive);
+  border-color: hsla(0, 84%, 60%, 0.2);
+}
+
+.activity-card-notes {
+  font-size: 0.75rem;
+  color: var(--muted-foreground);
+  line-height: 1.4;
+  margin-top: auto;
+}
+
+/* Cardio Tips */
+.cardio-tips {
+  padding: 1rem;
+  border-radius: 0.875rem;
+  background-color: var(--secondary);
+  border: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.cardio-tips-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--foreground);
+  margin-bottom: 0.75rem;
+}
+
+.cardio-tips-header svg {
+  width: 1.125rem;
+  height: 1.125rem;
+  color: var(--primary);
+}
+
+.cardio-tips-grid {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.cardio-tip-item {
+  flex: 1;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  border-radius: 0.625rem;
+  background-color: var(--card);
+  border: 1px solid var(--border);
+}
+
+.cardio-tip-item span {
+  color: var(--primary);
+  font-weight: 700;
+  font-size: 0.8rem;
+}
+
+.cardio-tip-item p {
+  font-size: 0.75rem;
+  color: var(--muted-foreground);
+  line-height: 1.4;
+}
+
+/* ==================== REST DAYS PAGE ==================== */
+.rest-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+  flex-shrink: 0;
+}
+
+.rest-icon {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 1rem;
+  background: linear-gradient(135deg, hsl(269, 60%, 50%) 0%, hsl(269, 70%, 65%) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rest-icon svg {
+  width: 1.5rem;
+  height: 1.5rem;
+  color: white;
+}
+
+.rest-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--foreground);
+}
+
+.rest-subtitle {
+  font-size: 0.8rem;
+  color: var(--muted-foreground);
+}
+
+.rest-grid {
+  display: flex;
+  gap: 1rem;
+  flex: 1;
+  margin-bottom: 1rem;
+}
+
+/* Rest Nutrition Card */
+.rest-nutrition-card {
+  flex: 1;
+  padding: 1rem;
+  border-radius: 1rem;
+  background-color: var(--card);
+  border: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+}
+
+.rest-card-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.875rem;
+}
+
+.rest-card-icon {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 0.625rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rest-card-icon.nutrition {
+  background-color: hsla(160, 84%, 39%, 0.1);
+}
+
+.rest-card-icon.activity {
+  background-color: hsla(221, 83%, 53%, 0.1);
+}
+
+.rest-card-icon svg {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.rest-card-icon.nutrition svg { color: var(--accent); }
+.rest-card-icon.activity svg { color: var(--primary); }
+
+.rest-card-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--foreground);
+}
+
+.rest-card-subtitle {
+  font-size: 0.75rem;
+  color: var(--muted-foreground);
+}
+
+.rest-macros-grid {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.rest-macro-item {
+  flex: 1;
+  padding: 0.625rem;
+  border-radius: 0.625rem;
+  text-align: center;
+}
+
+.rest-macro-item.protein { background-color: hsla(221, 83%, 53%, 0.08); }
+.rest-macro-item.carbs { background-color: hsla(142, 71%, 45%, 0.08); }
+.rest-macro-item.fat { background-color: hsla(38, 92%, 50%, 0.08); }
+
+.rest-macro-label {
+  font-size: 0.65rem;
+  color: var(--muted-foreground);
+  margin-bottom: 0.125rem;
+}
+
+.rest-macro-value {
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.rest-macro-item.protein .rest-macro-value { color: var(--macro-protein); }
+.rest-macro-item.carbs .rest-macro-value { color: var(--macro-carbs); }
+.rest-macro-item.fat .rest-macro-value { color: var(--macro-fat); }
+
+.rest-macro-change {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.125rem;
+  font-size: 0.6rem;
+  font-weight: 500;
+  margin-top: 0.25rem;
+}
+
+.rest-macro-change.kept { color: var(--accent); }
+.rest-macro-change.reduced { color: var(--destructive); }
+.rest-macro-change.increased { color: var(--gold); }
+
+.rest-calorie-goal {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.625rem 0.875rem;
+  border-radius: 0.625rem;
+  background-color: var(--secondary);
+  margin-bottom: 0.75rem;
+}
+
+.rest-calorie-goal span {
+  font-size: 0.8rem;
+  color: var(--muted-foreground);
+}
+
+.rest-calorie-goal strong {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--foreground);
+}
+
+.rest-calorie-goal small {
+  font-size: 0.75rem;
+  color: var(--muted-foreground);
+}
+
+.rest-meals-title {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--foreground);
+  margin-bottom: 0.5rem;
+}
+
+.rest-meals-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex: 1;
+}
+
+.rest-meal-item {
+  display: flex;
+  gap: 0.625rem;
+  padding: 0.625rem;
+  border-radius: 0.5rem;
+  background-color: var(--secondary);
+}
+
+.rest-meal-icon {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 0.375rem;
+  background-color: var(--card);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.rest-meal-icon svg {
+  width: 1rem;
+  height: 1rem;
+  color: var(--accent);
+}
+
+.rest-meal-name {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--foreground);
+}
+
+.rest-meal-description {
+  font-size: 0.7rem;
+  color: var(--muted-foreground);
+}
+
+.rest-meal-note {
+  font-size: 0.65rem;
+  color: var(--accent);
+  font-style: italic;
+}
+
+/* Rest Activity Card */
+.rest-activity-card {
+  flex: 1;
+  padding: 1rem;
+  border-radius: 1rem;
+  background-color: var(--card);
+  border: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+}
+
+.rest-activities-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex: 1;
+}
+
+.rest-activity-item {
+  padding: 0.625rem;
+  border-radius: 0.625rem;
+  background-color: var(--secondary);
+}
+
+.rest-activity-row {
+  display: flex;
+  gap: 0.625rem;
+}
+
+.rest-activity-icon {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 0.375rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.rest-activity-icon.green { background-color: hsla(160, 84%, 39%, 0.15); }
+.rest-activity-icon.blue { background-color: hsla(0, 84%, 60%, 0.1); }
+.rest-activity-icon.gold { background-color: hsla(38, 92%, 50%, 0.15); }
+.rest-activity-icon.gray { background-color: var(--muted); }
+
+.rest-activity-icon svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+.rest-activity-icon.green svg { color: var(--accent); }
+.rest-activity-icon.blue svg { color: var(--destructive); }
+.rest-activity-icon.gold svg { color: var(--gold); }
+.rest-activity-icon.gray svg { color: var(--muted-foreground); }
+
+.rest-activity-info {
+  flex: 1;
+}
+
+.rest-activity-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.125rem;
+}
+
+.rest-activity-name {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--foreground);
+}
+
+.rest-activity-duration {
+  font-size: 0.65rem;
+  color: var(--accent);
+  font-weight: 500;
+}
+
+.rest-activity-description {
+  font-size: 0.7rem;
+  color: var(--muted-foreground);
+  line-height: 1.4;
+}
+
+/* Rest Checklist */
+.rest-checklist {
+  padding: 0.875rem 1rem;
+  border-radius: 0.875rem;
+  background-color: var(--secondary);
+  border: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.rest-checklist-title {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--foreground);
+  margin-bottom: 0.625rem;
+}
+
+.rest-checklist-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.rest-checklist-item {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.375rem 0.625rem;
+  border-radius: 0.375rem;
+  background-color: var(--card);
+  border: 1px solid var(--border);
+  font-size: 0.7rem;
+  color: var(--muted-foreground);
+}
+
+.rest-checklist-item svg {
+  width: 14px;
+  height: 14px;
+  color: var(--accent);
+}
+
+/* ==================== INSIGHTS PAGE ==================== */
+.insights-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+  flex-shrink: 0;
+}
+
+.insights-icon {
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 0.625rem;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.insights-icon svg {
+  width: 1.125rem;
+  height: 1.125rem;
+  color: var(--primary-foreground);
+}
+
+.insights-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--foreground);
+}
+
+.insights-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  flex: 1;
+}
+
+.insight-card {
+  padding: 1rem;
+  border-radius: 0.875rem;
+  background-color: var(--card);
+  border: 1px solid var(--border);
+}
+
+.insight-card-header {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  margin-bottom: 0.625rem;
+}
+
+.insight-card-icon {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.insight-card-icon.blue { background-color: hsla(221, 83%, 53%, 0.1); }
+.insight-card-icon.green { background-color: hsla(160, 84%, 39%, 0.1); }
+.insight-card-icon.gold { background-color: hsla(38, 92%, 50%, 0.1); }
+.insight-card-icon.red { background-color: hsla(0, 84%, 60%, 0.1); }
+
+.insight-card-icon svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+.insight-card-icon.blue svg { color: var(--primary); }
+.insight-card-icon.green svg { color: var(--accent); }
+.insight-card-icon.gold svg { color: var(--gold); }
+.insight-card-icon.red svg { color: var(--destructive); }
+
+.insight-card-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--foreground);
+}
+
+.insight-card-text {
+  font-size: 0.8rem;
+  color: var(--muted-foreground);
+  line-height: 1.5;
+}
+
+/* ==================== FOOTER PAGE ==================== */
+.footer-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.footer-card {
+  padding: 1.5rem;
+  border-radius: 1rem;
+  background-color: var(--secondary);
+  border: 1px solid var(--border);
+  text-align: center;
+}
+
+.footer-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--foreground);
+  margin-bottom: 0.5rem;
+}
+
+.footer-text {
+  font-size: 0.8rem;
+  color: var(--muted-foreground);
+  line-height: 1.5;
+  margin-bottom: 1rem;
+  max-width: 40rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.footer-disclaimer {
+  padding: 1rem;
+  border-radius: 0.625rem;
+  background-color: hsla(38, 92%, 50%, 0.08);
+  border: 1px solid hsla(38, 92%, 50%, 0.2);
+  margin-bottom: 1rem;
+}
+
+.footer-disclaimer-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: hsl(38, 80%, 40%);
+  margin-bottom: 0.5rem;
+}
+
+.footer-disclaimer-header svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+.footer-disclaimer p {
+  font-size: 0.75rem;
+  color: var(--muted-foreground);
+  line-height: 1.5;
+}
+
+.footer-meta {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+}
+
+.footer-meta-item {
+  font-size: 0.75rem;
+  color: var(--muted-foreground);
+}
+
+.footer-meta-item strong {
+  color: var(--foreground);
+}

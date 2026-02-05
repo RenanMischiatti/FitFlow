@@ -29,6 +29,7 @@ services:
     volumes:
       - ./fitflow-backend:/var/www/html
       - ./fitflow-backend/storage:/var/www/html/storage
+      - /var/www/html/node_modules
     env_file:
       - ./fitflow-backend/.env
     networks:

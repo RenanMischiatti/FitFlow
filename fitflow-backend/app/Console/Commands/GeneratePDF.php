@@ -9,6 +9,12 @@ use App\Services\Pdf\PdfService;
 
 class GeneratePDF extends Command
 {
+    public function __construct(
+        public GeneratePdfTrainingService $pdfService
+    ) {
+        parent::__construct();
+    }
+
     /**
      * The name and signature of the console command.
      */
@@ -24,9 +30,7 @@ class GeneratePDF extends Command
         $this->info('🚀 Generating PDF...');
 
         try {
-            $path = (new GeneratePdfTrainingService(
-                order: Order::find(1)
-            ))->generate();
+            $path = $this->pdfService->generate(order: Order::find(1));
 
             $this->info('✅ PDF generated successfully!');
             $this->info("📄 File: {$path}");

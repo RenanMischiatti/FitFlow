@@ -1,7 +1,6 @@
-# FITFLOW-backend/Dockerfile
 FROM php:8.3-fpm
 
-# Instalar dependências do sistema
+# Instalar dependências do sistema + libs Chromium
 RUN apt-get update && apt-get install -y \
     git \
     curl \
@@ -10,7 +9,20 @@ RUN apt-get update && apt-get install -y \
     libxml2-dev \
     zip \
     unzip \
-    nginx
+    nginx \
+    chromium \
+    libx11-6 \
+    libxkbfile1 \
+    libxcomposite1 \
+    libxrender1 \
+    libnss3 \
+    libatk1.0-0 \
+    libatk-bridge2.0-0 \
+    libgtk-3-0
+
+# Instalar Node.js + npm via NodeSource
+RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
+    && apt-get install -y nodejs
 
 # Limpar cache
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
@@ -29,6 +41,9 @@ COPY . .
 
 # Instalar dependências do Laravel
 RUN composer install --no-interaction --optimize-autoloader
+
+# Instalar Puppeteer (nodejs) para Spatie PDF
+RUN npm install puppeteer --save-dev
 
 # Ajustar permissões
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
