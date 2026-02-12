@@ -12,6 +12,7 @@ use App\Http\Controllers\Controller;
 use App\Services\Payments\StripeService;
 use App\Http\Requests\CreateCheckoutRequest;
 use App\Http\Requests\WebhookStripeRequest;
+use App\Jobs\GeneratePlanJob;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Symfony\Contracts\EventDispatcher\Event;
@@ -62,20 +63,22 @@ class StripeController extends Controller
         );
 
         if ($event->type !== StripeWebhookEvent::CHECKOUT_SESSION_COMPLETED->value) {
-            return;
+            return response()->json(['ignored' => true]);
         }
 
         $order = $this->stripeService->getOrderByEvent($event);
+
+        if ($order->isPaid()) {
+            return response()->json(['status' => 'already_processed']);
+        }
+
         $order->markAsPaid();
 
-        Log::info('Order paid successfully', [
-            'order_id' => $order->id,
-        ]);
-
-        
+        GeneratePlanJob::dispatch($order->id);
 
         return response()->json(['status' => 'success']);
     }
+
         
 
 }

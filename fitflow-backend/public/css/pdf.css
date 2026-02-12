@@ -9326,10 +9326,11 @@ html, body {
   display: flex;
   align-items: flex-start;
   gap: 0.75rem;
-  padding: 0.875rem 1rem;
+  padding: 0.575rem 0.8rem;
   background: linear-gradient(135deg, hsla(38, 92%, 50%, 0.05) 0%, hsla(45, 93%, 47%, 0.03) 100%);
   border: 1.5px solid hsla(38, 92%, 50%, 0.25);
   border-radius: 0.875rem;
+  margin-top: 1rem;
 }
 
 .insights-final-message svg {

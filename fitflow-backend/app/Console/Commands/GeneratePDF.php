@@ -2,23 +2,16 @@
 
 namespace App\Console\Commands;
 
-use App\Models\Order;
-use App\Services\GeneratePdfTrainingService;
+use App\Jobs\GeneratePlanJob;
 use Illuminate\Console\Command;
-use App\Services\Pdf\PdfService;
+use Illuminate\Support\Facades\Artisan;
 
 class GeneratePDF extends Command
 {
-    public function __construct(
-        public GeneratePdfTrainingService $pdfService
-    ) {
-        parent::__construct();
-    }
-
     /**
      * The name and signature of the console command.
      */
-    protected $signature = 'generate:pdf';
+    protected $signature = 'generate:pdf {orderId=1}';
 
     /**
      * The console command description.
@@ -27,13 +20,23 @@ class GeneratePDF extends Command
 
     public function handle()
     {
-        $this->info('🚀 Generating PDF...');
+        $orderId = (int) $this->argument('orderId');
+
+        $this->info('🚀 Dispatching GeneratePlanJob...');
 
         try {
-            $path = $this->pdfService->generate(order: Order::find(1));
+            // 1️⃣ Dispara o job
+            GeneratePlanJob::dispatch($orderId)->onQueue('plans');
 
-            $this->info('✅ PDF generated successfully!');
-            $this->info("📄 File: {$path}");
+            $this->info('⏳ Processing queue...');
+
+            // 2️⃣ Executa UM job da fila
+            Artisan::call('queue:work', [
+                '--queue' => 'plans',
+                '--once'  => true,
+            ]);
+
+            $this->info('✅ Job processed successfully!');
 
             return Command::SUCCESS;
         } catch (\Throwable $e) {

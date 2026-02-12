@@ -30,7 +30,7 @@ class CreateOrderDTO
     public function toArray(): array
     {
         return [
-            'data' => $this->data,
+            'profile' => $this->data,
             'status' => $this->status,
             'price' => $this->price,
         ];

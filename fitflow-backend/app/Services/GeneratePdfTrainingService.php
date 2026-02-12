@@ -18,13 +18,11 @@ class GeneratePdfTrainingService
         }
 
         $html = view('pdf.pdf_training', [
-            'order' => $order,
+            'profile' => json_decode($order->profile, true),
+            'data' => json_decode($order->plan_gpt, true),
         ])->render();
 
-        /**
-         * PDF contínuo com altura automática do conteúdo
-         * (CSS controla tudo)
-         */
+
         Browsershot::html($html)
             ->noSandbox()
             ->setOption('args', [

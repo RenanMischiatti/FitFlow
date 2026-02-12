@@ -13,9 +13,22 @@ interface SummaryScreenProps {
   items: SummaryItem[];
   onPurchase: () => Promise<void>;
   onEdit: () => void;
+
+  onContactChange?: (data: {
+    nome: string;
+    email: string;
+    telefone: string;
+  }) => void;
 }
 
-const SummaryScreen = ({ items, onPurchase, onEdit }: SummaryScreenProps) => {
+
+const SummaryScreen = ({
+  items,
+  onPurchase,
+  onEdit,
+  onContactChange,
+}: SummaryScreenProps) => {
+
   const [isLoading, setIsLoading] = useState(false);
   const [isCollapsed, setIsCollapsed] = useState(true); // Collapse do resumo do perfil
 
@@ -26,15 +39,14 @@ const SummaryScreen = ({ items, onPurchase, onEdit }: SummaryScreenProps) => {
   const [savedContact, setSavedContact] = useState(false);
 
   useEffect(() => {
-    // carrega contato salvo, se houver
     try {
       const raw = localStorage.getItem("fitflow_contact");
       if (raw) {
         const parsed = JSON.parse(raw);
-        setName(parsed.name || "");
+        setName(parsed.nome || "");
         setEmail(parsed.email || "");
-        setPhone(parsed.phone || "");
-        setSavedContact(!!(parsed.name || parsed.email || parsed.phone));
+        setPhone(parsed.telefone || "");
+        setSavedContact(!!(parsed.nome || parsed.email || parsed.telefone));
       }
     } catch {
       // ignore
@@ -43,8 +55,21 @@ const SummaryScreen = ({ items, onPurchase, onEdit }: SummaryScreenProps) => {
 
   // salva automaticamente sempre que os campos mudarem
   useEffect(() => {
+    const payload = {
+      name: name.trim(),
+      email: email.trim(),
+      phone: phone.trim(),
+    };
+
+    // envia para o componente pai (normalizado)
+    onContactChange?.({
+      nome: payload.name,
+      email: payload.email,
+      telefone: payload.phone,
+    });
+
+    // persistência local
     try {
-      const payload = { name: name.trim(), email: email.trim(), phone: phone.trim() };
       if (payload.name || payload.email || payload.phone) {
         localStorage.setItem("fitflow_contact", JSON.stringify(payload));
         setSavedContact(true);
@@ -55,7 +80,9 @@ const SummaryScreen = ({ items, onPurchase, onEdit }: SummaryScreenProps) => {
     } catch (err) {
       console.error("Erro ao persistir contato:", err);
     }
-  }, [name, email, phone]);
+  }, [name, email, phone, onContactChange]);
+
+
 
   const handleClick = async () => {
     try {

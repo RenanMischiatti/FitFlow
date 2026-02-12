@@ -17,7 +17,8 @@ return new class extends Migration
             // User (optional, for future authentication)
             $table->unsignedBigInteger('user_id')->nullable()->index();
 
-            $table->json('data');
+            $table->json('profile');
+            $table->json('plan_gpt')->nullable();
 
             // Order / payment status
             $table->string('status')->default('pending');

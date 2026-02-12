@@ -36,6 +36,9 @@ interface FormData {
   observacoes: string;
   cardio: string;
   mealTimes: string[];
+  nome: string;
+  email: string;
+  telefone: string;
 }
 
 const initialFormData: FormData = {
@@ -61,6 +64,9 @@ const initialFormData: FormData = {
   observacoes: "",
   cardio: "",
   mealTimes: [],
+  nome: "",
+  email: "",
+  telefone: "",
 };
 
 const Questionnaire = () => {
@@ -1003,8 +1009,23 @@ const Questionnaire = () => {
   }
 
   if (showSummary) {
-    return <SummaryScreen items={getSummaryItems()} onPurchase={handlePurchase} onEdit={handleEditResponses} />;
+    return (
+      <SummaryScreen
+        items={getSummaryItems()}
+        onPurchase={handlePurchase}
+        onEdit={handleEditResponses}
+        onContactChange={(contact) => {
+          setFormData(prev => ({
+            ...prev,
+            nome: contact.nome,
+            email: contact.email,
+            telefone: contact.telefone,
+          }));
+        }}
+      />
+    );
   }
+
 
   const currentQuestion = questions[currentStep];
 

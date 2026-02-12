@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\ChatGpt;
 
 use OpenAI\Laravel\Facades\OpenAI;
 use Exception;
@@ -11,7 +11,7 @@ class ChatGPTService
 
     public function __construct()
     {
-        $this->assistantId = config('openai.assistant_id');
+        $this->assistantId = config('openai.assistant_plan_id');
     }
 
     /**

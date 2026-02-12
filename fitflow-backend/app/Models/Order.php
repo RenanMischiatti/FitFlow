@@ -12,7 +12,8 @@ class Order extends Model
      */
     protected $fillable = [
         'user_id',
-        'data',
+        'profile',
+        'plan_gpt',
 
         // Order
         'status',

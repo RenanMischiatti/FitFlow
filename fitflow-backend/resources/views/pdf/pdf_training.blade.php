@@ -2162,9 +2162,9 @@
               </svg>
               <span>Insights Nutricionais</span>
           </div>
-          <h1 class="insights-title-premium">Dicas Práticas para o Sucesso</h1>
+          <h1 class="insights-title-premium">Fundamentos da Nutrição</h1>
           <p class="insights-subtitle-premium">
-              Estratégias comprovadas para maximizar seus resultados na dieta
+              Princípios científicos essenciais para uma alimentação saudável e eficaz
           </p>
       </div>
 
@@ -2176,14 +2176,14 @@
               </svg>
           </div>
           <div>
-              <h3>Conhecimento é Poder</h3>
-              <p>Entender os fundamentos da nutrição transforma sua relação com a comida e potencializa seus resultados. Estas dicas são baseadas em ciência e testadas na prática.</p>
+              <h3>Conhecimento Transforma Hábitos</h3>
+              <p>Compreender os princípios da nutrição permite fazer escolhas mais conscientes e sustentáveis. Estas recomendações são baseadas em evidências científicas atuais.</p>
           </div>
       </div>
 
       <!-- PRINCIPAIS DICAS - GRID 2x3 -->
       <div class="insights-tips-section">
-          <h3 class="insights-section-title">Fundamentos Essenciais</h3>
+          <h3 class="insights-section-title">Pilares da Nutrição</h3>
           <div class="insights-tips-grid">
               <!-- Tip 1: Proteína -->
               <div class="insights-tip-card">
@@ -2193,14 +2193,14 @@
                               <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
                           </svg>
                       </div>
-                      <h4>Priorize Proteína</h4>
+                      <h4>Importância da Proteína</h4>
                   </div>
-                  <p class="insights-tip-desc">Consuma 1.6-2.2g/kg de peso corporal diariamente. Distribua em 4-6 refeições para otimizar síntese proteica.</p>
+                  <p class="insights-tip-desc">A proteína é essencial para construção e manutenção muscular. Recomenda-se distribuir o consumo ao longo do dia para melhor aproveitamento.</p>
                   <div class="insights-tip-highlight">
                       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
                           <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                       </svg>
-                      <span>170g/dia no seu caso</span>
+                      <span>1.6-2.2g por kg de peso</span>
                   </div>
               </div>
 
@@ -2212,14 +2212,14 @@
                               <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
                           </svg>
                       </div>
-                      <h4>Timing Estratégico</h4>
+                      <h4>Distribuição de Nutrientes</h4>
                   </div>
-                  <p class="insights-tip-desc">Concentre carboidratos 2h antes e logo após o treino. Janela anabólica favorece absorção e recuperação muscular.</p>
+                  <p class="insights-tip-desc">O momento da alimentação pode otimizar resultados. Carboidratos próximos ao treino fornecem energia e auxiliam na recuperação muscular.</p>
                   <div class="insights-tip-highlight">
                       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
                           <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                       </svg>
-                      <span>60-80g por refeição</span>
+                      <span>Refeições balanceadas</span>
                   </div>
               </div>
 
@@ -2231,14 +2231,14 @@
                               <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 3.104v5.714a2.25 2.25 0 01-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 014.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0112 15a9.065 9.065 0 00-6.23-.693L5 14.5m14.8.8l1.402 1.402c1.232 1.232.65 3.318-1.067 3.611A48.309 48.309 0 0112 21c-2.773 0-5.491-.235-8.135-.687-1.718-.293-2.3-2.379-1.067-3.61L5 14.5" />
                           </svg>
                       </div>
-                      <h4>Hidratação Constante</h4>
+                      <h4>Papel da Hidratação</h4>
                   </div>
-                  <p class="insights-tip-desc">Mínimo 3-4L diários. Desidratação de 2% já reduz performance em 10-20%. Beba água ao longo do dia, não apenas no treino.</p>
+                  <p class="insights-tip-desc">A água é crucial para todas as funções corporais. Mesmo pequenos níveis de desidratação podem impactar significativamente o desempenho físico e mental.</p>
                   <div class="insights-tip-highlight">
                       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
                           <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                       </svg>
-                      <span>1L a cada 3-4h</span>
+                      <span>35ml por kg de peso</span>
                   </div>
               </div>
 
@@ -2250,14 +2250,14 @@
                               <path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z" />
                           </svg>
                       </div>
-                      <h4>Qualidade dos Alimentos</h4>
+                      <h4>Escolha de Alimentos</h4>
                   </div>
-                  <p class="insights-tip-desc">80% da dieta deve vir de alimentos integrais e minimamente processados. Nutrientes biodisponíveis otimizam resultados.</p>
+                  <p class="insights-tip-desc">Priorizar alimentos integrais e minimamente processados fornece nutrientes mais biodisponíveis e promove melhor saúde geral.</p>
                   <div class="insights-tip-highlight">
                       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
                           <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                       </svg>
-                      <span>Regra 80/20</span>
+                      <span>Alimentos naturais</span>
                   </div>
               </div>
 
@@ -2269,14 +2269,14 @@
                               <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
                           </svg>
                       </div>
-                      <h4>Consistência > Perfeição</h4>
+                      <h4>Sustentabilidade dos Hábitos</h4>
                   </div>
-                  <p class="insights-tip-desc">Melhor ser 80% consistente por 12 semanas do que 100% perfeito por 2. Sustentabilidade é a chave para resultados duradouros.</p>
+                  <p class="insights-tip-desc">A constância nos hábitos alimentares gera resultados mais duradouros do que mudanças drásticas e temporárias. Foque no progresso gradual.</p>
                   <div class="insights-tip-highlight">
                       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
                           <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                       </svg>
-                      <span>Mentalidade de longo prazo</span>
+                      <span>Mudanças graduais</span>
                   </div>
               </div>
 
@@ -2288,14 +2288,14 @@
                               <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-9.75 0h9.75" />
                           </svg>
                       </div>
-                      <h4>Ajustes Inteligentes</h4>
+                      <h4>Adaptação Individual</h4>
                   </div>
-                  <p class="insights-tip-desc">Se o peso estagnar por 2 semanas, reduza 100-200 kcal. Se perder >1kg/semana, aumente calorias. Adapte sem radicalizar.</p>
+                  <p class="insights-tip-desc">Cada organismo responde de forma única. Monitore seu progresso e ajuste sua abordagem conforme necessário, respeitando os sinais do corpo.</p>
                   <div class="insights-tip-highlight">
                       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
                           <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                       </svg>
-                      <span>Pequenos ajustes frequentes</span>
+                      <span>Escute seu corpo</span>
                   </div>
               </div>
           </div>
@@ -2303,7 +2303,7 @@
 
       <!-- EVITE ESTES ERROS -->
       <div class="insights-mistakes-section">
-          <h3 class="insights-section-title">Evite Estes Erros Comuns</h3>
+          <h3 class="insights-section-title">Armadilhas Nutricionais</h3>
           <div class="insights-mistakes-grid">
               <div class="insights-mistake-card">
                   <div class="insights-mistake-icon">
@@ -2312,8 +2312,8 @@
                       </svg>
                   </div>
                   <div class="insights-mistake-content">
-                      <h5>Déficit Calórico Excessivo</h5>
-                      <p>Cortar calorias demais (>25%) leva à perda muscular, queda metabólica e fadiga extrema.</p>
+                      <h5>Restrição Calórica Extrema</h5>
+                      <p>Déficits muito agressivos podem comprometer o metabolismo e levar à perda de massa muscular.</p>
                   </div>
               </div>
 
@@ -2324,8 +2324,8 @@
                       </svg>
                   </div>
                   <div class="insights-mistake-content">
-                      <h5>Eliminar Grupos Alimentares</h5>
-                      <p>Cortar completamente carboidratos ou gorduras prejudica hormônios, energia e performance.</p>
+                      <h5>Demonizar Macronutrientes</h5>
+                      <p>Todos os macronutrientes têm funções importantes. Eliminar completamente algum deles pode prejudicar a saúde.</p>
                   </div>
               </div>
 
@@ -2336,20 +2336,20 @@
                       </svg>
                   </div>
                   <div class="insights-mistake-content">
-                      <h5>Ignorar Micronutrientes</h5>
-                      <p>Focar apenas em macros sem atenção a vitaminas e minerais compromete saúde e resultados.</p>
+                      <h5>Negligenciar Micronutrientes</h5>
+                      <p>Vitaminas e minerais são essenciais para processos metabólicos. Focar apenas em calorias é insuficiente.</p>
                   </div>
               </div>
 
               <div class="insights-mistake-card">
                   <div class="insights-mistake-icon">
                       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                          <path stroke-linecap="round" stroke-linejoin="round" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636" />
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 715.636 5.636m12.728 12.728L5.636 5.636" />
                       </svg>
                   </div>
                   <div class="insights-mistake-content">
-                      <h5>Comparar-se com Outros</h5>
-                      <p>Cada metabolismo é único. Foque no seu progresso individual, não em resultados alheios.</p>
+                      <h5>Expectativas Irrealistas</h5>
+                      <p>Mudanças corporais levam tempo. Comparações com outros geram frustração e podem levar à desistência.</p>
                   </div>
               </div>
           </div>
@@ -2360,7 +2360,7 @@
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 001.5-.189m-1.5.189a6.01 6.01 0 01-1.5-.189m3.75 7.478a12.06 12.06 0 01-4.5 0m3.75 2.383a14.406 14.406 0 01-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 10-7.517 0c.85.493 1.509 1.333 1.509 2.316V18" />
           </svg>
-          <p><strong>Lembre-se:</strong> Nutrição é uma ferramenta, não uma prisão. Use essas dicas como guias, não como regras inflexíveis. Adapte à sua realidade e mantenha o foco nos fundamentos.</p>
+          <p><strong>Lembre-se:</strong> Nutrição é um processo individualizado. Use estes princípios como fundamento, adapte à sua realidade e mantenha uma abordagem equilibrada e sustentável.</p>
       </div>
   </section>
 

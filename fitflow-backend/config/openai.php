@@ -46,4 +46,6 @@ return [
     */
 
     'request_timeout' => env('OPENAI_REQUEST_TIMEOUT', 30),
+
+    'assistant_plan_id' => env('OPENAI_ASSISTANT_PLAN_ID', null),
 ];
