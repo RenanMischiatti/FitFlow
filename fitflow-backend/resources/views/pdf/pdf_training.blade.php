@@ -2154,78 +2154,214 @@
 
   <!-- ==================== PAGE 11: INSIGHTS ==================== -->
   <section class="pdf-page">
-    <div class="insights-header">
-      <div class="insights-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
-          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M12 7v14" />
-          <path
-            d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z" />
-        </svg>
-      </div>
-      <h2 class="insights-title">Insights e Fundamentos Técnicos</h2>
-    </div>
-
-    <div class="insights-grid">
-      <div class="insight-card shadow-card">
-        <div class="insight-card-header">
-          <div class="insight-card-icon blue">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
-              stroke="currentColor" stroke-width="2">
-              <path d="M14.4 14.4 9.6 9.6" />
-            </svg>
+      <!-- HEADER PREMIUM -->
+      <div class="insights-header-premium">
+          <div class="insights-badge-premium">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 001.5-.189m-1.5.189a6.01 6.01 0 01-1.5-.189m3.75 7.478a12.06 12.06 0 01-4.5 0m3.75 2.383a14.406 14.406 0 01-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 10-7.517 0c.85.493 1.509 1.333 1.509 2.316V18" />
+              </svg>
+              <span>Insights Nutricionais</span>
           </div>
-          <h3 class="insight-card-title">Importância da Proteína</h3>
-        </div>
-        <p class="insight-card-text">O consumo adequado de proteína (1.6-2.2g/kg) é essencial para preservar massa
-          muscular durante o déficit calórico. Distribua em 4-6 refeições para otimizar a síntese proteica muscular ao
-          longo do dia.</p>
+          <h1 class="insights-title-premium">Dicas Práticas para o Sucesso</h1>
+          <p class="insights-subtitle-premium">
+              Estratégias comprovadas para maximizar seus resultados na dieta
+          </p>
       </div>
 
-      <div class="insight-card shadow-card">
-        <div class="insight-card-header">
-          <div class="insight-card-icon green">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
-              stroke="currentColor" stroke-width="2">
-              <path
-                d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z" />
-            </svg>
+      <!-- HERO CARD -->
+      <div class="insights-hero-card">
+          <div class="insights-hero-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z" />
+              </svg>
           </div>
-          <h3 class="insight-card-title">Timing de Carboidratos</h3>
-        </div>
-        <p class="insight-card-text">Priorize carboidratos nas refeições pré e pós-treino para maximizar performance e
-          recuperação. Nos dias de descanso, reduza levemente a ingestão para otimizar a queima de gordura.</p>
+          <div>
+              <h3>Conhecimento é Poder</h3>
+              <p>Entender os fundamentos da nutrição transforma sua relação com a comida e potencializa seus resultados. Estas dicas são baseadas em ciência e testadas na prática.</p>
+          </div>
       </div>
 
-      <div class="insight-card shadow-card">
-        <div class="insight-card-header">
-          <div class="insight-card-icon gold">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
-              stroke="currentColor" stroke-width="2">
-              <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
-            </svg>
+      <!-- PRINCIPAIS DICAS - GRID 2x3 -->
+      <div class="insights-tips-section">
+          <h3 class="insights-section-title">Fundamentos Essenciais</h3>
+          <div class="insights-tips-grid">
+              <!-- Tip 1: Proteína -->
+              <div class="insights-tip-card">
+                  <div class="insights-tip-header">
+                      <div class="insights-tip-icon blue">
+                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                              <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
+                          </svg>
+                      </div>
+                      <h4>Priorize Proteína</h4>
+                  </div>
+                  <p class="insights-tip-desc">Consuma 1.6-2.2g/kg de peso corporal diariamente. Distribua em 4-6 refeições para otimizar síntese proteica.</p>
+                  <div class="insights-tip-highlight">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                      <span>170g/dia no seu caso</span>
+                  </div>
+              </div>
+
+              <!-- Tip 2: Timing -->
+              <div class="insights-tip-card">
+                  <div class="insights-tip-header">
+                      <div class="insights-tip-icon green">
+                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                              <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                          </svg>
+                      </div>
+                      <h4>Timing Estratégico</h4>
+                  </div>
+                  <p class="insights-tip-desc">Concentre carboidratos 2h antes e logo após o treino. Janela anabólica favorece absorção e recuperação muscular.</p>
+                  <div class="insights-tip-highlight">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                      <span>60-80g por refeição</span>
+                  </div>
+              </div>
+
+              <!-- Tip 3: Hidratação -->
+              <div class="insights-tip-card">
+                  <div class="insights-tip-header">
+                      <div class="insights-tip-icon cyan">
+                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                              <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 3.104v5.714a2.25 2.25 0 01-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 014.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0112 15a9.065 9.065 0 00-6.23-.693L5 14.5m14.8.8l1.402 1.402c1.232 1.232.65 3.318-1.067 3.611A48.309 48.309 0 0112 21c-2.773 0-5.491-.235-8.135-.687-1.718-.293-2.3-2.379-1.067-3.61L5 14.5" />
+                          </svg>
+                      </div>
+                      <h4>Hidratação Constante</h4>
+                  </div>
+                  <p class="insights-tip-desc">Mínimo 3-4L diários. Desidratação de 2% já reduz performance em 10-20%. Beba água ao longo do dia, não apenas no treino.</p>
+                  <div class="insights-tip-highlight">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                      <span>1L a cada 3-4h</span>
+                  </div>
+              </div>
+
+              <!-- Tip 4: Qualidade -->
+              <div class="insights-tip-card">
+                  <div class="insights-tip-header">
+                      <div class="insights-tip-icon gold">
+                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                              <path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z" />
+                          </svg>
+                      </div>
+                      <h4>Qualidade dos Alimentos</h4>
+                  </div>
+                  <p class="insights-tip-desc">80% da dieta deve vir de alimentos integrais e minimamente processados. Nutrientes biodisponíveis otimizam resultados.</p>
+                  <div class="insights-tip-highlight">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                      <span>Regra 80/20</span>
+                  </div>
+              </div>
+
+              <!-- Tip 5: Consistência -->
+              <div class="insights-tip-card">
+                  <div class="insights-tip-header">
+                      <div class="insights-tip-icon purple">
+                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                              <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
+                          </svg>
+                      </div>
+                      <h4>Consistência > Perfeição</h4>
+                  </div>
+                  <p class="insights-tip-desc">Melhor ser 80% consistente por 12 semanas do que 100% perfeito por 2. Sustentabilidade é a chave para resultados duradouros.</p>
+                  <div class="insights-tip-highlight">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                      <span>Mentalidade de longo prazo</span>
+                  </div>
+              </div>
+
+              <!-- Tip 6: Ajustes -->
+              <div class="insights-tip-card">
+                  <div class="insights-tip-header">
+                      <div class="insights-tip-icon red">
+                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                              <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-9.75 0h9.75" />
+                          </svg>
+                      </div>
+                      <h4>Ajustes Inteligentes</h4>
+                  </div>
+                  <p class="insights-tip-desc">Se o peso estagnar por 2 semanas, reduza 100-200 kcal. Se perder >1kg/semana, aumente calorias. Adapte sem radicalizar.</p>
+                  <div class="insights-tip-highlight">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                      <span>Pequenos ajustes frequentes</span>
+                  </div>
+              </div>
           </div>
-          <h3 class="insight-card-title">Recuperação e Sono</h3>
-        </div>
-        <p class="insight-card-text">O sono de qualidade (7-9h) é quando ocorre a maior parte da recuperação muscular e
-          regulação hormonal. Priorize rotinas de sono consistentes para maximizar resultados.</p>
       </div>
 
-      <div class="insight-card shadow-card">
-        <div class="insight-card-header">
-          <div class="insight-card-icon red">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
-              stroke="currentColor" stroke-width="2">
-              <polyline points="22 7 13.5 15.5 8.5 10.5 2 17" />
-              <polyline points="16 7 22 7 22 13" />
-            </svg>
+      <!-- EVITE ESTES ERROS -->
+      <div class="insights-mistakes-section">
+          <h3 class="insights-section-title">Evite Estes Erros Comuns</h3>
+          <div class="insights-mistakes-grid">
+              <div class="insights-mistake-card">
+                  <div class="insights-mistake-icon">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636" />
+                      </svg>
+                  </div>
+                  <div class="insights-mistake-content">
+                      <h5>Déficit Calórico Excessivo</h5>
+                      <p>Cortar calorias demais (>25%) leva à perda muscular, queda metabólica e fadiga extrema.</p>
+                  </div>
+              </div>
+
+              <div class="insights-mistake-card">
+                  <div class="insights-mistake-icon">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636" />
+                      </svg>
+                  </div>
+                  <div class="insights-mistake-content">
+                      <h5>Eliminar Grupos Alimentares</h5>
+                      <p>Cortar completamente carboidratos ou gorduras prejudica hormônios, energia e performance.</p>
+                  </div>
+              </div>
+
+              <div class="insights-mistake-card">
+                  <div class="insights-mistake-icon">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636" />
+                      </svg>
+                  </div>
+                  <div class="insights-mistake-content">
+                      <h5>Ignorar Micronutrientes</h5>
+                      <p>Focar apenas em macros sem atenção a vitaminas e minerais compromete saúde e resultados.</p>
+                  </div>
+              </div>
+
+              <div class="insights-mistake-card">
+                  <div class="insights-mistake-icon">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636" />
+                      </svg>
+                  </div>
+                  <div class="insights-mistake-content">
+                      <h5>Comparar-se com Outros</h5>
+                      <p>Cada metabolismo é único. Foque no seu progresso individual, não em resultados alheios.</p>
+                  </div>
+              </div>
           </div>
-          <h3 class="insight-card-title">Progressão de Carga</h3>
-        </div>
-        <p class="insight-card-text">A sobrecarga progressiva é o princípio fundamental para ganhos contínuos. Adicione
-          carga gradualmente (2-5%) quando conseguir executar todas as séries na faixa de repetições máximas.</p>
       </div>
-    </div>
+
+      <!-- MENSAGEM FINAL -->
+      <div class="insights-final-message">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 001.5-.189m-1.5.189a6.01 6.01 0 01-1.5-.189m3.75 7.478a12.06 12.06 0 01-4.5 0m3.75 2.383a14.406 14.406 0 01-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 10-7.517 0c.85.493 1.509 1.333 1.509 2.316V18" />
+          </svg>
+          <p><strong>Lembre-se:</strong> Nutrição é uma ferramenta, não uma prisão. Use essas dicas como guias, não como regras inflexíveis. Adapte à sua realidade e mantenha o foco nos fundamentos.</p>
+      </div>
   </section>
 
   <!-- ==================== PAGE 12: COMPLETED ==================== -->

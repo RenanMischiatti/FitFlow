@@ -1,0 +1,1114 @@
+# SISTEMA DE GERAÇÃO DE PLANO PERSONALIZADO - JSON COMPLETO
+
+## 🎯 OBJETIVO
+
+Gerar um JSON completo e estruturado com **todos os dados dinâmicos e personalizados** para um plano de treino e nutrição baseado em ciência.
+
+---
+
+## 📋 REGRAS OBRIGATÓRIAS
+
+1. **Retorne APENAS JSON válido** (sem markdown, comentários ou textos)
+2. **Keys em português (snake_case)**: `descricao_estrategia`, `titulo_treino`
+3. **Tipos corretos**: int, float, string, array, object, boolean
+4. **Coerência científica**: baseie-se em evidências
+5. **Valores realistas**: nunca prometa resultados impossíveis
+6. **Compatibilidade interna**: treino, dieta e cardio alinhados ao objetivo
+7. **Adaptabilidade**: nem todo plano é déficit (superávit, manutenção, recomposição)
+
+---
+
+## 🧠 LÓGICA DE RACIOCÍNIO
+
+### **PASSO 1: Cálculos Metabólicos**
+
+#### **TMB (Taxa Metabólica Basal):**
+- **Homens:** `88.362 + (13.397 × peso) + (4.799 × altura) - (5.677 × idade)`
+- **Mulheres:** `447.593 + (9.247 × peso) + (3.098 × altura) - (4.330 × idade)`
+
+#### **TDEE (Gasto Diário Total):**
+| Atividade | Fator |
+|-----------|-------|
+| Sedentário | 1.2 |
+| Leve (1-3x/sem) | 1.375 |
+| Moderado (3-5x/sem) | 1.55 |
+| Muito ativo (6-7x/sem) | 1.725 |
+
+#### **Meta Calórica:**
+- **Déficit (perda de gordura):** TDEE - 300 a -500 kcal
+- **Superávit (ganho muscular):** TDEE + 200 a +400 kcal
+- **Recomposição:** TDEE - 100 a -200 kcal
+- **Manutenção:** TDEE ± 50 kcal
+
+#### **⚠️ Tipo de Objetivo Calórico (campo dinâmico):**
+```
+diferença < -100 kcal → "Déficit Calórico"
+diferença > +100 kcal → "Superávit Calórico"
+-100 a +100 kcal → "Manutenção Calórica"
+-100 a -200 + alta proteína → "Recomposição Corporal"
+```
+
+---
+
+### **PASSO 2: Distribuição de Macronutrientes**
+
+| Objetivo | Proteína (g/kg) | Gordura (g/kg) |
+|----------|-----------------|----------------|
+| Déficit | 1.8-2.2 | 0.8-1.2 |
+| Superávit | 1.6-2.0 | 0.8-1.2 |
+| Recomposição | 2.0-2.4 | 0.8-1.2 |
+| Manutenção | 1.6-1.8 | 0.8-1.2 |
+
+**Carboidrato:** Restante das calorias após proteína e gordura.
+
+**Cálculo inverso:**
+```
+Calorias = (Proteína × 4) + (Carboidrato × 4) + (Gordura × 9)
+```
+
+---
+
+### **PASSO 3: Projeção de Resultados**
+
+#### **Perda de Peso Saudável:**
+| Prazo | Perda (85kg) |
+|-------|--------------|
+| 30 dias | -2 a -4kg |
+| 60 dias | -4 a -7kg |
+| 90 dias | -6 a -10kg |
+
+#### **Ganho Muscular:**
+| Nível | 30 dias | 60 dias | 90 dias |
+|-------|---------|---------|---------|
+| Iniciante | 1-1.5kg | 2-3kg | 3-4.5kg |
+| Intermediário | 0.5-1kg | 1-2kg | 1.5-3kg |
+| Avançado | 0.25-0.5kg | 0.5-1kg | 0.75-1.5kg |
+
+---
+
+### **PASSO 4: Modelo de Treino**
+
+#### **Iniciante (0-12 meses):**
+- **Modelo:** Full Body 3x/semana
+- **Exercícios:** 3-4 por sessão
+- **Séries:** 2-3 por exercício
+- **Repetições:** 10-15 (foco técnica)
+- **RPE:** 6-7
+- **Duração:** 45-60 min
+
+#### **Intermediário (1-3 anos):**
+- **Modelo:** Upper/Lower 4x/semana
+- **Exercícios:** 5-6 por sessão
+- **Séries:** 3-4 por exercício
+- **Repetições:** 6-12 (variação)
+- **RPE:** 7-8.5
+- **Duração:** 60-75 min
+
+#### **Avançado (3+ anos):**
+- **Modelo:** Push/Pull/Legs 5-6x/semana
+- **Exercícios:** 6-8 por sessão
+- **Séries:** 4-5 por exercício
+- **Repetições:** 4-15 (periodização)
+- **RPE:** 8-9.5
+- **Duração:** 75-90 min
+
+---
+
+### **PASSO 5: Cardio Adaptado**
+
+#### **Déficit (Perda de Gordura):**
+- **LISS:** 3-4x/semana, 30-40min, FC 60-70%
+- **HIIT:** 1-2x/semana (opcional), 15-20min
+- **Queima:** 800-1200 kcal/semana
+
+#### **Superávit (Ganho Muscular):**
+- **LISS:** 1-2x/semana, 20min
+- **HIIT:** Evitar
+
+#### **Manutenção/Recomposição:**
+- **LISS:** 2-3x/semana, 30min
+- **HIIT:** 1x/semana (opcional)
+
+---
+
+## 📊 CAMPOS DINÂMICOS DETALHADOS
+
+### **1. DADOS PESSOAIS**
+
+#### **`nome_completo`** (string)
+Nome do usuário.
+
+#### **`data_emissao`** (string)
+Data de criação do plano. Formato: "DD de Mês de YYYY"
+**Exemplo:** "29 de Janeiro de 2026"
+
+#### **`duracao_plano_dias`** (int)
+Duração do plano escolhida pelo usuário.
+**Valores:** 30, 60 ou 90
+
+#### **`objetivo_principal`** (string)
+Objetivo macro do usuário.
+**Exemplos:**
+- "Perda de Gordura"
+- "Ganho Muscular"
+- "Recomposição Corporal"
+- "Manutenção de Peso"
+
+#### **`data_validade`** (string)
+Data de expiração do plano (data_emissao + duracao_plano_dias)
+**Exemplo:** "29 de Abril de 2026"
+
+---
+
+### **2. MÉTRICAS CORPORAIS**
+
+#### **`peso_atual_kg`** (float)
+Peso atual do usuário em kg.
+
+#### **`altura_cm`** (int)
+Altura em centímetros.
+
+#### **`idade`** (int)
+Idade em anos.
+
+#### **`genero`** (string)
+**Valores:** "Masculino" ou "Feminino"
+
+#### **`imc`** (float)
+Índice de Massa Corporal calculado: `peso / (altura_m²)`
+
+#### **`percentual_gordura_atual`** (float)
+Percentual de gordura corporal estimado ou informado.
+
+#### **`massa_magra_kg`** (float)
+Massa magra calculada: `peso × (1 - percentual_gordura/100)`
+
+#### **`massa_gorda_kg`** (float)
+Massa gorda calculada: `peso × (percentual_gordura/100)`
+
+---
+
+### **3. ESTRATÉGIA NUTRICIONAL**
+
+#### **`descricao_balanco_energetico`** (string - 2-3 frases)
+**O QUE É:** Explicação sobre a estratégia calórica escolhida.
+
+**IMPORTANTE:** Este texto deve ser adaptado ao objetivo do usuário!
+
+**Exemplos baseados no objetivo:**
+
+**Déficit Calórico:**
+> "Seu plano foi desenvolvido com base no seu gasto energético total diário (TDEE) e ajustado estrategicamente para criar um déficit calórico moderado que maximiza a perda de gordura preservando massa muscular."
+
+**Superávit Calórico:**
+> "Seu plano foi calculado para criar um superávit calórico controlado que promove ganho muscular limpo, com energia suficiente para treinos intensos e recuperação completa sem acúmulo excessivo de gordura."
+
+**Recomposição Corporal:**
+> "Seu plano utiliza um déficit leve combinado com alta proteína e treino intenso para simultaneamente queimar gordura e construir músculo, otimizando sua composição corporal."
+
+**Manutenção:**
+> "Seu plano mantém suas calorias no nível de equilíbrio energético (TDEE) para estabilizar o peso enquanto melhora a composição corporal através de treino consistente e nutrição balanceada."
+
+---
+
+#### **`gasto_diario_tdee`** (int)
+Gasto calórico total diário (TDEE calculado).
+**Exemplo:** 2940
+
+#### **`meta_calorica_diaria`** (int)
+Meta de calorias por dia (TDEE ajustado ao objetivo).
+**Exemplo:** 2440
+
+#### **`diferenca_calorica`** (int)
+Diferença entre TDEE e meta calórica (pode ser negativo ou positivo).
+**Exemplo:** -500
+
+---
+
+#### **`tipo_objetivo_calorico`** (string)
+**ATENÇÃO:** Este campo muda conforme a diferença calórica!
+
+**Valores possíveis:**
+- `"Déficit Calórico"` (se diferença < -100)
+- `"Superávit Calórico"` (se diferença > +100)
+- `"Recomposição Corporal"` (se entre -100 e -200 com proteína alta)
+- `"Manutenção Calórica"` (se entre -100 e +100)
+
+---
+
+#### **`descricao_tipo_objetivo`** (string - 1 frase curta)
+Breve descrição do tipo de estratégia.
+
+**Exemplos:**
+- Déficit: "Perda de gordura"
+- Superávit: "Ganho muscular limpo"
+- Recomposição: "Queimar gordura e ganhar músculo"
+- Manutenção: "Estabilização do peso"
+
+---
+
+#### **`macronutrientes`** (object)
+
+**`proteina`** (object)
+- `gramas` (int): Quantidade de proteína por dia
+- `percentual` (int): Percentual em relação ao total de calorias
+- `gramas_por_kg` (float): Gramas por kg de peso corporal
+
+**`carboidrato`** (object)
+- `gramas` (int)
+- `percentual` (int)
+
+**`gordura`** (object)
+- `gramas` (int)
+- `percentual` (int)
+
+**Exemplo:**
+```json
+"proteina": {
+  "gramas": 170,
+  "percentual": 32,
+  "gramas_por_kg": 2.0
+}
+```
+
+---
+
+#### **`beneficios_distribuicao_macros`** (object)
+
+**ATENÇÃO:** Estes 3 cards explicam POR QUE a distribuição de macros funciona para o objetivo específico!
+
+**`proteina_titulo`** (string)
+→ **SEMPRE:** "Alta Proteína"
+
+**`proteina_descricao`** (string - 1 frase)
+→ Explicar o benefício da alta proteína **adaptado ao objetivo**
+
+**Exemplos:**
+- Déficit: "Preserva massa muscular durante o déficit calórico"
+- Superávit: "Maximiza síntese proteica e construção muscular"
+- Recomposição: "Mantém músculo enquanto queima gordura"
+- Manutenção: "Garante recuperação e manutenção da massa magra"
+
+---
+
+**`carboidrato_titulo`** (string)
+→ **SEMPRE:** "Carboidratos Estratégicos"
+
+**`carboidrato_descricao`** (string - 1 frase)
+→ Explicar o benefício dos carbos **adaptado ao objetivo**
+
+**Exemplos:**
+- Déficit: "Garantem energia para treinos de alta intensidade"
+- Superávit: "Fornecem combustível para hipertrofia e recuperação"
+- Recomposição: "Sustentam treinos intensos sem excesso calórico"
+- Manutenção: "Mantêm performance e energia estável"
+
+---
+
+**`gordura_titulo`** (string)
+→ **SEMPRE:** "Gorduras Saudáveis"
+
+**`gordura_descricao`** (string - 1 frase)
+→ Explicar o benefício das gorduras **adaptado ao objetivo**
+
+**Exemplos:**
+- Déficit: "Mantêm produção hormonal e aumentam saciedade"
+- Superávit: "Suportam produção de testosterona e absorção de vitaminas"
+- Recomposição: "Equilibram hormônios sem excesso calórico"
+- Manutenção: "Garantem saúde hormonal e saciedade"
+
+---
+
+#### **`ajuste_dias_descanso`** (object)
+
+**O QUE É:** Ajuste de macros para dias de treino vs dias de descanso.
+
+```json
+{
+  "calorias_dia_treino": 2500,
+  "calorias_dia_descanso": 2200,
+  "proteina_mantida": 170,
+  "carboidrato_dia_treino": 263,
+  "carboidrato_dia_descanso": 185,
+  "gordura_dia_treino": 85,
+  "gordura_dia_descanso": 98
+}
+```
+
+---
+
+### **4. PROJEÇÃO DE RESULTADOS**
+
+#### **`prazo_escolhido`** (int)
+Prazo que o usuário escolheu para o plano.
+**Valores:** 30, 60 ou 90
+
+---
+
+#### **`fase_30_dias`** (object)
+
+**`variacao_peso_kg`** (string)
+Variação de peso esperada em 30 dias.
+
+**Exemplos:**
+- Déficit: "-3kg"
+- Superávit: "+2kg"
+- Recomposição: "-1kg"
+- Manutenção: "≈0kg"
+
+---
+
+**`variacao_gordura_percentual`** (string)
+Variação de gordura corporal em %.
+
+**Exemplos:**
+- Déficit: "-1.5%"
+- Superávit: "+0.5%"
+- Recomposição: "-1.5%"
+- Manutenção: "≈0%"
+
+---
+
+**`variacao_massa_magra_kg`** (string)
+Variação de massa magra (músculo).
+
+**Exemplos:**
+- Déficit: "≈0kg"
+- Superávit (Iniciante): "+1kg"
+- Superávit (Intermediário): "+0.7kg"
+- Superávit (Avançado): "+0.3kg"
+- Recomposição: "+0.5kg"
+- Manutenção: "≈0kg"
+
+---
+
+**`descricao_fase`** (string - 1 frase)
+Descrição do que acontece nesta fase.
+
+**Exemplos:**
+- Fase 30: "Adaptação metabólica e estabelecimento de rotina consistente"
+- Fase 60: "Definição muscular visível e maior ritmo de perda de gordura"
+- Fase 90: "Transformação completa: corpo definido, força aumentada e confiança máxima"
+
+---
+
+#### **`fase_60_dias`** (object)
+Mesma estrutura da `fase_30_dias`, mas com valores proporcionais aos 60 dias.
+
+#### **`fase_90_dias`** (object)
+Mesma estrutura, valores para 90 dias.
+
+---
+
+#### **`totais_esperados`** (object)
+
+**`perda_peso_total_kg`** (string)
+Total de peso perdido/ganho no período.
+**Exemplo:** "-6kg" ou "+5kg"
+
+**`reducao_gordura_total_percentual`** (string)
+Total de gordura reduzida em %.
+**Exemplo:** "-4.5%" ou "+1.5%"
+
+**`ganho_massa_magra_kg`** (string)
+Total de massa magra ganhada.
+**Exemplo:** "+0.5kg" ou "+3kg"
+
+---
+
+### **5. PROGRAMA DE TREINO**
+
+#### **`titulo_treino`** (string)
+Título do programa de treino.
+
+**Exemplos:**
+- "Upper/Lower Split"
+- "Push/Pull/Legs"
+- "Full Body"
+- "ABCDE (5x/semana)"
+
+---
+
+#### **`descricao_por_que_funciona`** (string - 3-4 linhas)
+**O QUE É:** Parágrafo explicando por que esse modelo de treino foi escolhido.
+
+**Exemplo (Upper/Lower):**
+> "Essa divisão permite treinar cada grupo muscular 2x por semana, frequência considerada ideal para hipertrofia segundo a literatura científica. O intervalo de 48-72h entre sessões do mesmo grupo garante recuperação completa e síntese proteica maximizada, resultando em ganhos superiores comparados a divisões de 1x por semana."
+
+**Exemplo (Push/Pull/Legs):**
+> "Dividindo o treino entre movimentos de empurrar, puxar e pernas, você maximiza o volume de trabalho por grupo muscular enquanto permite recuperação adequada. Cada grupo é treinado 2x por semana com intensidade alta, promovendo hipertrofia acelerada sem overtraining."
+
+**Exemplo (Full Body):**
+> "Treinar o corpo inteiro em cada sessão é ideal para iniciantes, pois permite praticar os padrões de movimento fundamentais com maior frequência. Você ativa a síntese proteica em todos os grupos musculares 3x por semana, maximizando os ganhos neurais e técnicos."
+
+---
+
+#### **`modelo_divisao`** (string)
+Nome do modelo de divisão.
+
+**Valores possíveis:**
+- "Upper/Lower Split"
+- "Push/Pull/Legs"
+- "Full Body"
+- "ABC"
+- "ABCDE"
+
+---
+
+#### **`frequencia_semanal`** (int)
+Quantos dias por semana o usuário treina.
+**Valores:** 3, 4, 5 ou 6
+
+---
+
+#### **`duracao_sessao_minutos`** (int)
+Duração estimada de cada treino.
+
+**Referência:**
+- Iniciante: 45-60 min
+- Intermediário: 60-75 min
+- Avançado: 75-90 min
+
+---
+
+#### **`nivel_intensidade`** (string)
+**Valores:** "Iniciante", "Intermediário" ou "Avançado"
+
+---
+
+#### **`calendario_semanal`** (array de 7 objects)
+
+**ATENÇÃO:** Array com **7 posições** (uma para cada dia da semana).
+
+**Estrutura de cada dia:**
+```json
+{
+  "dia_semana": "string (SEG, TER, QUA, QUI, SEX, SAB, DOM)",
+  "tipo_treino": "string (Upper A, Lower A, Descanso, Cardio, Push A, Pull A, Legs A, Full Body A, etc)",
+  "descricao_curta": "string (Força, Potência, Hipertrofia, Volume, Recuperar, Opcional)",
+  "treinar": "boolean (true se é dia de treino, false se não)",
+  "cardio": "boolean (true se tem cardio, false se não)",
+  "descanso": "boolean (true se é descanso total, false se não)"
+}
+```
+
+**Exemplo (4x/semana - Upper/Lower):**
+```json
+[
+  {
+    "dia_semana": "SEG",
+    "tipo_treino": "Upper A",
+    "descricao_curta": "Força",
+    "treinar": true,
+    "cardio": false,
+    "descanso": false
+  },
+  {
+    "dia_semana": "TER",
+    "tipo_treino": "Lower A",
+    "descricao_curta": "Potência",
+    "treinar": true,
+    "cardio": false,
+    "descanso": false
+  },
+  {
+    "dia_semana": "QUA",
+    "tipo_treino": "Descanso",
+    "descricao_curta": "Recuperar",
+    "treinar": false,
+    "cardio": false,
+    "descanso": true
+  },
+  {
+    "dia_semana": "QUI",
+    "tipo_treino": "Upper B",
+    "descricao_curta": "Hipertrofia",
+    "treinar": true,
+    "cardio": false,
+    "descanso": false
+  },
+  {
+    "dia_semana": "SEX",
+    "tipo_treino": "Lower B",
+    "descricao_curta": "Volume",
+    "treinar": true,
+    "cardio": false,
+    "descanso": false
+  },
+  {
+    "dia_semana": "SAB",
+    "tipo_treino": "Cardio",
+    "descricao_curta": "Opcional",
+    "treinar": false,
+    "cardio": true,
+    "descanso": false
+  },
+  {
+    "dia_semana": "DOM",
+    "tipo_treino": "Descanso",
+    "descricao_curta": "Recuperar",
+    "treinar": false,
+    "cardio": false,
+    "descanso": true
+  }
+]
+```
+
+**⚠️ IMPORTANTE:** Adapte o calendário conforme a frequência:
+- 3x/semana: Full Body (SEG, QUA, SEX) + 4 dias descanso/cardio
+- 4x/semana: Upper/Lower (SEG, TER, QUI, SEX) + 3 dias descanso/cardio
+- 5x/semana: PPL (SEG, TER, QUA, QUI, SEX) + 2 dias descanso
+- 6x/semana: PPL 2x (SEG a SAB) + 1 dia descanso
+
+---
+
+#### **`treinos`** (array de objects)
+
+**O QUE É:** Array contendo cada sessão de treino com exercícios detalhados.
+
+**Estrutura de cada treino:**
+```json
+{
+  "nome_treino": "string (Upper A - Força e Hipertrofia)",
+  "foco_principal": "string (Foco em peitorais, dorsais e deltoides)",
+  "grupos_musculares": ["string", "string"], // Ex: ["Peito", "Costas", "Ombro"]
+  "total_exercicios": "int",
+  
+  "exercicios": [
+    {
+      "numero": "int",
+      "nome": "string (Supino Reto com Barra)",
+      "musculo_alvo": "string (Peito, Costas, Quadríceps, etc)",
+      "series": "int",
+      "repeticoes": "string (6-8, 10-12, 12-15)",
+      "descanso_segundos": "int (45, 60, 90, 120)",
+      "rpe": "float (7, 7.5, 8, 8.5, 9)",
+      "dica_tecnica": "string ou null (Desça até tocar o peito, cotovelos a 45°)"
+    }
+  ],
+  
+  "nota_progressao": "string (Aumente a carga 2-5% quando completar todas as séries com boa forma nas reps máximas.)"
+}
+```
+
+**Exemplo completo:**
+```json
+{
+  "nome_treino": "Upper A - Força e Hipertrofia",
+  "foco_principal": "Foco em peitorais, dorsais e deltoides",
+  "grupos_musculares": ["Peito", "Costas", "Ombro", "Bíceps", "Tríceps"],
+  "total_exercicios": 6,
+  "exercicios": [
+    {
+      "numero": 1,
+      "nome": "Supino Reto com Barra",
+      "musculo_alvo": "Peito",
+      "series": 4,
+      "repeticoes": "6-8",
+      "descanso_segundos": 120,
+      "rpe": 8.5,
+      "dica_tecnica": "Desça até tocar o peito, cotovelos a 45°"
+    },
+    {
+      "numero": 2,
+      "nome": "Remada Curvada",
+      "musculo_alvo": "Costas",
+      "series": 4,
+      "repeticoes": "8-10",
+      "descanso_segundos": 90,
+      "rpe": 8,
+      "dica_tecnica": "Mantenha as costas retas e puxe até o umbigo"
+    }
+  ],
+  "nota_progressao": "Aumente a carga 2-5% quando completar todas as séries com boa forma nas reps máximas."
+}
+```
+
+---
+
+### **6. PLANO ALIMENTAR**
+
+#### **`titulo_conceito_dieta`** (string)
+Título criativo para o conceito da dieta.
+
+**Exemplos baseados no objetivo:**
+- Déficit: "Déficit Inteligente"
+- Superávit: "Superávit Controlado"
+- Recomposição: "Recomposição Estratégica"
+- Manutenção: "Manutenção Equilibrada"
+
+---
+
+#### **`descricao_conceito_dieta`** (string - 3-4 linhas)
+**O QUE É:** Explicação sobre a estratégia da dieta.
+
+**Exemplo (Déficit):**
+> "Este plano foi desenhado com um déficit calórico moderado (-500 kcal) que maximiza a queima de gordura enquanto preserva massa muscular. A distribuição estratégica de macronutrientes garante energia para treinos intensos, recuperação adequada e saciedade ao longo do dia. Cada refeição é planejada com propósito."
+
+**Exemplo (Superávit):**
+> "Este plano foi desenvolvido com um superávit calórico controlado (+300 kcal) que promove ganho muscular limpo sem acúmulo excessivo de gordura. Alta proteína e carboidratos estratégicos suportam hipertrofia máxima, enquanto gorduras saudáveis garantem produção hormonal ideal."
+
+---
+
+#### **`objetivo_dieta`** (object)
+
+**`titulo`** (string)
+Título do objetivo da dieta.
+
+**Exemplos:**
+- "Definição Muscular com Preservação de Massa"
+- "Ganho Muscular Limpo e Controlado"
+- "Recomposição Corporal Progressiva"
+- "Manutenção do Peso com Qualidade"
+
+---
+
+**`descricao`** (string - 1 frase)
+Descrição curta do tipo de dieta.
+
+**Exemplos:**
+- Déficit: "Hipocalórico, alto em proteínas, carboidratos estratégicos e gorduras saudáveis"
+- Superávit: "Hipercalórico, proteína otimizada, carboidratos elevados e gorduras balanceadas"
+- Recomposição: "Déficit leve, proteína máxima, carboidratos peri-treino e gorduras controladas"
+
+---
+
+#### **`total_refeicoes_dia`** (int)
+Número de refeições por dia.
+**Exemplo:** 4, 5 ou 6
+
+---
+
+#### **`meta_hidratacao_litros`** (float)
+Meta de hidratação diária em litros.
+**Cálculo:** `peso × 0.035`
+**Exemplo:** 3.0
+
+---
+
+#### **`calculo_hidratacao`** (object)
+```json
+{
+  "peso_kg": 85.0,
+  "fator_ml": 35,
+  "total_ml": 2975
+}
+```
+
+---
+
+#### **`refeicoes`** (array de objects)
+
+**Estrutura de cada refeição:**
+```json
+{
+  "numero_refeicao": "int (1, 2, 3, 4, 5, 6)",
+  "nome_refeicao": "string (Café da Manhã, Almoço, Pré-Treino, Pós-Treino, Jantar, Ceia)",
+  "emoji": "string (🌅, 🍽️, ⚡, 💪, 🌙)",
+  "descricao": "string (Primeira refeição do dia — energia e proteína)",
+  "horario": "string (07:00, 12:00, 15:00, 18:00, 21:00)",
+  
+  "alimentos": [
+    {
+      "nome": "string (Ovos inteiros, Peito de frango, Arroz integral)",
+      "quantidade": "string (3 un, 180g, 2 fatias)",
+      "proteina_g": "int",
+      "carboidrato_g": "int",
+      "gordura_g": "int",
+      "calorias": "int"
+    }
+  ],
+  
+  "totais_refeicao": {
+    "proteina_g": "int",
+    "carboidrato_g": "int",
+    "gordura_g": "int",
+    "calorias": "int"
+  }
+}
+```
+
+**⚠️ IMPORTANTE:** 
+- Soma dos macros × calorias ≈ total de calorias
+- (Proteína × 4) + (Carbo × 4) + (Gordura × 9) ≈ Calorias
+
+---
+
+#### **`totais_diarios`** (object)
+Soma de todas as refeições:
+```json
+{
+  "proteina_g": 170,
+  "carboidrato_g": 200,
+  "gordura_g": 70,
+  "calorias": 2100
+}
+```
+
+---
+
+### **7. CARDIO ESTRATÉGICO**
+
+#### **`descricao_por_que_cardio_funciona`** (string - 3-4 linhas)
+**O QUE É:** Explicação de por que o cardio está configurado dessa forma **baseado no objetivo**.
+
+**Exemplo (Déficit):**
+> "Durante um cutting, queremos queimar gordura enquanto preservamos ao máximo os músculos conquistados. Cardio em excesso ou mal planejado pode catabolizar massa muscular. Nossa abordagem prioriza LISS moderado, com HIIT opcional apenas quando bem recuperado."
+
+**Exemplo (Superávit):**
+> "Durante um bulking, o foco é maximizar ganho muscular. Cardio excessivo pode prejudicar a recuperação e queimar calorias que seriam usadas para construir músculo. Mantemos LISS mínimo apenas para saúde cardiovascular, sem comprometer os ganhos."
+
+**Exemplo (Manutenção/Recomposição):**
+> "Com o objetivo de recompor o corpo, o cardio atua como ferramenta para aumentar o déficit leve sem reduzir drasticamente as calorias. LISS regular mantém o metabolismo ativo enquanto preserva massa muscular durante o treino intenso."
+
+---
+
+#### **`meta_semanal_minutos`** (string)
+Total de minutos de cardio por semana.
+
+**Exemplos:**
+- Déficit: "90-120min"
+- Superávit: "40-60min"
+- Recomposição: "60-90min"
+- Manutenção: "60-90min"
+
+---
+
+#### **`queima_caloria_semanal`** (string)
+Estimativa de calorias queimadas por semana.
+
+**Exemplos:**
+- Déficit: "800-1200kcal"
+- Superávit: "200-400kcal"
+- Recomposição: "400-700kcal"
+
+---
+
+#### **`atividades`** (array de objects)
+
+**Estrutura:**
+```json
+{
+  "nome": "string (Caminhada em Jejum, Bicicleta Ergométrica, HIIT Opcional, Escada/Stairmaster)",
+  "frequencia_semanal": "string (3x/semana, 2x/semana, 1x/semana)",
+  "duracao_minutos": "string (30-40min, 20-30min, 15-20min)",
+  "intensidade": "string (Leve, Moderada, Alta)",
+  "frequencia_cardiaca": "string (FC 60-70%, FC 70-80%, FC 85-95%)",
+  "notas": "string (Logo ao acordar, antes do café da manhã. Ritmo confortável.)",
+  "beneficio_principal": "string (Máxima oxidação de gordura, Baixo impacto alta eficiência, Pós-queima de 24-48h)"
+}
+```
+
+**Exemplo:**
+```json
+{
+  "nome": "Caminhada em Jejum",
+  "frequencia_semanal": "3x/semana",
+  "duracao_minutos": "30-40min",
+  "intensidade": "Leve",
+  "frequencia_cardiaca": "FC 60-70%",
+  "notas": "Logo ao acordar, antes do café da manhã. Ritmo confortável, FC 60-70% da máxima. Ideal para mobilizar gordura armazenada.",
+  "beneficio_principal": "Máxima oxidação de gordura"
+}
+```
+
+---
+
+### **8. INSIGHTS PERSONALIZADOS**
+
+#### **`justificativa_treino`** (string - 2-3 frases)
+**O QUE É:** Por que este modelo de treino foi escolhido especificamente para o usuário.
+
+**Exemplo:**
+> "O modelo Upper/Lower 4x/semana foi escolhido por equilibrar frequência de treino ideal (2x por grupo muscular) com recuperação adequada para seu nível intermediário. Essa divisão maximiza o volume de trabalho sem causar overtraining, permitindo progressão consistente."
+
+---
+
+#### **`justificativa_dieta`** (string - 2-3 frases)
+**O QUE É:** Por que esta distribuição de macros foi escolhida.
+
+**Exemplo:**
+> "A distribuição de macros (32% proteína, 38% carboidrato, 30% gordura) foi calculada para preservar massa muscular durante o déficit, garantir energia para treinos intensos e manter produção hormonal saudável. Alta proteína é essencial para evitar perda muscular."
+
+---
+
+#### **`fatores_aceleradores`** (array de strings)
+**O QUE É:** Lista de fatores que aceleram os resultados.
+
+**Exemplo:**
+```json
+[
+  "Adesão >90% ao plano nutricional e treino",
+  "Sono consistente de 8h+ por noite",
+  "Hidratação adequada (2.5L+ diário)",
+  "Baixo nível de estresse e recuperação"
+]
+```
+
+---
+
+#### **`fatores_limitantes`** (array de strings)
+**O QUE É:** Lista de fatores que limitam os resultados.
+
+**Exemplo:**
+```json
+[
+  "Adesão <70% com frequentes 'off days'",
+  "Sono irregular ou menos de 6h",
+  "Estresse crônico não gerenciado",
+  "Consumo excessivo de álcool"
+]
+```
+
+---
+
+#### **`dica_adesao`** (string - 1-2 frases)
+**O QUE É:** Conselho prático para manter a adesão ao plano.
+
+**Exemplos:**
+- "Faça meal prep no domingo para garantir refeições prontas durante a semana."
+- "Organize suas refeições com antecedência e tenha opções práticas à disposição."
+- "Constância vence motivação — mantenha 80% de adesão e os resultados virão."
+
+---
+
+## 📊 ESTRUTURA JSON FINAL (APENAS TIPAGEM)
+
+```json
+{
+  "metricas_corporais": {
+    "peso_atual_kg": "float",
+    "altura_cm": "int",
+    "idade": "int",
+    "genero": "string",
+    "imc": "float",
+    "percentual_gordura_atual": "float",
+    "massa_magra_kg": "float",
+    "massa_gorda_kg": "float"
+  },
+
+  "estrategia_nutricional": {
+    "descricao_balanco_energetico": "string",
+    "gasto_diario_tdee": "int",
+    "meta_calorica_diaria": "int",
+    "diferenca_calorica": "int",
+    "tipo_objetivo_calorico": "string",
+    "descricao_tipo_objetivo": "string",
+    
+    "macronutrientes": {
+      "proteina": {
+        "gramas": "int",
+        "percentual": "int",
+        "gramas_por_kg": "float"
+      },
+      "carboidrato": {
+        "gramas": "int",
+        "percentual": "int"
+      },
+      "gordura": {
+        "gramas": "int",
+        "percentual": "int"
+      }
+    },
+
+    "beneficios_distribuicao_macros": {
+      "proteina_titulo": "string",
+      "proteina_descricao": "string",
+      "carboidrato_titulo": "string",
+      "carboidrato_descricao": "string",
+      "gordura_titulo": "string",
+      "gordura_descricao": "string"
+    },
+
+    "ajuste_dias_descanso": {
+      "calorias_dia_treino": "int",
+      "calorias_dia_descanso": "int",
+      "proteina_mantida": "int",
+      "carboidrato_dia_treino": "int",
+      "carboidrato_dia_descanso": "int",
+      "gordura_dia_treino": "int",
+      "gordura_dia_descanso": "int"
+    }
+  },
+
+  "projecao_resultados": {
+    "prazo_escolhido": "int",
+    
+    "fase_30_dias": {
+      "variacao_peso_kg": "string",
+      "variacao_gordura_percentual": "string",
+      "variacao_massa_magra_kg": "string",
+      "descricao_fase": "string"
+    },
+    
+    "fase_60_dias": {
+      "variacao_peso_kg": "string",
+      "variacao_gordura_percentual": "string",
+      "variacao_massa_magra_kg": "string",
+      "descricao_fase": "string"
+    },
+    
+    "fase_90_dias": {
+      "variacao_peso_kg": "string",
+      "variacao_gordura_percentual": "string",
+      "variacao_massa_magra_kg": "string",
+      "descricao_fase": "string"
+    },
+
+    "totais_esperados": {
+      "perda_peso_total_kg": "string",
+      "reducao_gordura_total_percentual": "string",
+      "ganho_massa_magra_kg": "string"
+    }
+  },
+
+  "programa_treino": {
+    "titulo_treino": "string",
+    "descricao_por_que_funciona": "string",
+    "modelo_divisao": "string",
+    "frequencia_semanal": "int",
+    "duracao_sessao_minutos": "int",
+    "nivel_intensidade": "string",
+    
+    "calendario_semanal": [
+      {
+        "dia_semana": "string",
+        "tipo_treino": "string",
+        "descricao_curta": "string",
+        "treinar": "boolean",
+        "cardio": "boolean",
+        "descanso": "boolean"
+      }
+    ],
+
+    "treinos": [
+      {
+        "nome_treino": "string",
+        "foco_principal": "string",
+        "grupos_musculares": ["string"],
+        "total_exercicios": "int",
+        
+        "exercicios": [
+          {
+            "numero": "int",
+            "nome": "string",
+            "musculo_alvo": "string",
+            "series": "int",
+            "repeticoes": "string",
+            "descanso_segundos": "int",
+            "rpe": "float",
+            "dica_tecnica": "string | null"
+          }
+        ],
+        
+        "nota_progressao": "string"
+      }
+    ]
+  },
+
+  "plano_alimentar": {
+    "titulo_conceito_dieta": "string",
+    "descricao_conceito_dieta": "string",
+    
+    "objetivo_dieta": {
+      "titulo": "string",
+      "descricao": "string"
+    },
+    
+    "total_refeicoes_dia": "int",
+    "meta_hidratacao_litros": "float",
+    "calculo_hidratacao": {
+      "peso_kg": "float",
+      "fator_ml": "int",
+      "total_ml": "int"
+    },
+
+    "refeicoes": [
+      {
+        "numero_refeicao": "int",
+        "nome_refeicao": "string",
+        "emoji": "string",
+        "descricao": "string",
+        "horario": "string",
+        
+        "alimentos": [
+          {
+            "nome": "string",
+            "quantidade": "string",
+            "proteina_g": "int",
+            "carboidrato_g": "int",
+            "gordura_g": "int",
+            "calorias": "int"
+          }
+        ],
+        
+        "totais_refeicao": {
+          "proteina_g": "int",
+          "carboidrato_g": "int",
+          "gordura_g": "int",
+          "calorias": "int"
+        }
+      }
+    ],
+
+    "totais_diarios": {
+      "proteina_g": "int",
+      "carboidrato_g": "int",
+      "gordura_g": "int",
+      "calorias": "int"
+    }
+  },
+
+  "cardio_estrategico": {
+    "descricao_por_que_cardio_funciona": "string",
+    "meta_semanal_minutos": "string",
+    "queima_caloria_semanal": "string",
+    
+    "atividades": [
+      {
+        "nome": "string",
+        "frequencia_semanal": "string",
+        "duracao_minutos": "string",
+        "intensidade": "string",
+        "frequencia_cardiaca": "string",
+        "notas": "string",
+        "beneficio_principal": "string"
+      }
+    ]
+  },
+
+  "insights_personalizados": {
+    "justificativa_treino": "string",
+    "justificativa_dieta": "string",
+    "fatores_aceleradores": ["string"],
+    "fatores_limitantes": ["string"],
+    "dica_adesao": "string"
+  }
+}
+```
+
+---
+
+## ✅ CHECKLIST ANTES DE GERAR
+
+- [ ] Calculei TMB e TDEE corretamente?
+- [ ] A meta calórica está alinhada ao objetivo?
+- [ ] O `tipo_objetivo_calorico` está correto?
+- [ ] A `descricao_balanco_energetico` foi adaptada ao objetivo?
+- [ ] Os `beneficios_distribuicao_macros` foram adaptados ao objetivo?
+- [ ] Os macros somam ~meta calórica?
+- [ ] A proteína está na faixa adequada (1.6-2.2g/kg)?
+- [ ] O `titulo_treino` está correto?
+- [ ] A `descricao_por_que_funciona` do treino foi gerada?
+- [ ] O volume de treino é compatível com o nível?
+- [ ] O `calendario_semanal` tem **7 dias** com as flags `treinar`, `cardio`, `descanso`?
+- [ ] A `descricao_por_que_cardio_funciona` foi adaptada ao objetivo?
+- [ ] A projeção de resultados é realista?
+- [ ] As refeições somam o total calórico diário?
+- [ ] O `titulo_conceito_dieta` está criativo e relevante?
+- [ ] A `descricao_conceito_dieta` foi adaptada ao objetivo?
+- [ ] Todos os campos de texto dinâmicos foram preenchidos?
+
+---
+
+## 🎯 AGORA GERE O JSON COM BASE NAS INFORMAÇÕES DO USUÁRIO
