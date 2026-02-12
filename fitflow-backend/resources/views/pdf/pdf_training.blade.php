@@ -1386,262 +1386,118 @@
 
   <!-- ==================== PAGE 8: MEALS ==================== -->
   <section class="pdf-page">
-    
-    <!-- Container com 3 refeições (padrão) -->
-    <div class="meals-container">
-      
-      <!-- Refeição 1 - Com 7 alimentos (caso extremo) -->
-      <div class="meal-card">
-        <div class="meal-card-header green">
-          <div class="meal-header-left">
-            <div class="meal-icon">🌅</div>
-            <div>
-              <h3 class="meal-title">Café da Manhã</h3>
-              <p class="meal-desc">Energia e proteína</p>
+      <div class="meals-page-container">
+        <!-- Refeição 1 -->
+        <div class="meal-card">
+          <div class="meal-card-header green">
+            <div class="meal-header-left">
+              <div class="meal-icon">🌅</div>
+              <div>
+                <h3 class="meal-title">Café da Manhã</h3>
+                <p class="meal-desc">Primeira refeição do dia — energia e proteína</p>
+              </div>
+            </div>
+            <div class="meal-time">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              07:00
             </div>
           </div>
-          <div class="meal-time">
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
-            </svg>
-            07:00
+          <div class="meal-body">
+            <table class="food-table">
+              <thead>
+                <tr>
+                  <th>Alimento</th>
+                  <th class="center">Qtd</th>
+                  <th class="center"><span class="macro-header protein">P</span></th>
+                  <th class="center"><span class="macro-header carbs">C</span></th>
+                  <th class="center"><span class="macro-header fat">G</span></th>
+                  <th class="center"><span class="macro-header kcal">Kcal</span></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td class="food-name">Ovos inteiros</td><td class="food-quantity">3 un</td><td class="food-protein">18</td><td class="food-carbs">1</td><td class="food-fat">15</td><td class="food-calories">210</td></tr>
+                <tr><td class="food-name">Pão integral</td><td class="food-quantity">2 fatias</td><td class="food-protein">6</td><td class="food-carbs">24</td><td class="food-fat">2</td><td class="food-calories">140</td></tr>
+                <tr><td class="food-name">Queijo cottage</td><td class="food-quantity">60g</td><td class="food-protein">16</td><td class="food-carbs">5</td><td class="food-fat">2</td><td class="food-calories">80</td></tr>
+                <tr><td class="food-name">Mamão papaia</td><td class="food-quantity">150g</td><td class="food-protein">1</td><td class="food-carbs">14</td><td class="food-fat">0</td><td class="food-calories">56</td></tr>
+                <tr><td class="food-name">Granola</td><td class="food-quantity">30g</td><td class="food-protein">3</td><td class="food-carbs">18</td><td class="food-fat">4</td><td class="food-calories">116</td></tr>
+                <tr><td class="food-name">Iogurte natural</td><td class="food-quantity">200g</td><td class="food-protein">10</td><td class="food-carbs">12</td><td class="food-fat">4</td><td class="food-calories">128</td></tr>
+                <tr><td class="food-name">Mel</td><td class="food-quantity">10g</td><td class="food-protein">0</td><td class="food-carbs">8</td><td class="food-fat">0</td><td class="food-calories">32</td></tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <td colspan="2"><strong>TOTAL</strong></td>
+                  <td class="food-protein"><strong>54</strong></td>
+                  <td class="food-carbs"><strong>82</strong></td>
+                  <td class="food-fat"><strong>27</strong></td>
+                  <td class="food-calories"><strong>762</strong></td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+          <div class="meal-card-footer green">
+            <div class="meal-footer-macros">
+              <div class="meal-footer-macro protein"><span class="meal-footer-dot"></span>Proteína: <strong>54g</strong></div>
+              <div class="meal-footer-macro carbs"><span class="meal-footer-dot"></span>Carbos: <strong>82g</strong></div>
+              <div class="meal-footer-macro fat"><span class="meal-footer-dot"></span>Gordura: <strong>27g</strong></div>
+            </div>
+            <div class="meal-footer-kcal">762 kcal</div>
           </div>
         </div>
-        <div class="meal-body">
-          <table class="food-table compact">
-            <thead>
-              <tr>
-                <th>Alimento</th>
-                <th class="center">Qtd</th>
-                <th class="center"><span class="macro-header protein">P</span></th>
-                <th class="center"><span class="macro-header carbs">C</span></th>
-                <th class="center"><span class="macro-header fat">G</span></th>
-                <th class="center"><span class="macro-header kcal">Kcal</span></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td class="food-name">Ovos inteiros</td>
-                <td class="food-quantity">3 un</td>
-                <td class="food-protein">18</td>
-                <td class="food-carbs">1</td>
-                <td class="food-fat">15</td>
-                <td class="food-calories">210</td>
-              </tr>
-              <tr>
-                <td class="food-name">Pão integral</td>
-                <td class="food-quantity">2 fatias</td>
-                <td class="food-protein">6</td>
-                <td class="food-carbs">24</td>
-                <td class="food-fat">2</td>
-                <td class="food-calories">140</td>
-              </tr>
-              <tr>
-                <td class="food-name">Queijo cottage</td>
-                <td class="food-quantity">60g</td>
-                <td class="food-protein">16</td>
-                <td class="food-carbs">5</td>
-                <td class="food-fat">2</td>
-                <td class="food-calories">80</td>
-              </tr>
-              <tr>
-                <td class="food-name">Mamão papaia</td>
-                <td class="food-quantity">150g</td>
-                <td class="food-protein">1</td>
-                <td class="food-carbs">14</td>
-                <td class="food-fat">0</td>
-                <td class="food-calories">56</td>
-              </tr>
-              <tr>
-                <td class="food-name">Granola</td>
-                <td class="food-quantity">30g</td>
-                <td class="food-protein">3</td>
-                <td class="food-carbs">18</td>
-                <td class="food-fat">4</td>
-                <td class="food-calories">116</td>
-              </tr>
-              <tr>
-                <td class="food-name">Iogurte natural</td>
-                <td class="food-quantity">200g</td>
-                <td class="food-protein">10</td>
-                <td class="food-carbs">12</td>
-                <td class="food-fat">4</td>
-                <td class="food-calories">128</td>
-              </tr>
-              <tr>
-                <td class="food-name">Mel</td>
-                <td class="food-quantity">10g</td>
-                <td class="food-protein">0</td>
-                <td class="food-carbs">8</td>
-                <td class="food-fat">0</td>
-                <td class="food-calories">32</td>
-              </tr>
-            </tbody>
-            <tfoot>
-              <tr>
-                <td><strong>TOTAL</strong></td>
-                <td class="food-protein"><strong>54</strong></td>
-                <td class="food-carbs"><strong>82</strong></td>
-                <td class="food-fat"><strong>27</strong></td>
-                <td class="food-calories"><strong>762</strong></td>
-              </tr>
-            </tfoot>
-          </table>
-        </div>
-      </div>
 
-      <!-- Refeição 2 - Normal -->
-      <div class="meal-card">
-        <div class="meal-card-header blue">
-          <div class="meal-header-left">
-            <div class="meal-icon">🍽️</div>
-            <div>
-              <h3 class="meal-title">Almoço</h3>
-              <p class="meal-desc">Refeição principal</p>
+        <!-- Refeição 2 -->
+        <div class="meal-card">
+          <div class="meal-card-header blue">
+            <div class="meal-header-left">
+              <div class="meal-icon">🍽️</div>
+              <div>
+                <h3 class="meal-title">Almoço</h3>
+                <p class="meal-desc">Refeição principal — maior volume calórico</p>
+              </div>
+            </div>
+            <div class="meal-time">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              12:00
             </div>
           </div>
-          <div class="meal-time">
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
-            </svg>
-            12:00
+          <div class="meal-body">
+            <table class="food-table">
+              <thead>
+                <tr>
+                  <th>Alimento</th>
+                  <th class="center">Qtd</th>
+                  <th class="center"><span class="macro-header protein">P</span></th>
+                  <th class="center"><span class="macro-header carbs">C</span></th>
+                  <th class="center"><span class="macro-header fat">G</span></th>
+                  <th class="center"><span class="macro-header kcal">Kcal</span></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td class="food-name">Peito de frango</td><td class="food-quantity">180g</td><td class="food-protein">45</td><td class="food-carbs">0</td><td class="food-fat">4</td><td class="food-calories">216</td></tr>
+                <tr><td class="food-name">Arroz integral</td><td class="food-quantity">120g</td><td class="food-protein">3</td><td class="food-carbs">30</td><td class="food-fat">1</td><td class="food-calories">144</td></tr>
+                <tr><td class="food-name">Feijão preto</td><td class="food-quantity">80g</td><td class="food-protein">6</td><td class="food-carbs">15</td><td class="food-fat">0</td><td class="food-calories">80</td></tr>
+                <tr><td class="food-name">Brócolis</td><td class="food-quantity">100g</td><td class="food-protein">3</td><td class="food-carbs">7</td><td class="food-fat">0</td><td class="food-calories">34</td></tr>
+                <tr><td class="food-name">Azeite extra virgem</td><td class="food-quantity">10ml</td><td class="food-protein">0</td><td class="food-carbs">0</td><td class="food-fat">10</td><td class="food-calories">90</td></tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <td colspan="2"><strong>TOTAL</strong></td>
+                  <td class="food-protein"><strong>57</strong></td>
+                  <td class="food-carbs"><strong>52</strong></td>
+                  <td class="food-fat"><strong>15</strong></td>
+                  <td class="food-calories"><strong>564</strong></td>
+                </tr>
+              </tfoot>
+            </table>
           </div>
-        </div>
-        <div class="meal-body">
-          <table class="food-table">
-            <thead>
-              <tr>
-                <th>Alimento</th>
-                <th class="center">Qtd</th>
-                <th class="center"><span class="macro-header protein">P</span></th>
-                <th class="center"><span class="macro-header carbs">C</span></th>
-                <th class="center"><span class="macro-header fat">G</span></th>
-                <th class="center"><span class="macro-header kcal">Kcal</span></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td class="food-name">Peito de frango</td>
-                <td class="food-quantity">180g</td>
-                <td class="food-protein">45</td>
-                <td class="food-carbs">0</td>
-                <td class="food-fat">4</td>
-                <td class="food-calories">216</td>
-              </tr>
-              <tr>
-                <td class="food-name">Arroz integral</td>
-                <td class="food-quantity">120g</td>
-                <td class="food-protein">3</td>
-                <td class="food-carbs">30</td>
-                <td class="food-fat">1</td>
-                <td class="food-calories">144</td>
-              </tr>
-              <tr>
-                <td class="food-name">Feijão preto</td>
-                <td class="food-quantity">80g</td>
-                <td class="food-protein">6</td>
-                <td class="food-carbs">15</td>
-                <td class="food-fat">0</td>
-                <td class="food-calories">80</td>
-              </tr>
-              <tr>
-                <td class="food-name">Brócolis</td>
-                <td class="food-quantity">100g</td>
-                <td class="food-protein">3</td>
-                <td class="food-carbs">7</td>
-                <td class="food-fat">0</td>
-                <td class="food-calories">34</td>
-              </tr>
-              <tr>
-                <td class="food-name">Azeite</td>
-                <td class="food-quantity">10ml</td>
-                <td class="food-protein">0</td>
-                <td class="food-carbs">0</td>
-                <td class="food-fat">10</td>
-                <td class="food-calories">90</td>
-              </tr>
-            </tbody>
-            <tfoot>
-              <tr>
-                <td><strong>TOTAL</strong></td>
-                <td class="food-protein"><strong>57</strong></td>
-                <td class="food-carbs"><strong>52</strong></td>
-                <td class="food-fat"><strong>15</strong></td>
-                <td class="food-calories"><strong>564</strong></td>
-              </tr>
-            </tfoot>
-          </table>
-        </div>
-      </div>
-
-      <!-- Refeição 3 - Compacta -->
-      <div class="meal-card">
-        <div class="meal-card-header gold">
-          <div class="meal-header-left">
-            <div class="meal-icon">🌙</div>
-            <div>
-              <h3 class="meal-title">Jantar</h3>
-              <p class="meal-desc">Leve e nutritivo</p>
+          <div class="meal-card-footer blue">
+            <div class="meal-footer-macros">
+              <div class="meal-footer-macro protein"><span class="meal-footer-dot"></span>Proteína: <strong>57g</strong></div>
+              <div class="meal-footer-macro carbs"><span class="meal-footer-dot"></span>Carbos: <strong>52g</strong></div>
+              <div class="meal-footer-macro fat"><span class="meal-footer-dot"></span>Gordura: <strong>15g</strong></div>
             </div>
-          </div>
-          <div class="meal-time">
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
-            </svg>
-            19:00
+            <div class="meal-footer-kcal">564 kcal</div>
           </div>
         </div>
-        <div class="meal-body">
-          <table class="food-table">
-            <thead>
-              <tr>
-                <th>Alimento</th>
-                <th class="center">Qtd</th>
-                <th class="center"><span class="macro-header protein">P</span></th>
-                <th class="center"><span class="macro-header carbs">C</span></th>
-                <th class="center"><span class="macro-header fat">G</span></th>
-                <th class="center"><span class="macro-header kcal">Kcal</span></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td class="food-name">Salmão grelhado</td>
-                <td class="food-quantity">150g</td>
-                <td class="food-protein">30</td>
-                <td class="food-carbs">0</td>
-                <td class="food-fat">12</td>
-                <td class="food-calories">228</td>
-              </tr>
-              <tr>
-                <td class="food-name">Batata doce</td>
-                <td class="food-quantity">100g</td>
-                <td class="food-protein">2</td>
-                <td class="food-carbs">20</td>
-                <td class="food-fat">0</td>
-                <td class="food-calories">86</td>
-              </tr>
-              <tr>
-                <td class="food-name">Aspargos</td>
-                <td class="food-quantity">80g</td>
-                <td class="food-protein">2</td>
-                <td class="food-carbs">4</td>
-                <td class="food-fat">0</td>
-                <td class="food-calories">20</td>
-              </tr>
-            </tbody>
-            <tfoot>
-              <tr>
-                <td><strong>TOTAL</strong></td>
-                <td class="food-protein"><strong>34</strong></td>
-                <td class="food-carbs"><strong>24</strong></td>
-                <td class="food-fat"><strong>12</strong></td>
-                <td class="food-calories"><strong>334</strong></td>
-              </tr>
-            </tfoot>
-          </table>
-        </div>
-      </div>
-
     </div>
   </section>
 
@@ -1854,120 +1710,447 @@
 
   <!-- ==================== PAGE 9: CARDIO ==================== -->
   <section class="pdf-page">
-    <div class="cardio-header">
-      <div class="cardio-header-left">
-        <div class="cardio-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg></div>
-        <div><h2 class="cardio-title">Cardio Complementar</h2><p class="cardio-subtitle">Otimize a queima de gordura sem comprometer os ganhos</p></div>
-      </div>
-      <div class="cardio-stats">
-        <div class="cardio-stat"><div class="cardio-stat-label"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span>Meta Semanal</span></div><p class="cardio-stat-value">90-120 min</p></div>
-        <div class="cardio-stat burn"><div class="cardio-stat-label"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6"/></svg><span>Queima</span></div><p class="cardio-stat-value">800-1200 kcal/sem</p></div>
-      </div>
-    </div>
+      <div class="cardio-container">
+          <!-- HEADER PREMIUM -->
+          <div class="cardio-header-premium">
+              <div class="cardio-badge-premium">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                  </svg>
+                  <span>Cardio</span>
+              </div>
+              <h1 class="cardio-title-premium">Cardio Estratégico</h1>
+              <p class="cardio-subtitle-premium">
+                  Maximizar queima de gordura sem comprometer ganhos musculares
+              </p>
+          </div>
 
-    <div class="activity-grid">
-      <div class="activity-card">
-        <div class="activity-card-header"><div class="activity-card-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 16v-2.38C4 11.5 2.97 10.5 3 8c.03-2.72 1.49-6 4.5-6C9.37 2 10 3.8 10 5.5c0 3.11-2 5.66-2 8.68V16a2 2 0 1 1-4 0Z"/><path d="M20 20v-2.38c0-2.12 1.03-3.12 1-5.62-.03-2.72-1.49-6-4.5-6C14.63 6 14 7.8 14 9.5c0 3.11 2 5.66 2 8.68V20a2 2 0 1 0 4 0Z"/></svg></div>
-        <div><h4 class="activity-card-title">Caminhada em Jejum</h4><div class="activity-card-badges"><span class="activity-badge frequency">3x/semana</span><span class="activity-badge duration">30-40 min</span><span class="activity-badge intensity light">Leve</span></div></div></div>
-        <p class="activity-card-notes">Ideal para queima de gordura. Manter 60-70% da FC máxima. Pode ser feita em dias de treino, pela manhã antes do café.</p>
-        <p class="activity-card-benefits">✅ Preserva massa muscular • Queima gordura diretamente</p>
-      </div>
-      <div class="activity-card">
-        <div class="activity-card-header"><div class="activity-card-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18.5" cy="17.5" r="3.5"/><circle cx="5.5" cy="17.5" r="3.5"/><circle cx="15" cy="5" r="1"/><path d="M12 17.5V14l-3-3 4-3 2 3h2"/></svg></div>
-        <div><h4 class="activity-card-title">Bicicleta Ergométrica</h4><div class="activity-card-badges"><span class="activity-badge frequency">2x/semana</span><span class="activity-badge duration">20-30 min</span><span class="activity-badge intensity moderate">Moderada</span></div></div></div>
-        <p class="activity-card-notes">Alternativa de baixo impacto nas articulações. Manter 60-70% da FC máxima para zona de queima de gordura.</p>
-        <p class="activity-card-benefits">✅ Baixo impacto • Ideal para recuperação ativa</p>
-      </div>
-      <div class="activity-card">
-        <div class="activity-card-header"><div class="activity-card-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/></svg></div>
-        <div><h4 class="activity-card-title">HIIT (Opcional)</h4><div class="activity-card-badges"><span class="activity-badge frequency">1x/semana</span><span class="activity-badge duration">15-20 min</span><span class="activity-badge intensity high">Alta</span></div></div></div>
-        <p class="activity-card-notes">Apenas em dias sem treino de pernas. Intervalos de 30s intenso / 60s recuperação. Efeito afterburn por até 24h.</p>
-        <p class="activity-card-benefits">✅ Efeito EPOC • Acelera metabolismo por horas</p>
-      </div>
-      <div class="activity-card">
-        <div class="activity-card-header"><div class="activity-card-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2"/></svg></div>
-        <div><h4 class="activity-card-title">Escada/Stairmaster</h4><div class="activity-card-badges"><span class="activity-badge frequency">1-2x/semana</span><span class="activity-badge duration">15-25 min</span><span class="activity-badge intensity moderate">Moderada</span></div></div></div>
-        <p class="activity-card-notes">Excelente para glúteos e posterior. Intensidade moderada constante. Evitar nos dias de treino de Lower.</p>
-        <p class="activity-card-benefits">✅ Trabalha glúteos • Alta queima calórica</p>
-      </div>
-    </div>
+          <!-- HERO CARD -->
+          <div class="cardio-hero-card">
+              <div class="cardio-hero-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+              </div>
+              <div>
+                  <h3>Por Que Cardio Estratégico?</h3>
+                  <p>Durante um cutting, queremos queimar gordura enquanto preservamos ao máximo os músculos conquistados. Cardio em excesso ou mal planejado pode catabolizar massa muscular. Nossa abordagem prioriza LISS moderado, com HIIT opcional apenas quando bem recuperado.</p>
+              </div>
+          </div>
 
-    <div class="cardio-zones">
-      <h4>🎯 Zonas de Frequência Cardíaca</h4>
-      <div class="zones-grid">
-        <div class="zone-item fat-burn"><div class="zone-label">Queima de Gordura</div><div class="zone-range">60-70% FC</div><div class="zone-desc">Caminhada, bike leve</div></div>
-        <div class="zone-item cardio-zone"><div class="zone-label">Zona Cardio</div><div class="zone-range">70-80% FC</div><div class="zone-desc">Corrida moderada</div></div>
-        <div class="zone-item hiit-zone"><div class="zone-label">Zona HIIT</div><div class="zone-range">80-90% FC</div><div class="zone-desc">Sprints, intervalos</div></div>
-      </div>
-    </div>
+          <!-- STATS CARDS -->
+          <div class="cardio-stats-premium">
+              <div class="cardio-stat-premium">
+                  <div class="cardio-stat-icon-premium">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                  </div>
+                  <div class="cardio-stat-content-premium">
+                      <div class="cardio-stat-label-premium">Meta Semanal</div>
+                      <div class="cardio-stat-value-premium">90-120min</div>
+                  </div>
+              </div>
+              <div class="cardio-stat-premium burn">
+                  <div class="cardio-stat-icon-premium">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M15.362 5.214A8.252 8.252 0 0112 21 8.25 8.25 0 016.038 7.048 8.287 8.287 0 009 9.6a8.983 8.983 0 013.361-6.867 8.21 8.21 0 003 2.48z" />
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M12 18a3.75 3.75 0 00.495-7.467 5.99 5.99 0 00-1.925 3.546 5.974 5.974 0 01-2.133-1A3.75 3.75 0 0012 18z" />
+                      </svg>
+                  </div>
+                  <div class="cardio-stat-content-premium">
+                      <div class="cardio-stat-label-premium">Queima Extra</div>
+                      <div class="cardio-stat-value-premium">800-1200kcal</div>
+                  </div>
+              </div>
+          </div>
 
-    <div class="cardio-warning">
-      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
-      <p><strong>Importante:</strong> Nunca faça HIIT em dia de treino de pernas. Realize cardio após o treino de força ou em horários separados. LISS (baixa intensidade) é sempre preferível para preservar massa muscular durante déficit calórico.</p>
-    </div>
+          <!-- ACTIVITY GRID 2x2 -->
+          <div class="cardio-activity-grid">
+              <!-- Card 1: Caminhada em Jejum -->
+              <div class="cardio-activity-card">
+                  <div class="cardio-activity-header">
+                      <div class="cardio-activity-icon green">
+                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                              <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
+                          </svg>
+                      </div>
+                      <div style="flex: 1;">
+                          <h4>Caminhada em Jejum</h4>
+                          <div class="cardio-activity-badges">
+                              <span class="cardio-badge frequency">3x/semana</span>
+                              <span class="cardio-badge duration">30-40min</span>
+                              <span class="cardio-badge intensity light">Leve</span>
+                          </div>
+                      </div>
+                  </div>
+                  <p class="cardio-activity-notes">
+                      Logo ao acordar, antes do café da manhã. Ritmo confortável, FC 60-70% da máxima. Ideal para mobilizar gordura armazenada.
+                  </p>
+                  <div class="cardio-activity-benefits">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                      <span>Máxima oxidação de gordura</span>
+                  </div>
+              </div>
+
+              <!-- Card 2: Bicicleta Ergométrica -->
+              <div class="cardio-activity-card">
+                  <div class="cardio-activity-header">
+                      <div class="cardio-activity-icon blue">
+                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                              <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.213-9.193 2.056 2.056 0 00-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 00-10.026 0 1.106 1.106 0 00-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12" />
+                          </svg>
+                      </div>
+                      <div style="flex: 1;">
+                          <h4>Bicicleta Ergométrica</h4>
+                          <div class="cardio-activity-badges">
+                              <span class="cardio-badge frequency">2x/semana</span>
+                              <span class="cardio-badge duration">20-30min</span>
+                              <span class="cardio-badge intensity moderate">Moderada</span>
+                          </div>
+                      </div>
+                  </div>
+                  <p class="cardio-activity-notes">
+                      Pós-treino de superiores ou em dias off. FC 70-80%. Baixo impacto nas articulações, ideal para recovery ativo.
+                  </p>
+                  <div class="cardio-activity-benefits">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                      <span>Baixo impacto, alta eficiência</span>
+                  </div>
+              </div>
+
+              <!-- Card 3: HIIT Opcional -->
+              <div class="cardio-activity-card">
+                  <div class="cardio-activity-header">
+                      <div class="cardio-activity-icon red">
+                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                              <path stroke-linecap="round" stroke-linejoin="round" d="M15.362 5.214A8.252 8.252 0 0112 21 8.25 8.25 0 016.038 7.048 8.287 8.287 0 009 9.6a8.983 8.983 0 013.361-6.867 8.21 8.21 0 003 2.48z" />
+                              <path stroke-linecap="round" stroke-linejoin="round" d="M12 18a3.75 3.75 0 00.495-7.467 5.99 5.99 0 00-1.925 3.546 5.974 5.974 0 01-2.133-1A3.75 3.75 0 0012 18z" />
+                          </svg>
+                      </div>
+                      <div style="flex: 1;">
+                          <h4>HIIT Opcional</h4>
+                          <div class="cardio-activity-badges">
+                              <span class="cardio-badge frequency">1x/semana</span>
+                              <span class="cardio-badge duration">15-20min</span>
+                              <span class="cardio-badge intensity high">Alta</span>
+                          </div>
+                      </div>
+                  </div>
+                  <p class="cardio-activity-notes">
+                      Apenas se bem recuperado. Sprints 30seg on/90seg off. Nunca em dias de perna ou no dia seguinte. Prioriza EPOC e metabolismo.
+                  </p>
+                  <div class="cardio-activity-benefits">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                      <span>Pós-queima de 24-48h</span>
+                  </div>
+              </div>
+
+              <!-- Card 4: Escada/Stairmaster -->
+              <div class="cardio-activity-card">
+                  <div class="cardio-activity-header">
+                      <div class="cardio-activity-icon gold">
+                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                              <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941" />
+                          </svg>
+                      </div>
+                      <div style="flex: 1;">
+                          <h4>Escada/Stairmaster</h4>
+                          <div class="cardio-activity-badges">
+                              <span class="cardio-badge frequency">1-2x/semana</span>
+                              <span class="cardio-badge duration">15-25min</span>
+                              <span class="cardio-badge intensity moderate">Moderada</span>
+                          </div>
+                      </div>
+                  </div>
+                  <p class="cardio-activity-notes">
+                      Ótimo para glúteos e posterior de coxa. Ritmo constante, sem segurar o corrimão. Pode substituir uma sessão de caminhada.
+                  </p>
+                  <div class="cardio-activity-benefits">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                      <span>Tonifica membros inferiores</span>
+                  </div>
+              </div>
+          </div>
+
+          <!-- WARNING BANNER -->
+          <div class="cardio-warning-premium">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
+              </svg>
+              <p><strong>Atenção:</strong> Nunca faça HIIT em dias de treino de pernas ou no dia seguinte. Durante déficit calórico, priorize LISS para preservar massa muscular. Ajuste volume conforme recuperação.</p>
+          </div>
+      </div>
   </section>
 
   <!-- ==================== PAGE 10: REST DAYS ==================== -->
-  <section class="pdf-page">
-    <div class="rest-header">
-      <div class="rest-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg></div>
-      <div><h2 class="rest-title">Dias de Descanso</h2><p class="rest-subtitle">Recuperação inteligente para maximizar seus resultados</p></div>
-    </div>
-
-    <div class="rest-grid">
-      <div class="rest-card">
-        <div class="rest-card-header"><div class="rest-card-icon green"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/></svg></div><div><div class="rest-card-title">Ajuste Nutricional</div><div class="rest-card-subtitle">Calorias ajustadas para dias sem treino</div></div></div>
-        <div class="rest-macros">
-          <div class="rest-macro protein"><div class="rest-macro-label">Proteína</div><div class="rest-macro-value">170g</div><div class="rest-macro-change kept">✓ Mantida</div></div>
-          <div class="rest-macro carbs"><div class="rest-macro-label">Carboidratos</div><div class="rest-macro-value">150g</div><div class="rest-macro-change reduced">-25%</div></div>
-          <div class="rest-macro fat"><div class="rest-macro-label">Gorduras</div><div class="rest-macro-value">77g</div><div class="rest-macro-change increased">+10%</div></div>
-        </div>
-        <div class="rest-calorie-goal"><span>Meta Calórica</span><div><strong>1890</strong> <small>kcal</small></div></div>
+  <div class="pdf-page rest-container">
+      <!-- HEADER PREMIUM -->
+      <div class="rest-header-premium">
+          <div class="rest-badge-premium">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" />
+              </svg>
+              <span>Dias de Descanso</span>
+          </div>
+          <h1 class="rest-title-premium">Recuperação Estratégica</h1>
+          <p class="rest-subtitle-premium">
+              Músculo cresce no descanso, não no treino — respeite este processo
+          </p>
       </div>
 
-      <div class="rest-card">
-        <div class="rest-card-header"><div class="rest-card-icon blue"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2"/></svg></div><div><div class="rest-card-title">Recuperação Ativa</div><div class="rest-card-subtitle">Atividades leves para acelerar recuperação</div></div></div>
-        <ul class="rest-list">
-          <li><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Mobilidade & Alongamento (15-20 min)</li>
-          <li><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Caminhada leve ao ar livre (20-30 min)</li>
-          <li><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Foam roller nas regiões treinadas</li>
-          <li><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Yoga ou Pilates suave (opcional)</li>
-        </ul>
+      <!-- INFO CARDS ROW -->
+      <div class="rest-info-cards">
+          <div class="rest-info-card purple">
+              <div class="rest-info-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+              </div>
+              <div class="rest-info-content">
+                  <div class="rest-info-value">48-72h</div>
+                  <div class="rest-info-label">Tempo ideal entre treinos do mesmo grupo</div>
+              </div>
+          </div>
+
+          <div class="rest-info-card blue">
+              <div class="rest-info-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" />
+                  </svg>
+              </div>
+              <div class="rest-info-content">
+                  <div class="rest-info-value">7-9h</div>
+                  <div class="rest-info-label">Sono por noite para máxima síntese proteica</div>
+              </div>
+          </div>
+
+          <div class="rest-info-card green">
+              <div class="rest-info-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z" />
+                  </svg>
+              </div>
+              <div class="rest-info-content">
+                  <div class="rest-info-value">2-3x</div>
+                  <div class="rest-info-label">Dias off por semana mínimo recomendado</div>
+              </div>
+          </div>
       </div>
 
-      <div class="rest-card">
-        <div class="rest-card-header"><div class="rest-card-icon gold"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg></div><div><div class="rest-card-title">Qualidade do Sono</div><div class="rest-card-subtitle">O momento mais anabólico do dia</div></div></div>
-        <ul class="rest-list">
-          <li><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Durma 7-9 horas por noite consistentemente</li>
-          <li><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Evite telas 30min antes de dormir</li>
-          <li><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Quarto escuro e temperatura 18-22°C</li>
-          <li><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Horário fixo para deitar e acordar</li>
-        </ul>
+      <!-- NUTRITION COMPARISON -->
+      <div class="rest-nutrition-section">
+          <h3 class="rest-section-title">Ajuste Nutricional: Treino vs Descanso</h3>
+          <div class="rest-nutrition-comparison">
+              <div class="rest-nutrition-column training">
+                  <div class="rest-nutrition-header">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
+                      </svg>
+                      <span>Dia de Treino</span>
+                  </div>
+                  <div class="rest-nutrition-macros">
+                      <div class="rest-macro-row">
+                          <span class="rest-macro-name">Proteína</span>
+                          <span class="rest-macro-amount">170g</span>
+                      </div>
+                      <div class="rest-macro-row">
+                          <span class="rest-macro-name">Carboidratos</span>
+                          <span class="rest-macro-amount highlight">200g</span>
+                      </div>
+                      <div class="rest-macro-row">
+                          <span class="rest-macro-name">Gorduras</span>
+                          <span class="rest-macro-amount">70g</span>
+                      </div>
+                  </div>
+                  <div class="rest-nutrition-total training">
+                      <span>Total</span>
+                      <strong>2100 kcal</strong>
+                  </div>
+              </div>
+
+              <div class="rest-nutrition-arrow">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                  </svg>
+              </div>
+
+              <div class="rest-nutrition-column rest">
+                  <div class="rest-nutrition-header">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" />
+                      </svg>
+                      <span>Dia de Descanso</span>
+                  </div>
+                  <div class="rest-nutrition-macros">
+                      <div class="rest-macro-row">
+                          <span class="rest-macro-name">Proteína</span>
+                          <span class="rest-macro-amount">170g</span>
+                          <span class="rest-macro-badge kept">Mantida</span>
+                      </div>
+                      <div class="rest-macro-row">
+                          <span class="rest-macro-name">Carboidratos</span>
+                          <span class="rest-macro-amount highlight">150g</span>
+                          <span class="rest-macro-badge reduced">-25%</span>
+                      </div>
+                      <div class="rest-macro-row">
+                          <span class="rest-macro-name">Gorduras</span>
+                          <span class="rest-macro-amount">77g</span>
+                          <span class="rest-macro-badge increased">+10%</span>
+                      </div>
+                  </div>
+                  <div class="rest-nutrition-total rest">
+                      <span>Total</span>
+                      <strong>1890 kcal</strong>
+                  </div>
+              </div>
+          </div>
       </div>
 
-      <div class="rest-card">
-        <div class="rest-card-header"><div class="rest-card-icon purple"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"/><path d="M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z"/></svg></div><div><div class="rest-card-title">Gerenciamento de Estresse</div><div class="rest-card-subtitle">Cortisol alto = catabolismo muscular</div></div></div>
-        <ul class="rest-list">
-          <li><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Meditação guiada (10-15 min/dia)</li>
-          <li><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Respiração profunda (box breathing)</li>
-          <li><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Tempo na natureza e desconexão digital</li>
-          <li><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Hobbies e atividades prazerosas</li>
-        </ul>
-      </div>
-    </div>
+      <!-- BENEFITS GRID -->
+      <div class="rest-benefits-section">
+          <h3 class="rest-section-title">O Que Acontece Durante o Descanso</h3>
+          <div class="rest-benefits-grid">
+              <div class="rest-benefit-card">
+                  <div class="rest-benefit-icon blue">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z" />
+                      </svg>
+                  </div>
+                  <h4>Síntese Proteica</h4>
+                  <p>Fibras musculares se reconstroem mais fortes. Hipertrofia ocorre nas 24-48h pós-treino.</p>
+              </div>
 
-    <div class="rest-checklist">
-      <p class="rest-checklist-title">✅ Checklist do Dia de Descanso</p>
-      <div class="rest-checklist-grid">
-        <div class="rest-checklist-item"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg><span>Dormi 7+ horas</span></div>
-        <div class="rest-checklist-item"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg><span>Bebi 3L de água</span></div>
-        <div class="rest-checklist-item"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg><span>Fiz alongamento</span></div>
-        <div class="rest-checklist-item"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg><span>Evitei processados</span></div>
-        <div class="rest-checklist-item"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg><span>Comi proteína suficiente</span></div>
-        <div class="rest-checklist-item"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg><span>Gerenciei estresse</span></div>
+              <div class="rest-benefit-card">
+                  <div class="rest-benefit-icon green">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                  </div>
+                  <h4>Reparo de Tecidos</h4>
+                  <p>Microlesões são reparadas. Tendões e ligamentos se fortalecem gradualmente.</p>
+              </div>
+
+              <div class="rest-benefit-card">
+                  <div class="rest-benefit-icon purple">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z" />
+                      </svg>
+                  </div>
+                  <h4>Reposição de Energia</h4>
+                  <p>Glicogênio muscular restaurado. Sistema nervoso central recupera da fadiga.</p>
+              </div>
+
+              <div class="rest-benefit-card">
+                  <div class="rest-benefit-icon gold">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v17.25m0 0c-1.472 0-2.882.265-4.185.75M12 20.25c1.472 0 2.882.265 4.185.75M18.75 4.97A48.416 48.416 0 0012 4.5c-2.291 0-4.545.16-6.75.47m13.5 0c1.01.143 2.01.317 3 .52m-3-.52l2.62 10.726c.122.499-.106 1.028-.589 1.202a5.988 5.988 0 01-2.031.352 5.988 5.988 0 01-2.031-.352c-.483-.174-.711-.703-.59-1.202L18.75 4.971zm-16.5.52c.99-.203 1.99-.377 3-.52m0 0l2.62 10.726c.122.499-.106 1.028-.589 1.202a5.989 5.989 0 01-2.031.352 5.989 5.989 0 01-2.031-.352c-.483-.174-.711-.703-.59-1.202L5.25 4.971z" />
+                      </svg>
+                  </div>
+                  <h4>Balanceamento Hormonal</h4>
+                  <p>Cortisol reduz, testosterona e GH aumentam no sono. Essencial para anabolismo.</p>
+              </div>
+          </div>
       </div>
-    </div>
-  </section>
+
+      <!-- RECOMMENDATIONS -->
+      <div class="rest-recommendations">
+          <div class="rest-recommendation-card do">
+              <div class="rest-recommendation-header">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  <h4>O Que FAZER</h4>
+              </div>
+              <ul class="rest-recommendation-list">
+                  <li>Caminhada leve 20-30min</li>
+                  <li>Alongamento e mobilidade</li>
+                  <li>Foam roller áreas treinadas</li>
+                  <li>Manter proteína alta (170g)</li>
+                  <li>Dormir 7-9h consistentemente</li>
+                  <li>Hidratar 3-4L água</li>
+              </ul>
+          </div>
+
+          <div class="rest-recommendation-card dont">
+              <div class="rest-recommendation-header">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636" />
+                  </svg>
+                  <h4>O Que EVITAR</h4>
+              </div>
+              <ul class="rest-recommendation-list">
+                  <li>HIIT ou cardio intenso</li>
+                  <li>Déficit extremo (<1500 kcal)</li>
+                  <li>Treinar mesmo grupo muscular</li>
+                  <li>Privação de sono (<6h)</li>
+                  <li>Estresse não controlado</li>
+                  <li>Álcool (bloqueia síntese)</li>
+              </ul>
+          </div>
+      </div>
+
+      <!-- RECOVERY TIMELINE -->
+      <div class="rest-recovery-timeline">
+          <h3 class="rest-section-title">Ciclo de Recuperação Muscular</h3>
+
+          <div class="rest-timeline-grid">
+
+              <div class="rest-timeline-step">
+                  <div class="rest-timeline-badge blue">0–12h</div>
+                  <h4>Dano Muscular</h4>
+                  <p>
+                      O treino gera microlesões nas fibras. Inflamação inicial é necessária
+                      para iniciar o processo de adaptação.
+                  </p>
+              </div>
+
+              <div class="rest-timeline-step">
+                  <div class="rest-timeline-badge purple">12–24h</div>
+                  <h4>Ativação Anabólica</h4>
+                  <p>
+                      A síntese proteica aumenta. Aminoácidos e sono de qualidade
+                      são decisivos nesta fase.
+                  </p>
+              </div>
+
+              <div class="rest-timeline-step">
+                  <div class="rest-timeline-badge green">24–48h</div>
+                  <h4>Reconstrução</h4>
+                  <p>
+                      As fibras se regeneram mais fortes. Volume excessivo aqui
+                      atrasa o progresso.
+                  </p>
+              </div>
+
+              <div class="rest-timeline-step">
+                  <div class="rest-timeline-badge gold">48–72h</div>
+                  <h4>Supercompensação</h4>
+                  <p>
+                      O músculo está pronto para novo estímulo.
+                      É aqui que a evolução acontece.
+                  </p>
+              </div>
+
+          </div>
+      </div>
+
+      <!-- BOTTOM NOTE -->
+      <div class="rest-bottom-note">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 001.5-.189m-1.5.189a6.01 6.01 0 01-1.5-.189m3.75 7.478a12.06 12.06 0 01-4.5 0m3.75 2.383a14.406 14.406 0 01-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 10-7.517 0c.85.493 1.509 1.333 1.509 2.316V18" />
+          </svg>
+          <p><strong>Importante:</strong> Overtraining é tão ruim quanto undertraining. Se seus números estão estagnados ou caindo, você precisa de mais descanso, não mais volume.</p>
+      </div>
+  </div>
 
   <!-- ==================== PAGE 11: INSIGHTS ==================== -->
   <section class="pdf-page">

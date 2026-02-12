@@ -7635,3 +7635,1343 @@ html, body {
 .victory-meta{display:flex;gap:1rem}
 .victory-meta-item{padding:0.5rem 1rem;border-radius:0.5rem;background-color:hsla(0,0%,100%,0.08);color:hsla(0,0%,100%,0.7);font-size:0.75rem}
 .victory-meta-item strong{font-weight:600;color:hsla(0,0%,100%,0.9)}
+
+/* Container for 2 meals per page */
+.meals-page-container { display: flex; flex-direction: column; gap: 1rem; flex: 1; }
+
+/* Meal Card */
+.meal-card { background-color: var(--card); border: 2px solid var(--border); border-radius: 1.125rem; overflow: hidden; flex: 1; display: flex; flex-direction: column; max-height: 48%; }
+
+/* Header */
+.meal-card-header { padding: 0.875rem 1.125rem; border-bottom: 2px solid var(--border); display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; }
+.meal-card-header.green { background: linear-gradient(135deg, hsla(142, 71%, 45%, 0.08) 0%, hsla(160, 84%, 39%, 0.08) 100%); }
+.meal-card-header.blue { background: linear-gradient(135deg, hsla(221, 83%, 53%, 0.08) 0%, hsla(217, 91%, 60%, 0.08) 100%); }
+.meal-card-header.gold { background: linear-gradient(135deg, hsla(38, 92%, 50%, 0.08) 0%, hsla(45, 93%, 47%, 0.08) 100%); }
+
+.meal-header-left { display: flex; align-items: center; gap: 0.75rem; }
+.meal-icon { font-size: 1.5rem; }
+.meal-title { font-size: 1.0625rem; font-weight: 800; color: var(--foreground); }
+.meal-desc { font-size: 0.8125rem; color: var(--muted-foreground); }
+.meal-time { display: flex; align-items: center; gap: 0.375rem; padding: 0.375rem 0.75rem; border-radius: 9999px; background-color: var(--card); border: 1.5px solid var(--border); font-size: 0.8125rem; font-weight: 700; color: var(--foreground); }
+.meal-time svg { width: 14px; height: 14px; color: var(--accent); }
+
+/* Body */
+.meal-body { padding: 0.625rem 1rem; flex: 1; overflow: hidden; }
+
+/* Table */
+.food-table { width: 100%; border-collapse: collapse; font-size: 0.8125rem; }
+.food-table thead { background-color: var(--secondary); }
+.food-table th { padding: 0.4375rem 0.75rem; text-align: left; font-weight: 700; color: var(--muted-foreground); font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.04em; border-bottom: 2px solid var(--border); }
+.food-table th.center { text-align: center; }
+.food-table tbody tr { border-bottom: 1px solid var(--border); }
+.food-table tbody tr:last-child { border-bottom: none; }
+.food-table tbody tr:nth-child(even) { background-color: hsla(220, 14%, 96%, 0.5); }
+.food-table td { padding: 0.4375rem 0.75rem; }
+.food-table tfoot { background-color: var(--secondary); }
+.food-table tfoot td { padding: 0.5rem 0.75rem; border-top: 2px solid var(--border); font-weight: 700; }
+
+/* Macro headers in table */
+.macro-header { display: inline-flex; align-items: center; justify-content: center; width: 1.5rem; height: 1.5rem; border-radius: 0.375rem; font-size: 0.6875rem; font-weight: 800; }
+.macro-header.protein { background-color: hsla(221, 83%, 53%, 0.12); color: var(--macro-protein); }
+.macro-header.carbs { background-color: hsla(142, 71%, 45%, 0.12); color: var(--macro-carbs); }
+.macro-header.fat { background-color: hsla(38, 92%, 50%, 0.12); color: var(--macro-fat); }
+.macro-header.kcal { background-color: hsla(0, 84%, 60%, 0.12); color: var(--macro-calories); width: auto; padding: 0 0.375rem; }
+
+.food-name { font-weight: 600; color: var(--foreground); }
+.food-quantity { color: var(--muted-foreground); font-size: 0.75rem; text-align: center; }
+.food-protein { color: var(--macro-protein); font-weight: 700; text-align: center; }
+.food-carbs { color: var(--macro-carbs); font-weight: 700; text-align: center; }
+.food-fat { color: var(--macro-fat); font-weight: 700; text-align: center; }
+.food-calories { color: var(--macro-calories); font-weight: 700; text-align: center; }
+
+/* Footer with visual macro summary */
+.meal-card-footer { padding: 0.625rem 1rem; border-top: 2px solid var(--border); display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; }
+.meal-card-footer.green { background: linear-gradient(135deg, hsla(142, 71%, 45%, 0.04) 0%, hsla(160, 84%, 39%, 0.06) 100%); }
+.meal-card-footer.blue { background: linear-gradient(135deg, hsla(221, 83%, 53%, 0.04) 0%, hsla(217, 91%, 60%, 0.06) 100%); }
+.meal-card-footer.gold { background: linear-gradient(135deg, hsla(38, 92%, 50%, 0.04) 0%, hsla(45, 93%, 47%, 0.06) 100%); }
+
+.meal-footer-macros { display: flex; gap: 1rem; }
+.meal-footer-macro { display: flex; align-items: center; gap: 0.375rem; font-size: 0.75rem; color: var(--muted-foreground); }
+.meal-footer-macro strong { font-weight: 800; }
+.meal-footer-macro.protein strong { color: var(--macro-protein); }
+.meal-footer-macro.carbs strong { color: var(--macro-carbs); }
+.meal-footer-macro.fat strong { color: var(--macro-fat); }
+
+.meal-footer-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+.meal-footer-macro.protein .meal-footer-dot { background-color: var(--macro-protein); }
+.meal-footer-macro.carbs .meal-footer-dot { background-color: var(--macro-carbs); }
+.meal-footer-macro.fat .meal-footer-dot { background-color: var(--macro-fat); }
+
+.meal-footer-kcal { font-size: 1.0625rem; font-weight: 800; color: var(--macro-calories); padding: 0.25rem 0.75rem; border-radius: 9999px; background-color: hsla(0, 84%, 60%, 0.08); border: 1px solid hsla(0, 84%, 60%, 0.15); }
+
+/* Header */
+.cardio-header{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:0.875rem;flex-shrink:0}
+.cardio-header-left{display:flex;align-items:center;gap:0.875rem}
+.cardio-icon{width:3rem;height:3rem;border-radius:0.875rem;background-color:hsla(0,84%,60%,0.1);border:1.5px solid hsla(0,84%,60%,0.2);display:flex;align-items:center;justify-content:center}
+.cardio-icon svg{width:1.5rem;height:1.5rem;color:var(--destructive)}
+.cardio-title{font-size:1.375rem;font-weight:800}
+.cardio-subtitle{font-size:0.875rem;color:var(--muted-foreground)}
+.cardio-stats{display:flex;gap:0.75rem}
+.cardio-stat{padding:0.625rem 0.875rem;border-radius:0.75rem;background-color:var(--card);border:1.5px solid var(--border)}
+.cardio-stat.burn{background-color:hsla(0,84%,60%,0.08);border-color:hsla(0,84%,60%,0.2)}
+.cardio-stat-label{display:flex;align-items:center;gap:0.375rem;font-size:0.6875rem;color:var(--muted-foreground);margin-bottom:0.125rem}
+.cardio-stat-label svg{width:12px;height:12px}
+.cardio-stat-value{font-size:1rem;font-weight:800;color:var(--foreground)}
+.cardio-stat.burn .cardio-stat-value{color:var(--destructive)}
+
+/* Activity Grid - 2x2 */
+.activity-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:0.75rem;margin-bottom:0.875rem;flex:1}
+
+.activity-card{padding:0.875rem;border-radius:1rem;background-color:var(--card);border:1.5px solid var(--border);display:flex;flex-direction:column}
+.activity-card-header{display:flex;align-items:flex-start;gap:0.75rem;margin-bottom:0.5rem}
+.activity-card-icon{width:2.25rem;height:2.25rem;border-radius:0.625rem;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.activity-card-icon svg{width:1.125rem;height:1.125rem}
+.activity-card-icon.green{background-color:hsla(160,84%,39%,0.12)}
+.activity-card-icon.green svg{color:var(--accent)}
+.activity-card-icon.blue{background-color:hsla(221,83%,53%,0.12)}
+.activity-card-icon.blue svg{color:var(--primary)}
+.activity-card-icon.red{background-color:hsla(0,84%,60%,0.12)}
+.activity-card-icon.red svg{color:var(--destructive)}
+.activity-card-icon.gold{background-color:hsla(38,92%,50%,0.12)}
+.activity-card-icon.gold svg{color:var(--gold)}
+
+.activity-card-title{font-size:0.9375rem;font-weight:700;margin-bottom:0.25rem}
+.activity-card-badges{display:flex;flex-wrap:wrap;gap:0.25rem}
+.activity-badge{padding:0.1875rem 0.4375rem;border-radius:0.25rem;font-size:0.625rem;font-weight:600}
+.activity-badge.frequency{background-color:hsla(221,83%,53%,0.1);color:var(--primary)}
+.activity-badge.duration{background-color:var(--secondary);color:var(--foreground)}
+.activity-badge.intensity{border:1px solid}
+.activity-badge.intensity.light{background-color:hsla(160,84%,39%,0.1);color:var(--accent);border-color:hsla(160,84%,39%,0.2)}
+.activity-badge.intensity.moderate{background-color:hsla(38,92%,50%,0.1);color:hsl(38,80%,40%);border-color:hsla(38,92%,50%,0.2)}
+.activity-badge.intensity.high{background-color:hsla(0,84%,60%,0.1);color:var(--destructive);border-color:hsla(0,84%,60%,0.2)}
+
+.activity-card-notes{font-size:0.75rem;color:var(--muted-foreground);line-height:1.45;margin-top:auto}
+.activity-card-benefits{margin-top:0.375rem;font-size:0.6875rem;color:var(--accent);font-weight:600;display:flex;align-items:center;gap:0.25rem}
+.activity-card-benefits svg{flex-shrink:0}
+
+/* Bottom Row: Zones + Timing */
+.cardio-bottom-row{display:grid;grid-template-columns:1.2fr 0.8fr;gap:0.75rem;margin-bottom:0.75rem;flex-shrink:0}
+
+.cardio-zones{padding:0.875rem 1rem;border-radius:0.875rem;background-color:var(--card);border:1.5px solid var(--border)}
+.cardio-zones h4{font-size:0.875rem;font-weight:700;margin-bottom:0.5rem;text-align:center}
+.zones-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0.5rem}
+.zone-item{padding:0.5rem;border-radius:0.5rem;text-align:center}
+.zone-item.fat-burn{background-color:hsla(160,84%,39%,0.08);border:1px solid hsla(160,84%,39%,0.2)}
+.zone-item.cardio-zone{background-color:hsla(38,92%,50%,0.08);border:1px solid hsla(38,92%,50%,0.2)}
+.zone-item.hiit-zone{background-color:hsla(0,84%,60%,0.08);border:1px solid hsla(0,84%,60%,0.2)}
+.zone-label{font-size:0.6875rem;font-weight:700;margin-bottom:0.125rem}
+.zone-item.fat-burn .zone-label{color:var(--accent)}
+.zone-item.cardio-zone .zone-label{color:var(--gold)}
+.zone-item.hiit-zone .zone-label{color:var(--destructive)}
+.zone-range{font-size:0.8125rem;font-weight:800}
+.zone-desc{font-size:0.625rem;color:var(--muted-foreground)}
+
+/* Timing Card */
+.cardio-timing{padding:0.875rem 1rem;border-radius:0.875rem;background-color:var(--card);border:1.5px solid var(--border)}
+.cardio-timing h4{font-size:0.875rem;font-weight:700;margin-bottom:0.5rem;text-align:center}
+.timing-items{display:flex;flex-direction:column;gap:0.375rem}
+.timing-item{display:flex;align-items:center;gap:0.5rem;padding:0.375rem 0.5rem;background-color:var(--secondary);border-radius:0.375rem}
+.timing-icon{width:1.5rem;height:1.5rem;border-radius:0.375rem;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.timing-icon.green{background-color:hsla(160,84%,39%,0.15)}
+.timing-icon.green svg{color:var(--accent)}
+.timing-icon.gold{background-color:hsla(38,92%,50%,0.15)}
+.timing-icon.gold svg{color:var(--gold)}
+.timing-icon.red{background-color:hsla(0,84%,60%,0.15)}
+.timing-icon.red svg{color:var(--destructive)}
+.timing-label{font-size:0.6875rem;font-weight:700;color:var(--foreground)}
+.timing-value{font-size:0.625rem;color:var(--muted-foreground)}
+
+/* Warning */
+.cardio-warning{padding:0.625rem 0.875rem;border-radius:0.75rem;background-color:hsla(0,84%,60%,0.06);border:1.5px solid hsla(0,84%,60%,0.2);display:flex;align-items:flex-start;gap:0.5rem;flex-shrink:0}
+.cardio-warning svg{width:1rem;height:1rem;color:var(--destructive);flex-shrink:0;margin-top:0.125rem}
+.cardio-warning p{font-size:0.75rem;color:var(--muted-foreground);line-height:1.4}
+
+/* Header */
+.rest-header{display:flex;align-items:center;gap:1rem;margin-bottom:0.75rem;flex-shrink:0}
+.rest-icon{width:3rem;height:3rem;border-radius:1rem;background:linear-gradient(135deg,hsl(269,60%,50%) 0%,hsl(269,70%,65%) 100%);display:flex;align-items:center;justify-content:center}
+.rest-icon svg{width:1.5rem;height:1.5rem;color:white}
+.rest-title{font-size:1.375rem;font-weight:800}
+.rest-subtitle{font-size:0.8125rem;color:var(--muted-foreground)}
+
+/* Hero Card */
+.rest-hero{display:flex;align-items:flex-start;gap:0.875rem;padding:0.875rem 1rem;background:linear-gradient(135deg,hsla(270,100%,70%,0.06) 0%,hsla(260,100%,65%,0.08) 100%);border:2px solid hsla(270,100%,70%,0.2);border-radius:1rem;margin-bottom:0.75rem;flex-shrink:0}
+.rest-hero-icon{width:2.5rem;height:2.5rem;border-radius:0.75rem;background:linear-gradient(135deg,hsl(269,60%,50%) 0%,hsl(269,70%,65%) 100%);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.rest-hero-icon svg{width:1.25rem;height:1.25rem;color:white}
+.rest-hero h3{font-size:1rem;font-weight:800;color:var(--foreground);margin-bottom:0.25rem}
+.rest-hero p{font-size:0.8125rem;color:var(--muted-foreground);line-height:1.5}
+
+/* Grid 2x2 */
+.rest-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:0.625rem;flex:1;margin-bottom:0.625rem}
+
+.rest-card{padding:0.875rem;border-radius:0.875rem;background-color:var(--card);border:1.5px solid var(--border);display:flex;flex-direction:column}
+.rest-card-header{display:flex;align-items:center;gap:0.625rem;margin-bottom:0.625rem}
+.rest-card-icon{width:2rem;height:2rem;border-radius:0.5rem;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.rest-card-icon.green{background-color:hsla(160,84%,39%,0.12)}
+.rest-card-icon.blue{background-color:hsla(221,83%,53%,0.12)}
+.rest-card-icon.gold{background-color:hsla(38,92%,50%,0.12)}
+.rest-card-icon.purple{background-color:hsla(270,100%,70%,0.12)}
+.rest-card-icon svg{width:1rem;height:1rem}
+.rest-card-icon.green svg{color:var(--accent)}
+.rest-card-icon.blue svg{color:var(--primary)}
+.rest-card-icon.gold svg{color:var(--gold)}
+.rest-card-icon.purple svg{color:hsl(270,100%,60%)}
+.rest-card-title{font-size:0.875rem;font-weight:700}
+.rest-card-subtitle{font-size:0.6875rem;color:var(--muted-foreground)}
+
+/* Lists */
+.rest-list{list-style:none;display:flex;flex-direction:column;gap:0.3125rem;flex:1}
+.rest-list li{display:flex;align-items:flex-start;gap:0.375rem;font-size:0.75rem;color:var(--muted-foreground);line-height:1.35;padding:0.3125rem 0.4375rem;background-color:var(--secondary);border-radius:0.375rem}
+.rest-list li svg{width:0.8125rem;height:0.8125rem;color:var(--accent);flex-shrink:0;margin-top:0.0625rem}
+
+/* Macros */
+.rest-macros{display:flex;gap:0.375rem;margin-bottom:0.375rem}
+.rest-macro{flex:1;padding:0.4375rem;border-radius:0.4375rem;text-align:center}
+.rest-macro.protein{background-color:hsla(221,83%,53%,0.08)}
+.rest-macro.carbs{background-color:hsla(142,71%,45%,0.08)}
+.rest-macro.fat{background-color:hsla(38,92%,50%,0.08)}
+.rest-macro-label{font-size:0.625rem;color:var(--muted-foreground)}
+.rest-macro-value{font-size:0.9375rem;font-weight:800}
+.rest-macro.protein .rest-macro-value{color:var(--macro-protein)}
+.rest-macro.carbs .rest-macro-value{color:var(--macro-carbs)}
+.rest-macro.fat .rest-macro-value{color:var(--macro-fat)}
+.rest-macro-change{font-size:0.5625rem;font-weight:600}
+.rest-macro-change.kept{color:var(--accent)}
+.rest-macro-change.reduced{color:var(--destructive)}
+.rest-macro-change.increased{color:var(--gold)}
+
+.rest-calorie-goal{display:flex;justify-content:space-between;align-items:center;padding:0.375rem 0.625rem;border-radius:0.4375rem;background-color:var(--secondary)}
+.rest-calorie-goal span{font-size:0.75rem;color:var(--muted-foreground)}
+.rest-calorie-goal strong{font-size:1rem;font-weight:800}
+
+/* Science Note */
+.rest-science{display:flex;align-items:flex-start;gap:0.625rem;padding:0.625rem 0.875rem;background:linear-gradient(135deg,hsla(221,83%,53%,0.05) 0%,hsla(217,91%,60%,0.05) 100%);border:1.5px solid hsla(221,83%,53%,0.2);border-radius:0.75rem;margin-bottom:0.625rem;flex-shrink:0}
+.rest-science-icon{width:1.75rem;height:1.75rem;border-radius:0.5rem;background:linear-gradient(135deg,var(--primary) 0%,var(--primary-light) 100%);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.rest-science-icon svg{width:0.875rem;height:0.875rem;color:white}
+.rest-science div{font-size:0.75rem;color:var(--muted-foreground);line-height:1.45}
+.rest-science strong{color:var(--foreground);font-weight:700}
+
+/* Checklist */
+.rest-checklist{padding:0.625rem 0.875rem;border-radius:0.75rem;background-color:var(--secondary);border:1.5px solid var(--border);flex-shrink:0}
+.rest-checklist-title{font-size:0.875rem;font-weight:700;margin-bottom:0.375rem}
+.rest-checklist-grid{display:flex;flex-wrap:wrap;gap:0.3125rem}
+.rest-checklist-item{display:flex;align-items:center;gap:0.3125rem;padding:0.3125rem 0.5rem;border-radius:0.375rem;background-color:var(--card);border:1px solid var(--border);font-size:0.6875rem;color:var(--foreground);font-weight:500}
+.rest-checklist-item svg{width:12px;height:12px;color:var(--accent)}
+
+.cardio-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.cardio-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+  flex: 1;
+}
+
+/* ==================================================================================
+   HEADER PREMIUM
+   ================================================================================== */
+
+.cardio-header-premium {
+  text-align: center;
+  margin-bottom: 1rem;
+  flex-shrink: 0;
+}
+
+.cardio-badge-premium {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1.25rem;
+  border-radius: 9999px;
+  background: linear-gradient(135deg, hsla(0, 84%, 60%, 0.15) 0%, hsla(0, 72%, 51%, 0.15) 100%);
+  border: 1.5px solid hsla(0, 84%, 60%, 0.4);
+  margin-bottom: 0.625rem;
+}
+
+.cardio-badge-premium svg {
+  width: 0.875rem;
+  height: 0.875rem;
+  color: var(--destructive);
+}
+
+.cardio-badge-premium span {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--destructive);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.cardio-title-premium {
+  font-size: 1.875rem;
+  font-weight: 900;
+  color: var(--foreground);
+  margin-bottom: 0.375rem;
+  line-height: 1.1;
+}
+
+.cardio-subtitle-premium {
+  font-size: 0.875rem;
+  color: var(--muted-foreground);
+  max-width: 40rem;
+  margin: 0 auto;
+}
+
+/* ==================================================================================
+   HERO CARD
+   ================================================================================== */
+
+.cardio-hero-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.875rem;
+  padding: 1rem 1.125rem;
+  background: linear-gradient(135deg, hsla(0, 84%, 60%, 0.06) 0%, hsla(0, 72%, 51%, 0.08) 100%);
+  border: 2px solid hsla(0, 84%, 60%, 0.2);
+  border-radius: 1.125rem;
+  margin-bottom: 0.875rem;
+  flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.cardio-hero-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 180px;
+  height: 180px;
+  background: radial-gradient(circle, hsla(0, 84%, 60%, 0.12) 0%, transparent 70%);
+  border-radius: 50%;
+  transform: translate(30%, -30%);
+}
+
+.cardio-hero-icon {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 0.75rem;
+  background: linear-gradient(135deg, var(--destructive) 0%, hsl(0, 72%, 51%) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.cardio-hero-icon svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  color: white;
+}
+
+.cardio-hero-card h3 {
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--foreground);
+  margin-bottom: 0.375rem;
+  position: relative;
+  z-index: 1;
+}
+
+.cardio-hero-card p {
+  font-size: 0.8125rem;
+  color: var(--muted-foreground);
+  line-height: 1.5;
+  position: relative;
+  z-index: 1;
+}
+
+/* ==================================================================================
+   STATS CARDS
+   ================================================================================== */
+
+.cardio-stats-premium {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 0.875rem;
+  flex-shrink: 0;
+}
+
+.cardio-stat-premium {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.875rem 1rem;
+  background-color: var(--card);
+  border: 1.5px solid var(--border);
+  border-radius: 0.875rem;
+}
+
+.cardio-stat-premium.burn {
+  background: linear-gradient(135deg, hsla(0, 84%, 60%, 0.05) 0%, hsla(0, 72%, 51%, 0.05) 100%);
+  border-color: hsla(0, 84%, 60%, 0.25);
+}
+
+.cardio-stat-icon-premium {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 0.625rem;
+  background-color: var(--secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.cardio-stat-premium.burn .cardio-stat-icon-premium {
+  background: linear-gradient(135deg, var(--destructive) 0%, hsl(0, 72%, 51%) 100%);
+}
+
+.cardio-stat-icon-premium svg {
+  width: 1.125rem;
+  height: 1.125rem;
+  color: var(--muted-foreground);
+}
+
+.cardio-stat-premium.burn .cardio-stat-icon-premium svg {
+  color: white;
+}
+
+.cardio-stat-content-premium {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+}
+
+.cardio-stat-label-premium {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--muted-foreground);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.cardio-stat-value-premium {
+  font-size: 1.125rem;
+  font-weight: 800;
+  color: var(--foreground);
+  line-height: 1;
+}
+
+.cardio-stat-premium.burn .cardio-stat-value-premium {
+  color: var(--destructive);
+}
+
+/* ==================================================================================
+   ACTIVITY GRID 2x2
+   ================================================================================== */
+
+.cardio-activity-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+  margin-bottom: auto;
+}
+
+.cardio-activity-card {
+  padding: 0.875rem;
+  border-radius: 0.875rem;
+  background-color: var(--card);
+  border: 1.5px solid var(--border);
+  display: flex;
+  flex-direction: column;
+}
+
+.cardio-activity-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.cardio-activity-icon {
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 0.625rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.cardio-activity-icon.green {
+  background-color: hsla(160, 84%, 39%, 0.12);
+}
+
+.cardio-activity-icon.blue {
+  background-color: hsla(221, 83%, 53%, 0.12);
+}
+
+.cardio-activity-icon.red {
+  background-color: hsla(0, 84%, 60%, 0.12);
+}
+
+.cardio-activity-icon.gold {
+  background-color: hsla(38, 92%, 50%, 0.12);
+}
+
+.cardio-activity-icon svg {
+  width: 1.125rem;
+  height: 1.125rem;
+}
+
+.cardio-activity-icon.green svg {
+  color: var(--accent);
+}
+
+.cardio-activity-icon.blue svg {
+  color: var(--primary);
+}
+
+.cardio-activity-icon.red svg {
+  color: var(--destructive);
+}
+
+.cardio-activity-icon.gold svg {
+  color: var(--gold);
+}
+
+.cardio-activity-header h4 {
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--foreground);
+  margin-bottom: 0.375rem;
+}
+
+.cardio-activity-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3125rem;
+}
+
+.cardio-badge {
+  padding: 0.1875rem 0.4375rem;
+  border-radius: 0.25rem;
+  font-size: 0.625rem;
+  font-weight: 600;
+}
+
+.cardio-badge.frequency {
+  background-color: hsla(221, 83%, 53%, 0.1);
+  color: var(--primary);
+}
+
+.cardio-badge.duration {
+  background-color: var(--secondary);
+  color: var(--foreground);
+}
+
+.cardio-badge.intensity {
+  border: 1px solid;
+}
+
+.cardio-badge.intensity.light {
+  background-color: hsla(160, 84%, 39%, 0.1);
+  color: var(--accent);
+  border-color: hsla(160, 84%, 39%, 0.2);
+}
+
+.cardio-badge.intensity.moderate {
+  background-color: hsla(38, 92%, 50%, 0.1);
+  color: hsl(38, 80%, 40%);
+  border-color: hsla(38, 92%, 50%, 0.2);
+}
+
+.cardio-badge.intensity.high {
+  background-color: hsla(0, 84%, 60%, 0.1);
+  color: var(--destructive);
+  border-color: hsla(0, 84%, 60%, 0.2);
+}
+
+.cardio-activity-notes {
+  font-size: 0.75rem;
+  color: var(--muted-foreground);
+  line-height: 1.45;
+  margin-top: auto;
+  margin-bottom: 0.5rem;
+}
+
+.cardio-activity-benefits {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: 0.6875rem;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.cardio-activity-benefits svg {
+  width: 0.875rem;
+  height: 0.875rem;
+  flex-shrink: 0;
+}
+
+/* ==================================================================================
+   ZONES & TIMING SECTION
+   ================================================================================== */
+
+.cardio-zones-timing {
+  display: grid;
+  grid-template-columns: 1.3fr 0.7fr;
+  gap: 0.75rem;
+  margin-bottom: 0.875rem;
+  flex-shrink: 0;
+}
+
+.cardio-zones-card,
+.cardio-timing-card {
+  padding: 0.875rem;
+  border-radius: 0.875rem;
+  background-color: var(--card);
+  border: 1.5px solid var(--border);
+}
+
+.cardio-section-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.625rem;
+}
+
+.cardio-section-header svg {
+  width: 1rem;
+  height: 1rem;
+  color: var(--primary);
+}
+
+.cardio-section-header h4 {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--foreground);
+}
+
+/* Zones Grid */
+.cardio-zones-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+}
+
+.cardio-zone-item {
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  text-align: center;
+  border: 1px solid;
+}
+
+.cardio-zone-item.fat-burn {
+  background-color: hsla(160, 84%, 39%, 0.08);
+  border-color: hsla(160, 84%, 39%, 0.2);
+}
+
+.cardio-zone-item.cardio {
+  background-color: hsla(38, 92%, 50%, 0.08);
+  border-color: hsla(38, 92%, 50%, 0.2);
+}
+
+.cardio-zone-item.hiit {
+  background-color: hsla(0, 84%, 60%, 0.08);
+  border-color: hsla(0, 84%, 60%, 0.2);
+}
+
+.cardio-zone-label {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  margin-bottom: 0.125rem;
+}
+
+.cardio-zone-item.fat-burn .cardio-zone-label {
+  color: var(--accent);
+}
+
+.cardio-zone-item.cardio .cardio-zone-label {
+  color: var(--gold);
+}
+
+.cardio-zone-item.hiit .cardio-zone-label {
+  color: var(--destructive);
+}
+
+.cardio-zone-range {
+  font-size: 0.8125rem;
+  font-weight: 800;
+  color: var(--foreground);
+  margin-bottom: 0.125rem;
+}
+
+.cardio-zone-desc {
+  font-size: 0.625rem;
+  color: var(--muted-foreground);
+}
+
+/* Timing List */
+.cardio-timing-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.cardio-timing-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  background-color: var(--secondary);
+  border-radius: 0.5rem;
+}
+
+.cardio-timing-icon {
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 0.375rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.cardio-timing-icon.green {
+  background-color: hsla(160, 84%, 39%, 0.15);
+}
+
+.cardio-timing-icon.gold {
+  background-color: hsla(38, 92%, 50%, 0.15);
+}
+
+.cardio-timing-icon.red {
+  background-color: hsla(0, 84%, 60%, 0.15);
+}
+
+.cardio-timing-icon svg {
+  width: 0.875rem;
+  height: 0.875rem;
+}
+
+.cardio-timing-icon.green svg {
+  color: var(--accent);
+}
+
+.cardio-timing-icon.gold svg {
+  color: var(--gold);
+}
+
+.cardio-timing-icon.red svg {
+  color: var(--destructive);
+}
+
+.cardio-timing-label {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  color: var(--foreground);
+  margin-bottom: 0.0625rem;
+}
+
+.cardio-timing-value {
+  font-size: 0.625rem;
+  color: var(--muted-foreground);
+  line-height: 1.3;
+}
+
+/* ==================================================================================
+   WARNING BANNER
+   ================================================================================== */
+
+.cardio-warning-premium {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.625rem;
+  padding: 0.75rem 1rem;
+  background: linear-gradient(135deg, hsla(0, 84%, 60%, 0.05) 0%, hsla(0, 72%, 51%, 0.05) 100%);
+  border: 1.5px solid hsla(0, 84%, 60%, 0.25);
+  border-radius: 0.875rem;
+  flex-shrink: 0;
+}
+
+.cardio-warning-premium svg {
+  width: 1.125rem;
+  height: 1.125rem;
+  color: var(--destructive);
+  flex-shrink: 0;
+  margin-top: 0.125rem;
+}
+
+.cardio-warning-premium p {
+  font-size: 0.75rem;
+  color: var(--muted-foreground);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.cardio-warning-premium strong {
+  color: var(--foreground);
+  font-weight: 700;
+}
+
+.rest-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+/* ==================================================================================
+   HEADER
+   ================================================================================== */
+
+.rest-header-premium {
+  text-align: center;
+  margin-bottom: 0.375rem;
+}
+
+.rest-badge-premium {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  background: linear-gradient(135deg, hsla(221, 83%, 53%, 0.15) 0%, hsla(221, 70%, 45%, 0.15) 100%);
+  border: 1.5px solid hsla(221, 83%, 53%, 0.4);
+  margin-bottom: 0.25rem;
+}
+
+.rest-badge-premium svg {
+  width: 0.6875rem;
+  height: 0.6875rem;
+  color: var(--primary);
+}
+
+.rest-badge-premium span {
+  font-size: 0.625rem;
+  font-weight: 700;
+  color: var(--primary);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.rest-title-premium {
+  font-size: 1.375rem;
+  font-weight: 900;
+  color: var(--foreground);
+  margin-bottom: 0.1875rem;
+  line-height: 1.1;
+}
+
+.rest-subtitle-premium {
+  font-size: 0.6875rem;
+  color: var(--muted-foreground);
+}
+
+/* ==================================================================================
+   INFO CARDS ROW
+   ================================================================================== */
+
+.rest-info-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+  margin-bottom: 0.375rem;
+}
+
+.rest-info-card {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.625rem;
+  border-radius: 0.625rem;
+  border: 1.5px solid;
+}
+
+.rest-info-card.purple {
+  background: linear-gradient(135deg, hsla(280, 65%, 60%, 0.08) 0%, hsla(280, 60%, 55%, 0.06) 100%);
+  border-color: hsla(280, 65%, 60%, 0.25);
+}
+
+.rest-info-card.blue {
+  background: linear-gradient(135deg, hsla(221, 83%, 53%, 0.08) 0%, hsla(221, 70%, 45%, 0.06) 100%);
+  border-color: hsla(221, 83%, 53%, 0.25);
+}
+
+.rest-info-card.green {
+  background: linear-gradient(135deg, hsla(160, 84%, 39%, 0.08) 0%, hsla(160, 70%, 35%, 0.06) 100%);
+  border-color: hsla(160, 84%, 39%, 0.25);
+}
+
+.rest-info-icon {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.rest-info-card.purple .rest-info-icon {
+  background: linear-gradient(135deg, var(--purple) 0%, hsl(280, 60%, 55%) 100%);
+}
+
+.rest-info-card.blue .rest-info-icon {
+  background: linear-gradient(135deg, var(--primary) 0%, hsl(221, 70%, 45%) 100%);
+}
+
+.rest-info-card.green .rest-info-icon {
+  background: linear-gradient(135deg, var(--accent) 0%, hsl(160, 70%, 35%) 100%);
+}
+
+.rest-info-icon svg {
+  width: 1rem;
+  height: 1rem;
+  color: white;
+}
+
+.rest-info-value {
+  font-size: 1.125rem;
+  font-weight: 900;
+  color: var(--foreground);
+  line-height: 1;
+  margin-bottom: 0.125rem;
+}
+
+.rest-info-label {
+  font-size: 0.625rem;
+  color: var(--muted-foreground);
+  line-height: 1.3;
+}
+
+/* ==================================================================================
+   NUTRITION COMPARISON
+   ================================================================================== */
+
+.rest-nutrition-section {
+  margin-bottom: 0.375rem;
+}
+
+.rest-section-title {
+  font-size: 0.875rem;
+  font-weight: 800;
+  color: var(--foreground);
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+.rest-nutrition-comparison {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 0.625rem;
+  align-items: stretch;
+}
+
+.rest-nutrition-column {
+  padding: 0.625rem;
+  border-radius: 0.75rem;
+  border: 1.5px solid;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.rest-nutrition-column.training {
+  background: linear-gradient(135deg, hsla(221, 83%, 53%, 0.05) 0%, hsla(221, 70%, 45%, 0.03) 100%);
+  border-color: hsla(221, 83%, 53%, 0.2);
+}
+
+.rest-nutrition-column.rest {
+  background: linear-gradient(135deg, hsla(280, 65%, 60%, 0.05) 0%, hsla(280, 60%, 55%, 0.03) 100%);
+  border-color: hsla(280, 65%, 60%, 0.2);
+}
+
+.rest-nutrition-header {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding-bottom: 0.375rem;
+  border-bottom: 1.5px solid var(--border);
+}
+
+.rest-nutrition-header svg {
+  width: 0.875rem;
+  height: 0.875rem;
+  color: var(--primary);
+}
+
+.rest-nutrition-column.rest .rest-nutrition-header svg {
+  color: var(--purple);
+}
+
+.rest-nutrition-header span {
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: var(--foreground);
+}
+
+.rest-nutrition-macros {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+  flex: 1;
+}
+
+.rest-macro-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.375rem;
+  padding: 0.3125rem 0.5rem;
+  background-color: var(--secondary);
+  border-radius: 0.375rem;
+}
+
+.rest-macro-name {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: var(--foreground);
+}
+
+.rest-macro-amount {
+  font-size: 0.8125rem;
+  font-weight: 800;
+  color: var(--foreground);
+}
+
+.rest-macro-amount.highlight {
+  color: var(--primary);
+}
+
+.rest-nutrition-column.rest .rest-macro-amount.highlight {
+  color: var(--purple);
+}
+
+.rest-macro-badge {
+  font-size: 0.5625rem;
+  font-weight: 700;
+  padding: 0.125rem 0.3125rem;
+  border-radius: 0.1875rem;
+  border: 1px solid;
+}
+
+.rest-macro-badge.kept {
+  background-color: hsla(160, 84%, 39%, 0.12);
+  color: var(--accent);
+  border-color: hsla(160, 84%, 39%, 0.25);
+}
+
+.rest-macro-badge.reduced {
+  background-color: hsla(38, 92%, 50%, 0.12);
+  color: hsl(38, 80%, 40%);
+  border-color: hsla(38, 92%, 50%, 0.25);
+}
+
+.rest-macro-badge.increased {
+  background-color: hsla(221, 83%, 53%, 0.12);
+  color: var(--primary);
+  border-color: hsla(221, 83%, 53%, 0.25);
+}
+
+.rest-nutrition-total {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.375rem 0.5rem;
+  border-radius: 0.375rem;
+  border: 1.5px solid;
+  margin-top: auto;
+}
+
+.rest-nutrition-total.training {
+  background-color: hsla(221, 83%, 53%, 0.1);
+  border-color: hsla(221, 83%, 53%, 0.3);
+}
+
+.rest-nutrition-total.rest {
+  background-color: hsla(280, 65%, 60%, 0.1);
+  border-color: hsla(280, 65%, 60%, 0.3);
+}
+
+.rest-nutrition-total span {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: var(--muted-foreground);
+}
+
+.rest-nutrition-total strong {
+  font-size: 1rem;
+  font-weight: 900;
+  color: var(--foreground);
+}
+
+.rest-nutrition-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rest-nutrition-arrow svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  color: var(--muted-foreground);
+}
+
+/* ==================================================================================
+   BENEFITS GRID
+   ================================================================================== */
+
+.rest-benefits-section {
+  margin-bottom: 0.375rem;
+}
+
+.rest-benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
+}
+
+.rest-benefit-card {
+  padding: 0.5rem;
+  border-radius: 0.625rem;
+  background-color: var(--card);
+  border: 1.5px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.375rem;
+}
+
+.rest-benefit-icon {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.rest-benefit-icon.blue {
+  background: linear-gradient(135deg, var(--primary) 0%, hsl(221, 70%, 45%) 100%);
+}
+
+.rest-benefit-icon.green {
+  background: linear-gradient(135deg, var(--accent) 0%, hsl(160, 70%, 35%) 100%);
+}
+
+.rest-benefit-icon.purple {
+  background: linear-gradient(135deg, var(--purple) 0%, hsl(280, 60%, 55%) 100%);
+}
+
+.rest-benefit-icon.gold {
+  background: linear-gradient(135deg, var(--gold) 0%, hsl(38, 80%, 45%) 100%);
+}
+
+.rest-benefit-icon svg {
+  width: 1rem;
+  height: 1rem;
+  color: white;
+}
+
+.rest-benefit-card h4 {
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: var(--foreground);
+  line-height: 1.2;
+}
+
+.rest-benefit-card p {
+  font-size: 0.625rem;
+  color: var(--muted-foreground);
+  line-height: 1.4;
+}
+
+/* ==================================================================================
+   RECOMMENDATIONS
+   ================================================================================== */
+
+.rest-recommendations {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.5rem;
+  margin-bottom: 0.375rem;
+}
+
+.rest-recommendation-card {
+  padding: 0.5rem 0.625rem;
+  border-radius: 0.625rem;
+  border: 1.5px solid;
+}
+
+.rest-recommendation-card.do {
+  background: linear-gradient(135deg, hsla(160, 84%, 39%, 0.08) 0%, hsla(160, 70%, 35%, 0.06) 100%);
+  border-color: hsla(160, 84%, 39%, 0.25);
+}
+
+.rest-recommendation-card.dont {
+  background: linear-gradient(135deg, hsla(0, 84%, 60%, 0.08) 0%, hsla(0, 72%, 51%, 0.06) 100%);
+  border-color: hsla(0, 84%, 60%, 0.25);
+}
+
+.rest-recommendation-header {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  margin-bottom: 0.375rem;
+  padding-bottom: 0.375rem;
+  border-bottom: 1.5px solid var(--border);
+}
+
+.rest-recommendation-header svg {
+  width: 0.875rem;
+  height: 0.875rem;
+}
+
+.rest-recommendation-card.do .rest-recommendation-header svg {
+  color: var(--accent);
+}
+
+.rest-recommendation-card.dont .rest-recommendation-header svg {
+  color: var(--destructive);
+}
+
+.rest-recommendation-header h4 {
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: var(--foreground);
+}
+
+.rest-recommendation-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.rest-recommendation-list li {
+  font-size: 0.625rem;
+  color: var(--foreground);
+  padding-left: 0.75rem;
+  position: relative;
+  line-height: 1.4;
+}
+
+.rest-recommendation-list li::before {
+  content: '•';
+  position: absolute;
+  left: 0.25rem;
+  font-weight: 900;
+}
+
+.rest-recommendation-card.do .rest-recommendation-list li::before {
+  color: var(--accent);
+}
+
+.rest-recommendation-card.dont .rest-recommendation-list li::before {
+  color: var(--destructive);
+}
+
+/* ==================================================================================
+   BOTTOM NOTE
+   ================================================================================== */
+
+.rest-bottom-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  padding: 0.5rem 0.625rem;
+  background: linear-gradient(135deg, hsla(38, 92%, 50%, 0.08) 0%, hsla(38, 80%, 45%, 0.06) 100%);
+  border: 1.5px solid hsla(38, 92%, 50%, 0.25);
+  border-radius: 0.625rem;
+  margin-top: auto;
+}
+
+.rest-bottom-note svg {
+  width: 1rem;
+  height: 1rem;
+  color: var(--gold);
+  flex-shrink: 0;
+  margin-top: 0.0625rem;
+}
+
+.rest-bottom-note p {
+  font-size: 0.6875rem;
+  color: var(--muted-foreground);
+  line-height: 1.5;
+}
+
+.rest-bottom-note strong {
+  color: var(--foreground);
+  font-weight: 800;
+}
+
+/* ==================================================================================
+   RECOVERY TIMELINE
+   ================================================================================== */
+
+.rest-recovery-timeline {
+  margin-bottom: auto;
+}
+
+.rest-timeline-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
+}
+
+.rest-timeline-step {
+  padding: 0.5rem;
+  border-radius: 0.625rem;
+  background-color: var(--card);
+  border: 1.5px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+
+.rest-timeline-step h4 {
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: var(--foreground);
+}
+
+.rest-timeline-step p {
+  font-size: 0.625rem;
+  color: var(--muted-foreground);
+  line-height: 1.45;
+}
+
+.rest-timeline-badge {
+  align-self: flex-start;
+  font-size: 0.5625rem;
+  font-weight: 800;
+  padding: 0.1875rem 0.375rem;
+  border-radius: 9999px;
+  border: 1px solid;
+  letter-spacing: 0.05em;
+}
+
+.rest-timeline-badge.blue {
+  background-color: hsla(221, 83%, 53%, 0.12);
+  color: var(--primary);
+  border-color: hsla(221, 83%, 53%, 0.3);
+}
+
+.rest-timeline-badge.purple {
+  background-color: hsla(280, 65%, 60%, 0.12);
+  color: var(--purple);
+  border-color: hsla(280, 65%, 60%, 0.3);
+}
+
+.rest-timeline-badge.green {
+  background-color: hsla(160, 84%, 39%, 0.12);
+  color: var(--accent);
+  border-color: hsla(160, 84%, 39%, 0.3);
+}
+
+.rest-timeline-badge.gold {
+  background-color: hsla(38, 92%, 50%, 0.12);
+  color: var(--gold);
+  border-color: hsla(38, 92%, 50%, 0.3);
+}
