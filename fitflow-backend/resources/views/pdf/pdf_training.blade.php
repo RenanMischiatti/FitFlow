@@ -562,51 +562,89 @@
     <!-- Cards de Estatísticas Principais -->
     <div class="progression-stats-showcase">
       <div class="progression-stat-premium weight">
-        <div class="stat-premium-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="2">
-            <path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z" />
-            <path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z" />
-            <path d="M7 21h10" />
-            <path d="M12 3v18" />
-            <path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2" />
-          </svg>
-        </div>
+        @php
+          $peso = $data->projecao_resultados->totais_esperados->variacao_peso_total_kg;
+          $isNegative = str_starts_with($peso, '-');
+        @endphp
         <div class="stat-premium-content">
-          <span class="stat-premium-label">Perda de Peso</span>
-          <span class="stat-premium-value">-6kg</span>
-          <span class="stat-premium-detail">em 90 dias</span>
+          <span class="stat-premium-label">
+            Evolução do Peso
+          </span>
+          <span class="stat-premium-value">
+            <div class="stat-premium-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2">
+                  <path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z" />
+                  <path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z" />
+                  <path d="M7 21h10" />
+                  <path d="M12 3v18" />
+                  <path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2" />
+              </svg>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 7px">
+              <span class="{{ $isNegative ? 'is-negative' : 'is-positive' }}">
+                {{ $peso }}
+              </span>
+              <span class="stat-premium-detail">
+                em {{ $data->projecao_resultados->prazo_escolhido }} dias
+              </span>
+            </div>
+          </span>
+
+          
         </div>
       </div>
 
       <div class="progression-stat-premium bodyfat">
-        <div class="stat-premium-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="2">
-            <line x1="19" x2="5" y1="5" y2="19" />
-            <circle cx="6.5" cy="6.5" r="2.5" />
-            <circle cx="17.5" cy="17.5" r="2.5" />
-          </svg>
-        </div>
+        @php
+          $peso = $data->projecao_resultados->totais_esperados->gordura_corporal;
+          $isNegative = str_starts_with($peso, '-');
+        @endphp
         <div class="stat-premium-content">
-          <span class="stat-premium-label">Redução de Gordura</span>
-          <span class="stat-premium-value">-4.5%</span>
-          <span class="stat-premium-detail">Definição visível</span>
+          <span class="stat-premium-label">Gordura Corporal</span>
+          <span class="stat-premium-value">
+            <div class="stat-premium-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2">
+                <line x1="19" x2="5" y1="5" y2="19" />
+                <circle cx="6.5" cy="6.5" r="2.5" />
+                <circle cx="17.5" cy="17.5" r="2.5" />
+              </svg>
+            </div>
+            <div style="display: flex; flex-direction:column; gap: 7px">
+              <span class="{{ $isNegative ? 'is-negative' : 'is-positive' }}">
+                {{ $peso }}
+              </span>
+              <span class="stat-premium-detail">Definição visível</span>
+            </div>
+          </span>
+          
         </div>
       </div>
 
       <div class="progression-stat-premium muscle">
-        <div class="stat-premium-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="2">
-            <path d="M14.4 14.4 9.6 9.6" />
-            <path d="M18.657 21.485a2 2 0 1 1-2.829-2.828l-1.767 1.768a2 2 0 1 1-2.829-2.829l6.364-6.364a2 2 0 1 1 2.829 2.829l-1.768 1.767a2 2 0 1 1 2.828 2.829z" />
-          </svg>
-        </div>
+        @php
+          $peso = $data->projecao_resultados->totais_esperados->ganho_massa_magra_kg;
+          $isNegative = str_starts_with($peso, '-');
+        @endphp
+        
         <div class="stat-premium-content">
           <span class="stat-premium-label">Ganho Muscular</span>
-          <span class="stat-premium-value">+0.5kg</span>
-          <span class="stat-premium-detail">Recomposição</span>
+          <span class="stat-premium-value">
+            <div class="stat-premium-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2">
+                <path d="M14.4 14.4 9.6 9.6" />
+                <path d="M18.657 21.485a2 2 0 1 1-2.829-2.828l-1.767 1.768a2 2 0 1 1-2.829-2.829l6.364-6.364a2 2 0 1 1 2.829 2.829l-1.768 1.767a2 2 0 1 1 2.828 2.829z" />
+              </svg>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 7px">
+              <span class="{{ $isNegative ? 'is-negative' : 'is-positive' }}">
+                {{ $peso }}
+              </span>
+              <span class="stat-premium-detail">Recomposição</span>
+            </div>
+          </span>
         </div>
       </div>
     </div>

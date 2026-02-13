@@ -4822,7 +4822,7 @@ html, body {
   font-size: 1.25rem;
   font-weight: 800;
   color: var(--foreground);
-  margin-bottom: 0.625rem;
+  margin-bottom: 0.325rem;
   position: relative;
   z-index: 1;
 }
@@ -5553,7 +5553,7 @@ html, body {
 }
 
 .progression-stat-premium {
-  padding: 1rem;
+  padding: 0.5rem 1rem;
   border-radius: 1rem;
   border: 2px solid;
   display: flex;
@@ -5563,19 +5563,32 @@ html, body {
 }
 
 .progression-stat-premium.weight {
-  background: linear-gradient(135deg, hsla(0, 84%, 60%, 0.05) 0%, hsla(0, 72%, 51%, 0.08) 100%);
-  border-color: hsla(0, 84%, 60%, 0.3);
+  background: linear-gradient(
+    135deg,
+    hsla(220, 90%, 56%, 0.05) 0%,
+    hsla(220, 80%, 48%, 0.08) 100%
+  );
+  border-color: hsla(220, 90%, 56%, 0.28);
 }
 
 .progression-stat-premium.bodyfat {
-  background: linear-gradient(135deg, hsla(38, 92%, 50%, 0.05) 0%, hsla(45, 93%, 47%, 0.08) 100%);
-  border-color: hsla(38, 92%, 50%, 0.3);
+  background: linear-gradient(
+    135deg,
+    hsla(42, 90%, 52%, 0.06) 0%,
+    hsla(38, 92%, 48%, 0.09) 100%
+  );
+  border-color: hsla(42, 90%, 52%, 0.32);
 }
 
 .progression-stat-premium.muscle {
-  background: linear-gradient(135deg, hsla(142, 71%, 45%, 0.05) 0%, hsla(160, 84%, 39%, 0.08) 100%);
-  border-color: hsla(142, 71%, 45%, 0.3);
+  background: linear-gradient(
+    135deg,
+    hsla(262, 72%, 55%, 0.05) 0%,
+    hsla(275, 80%, 45%, 0.08) 100%
+  );
+  border-color: hsla(262, 72%, 55%, 0.30);
 }
+
 
 .progression-stat-premium:hover {
   transform: translateY(-2px);
@@ -5583,8 +5596,8 @@ html, body {
 }
 
 .stat-premium-icon {
-  width: 3rem;
-  height: 3rem;
+  width: 4rem;
+  height: 4rem;
   border-radius: 0.875rem;
   display: flex;
   align-items: center;
@@ -5593,16 +5606,29 @@ html, body {
 }
 
 .progression-stat-premium.weight .stat-premium-icon {
-  background: linear-gradient(135deg, var(--destructive) 0%, hsl(0, 72%, 51%) 100%);
+  background: linear-gradient(
+    135deg,
+    #2b6cee 0%,
+    hsl(220, 75%, 45%) 100%
+  );
 }
 
 .progression-stat-premium.bodyfat .stat-premium-icon {
-  background: linear-gradient(135deg, var(--gold) 0%, hsl(45, 93%, 47%) 100%);
+  background: linear-gradient(
+    135deg,
+    hsl(42, 90%, 52%) 0%,
+    hsl(38, 88%, 46%) 100%
+  );
 }
 
 .progression-stat-premium.muscle .stat-premium-icon {
-  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+  background: linear-gradient(
+    135deg,
+    #793ee0 0%,
+    hsl(275, 78%, 48%) 100%
+  );
 }
+
 
 .stat-premium-icon svg {
   width: 1.25rem;
@@ -5630,23 +5656,21 @@ html, body {
   font-weight: 800;
   line-height: 1;
   margin-bottom: 0.125rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
-.progression-stat-premium.weight .stat-premium-value {
-  color: var(--destructive);
-}
 
 .progression-stat-premium.bodyfat .stat-premium-value {
   color: var(--gold);
 }
 
-.progression-stat-premium.muscle .stat-premium-value {
-  color: var(--accent);
-}
-
 .stat-premium-detail {
   font-size: 0.6875rem;
   color: var(--muted-foreground);
+  width: 100%;
+  text-align: center;
 }
 
 /* ========== TIMELINE VISUAL ========== */
@@ -9361,4 +9385,29 @@ html, body {
 .insights-final-message strong {
   color: var(--foreground);
   font-weight: 700;
+}
+
+.stat-premium-label {
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.is-negative {
+  color: hsl(0, 75%, 55%); /* vermelho elegante */
+}
+
+.is-positive {
+  color: hsl(142, 70%, 45%); /* verde premium */
+}
+
+.is-negative::after {
+  content: " ▼";
+  font-size: 0.75em;
+  opacity: 0.7;
+}
+
+.is-positive::after {
+  content: " ▲";
+  font-size: 0.75em;
+  opacity: 0.7;
 }
