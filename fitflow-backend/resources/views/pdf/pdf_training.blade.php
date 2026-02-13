@@ -141,7 +141,7 @@
     </div>
   </section>
 
-  <!-- ==================== PÁGINA 2: CONHECENDO O PROTOCOLO - VERSÃO MELHORADA ==================== -->
+  <!-- ==================== PÁGINA 2: CONHECENDO O PROTOCOLO ==================== -->
   <section class="pdf-page">
     <!-- Header Premium com Gradiente -->
     <div class="protocol-header">
@@ -236,7 +236,7 @@
     </div>
   </section>
 
-  <!-- ==================== PÁGINA 3: ESTRATÉGIA NUTRICIONAL - VERSÃO MELHORADA ==================== -->
+  <!-- ==================== PÁGINA 3: ESTRATÉGIA NUTRICIONAL ==================== -->
   <section class="pdf-page">
     <!-- Header Premium -->
     <div class="calorie-header-improved">
@@ -543,7 +543,7 @@
     </div>
   </section>
 
-  <!-- ==================== PAGE 4: PROGRESSION TIMELINE - VERSÃO REVOLUCIONÁRIA ==================== -->
+  <!-- ==================== PAGE 4: PROGRESSION TIMELINE ==================== -->
   <section class="pdf-page">
     <!-- Header Premium -->
     <div class="progression-header-premium">
@@ -927,14 +927,14 @@
           </svg>
           <span>Programa de Treinamento</span>
         </div>
-        <h2 class="treino-title">Upper/Lower Split</h2>
+        <h2 class="treino-title">{{$data->programa_treino->titulo_treino}}</h2>
         <p class="treino-subtitle">Divisão cientificamente otimizada para hipertrofia e ganho de força</p>
       </div>
 
       <!-- Hero Card -->
       <div class="treino-hero">
-        <h3>Por Que o Upper/Lower Split?</h3>
-        <p>Essa divisão permite treinar cada grupo muscular <strong>2x por semana</strong>, frequência considerada ideal para hipertrofia segundo a literatura científica. O intervalo de 48-72h entre sessões do mesmo grupo garante <strong>recuperação completa</strong> e <strong>síntese proteica maximizada</strong>, resultando em ganhos superiores comparados a divisões de 1x por semana.</p>
+        <h3>Por Que o {{$data->programa_treino->modelo_divisao}}?</h3>
+        <p>{!! $data->programa_treino->descricao_por_que_funciona !!}</p>
       </div>
 
       <!-- Overview Cards -->
@@ -944,28 +944,30 @@
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m17 2 4 4-4 4"/><path d="M3 11v-1a4 4 0 0 1 4-4h14"/><path d="m7 22-4-4 4-4"/><path d="M21 13v1a4 4 0 0 1-4 4H3"/></svg>
           </div>
           <div class="treino-overview-label">Modelo</div>
-          <div class="treino-overview-value">Upper/Lower</div>
+          <div class="treino-overview-value">
+            {{ $data->programa_treino->modelo_divisao }}
+          </div>
         </div>
         <div class="treino-overview-card">
           <div class="treino-overview-icon green">
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>
           </div>
           <div class="treino-overview-label">Frequência</div>
-          <div class="treino-overview-value">4x/semana</div>
+          <div class="treino-overview-value">{{ $data->programa_treino->frequencia_semanal }}x/semana</div>
         </div>
         <div class="treino-overview-card">
           <div class="treino-overview-icon gold">
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
           </div>
           <div class="treino-overview-label">Duração</div>
-          <div class="treino-overview-value">60-75 min</div>
+          <div class="treino-overview-value">{{ $data->programa_treino->duracao_sessao_minutos }} min</div>
         </div>
         <div class="treino-overview-card">
           <div class="treino-overview-icon red">
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg>
           </div>
           <div class="treino-overview-label">Intensidade</div>
-          <div class="treino-overview-value">Moderada → Alta</div>
+          <div class="treino-overview-value">{{ $data->programa_treino->nivel_intensidade }}</div>
         </div>
       </div>
 
@@ -976,48 +978,35 @@
           Sugestão de Divisão Semanal
         </div>
         <div class="treino-schedule-grid">
-          <div class="treino-day upper">
-            <div class="treino-day-icon"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.4 14.4 9.6 9.6"/></svg></div>
-            <span class="treino-day-label">SEG</span>
-            <span class="treino-day-workout">Upper A</span>
-            <span class="treino-day-desc">Força</span>
-          </div>
-          <div class="treino-day lower">
-            <div class="treino-day-icon"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.4 14.4 9.6 9.6"/></svg></div>
-            <span class="treino-day-label">TER</span>
-            <span class="treino-day-workout">Lower A</span>
-            <span class="treino-day-desc">Potência</span>
-          </div>
-          <div class="treino-day rest">
-            <div class="treino-day-icon"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg></div>
-            <span class="treino-day-label">QUA</span>
-            <span class="treino-day-workout">Descanso</span>
-            <span class="treino-day-desc">Recuperar</span>
-          </div>
-          <div class="treino-day upper">
-            <div class="treino-day-icon"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.4 14.4 9.6 9.6"/></svg></div>
-            <span class="treino-day-label">QUI</span>
-            <span class="treino-day-workout">Upper B</span>
-            <span class="treino-day-desc">Hipertrofia</span>
-          </div>
-          <div class="treino-day lower">
-            <div class="treino-day-icon"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.4 14.4 9.6 9.6"/></svg></div>
-            <span class="treino-day-label">SEX</span>
-            <span class="treino-day-workout">Lower B</span>
-            <span class="treino-day-desc">Volume</span>
-          </div>
-          <div class="treino-day cardio">
-            <div class="treino-day-icon"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg></div>
-            <span class="treino-day-label">SÁB</span>
-            <span class="treino-day-workout">Cardio</span>
-            <span class="treino-day-desc">Opcional</span>
-          </div>
-          <div class="treino-day rest">
-            <div class="treino-day-icon"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg></div>
-            <span class="treino-day-label">DOM</span>
-            <span class="treino-day-workout">Descanso</span>
-            <span class="treino-day-desc">Recuperar</span>
-          </div>
+
+          @foreach ($data->programa_treino->calendario_semanal as $treino)
+            @php
+                $class = $treino->descanso ? 'rest' : 'treino';
+            @endphp
+            <div class="treino-day {{ $class }}">
+              @if($treino->cardio)
+                <div class="treino-day-badge">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" viewBox="0 0 640 640">
+                    <path d="M96 176C96 149.5 117.5 128 144 128C170.5 128 192 149.5 192 176L192 288L448 288L448 176C448 149.5 469.5 128 496 128C522.5 128 544 149.5 544 176L544 192L560 192C586.5 192 608 213.5 608 240L608 288C625.7 288 640 302.3 640 320C640 337.7 625.7 352 608 352L608 400C608 426.5 586.5 448 560 448L544 448L544 464C544 490.5 522.5 512 496 512C469.5 512 448 490.5 448 464L448 352L192 352L192 464C192 490.5 170.5 512 144 512C117.5 512 96 490.5 96 464L96 448L80 448C53.5 448 32 426.5 32 400L32 352C14.3 352 0 337.7 0 320C0 302.3 14.3 288 32 288L32 240C32 213.5 53.5 192 80 192L96 192L96 176z"/>
+                  </svg>
+                  <span>CARDIO</span>
+                </div>
+              @endif
+              
+              @switch(true)
+                  @case($treino->descanso)
+                      <div class="treino-day-icon"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg></div>
+                      @break
+                  @case($treino->treinar)
+                      <div class="treino-day-icon"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 640 640"><path d="M96 176C96 149.5 117.5 128 144 128C170.5 128 192 149.5 192 176L192 288L448 288L448 176C448 149.5 469.5 128 496 128C522.5 128 544 149.5 544 176L544 192L560 192C586.5 192 608 213.5 608 240L608 288C625.7 288 640 302.3 640 320C640 337.7 625.7 352 608 352L608 400C608 426.5 586.5 448 560 448L544 448L544 464C544 490.5 522.5 512 496 512C469.5 512 448 490.5 448 464L448 352L192 352L192 464C192 490.5 170.5 512 144 512C117.5 512 96 490.5 96 464L96 448L80 448C53.5 448 32 426.5 32 400L32 352C14.3 352 0 337.7 0 320C0 302.3 14.3 288 32 288L32 240C32 213.5 53.5 192 80 192L96 192L96 176z"/></svg></div>
+                      @break
+              @endswitch
+
+              <span class="treino-day-label">{{ $treino->dia_semana }}</span>
+              <span class="treino-day-workout">{{ $treino->tipo_treino }}</span>
+              <span class="treino-day-desc">{{ $treino->descricao_curta }}</span>
+            </div>
+          @endforeach
         </div>
       </div>
 
@@ -1074,12 +1063,8 @@
       <div class="treino-legend">
         <div class="treino-legend-items">
           <div class="treino-legend-item">
-            <div class="treino-legend-dot upper"></div>
-            <span>Upper Body</span>
-          </div>
-          <div class="treino-legend-item">
-            <div class="treino-legend-dot lower"></div>
-            <span>Lower Body</span>
+            <div class="treino-legend-dot treino"></div>
+            <span>Dia de Treino</span>
           </div>
           <div class="treino-legend-item">
             <div class="treino-legend-dot cardio"></div>

@@ -6213,19 +6213,9 @@ html, body {
   background-color: var(--card);
 }
 
-.treino-day.upper {
-  border-color: hsla(228, 96%, 89%, 1);
+.treino-day.treino {
+  border-color: #869eff;
   background-color: var(--indigo-50);
-}
-
-.treino-day.lower {
-  border-color: hsla(168, 84%, 78%, 1);
-  background-color: var(--teal-50);
-}
-
-.treino-day.cardio {
-  border-color: hsla(0, 84%, 60%, 0.25);
-  background-color: hsla(0, 84%, 60%, 0.05);
 }
 
 .treino-day.rest {
@@ -6387,8 +6377,7 @@ html, body {
   border-radius: 3px;
 }
 
-.treino-legend-dot.upper { background-color: var(--indigo-600); }
-.treino-legend-dot.lower { background-color: var(--teal-600); }
+.treino-legend-dot.treino { background-color: #869eff; }
 .treino-legend-dot.cardio { background-color: var(--destructive); }
 .treino-legend-dot.rest { background-color: var(--gold); }
 
@@ -9420,4 +9409,46 @@ html, body {
   content: " ▲";
   font-size: 0.75em;
   opacity: 0.7;
+}
+
+/* Badge de Cardio no Calendário */
+.treino-day {
+  position: relative;
+  padding-top: 1rem; /* Espaço extra para o badge */
+}
+
+.treino-day-badge {
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.1875rem 0.4375rem;
+  border-radius: 0.25rem;
+  background: linear-gradient(135deg, var(--destructive) 0%, hsl(0, 72%, 51%) 100%);
+  font-size: 0.5rem;
+  font-weight: 800;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  box-shadow: 0 2px 4px hsla(0, 84%, 60%, 0.3);
+  z-index: 2;
+}
+
+.treino-day-badge svg {
+  width: 8px;
+  height: 8px;
+  color: white;
+  flex-shrink: 0;
+}
+
+.treino-day-badge span {
+  line-height: 1;
+}
+
+/* Ajuste no padding do card de cardio quando tem badge */
+.treino-day.cardio {
+  padding-top: 1.625rem;
 }

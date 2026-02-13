@@ -46,10 +46,10 @@
                 "alimentos": [
                     {
                         "nome": "Ovos mexidos",
-                        "calorias": 210,
-                        "gordura_g": 15,
-                        "proteina_g": 21,
-                        "quantidade": "3 unidades",
+                        "calorias": 280,
+                        "gordura_g": 20,
+                        "proteina_g": 28,
+                        "quantidade": "4 unidades",
                         "carboidrato_g": 2
                     },
                     {
@@ -58,24 +58,24 @@
                         "gordura_g": 2,
                         "proteina_g": 8,
                         "quantidade": "2 fatias",
-                        "carboidrato_g": 26
+                        "carboidrato_g": 24
                     },
                     {
                         "nome": "Queijo branco",
-                        "calorias": 60,
+                        "calorias": 67,
                         "gordura_g": 4,
                         "proteina_g": 7,
                         "quantidade": "40g",
                         "carboidrato_g": 1
                     }
                 ],
-                "descricao": "Refeição rica em proteína e moderada em carboidratos para iniciar o dia com saciedade e energia.",
+                "descricao": "Refeição inicial rica em proteína e moderada em carboidratos para estimular síntese proteica e fornecer energia.",
                 "nome_refeicao": "Café da manhã",
                 "totais_refeicao": {
-                    "calorias": 410,
-                    "gordura_g": 21,
-                    "proteina_g": 36,
-                    "carboidrato_g": 29
+                    "calorias": 487,
+                    "gordura_g": 26,
+                    "proteina_g": 43,
+                    "carboidrato_g": 27
                 }
             },
             {
@@ -83,10 +83,10 @@
                 "alimentos": [
                     {
                         "nome": "Peito de frango grelhado",
-                        "calorias": 165,
-                        "gordura_g": 3,
-                        "proteina_g": 36,
-                        "quantidade": "150g",
+                        "calorias": 210,
+                        "gordura_g": 4,
+                        "proteina_g": 43,
+                        "quantidade": "180g",
                         "carboidrato_g": 0
                     },
                     {
@@ -99,28 +99,28 @@
                     },
                     {
                         "nome": "Feijão carioca",
-                        "calorias": 85,
-                        "gordura_g": 1,
-                        "proteina_g": 6,
-                        "quantidade": "100g cozido",
-                        "carboidrato_g": 14
+                        "calorias": 70,
+                        "gordura_g": 0,
+                        "proteina_g": 5,
+                        "quantidade": "80g cozido",
+                        "carboidrato_g": 13
                     },
                     {
-                        "nome": "Salada variada",
-                        "calorias": 30,
+                        "nome": "Brócolis cozido",
+                        "calorias": 32,
                         "gordura_g": 0,
-                        "proteina_g": 2,
-                        "quantidade": "à vontade",
+                        "proteina_g": 3,
+                        "quantidade": "80g",
                         "carboidrato_g": 5
                     }
                 ],
                 "descricao": "Refeição principal com proteína magra, carboidrato complexo e fibras.",
                 "nome_refeicao": "Almoço",
                 "totais_refeicao": {
-                    "calorias": 390,
+                    "calorias": 422,
                     "gordura_g": 5,
-                    "proteina_g": 47,
-                    "carboidrato_g": 42
+                    "proteina_g": 54,
+                    "carboidrato_g": 41
                 }
             },
             {
@@ -128,27 +128,19 @@
                 "alimentos": [
                     {
                         "nome": "Iogurte natural desnatado",
-                        "calorias": 70,
+                        "calorias": 72,
                         "gordura_g": 0,
-                        "proteina_g": 8,
-                        "quantidade": "170g (1 pote)",
-                        "carboidrato_g": 10
+                        "proteina_g": 10,
+                        "quantidade": "170g",
+                        "carboidrato_g": 8
                     },
                     {
-                        "nome": "Banana",
-                        "calorias": 90,
-                        "gordura_g": 0,
-                        "proteina_g": 1,
-                        "quantidade": "1 unidade média",
-                        "carboidrato_g": 22
-                    },
-                    {
-                        "nome": "Pão integral",
-                        "calorias": 70,
+                        "nome": "Pão francês",
+                        "calorias": 135,
                         "gordura_g": 1,
-                        "proteina_g": 4,
-                        "quantidade": "1 fatia",
-                        "carboidrato_g": 13
+                        "proteina_g": 7,
+                        "quantidade": "1 unidade",
+                        "carboidrato_g": 28
                     },
                     {
                         "nome": "Peito de peru",
@@ -159,13 +151,13 @@
                         "carboidrato_g": 0
                     }
                 ],
-                "descricao": "Refeição com proteína e carboidrato para fornecer energia e suporte anabólico antes do treino.",
-                "nome_refeicao": "Pré-treino/Lanche",
+                "descricao": "Refeição leve, de fácil digestão, priorizando proteína e carboidrato para energia e síntese proteica.",
+                "nome_refeicao": "Lanche pré-treino",
                 "totais_refeicao": {
-                    "calorias": 270,
+                    "calorias": 247,
                     "gordura_g": 2,
-                    "proteina_g": 21,
-                    "carboidrato_g": 45
+                    "proteina_g": 25,
+                    "carboidrato_g": 36
                 }
             },
             {
@@ -173,81 +165,141 @@
                 "alimentos": [
                     {
                         "nome": "Carne bovina magra grelhada",
-                        "calorias": 180,
+                        "calorias": 220,
                         "gordura_g": 8,
-                        "proteina_g": 30,
-                        "quantidade": "120g",
+                        "proteina_g": 36,
+                        "quantidade": "150g",
                         "carboidrato_g": 0
                     },
                     {
-                        "nome": "Ovos cozidos",
-                        "calorias": 140,
-                        "gordura_g": 10,
-                        "proteina_g": 14,
-                        "quantidade": "2 unidades",
-                        "carboidrato_g": 1
-                    },
-                    {
-                        "nome": "Batata-doce cozida",
-                        "calorias": 90,
+                        "nome": "Batata doce cozida",
+                        "calorias": 120,
                         "gordura_g": 0,
-                        "proteina_g": 1,
-                        "quantidade": "100g",
-                        "carboidrato_g": 21
+                        "proteina_g": 2,
+                        "quantidade": "120g",
+                        "carboidrato_g": 28
                     },
                     {
-                        "nome": "Brócolis refogado",
-                        "calorias": 30,
+                        "nome": "Salada verde (alface, tomate)",
+                        "calorias": 25,
                         "gordura_g": 1,
-                        "proteina_g": 3,
-                        "quantidade": "80g",
-                        "carboidrato_g": 4
+                        "proteina_g": 2,
+                        "quantidade": "100g",
+                        "carboidrato_g": 3
                     },
                     {
                         "nome": "Azeite de oliva",
-                        "calorias": 36,
-                        "gordura_g": 4,
+                        "calorias": 90,
+                        "gordura_g": 10,
                         "proteina_g": 0,
-                        "quantidade": "1 colher de chá",
+                        "quantidade": "1 colher de sopa",
                         "carboidrato_g": 0
                     }
                 ],
-                "descricao": "Refeição pós-treino com proteína de alto valor biológico e carboidratos para recuperação.",
-                "nome_refeicao": "Jantar/Pós-treino",
+                "descricao": "Refeição pós-treino rica em proteína e moderada em carboidratos para recuperação muscular.",
+                "nome_refeicao": "Jantar",
                 "totais_refeicao": {
-                    "calorias": 476,
-                    "gordura_g": 23,
-                    "proteina_g": 48,
-                    "carboidrato_g": 26
+                    "calorias": 455,
+                    "gordura_g": 19,
+                    "proteina_g": 40,
+                    "carboidrato_g": 31
                 }
             }
         ],
         "objetivo_dieta": {
             "titulo": "Definição muscular com preservação de massa magra",
-            "descricao": "Reduzir gordura corporal mantendo o máximo de massa muscular, otimizando ingestão proteica e refeições práticas."
+            "descricao": "Reduzir gordura corporal mantendo o máximo de massa magra, utilizando proteína elevada e refeições distribuídas ao longo do dia."
         },
         "totais_diarios": {
-            "calorias": 1797,
-            "gordura_g": 50,
-            "proteina_g": 184,
-            "carboidrato_g": 158
+            "calorias": 1700,
+            "gordura_g": 44,
+            "proteina_g": 200,
+            "carboidrato_g": 130
         },
         "total_refeicoes_dia": 4,
-        "titulo_conceito_dieta": "Dieta hiperproteica flexível com alimentos comuns",
+        "titulo_conceito_dieta": "Dieta alta em proteína e alimentos comuns",
         "meta_hidratacao_litros": 3.2,
-        "descricao_conceito_dieta": "Estratégia baseada em proteína elevada, alimentos acessíveis e distribuição inteligente de macros para facilitar adesão e resultados, respeitando horários e preferências do usuário."
+        "descricao_conceito_dieta": "Estruturada para facilitar a adesão usando alimentos práticos e acessíveis, com alto teor proteico e distribuição de macros compatível com definição muscular."
     },
     "programa_treino": {
         "treinos": [
             {
                 "exercicios": [
                     {
-                        "rpe": 8.5,
+                        "rpe": 8,
+                        "nome": "Supino reto barra",
+                        "series": 4,
+                        "repeticoes": "6-8",
+                        "dica_tecnica": "Mantenha escápulas retraídas e controle na descida.",
+                        "musculo_alvo": "Peito",
+                        "descanso_segundos": 120
+                    },
+                    {
+                        "rpe": 8,
+                        "nome": "Remada curvada barra",
+                        "series": 4,
+                        "repeticoes": "8-10",
+                        "dica_tecnica": "Evite balanço do tronco e foque na contração das costas.",
+                        "musculo_alvo": "Costas",
+                        "descanso_segundos": 90
+                    },
+                    {
+                        "rpe": 7.5,
+                        "nome": "Desenvolvimento com halteres",
+                        "series": 3,
+                        "repeticoes": "8-10",
+                        "dica_tecnica": "Não trave os cotovelos no topo.",
+                        "musculo_alvo": "Ombros",
+                        "descanso_segundos": 90
+                    },
+                    {
+                        "rpe": 7.5,
+                        "nome": "Puxada alta na frente",
+                        "series": 3,
+                        "repeticoes": "10-12",
+                        "dica_tecnica": "Puxe até a linha do queixo, controle o retorno.",
+                        "musculo_alvo": "Costas",
+                        "descanso_segundos": 75
+                    },
+                    {
+                        "rpe": 8,
+                        "nome": "Tríceps pulley",
+                        "series": 3,
+                        "repeticoes": "10-12",
+                        "dica_tecnica": "Mantenha cotovelos fixos ao lado do corpo.",
+                        "musculo_alvo": "Braços",
+                        "descanso_segundos": 60
+                    },
+                    {
+                        "rpe": 8,
+                        "nome": "Rosca direta barra",
+                        "series": 3,
+                        "repeticoes": "10-12",
+                        "dica_tecnica": "Evite balanço e foque na contração do bíceps.",
+                        "musculo_alvo": "Braços",
+                        "descanso_segundos": 60
+                    }
+                ],
+                "nome_treino": "Upper A",
+                "foco_principal": "Força e Hipertrofia Superior",
+                "nota_progressao": "Aumente a carga somente ao atingir o topo das repetições com boa forma.",
+                "total_exercicios": 6,
+                "grupos_musculares": [
+                    "Peito",
+                    "Costas",
+                    "Ombros",
+                    "Braços"
+                ]
+            },
+            {
+                "exercicios": [
+                    {
+                        "rpe": 8,
                         "nome": "Agachamento livre",
                         "series": 4,
                         "repeticoes": "6-8",
-                        "dica_tecnica": "Mantenha a coluna neutra e desça até o paralelo.",
-                        "musculo_alvo": "Quadríceps/Glúteos",
+                        "dica_tecnica": "Mantenha o tronco ereto e desça até o paralelo.",
+                        "musculo_alvo": "Pernas",
                         "descanso_segundos": 120
                     },
                     {
@@ -255,8 +307,8 @@
                         "nome": "Leg press",
                         "series": 3,
                         "repeticoes": "10-12",
-                        "dica_tecnica": "Pés afastados na largura dos ombros, movimento controlado.",
-                        "musculo_alvo": "Quadríceps/Glúteos",
+                        "dica_tecnica": "Não bloqueie os joelhos no topo.",
+                        "musculo_alvo": "Pernas",
                         "descanso_segundos": 90
                     },
                     {
@@ -264,25 +316,25 @@
                         "nome": "Cadeira extensora",
                         "series": 3,
                         "repeticoes": "12-15",
-                        "dica_tecnica": "Contraia o quadríceps no topo do movimento.",
-                        "musculo_alvo": "Quadríceps",
+                        "dica_tecnica": "Segure 1s no pico da contração.",
+                        "musculo_alvo": "Pernas",
                         "descanso_segundos": 60
                     },
                     {
-                        "rpe": 8,
+                        "rpe": 7.5,
                         "nome": "Mesa flexora",
                         "series": 3,
                         "repeticoes": "10-12",
-                        "dica_tecnica": "Evite tirar o quadril do banco.",
-                        "musculo_alvo": "Posterior de coxa",
+                        "dica_tecnica": "Evite levantar o quadril do banco.",
+                        "musculo_alvo": "Pernas",
                         "descanso_segundos": 60
                     },
                     {
                         "rpe": 8,
-                        "nome": "Elevação de quadril",
+                        "nome": "Glúteo máquina",
                         "series": 3,
                         "repeticoes": "12-15",
-                        "dica_tecnica": "Contraia os glúteos no topo.",
+                        "dica_tecnica": "Concentre-se na contração máxima.",
                         "musculo_alvo": "Glúteos",
                         "descanso_segundos": 60
                     },
@@ -296,9 +348,9 @@
                         "descanso_segundos": 45
                     }
                 ],
-                "nome_treino": "Lower Body A",
-                "foco_principal": "Força e volume em pernas e glúteos",
-                "nota_progressao": "Aumente a carga progressivamente mantendo a execução perfeita; priorize recuperação entre sessões.",
+                "nome_treino": "Lower A",
+                "foco_principal": "Força e Hipertrofia Inferior",
+                "nota_progressao": "Priorize a técnica e aumente o volume apenas quando sentir recuperação adequada.",
                 "total_exercicios": 6,
                 "grupos_musculares": [
                     "Pernas",
@@ -309,63 +361,63 @@
             {
                 "exercicios": [
                     {
-                        "rpe": 8.5,
-                        "nome": "Supino reto barra",
-                        "series": 4,
-                        "repeticoes": "6-8",
-                        "dica_tecnica": "Abaixe a barra até o peito, cotovelos a 45°.",
-                        "musculo_alvo": "Peito",
-                        "descanso_segundos": 120
-                    },
-                    {
                         "rpe": 8,
-                        "nome": "Remada curvada",
-                        "series": 4,
-                        "repeticoes": "8-10",
-                        "dica_tecnica": "Mantenha o tronco estável, puxe com as costas.",
-                        "musculo_alvo": "Costas",
-                        "descanso_segundos": 90
-                    },
-                    {
-                        "rpe": 8,
-                        "nome": "Desenvolvimento com halteres",
+                        "nome": "Supino inclinado halteres",
                         "series": 3,
                         "repeticoes": "8-10",
-                        "dica_tecnica": "Evite arquear a lombar durante o movimento.",
-                        "musculo_alvo": "Ombros",
+                        "dica_tecnica": "Controle a descida e não junte os halteres no topo.",
+                        "musculo_alvo": "Peito",
                         "descanso_segundos": 90
+                    },
+                    {
+                        "rpe": 8,
+                        "nome": "Remada unilateral halter",
+                        "series": 3,
+                        "repeticoes": "10-12",
+                        "dica_tecnica": "Evite rodar o tronco durante o movimento.",
+                        "musculo_alvo": "Costas",
+                        "descanso_segundos": 75
                     },
                     {
                         "rpe": 7.5,
-                        "nome": "Crucifixo inclinado",
+                        "nome": "Elevação lateral",
                         "series": 3,
-                        "repeticoes": "10-12",
-                        "dica_tecnica": "Movimento controlado, sinta o alongamento.",
+                        "repeticoes": "12-15",
+                        "dica_tecnica": "Mantenha cotovelos levemente flexionados.",
+                        "musculo_alvo": "Ombros",
+                        "descanso_segundos": 60
+                    },
+                    {
+                        "rpe": 7.5,
+                        "nome": "Crucifixo reto",
+                        "series": 3,
+                        "repeticoes": "12-15",
+                        "dica_tecnica": "Abaixe até sentir alongamento no peito.",
                         "musculo_alvo": "Peito",
                         "descanso_segundos": 60
                     },
                     {
                         "rpe": 8,
-                        "nome": "Rosca direta",
+                        "nome": "Tríceps francês",
                         "series": 3,
                         "repeticoes": "10-12",
-                        "dica_tecnica": "Evite balanço do corpo.",
-                        "musculo_alvo": "Bíceps",
+                        "dica_tecnica": "Mantenha o cotovelo fixo e evite abrir os braços.",
+                        "musculo_alvo": "Braços",
                         "descanso_segundos": 60
                     },
                     {
                         "rpe": 8,
-                        "nome": "Tríceps pulley",
+                        "nome": "Rosca alternada",
                         "series": 3,
                         "repeticoes": "10-12",
-                        "dica_tecnica": "Mantenha o cotovelo fixo ao lado do corpo.",
-                        "musculo_alvo": "Tríceps",
+                        "dica_tecnica": "Evite balanço, concentre-se na contração do bíceps.",
+                        "musculo_alvo": "Braços",
                         "descanso_segundos": 60
                     }
                 ],
-                "nome_treino": "Upper Body A",
-                "foco_principal": "Força e volume em peitoral, costas e ombros",
-                "nota_progressao": "Busque progressão de carga ou repetições semanalmente, mantendo boa técnica e controle.",
+                "nome_treino": "Upper B",
+                "foco_principal": "Volume e Resistência Superior",
+                "nota_progressao": "Busque progressão de carga ou repetições semanais, mantendo execução perfeita.",
                 "total_exercicios": 6,
                 "grupos_musculares": [
                     "Peito",
@@ -373,116 +425,174 @@
                     "Ombros",
                     "Braços"
                 ]
+            },
+            {
+                "exercicios": [
+                    {
+                        "rpe": 8,
+                        "nome": "Agachamento frontal",
+                        "series": 3,
+                        "repeticoes": "8-10",
+                        "dica_tecnica": "Mantenha cotovelos elevados e tronco ereto.",
+                        "musculo_alvo": "Pernas",
+                        "descanso_segundos": 90
+                    },
+                    {
+                        "rpe": 8,
+                        "nome": "Avanço com halteres",
+                        "series": 3,
+                        "repeticoes": "10-12",
+                        "dica_tecnica": "Dê passos longos e controle a descida.",
+                        "musculo_alvo": "Pernas",
+                        "descanso_segundos": 75
+                    },
+                    {
+                        "rpe": 8,
+                        "nome": "Stiff barra",
+                        "series": 3,
+                        "repeticoes": "10-12",
+                        "dica_tecnica": "Mantenha a coluna neutra e não force o joelho.",
+                        "musculo_alvo": "Glúteos",
+                        "descanso_segundos": 75
+                    },
+                    {
+                        "rpe": 7.5,
+                        "nome": "Cadeira abdutora",
+                        "series": 3,
+                        "repeticoes": "12-15",
+                        "dica_tecnica": "Segure 1s na contração máxima.",
+                        "musculo_alvo": "Glúteos",
+                        "descanso_segundos": 60
+                    },
+                    {
+                        "rpe": 7.5,
+                        "nome": "Panturrilha em pé",
+                        "series": 4,
+                        "repeticoes": "12-15",
+                        "dica_tecnica": "Faça a subida explosiva e descida controlada.",
+                        "musculo_alvo": "Pernas",
+                        "descanso_segundos": 45
+                    },
+                    {
+                        "rpe": 7,
+                        "nome": "Abdominal infra banco",
+                        "series": 3,
+                        "repeticoes": "15-20",
+                        "dica_tecnica": "Evite balançar as pernas, concentre-se na contração abdominal.",
+                        "musculo_alvo": "Abdômen",
+                        "descanso_segundos": 45
+                    }
+                ],
+                "nome_treino": "Lower B",
+                "foco_principal": "Volume e Resistência Inferior",
+                "nota_progressao": "Aumente volume ou carga de acordo com a recuperação e qualidade do movimento.",
+                "total_exercicios": 6,
+                "grupos_musculares": [
+                    "Pernas",
+                    "Glúteos",
+                    "Abdômen"
+                ]
             }
         ],
-        "titulo_treino": "Treino de Força Avançado para Definição Muscular",
-        "modelo_divisao": "Upper/Lower (2x cada, 4 sessões/semana)",
-        "nivel_intensidade": "Alto",
+        "titulo_treino": "Upper/Lower Split 4x",
+        "modelo_divisao": "Upper/Lower",
+        "nivel_intensidade": "Alta",
         "calendario_semanal": [
             {
                 "cardio": false,
                 "treinar": true,
                 "descanso": false,
-                "dia_semana": "Segunda",
-                "tipo_treino": "Treino Lower",
-                "descricao_curta": "Pernas e glúteos, foco em força e volume"
+                "dia_semana": "SEG",
+                "tipo_treino": "Upper A",
+                "descricao_curta": "Hipertrofia, Força Superior"
             },
             {
                 "cardio": true,
                 "treinar": true,
                 "descanso": false,
-                "dia_semana": "Terça",
-                "tipo_treino": "Treino Upper",
-                "descricao_curta": "Peito, costas, ombros e braços"
+                "dia_semana": "TER",
+                "tipo_treino": "Lower A",
+                "descricao_curta": "Hipertrofia, Força Inferior"
             },
             {
                 "cardio": true,
                 "treinar": false,
-                "descanso": false,
-                "dia_semana": "Quarta",
-                "tipo_treino": "Cardio/Descanso",
-                "descricao_curta": "Cardio moderado, foco em recuperação"
+                "descanso": true,
+                "dia_semana": "QUA",
+                "tipo_treino": "Cardio + Core",
+                "descricao_curta": "Cardio, Abdômen, Recuperação ativa"
             },
             {
                 "cardio": false,
                 "treinar": true,
                 "descanso": false,
-                "dia_semana": "Quinta",
-                "tipo_treino": "Treino Lower",
-                "descricao_curta": "Pernas, glúteos e abdômen"
+                "dia_semana": "QUI",
+                "tipo_treino": "Upper B",
+                "descricao_curta": "Volume, Força Superior"
             },
             {
                 "cardio": true,
                 "treinar": true,
                 "descanso": false,
-                "dia_semana": "Sexta",
-                "tipo_treino": "Treino Upper",
-                "descricao_curta": "Costas, peito, ombros e braços"
+                "dia_semana": "SEX",
+                "tipo_treino": "Lower B",
+                "descricao_curta": "Volume, Força Inferior"
             },
             {
                 "cardio": true,
                 "treinar": false,
-                "descanso": false,
-                "dia_semana": "Sábado",
-                "tipo_treino": "Cardio leve/Descanso",
-                "descricao_curta": "Cardio leve ou descanso ativo"
+                "descanso": true,
+                "dia_semana": "SÁB",
+                "tipo_treino": "Cardio leve + Mobilidade",
+                "descricao_curta": "Cardio, Recuperação ativa"
             },
             {
                 "cardio": false,
                 "treinar": false,
                 "descanso": true,
-                "dia_semana": "Domingo",
+                "dia_semana": "DOM",
                 "tipo_treino": "Descanso",
                 "descricao_curta": "Recuperação total"
             }
         ],
         "frequencia_semanal": 4,
         "duracao_sessao_minutos": 90,
-        "descricao_por_que_funciona": "O programa utiliza divisão upper/lower com foco em volume semanal e intensidade adequados para avançados, otimizando estímulo anabólico e preservação de massa magra sob déficit calórico."
+        "descricao_por_que_funciona": "Essa divisão permite treinar cada grupo muscular 2x por semana, frequência ideal para hipertrofia e manutenção muscular em déficit, conforme meta-análises recentes. O volume semanal é ajustado para avançados, com foco em intensidade e recuperação."
     },
     "cardio_estrategico": {
         "atividades": [
             {
-                "nome": "Caminhada rápida",
-                "notas": "Ideal para dias pós-treino ou descanso, baixo impacto.",
+                "nome": "Esteira caminhada rápida",
+                "notas": "Ideal após treino de força ou em dias de cardio isolado.",
                 "intensidade": "Moderada",
-                "duracao_minutos": "40",
-                "frequencia_semanal": "2x",
-                "beneficio_principal": "Aumenta gasto calórico sem prejudicar recuperação.",
+                "duracao_minutos": "30",
+                "frequencia_semanal": "3x",
+                "beneficio_principal": "Aumenta o gasto energético sem sobrecarregar as articulações.",
                 "frequencia_cardiaca": "60-70% FCmáx"
             },
             {
                 "nome": "Bicicleta ergométrica",
-                "notas": "Pode ser realizada após treino de membros superiores.",
-                "intensidade": "Moderada a alta",
-                "duracao_minutos": "30",
+                "notas": "Pode ser usada em dias de recuperação ativa.",
+                "intensidade": "Moderada",
+                "duracao_minutos": "30-40",
                 "frequencia_semanal": "1x",
-                "beneficio_principal": "Melhora resistência cardiovascular e acelera déficit energético.",
-                "frequencia_cardiaca": "70-80% FCmáx"
-            },
-            {
-                "nome": "HIIT leve (opcional)",
-                "notas": "Somente se recuperação estiver adequada.",
-                "intensidade": "Alta",
-                "duracao_minutos": "15",
-                "frequencia_semanal": "1x",
-                "beneficio_principal": "Aumenta EPOC e potencializa queima de gordura.",
-                "frequencia_cardiaca": "80-90% FCmáx"
+                "beneficio_principal": "Melhora a resistência e auxilia na recuperação.",
+                "frequencia_cardiaca": "60-70% FCmáx"
             }
         ],
         "meta_semanal_minutos": "120-150",
-        "queima_caloria_semanal": "800-1100",
-        "descricao_cardio_funciona": "O cardio é utilizado para aumentar o gasto energético semanal, acelerar a queima de gordura e melhorar a saúde cardiovascular, sem comprometer a recuperação muscular."
+        "queima_caloria_semanal": "700-900",
+        "descricao_cardio_funciona": "O cardio é utilizado como ferramenta complementar para aumentar o déficit calórico, melhorar a saúde cardiovascular e otimizar a queima de gordura, sem comprometer a recuperação do treino de força."
     },
     "projecao_resultados": {
         "fase_30_dias": {
-            "descricao_fase": "Fase inicial de adaptação metabólica, ajuste de rotina alimentar e treino, com início da redução de gordura.",
+            "descricao_fase": "Adaptação metabólica, início da redução de gordura e manutenção da força.",
             "variacao_peso_kg": "-2kg",
             "variacao_massa_magra_kg": "0kg",
             "variacao_gordura_percentual": "-1.5%"
         },
         "fase_60_dias": {
-            "descricao_fase": "Consolidação da perda de gordura, manutenção da massa magra e melhora da definição muscular.",
+            "descricao_fase": "Redução consistente de gordura, definição muscular mais visível e manutenção da massa magra.",
             "variacao_peso_kg": "-4kg",
             "variacao_massa_magra_kg": "0kg",
             "variacao_gordura_percentual": "-3%"
@@ -501,43 +611,43 @@
         }
     },
     "ajuste_dias_descanso": {
-        "gordura_dia_treino": 50,
-        "calorias_dia_treino": 1797,
-        "proteina_dia_treino": 184,
-        "gordura_dia_descanso": 50,
-        "calorias_dia_descanso": 1650,
-        "proteina_dia_descanso": 184,
-        "carboidrato_dia_treino": 158,
-        "carboidrato_dia_descanso": 120
+        "gordura_dia_treino": 44,
+        "calorias_dia_treino": 1700,
+        "proteina_dia_treino": 200,
+        "gordura_dia_descanso": 48,
+        "calorias_dia_descanso": 1600,
+        "proteina_dia_descanso": 200,
+        "carboidrato_dia_treino": 130,
+        "carboidrato_dia_descanso": 100
     },
     "estrategia_nutricional": {
         "macronutrientes": {
             "gordura": {
-                "gramas": 50,
-                "percentual": 25
+                "gramas": 44,
+                "percentual": 23
             },
             "proteina": {
-                "gramas": 184,
-                "percentual": 41
+                "gramas": 200,
+                "percentual": 47
             },
             "carboidrato": {
-                "gramas": 158,
-                "percentual": 35
+                "gramas": 130,
+                "percentual": 31
             }
         },
-        "gasto_diario_tdee": 2297,
+        "gasto_diario_tdee": 2203,
         "diferenca_calorica": "-500",
-        "meta_calorica_diaria": 1797,
+        "meta_calorica_diaria": 1700,
         "tipo_objetivo_calorico": "Déficit moderado",
-        "descricao_tipo_objetivo": "Definição muscular",
-        "descricao_balanco_energetico": "O plano foi desenvolvido com base no seu TDEE calculado para perfil sedentário, ajustado para um déficit calórico moderado visando definição muscular com máxima preservação de massa magra.",
+        "descricao_tipo_objetivo": "Perda de gordura",
+        "descricao_balanco_energetico": "Seu plano foi desenvolvido com base no seu gasto energético total diário (TDEE) e ajustado para um déficit calórico moderado, visando a máxima preservação de massa magra durante a definição muscular.",
         "beneficios_distribuicao_macros": {
-            "gordura_titulo": "Gordura adequada para suporte hormonal",
+            "gordura_titulo": "Gordura suficiente para saúde hormonal",
             "proteina_titulo": "Alta proteína para preservar massa magra",
-            "gordura_descricao": "A gordura está em nível suficiente para manter funções hormonais e saciedade, sem exceder o aporte calórico necessário para definição.",
-            "carboidrato_titulo": "Carboidrato moderado para performance",
-            "proteina_descricao": "A ingestão elevada de proteína (2g/kg) é baseada em meta-análises que mostram maior preservação muscular durante déficit energético, especialmente em praticantes avançados.",
-            "carboidrato_descricao": "Ajuste moderado de carboidratos garante energia para treinos intensos e recuperação, sem comprometer o déficit calórico."
+            "gordura_descricao": "A ingestão de gordura cobre necessidades hormonais e auxilia na saciedade, sem comprometer o déficit calórico.",
+            "carboidrato_titulo": "Carboidrato ajustado para performance",
+            "proteina_descricao": "A ingestão elevada de proteína (2,2g/kg) reduz a perda muscular durante o déficit calórico e potencializa a síntese proteica, conforme meta-análises recentes.",
+            "carboidrato_descricao": "Quantidade moderada para sustentar a performance nos treinos de força, priorizando ingestão peri-treino e recuperação."
         }
     }
 }
