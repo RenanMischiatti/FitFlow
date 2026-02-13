@@ -998,7 +998,7 @@
                       <div class="treino-day-icon"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg></div>
                       @break
                   @case($treino->treinar)
-                      <div class="treino-day-icon"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 640 640"><path d="M96 176C96 149.5 117.5 128 144 128C170.5 128 192 149.5 192 176L192 288L448 288L448 176C448 149.5 469.5 128 496 128C522.5 128 544 149.5 544 176L544 192L560 192C586.5 192 608 213.5 608 240L608 288C625.7 288 640 302.3 640 320C640 337.7 625.7 352 608 352L608 400C608 426.5 586.5 448 560 448L544 448L544 464C544 490.5 522.5 512 496 512C469.5 512 448 490.5 448 464L448 352L192 352L192 464C192 490.5 170.5 512 144 512C117.5 512 96 490.5 96 464L96 448L80 448C53.5 448 32 426.5 32 400L32 352C14.3 352 0 337.7 0 320C0 302.3 14.3 288 32 288L32 240C32 213.5 53.5 192 80 192L96 192L96 176z"/></svg></div>
+                      <div class="treino-day-icon"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" viewBox="0 0 640 640"><path d="M96 176C96 149.5 117.5 128 144 128C170.5 128 192 149.5 192 176L192 288L448 288L448 176C448 149.5 469.5 128 496 128C522.5 128 544 149.5 544 176L544 192L560 192C586.5 192 608 213.5 608 240L608 288C625.7 288 640 302.3 640 320C640 337.7 625.7 352 608 352L608 400C608 426.5 586.5 448 560 448L544 448L544 464C544 490.5 522.5 512 496 512C469.5 512 448 490.5 448 464L448 352L192 352L192 464C192 490.5 170.5 512 144 512C117.5 512 96 490.5 96 464L96 448L80 448C53.5 448 32 426.5 32 400L32 352C14.3 352 0 337.7 0 320C0 302.3 14.3 288 32 288L32 240C32 213.5 53.5 192 80 192L96 192L96 176z"/></svg></div>
                       @break
               @endswitch
 
@@ -1078,283 +1078,87 @@
       </div>
   </section>
 
-  <!-- ==================== PAGE 6: WORKOUT UPPER A ==================== -->
-  <section class="pdf-page">
-    <div class="workout-card">
-      <div class="workout-card-header upper">
-        <div class="workout-card-header-row">
-          <div class="workout-card-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M14.4 14.4 9.6 9.6"/>
-              <path d="M18.657 21.485a2 2 0 1 1-2.829-2.828l-1.767 1.768a2 2 0 1 1-2.829-2.829l6.364-6.364a2 2 0 1 1 2.829 2.829l-1.768 1.767a2 2 0 1 1 2.828 2.829z"/>
+  <!-- ==================== PAGE 6: WORKOUT ==================== -->
+  @foreach($data->programa_treino->treinos as $treino)
+    <section class="pdf-page">
+      <div class="workout-card">
+        <div class="workout-card-header upper">
+          <div class="workout-card-header-row">
+            <div class="workout-card-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 640 640"><path d="M96 176C96 149.5 117.5 128 144 128C170.5 128 192 149.5 192 176L192 288L448 288L448 176C448 149.5 469.5 128 496 128C522.5 128 544 149.5 544 176L544 192L560 192C586.5 192 608 213.5 608 240L608 288C625.7 288 640 302.3 640 320C640 337.7 625.7 352 608 352L608 400C608 426.5 586.5 448 560 448L544 448L544 464C544 490.5 522.5 512 496 512C469.5 512 448 490.5 448 464L448 352L192 352L192 464C192 490.5 170.5 512 144 512C117.5 512 96 490.5 96 464L96 448L80 448C53.5 448 32 426.5 32 400L32 352C14.3 352 0 337.7 0 320C0 302.3 14.3 288 32 288L32 240C32 213.5 53.5 192 80 192L96 192L96 176z"/></svg>
+            </div>
+            <div class="workout-card-info">
+              <h3 class="workout-card-title">{{ $treino->nome_treino }}</h3>
+              <p class="workout-card-subtitle">{{ $treino->foco_principal }}</p>
+            </div>
+            <div class="workout-card-count">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+              <span>{{$treino->total_exercicios}} exercícios</span>
+            </div>
+          </div>
+          <div class="workout-card-badges">
+            @foreach($treino->grupos_musculares as $musculo)
+              <span class="workout-card-badge">{{ $musculo }}</span>
+            @endforeach
+          </div>
+        </div>
+
+        <table class="exercise-table">
+          <thead>
+            <tr>
+              <th style="width: 2.5rem;">#</th>
+              <th>Exercício</th>
+              <th style="width: 5.5rem;">Músculo</th>
+              <th class="center" style="width: 4rem;">Séries</th>
+              <th class="center" style="width: 4.5rem;">Reps</th>
+              <th class="center" style="width: 4.5rem;">Descanso</th>
+              <th class="center" style="width: 3.5rem;">RPE</th>
+            </tr>
+          </thead>
+          <tbody>
+            @foreach($treino->exercicios as $index => $exercicio)
+              <tr>
+                <td><span class="exercise-number upper">{{ $index + 1 }}</span></td>
+                <td>
+                  <span class="exercise-name">{{ $exercicio->nome }}</span>
+                  <div class="exercise-tip">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/></svg>
+                    <span>{{ $exercicio->dica_tecnica }}</span>
+                  </div>
+                </td>
+                <td><span class="muscle-badge upper">{{ $exercicio->musculo_alvo }}</span></td>
+                <td class="center"><span class="exercise-sets">{{ $exercicio->series }}</span></td>
+                <td class="center"><span class="exercise-reps">{{ $exercicio->repeticoes }}</span></td>
+                <td class="center"><span class="exercise-rest">{{ $exercicio->descanso_segundos }}s</span></td>
+                <td class="center">
+                    <span class="rpe-badge 
+                        {{ 
+                            $exercicio->rpe <= 7 ? 'low' : 
+                            ($exercicio->rpe < 8 ? 'medium' : 'high') 
+                        }}">
+                        {{ $exercicio->rpe }}
+                    </span>
+                </td>
+              </tr>
+            @endforeach
+          </tbody>
+        </table>
+
+        <div class="workout-card-footer upper">
+          <div class="workout-card-footer-content">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/>
+              <polyline points="16 7 22 7 22 13"/>
             </svg>
-          </div>
-          <div class="workout-card-info">
-            <h3 class="workout-card-title">Upper A — Força e Hipertrofia</h3>
-            <p class="workout-card-subtitle">Foco em peitorais, dorsais e deltoides</p>
-          </div>
-          <div class="workout-card-count">
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
-            <span>6 exercícios</span>
-          </div>
-        </div>
-        <div class="workout-card-badges">
-          <span class="workout-card-badge">Peito</span>
-          <span class="workout-card-badge">Costas</span>
-          <span class="workout-card-badge">Ombro</span>
-          <span class="workout-card-badge">Bíceps</span>
-          <span class="workout-card-badge">Tríceps</span>
-        </div>
-      </div>
-
-      <table class="exercise-table">
-        <thead>
-          <tr>
-            <th style="width: 2.5rem;">#</th>
-            <th>Exercício</th>
-            <th style="width: 5.5rem;">Músculo</th>
-            <th class="center" style="width: 4rem;">Séries</th>
-            <th class="center" style="width: 4.5rem;">Reps</th>
-            <th class="center" style="width: 4.5rem;">Descanso</th>
-            <th class="center" style="width: 3.5rem;">RPE</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><span class="exercise-number upper">1</span></td>
-            <td>
-              <span class="exercise-name">Supino Reto com Barra</span>
-              <div class="exercise-tip">
-                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/></svg>
-                <span>Desça até tocar o peito, cotovelos a 45°</span>
-              </div>
-            </td>
-            <td><span class="muscle-badge upper">Peito</span></td>
-            <td class="center"><span class="exercise-sets">4</span></td>
-            <td class="center"><span class="exercise-reps">6-8</span></td>
-            <td class="center"><span class="exercise-rest">120s</span></td>
-            <td class="center"><span class="rpe-badge high">8.5</span></td>
-          </tr>
-          <tr>
-            <td><span class="exercise-number upper">2</span></td>
-            <td>
-              <span class="exercise-name">Remada Curvada</span>
-              <div class="exercise-tip">
-                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/></svg>
-                <span>Mantenha as costas retas e puxe até o umbigo</span>
-              </div>
-            </td>
-            <td><span class="muscle-badge upper">Costas</span></td>
-            <td class="center"><span class="exercise-sets">4</span></td>
-            <td class="center"><span class="exercise-reps">8-10</span></td>
-            <td class="center"><span class="exercise-rest">90s</span></td>
-            <td class="center"><span class="rpe-badge high">8</span></td>
-          </tr>
-          <tr>
-            <td><span class="exercise-number upper">3</span></td>
-            <td><span class="exercise-name">Desenvolvimento com Halteres</span></td>
-            <td><span class="muscle-badge upper">Ombro</span></td>
-            <td class="center"><span class="exercise-sets">3</span></td>
-            <td class="center"><span class="exercise-reps">10-12</span></td>
-            <td class="center"><span class="exercise-rest">90s</span></td>
-            <td class="center"><span class="rpe-badge medium">7.5</span></td>
-          </tr>
-          <tr>
-            <td><span class="exercise-number upper">4</span></td>
-            <td><span class="exercise-name">Crucifixo Inclinado</span></td>
-            <td><span class="muscle-badge upper">Peito</span></td>
-            <td class="center"><span class="exercise-sets">3</span></td>
-            <td class="center"><span class="exercise-reps">12-15</span></td>
-            <td class="center"><span class="exercise-rest">60s</span></td>
-            <td class="center"><span class="rpe-badge low">7</span></td>
-          </tr>
-          <tr>
-            <td><span class="exercise-number upper">5</span></td>
-            <td><span class="exercise-name">Rosca Direta com Barra</span></td>
-            <td><span class="muscle-badge upper">Bíceps</span></td>
-            <td class="center"><span class="exercise-sets">3</span></td>
-            <td class="center"><span class="exercise-reps">10-12</span></td>
-            <td class="center"><span class="exercise-rest">60s</span></td>
-            <td class="center"><span class="rpe-badge medium">7.5</span></td>
-          </tr>
-          <tr>
-            <td><span class="exercise-number upper">6</span></td>
-            <td><span class="exercise-name">Tríceps Corda no Pulley</span></td>
-            <td><span class="muscle-badge upper">Tríceps</span></td>
-            <td class="center"><span class="exercise-sets">3</span></td>
-            <td class="center"><span class="exercise-reps">12-15</span></td>
-            <td class="center"><span class="exercise-rest">60s</span></td>
-            <td class="center"><span class="rpe-badge low">7</span></td>
-          </tr>
-        </tbody>
-      </table>
-
-      <div class="workout-card-footer upper">
-        <div class="workout-card-footer-content">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/>
-            <polyline points="16 7 22 7 22 13"/>
-          </svg>
-          <div>
-            <span class="progression-label">Progressão: </span>
-            <span class="progression-text">Aumente a carga 2-5% quando completar todas as séries com boa forma nas reps máximas.</span>
+            <div>
+              <span class="progression-label">Progressão: </span>
+              <span class="progression-text">{{ $treino->nota_progressao }}</span>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- ==================== PAGE 7: WORKOUT LOWER A ==================== -->
-  <section class="pdf-page">
-    <div class="workout-card shadow-card">
-      <div class="workout-card-header lower">
-        <div class="workout-card-header-row">
-          <div class="workout-card-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M14.4 14.4 9.6 9.6" />
-              <path
-                d="M18.657 21.485a2 2 0 1 1-2.829-2.828l-1.767 1.768a2 2 0 1 1-2.829-2.829l6.364-6.364a2 2 0 1 1 2.829 2.829l-1.768 1.767a2 2 0 1 1 2.828 2.829z" />
-            </svg>
-          </div>
-          <div class="workout-card-info">
-            <h3 class="workout-card-title">Lower A - Força e Potência</h3>
-            <p class="workout-card-subtitle">Foco em quadríceps, glúteos e posterior de coxa</p>
-          </div>
-          <div class="workout-card-count">
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
-              stroke="currentColor" stroke-width="2">
-              <circle cx="12" cy="12" r="10" />
-              <circle cx="12" cy="12" r="6" />
-              <circle cx="12" cy="12" r="2" />
-            </svg>
-            <span>6 exercícios</span>
-          </div>
-        </div>
-        <div class="workout-card-badges">
-          <span class="workout-card-badge">Quadríceps</span>
-          <span class="workout-card-badge">Glúteos</span>
-          <span class="workout-card-badge">Posterior</span>
-          <span class="workout-card-badge">Panturrilha</span>
-        </div>
-      </div>
-
-      <table class="exercise-table">
-        <thead>
-          <tr>
-            <th style="width: 2rem;">#</th>
-            <th>Exercício</th>
-            <th style="width: 5rem;">Músculo</th>
-            <th class="center" style="width: 3.5rem;">Séries</th>
-            <th class="center" style="width: 4rem;">Reps</th>
-            <th class="center" style="width: 4rem;">Descanso</th>
-            <th class="center" style="width: 3rem;">RPE</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><span class="exercise-number lower">1</span></td>
-            <td>
-              <span class="exercise-name">Agachamento Livre</span>
-              <div class="exercise-tip">
-                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none"
-                  stroke="currentColor" stroke-width="2">
-                  <path
-                    d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5" />
-                </svg>
-                <span>Desça até pelo menos paralelo, joelhos alinhados</span>
-              </div>
-            </td>
-            <td><span class="muscle-badge lower">Quadríceps</span></td>
-            <td class="center"><span class="exercise-sets">4</span></td>
-            <td class="center"><span class="exercise-reps">6-8</span></td>
-            <td class="center"><span class="exercise-rest">120s</span></td>
-            <td class="center"><span class="rpe-badge high">8.5</span></td>
-          </tr>
-          <tr>
-            <td><span class="exercise-number lower">2</span></td>
-            <td>
-              <span class="exercise-name">Leg Press 45°</span>
-              <div class="exercise-tip">
-                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none"
-                  stroke="currentColor" stroke-width="2">
-                  <path
-                    d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5" />
-                </svg>
-                <span>Não bloqueie os joelhos no topo</span>
-              </div>
-            </td>
-            <td><span class="muscle-badge lower">Quadríceps</span></td>
-            <td class="center"><span class="exercise-sets">4</span></td>
-            <td class="center"><span class="exercise-reps">10-12</span></td>
-            <td class="center"><span class="exercise-rest">90s</span></td>
-            <td class="center"><span class="rpe-badge high">8</span></td>
-          </tr>
-          <tr>
-            <td><span class="exercise-number lower">3</span></td>
-            <td><span class="exercise-name">Cadeira Extensora</span></td>
-            <td><span class="muscle-badge lower">Quadríceps</span></td>
-            <td class="center"><span class="exercise-sets">3</span></td>
-            <td class="center"><span class="exercise-reps">12-15</span></td>
-            <td class="center"><span class="exercise-rest">60s</span></td>
-            <td class="center"><span class="rpe-badge low">7</span></td>
-          </tr>
-          <tr>
-            <td><span class="exercise-number lower">4</span></td>
-            <td><span class="exercise-name">Mesa Flexora</span></td>
-            <td><span class="muscle-badge lower">Posterior</span></td>
-            <td class="center"><span class="exercise-sets">3</span></td>
-            <td class="center"><span class="exercise-reps">10-12</span></td>
-            <td class="center"><span class="exercise-rest">60s</span></td>
-            <td class="center"><span class="rpe-badge medium">7.5</span></td>
-          </tr>
-          <tr>
-            <td><span class="exercise-number lower">5</span></td>
-            <td>
-              <span class="exercise-name">Elevação de Quadril</span>
-              <div class="exercise-tip">
-                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none"
-                  stroke="currentColor" stroke-width="2">
-                  <path
-                    d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5" />
-                </svg>
-                <span>Mantenha core ativado</span>
-              </div>
-            </td>
-            <td><span class="muscle-badge lower">Glúteos</span></td>
-            <td class="center"><span class="exercise-sets">3</span></td>
-            <td class="center"><span class="exercise-reps">12-15</span></td>
-            <td class="center"><span class="exercise-rest">60s</span></td>
-            <td class="center"><span class="rpe-badge low">7</span></td>
-          </tr>
-          <tr>
-            <td><span class="exercise-number lower">6</span></td>
-            <td><span class="exercise-name">Panturrilha em Pé</span></td>
-            <td><span class="muscle-badge lower">Panturrilha</span></td>
-            <td class="center"><span class="exercise-sets">4</span></td>
-            <td class="center"><span class="exercise-reps">15-20</span></td>
-            <td class="center"><span class="exercise-rest">45s</span></td>
-            <td class="center"><span class="rpe-badge high">8</span></td>
-          </tr>
-        </tbody>
-      </table>
-
-      <div class="workout-card-footer lower">
-        <div class="workout-card-footer-content">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="22 7 13.5 15.5 8.5 10.5 2 17" />
-            <polyline points="16 7 22 7 22 13" />
-          </svg>
-          <div>
-            <span class="progression-label">Progressão: </span>
-            <span class="progression-text">Priorize a forma correta sobre a carga. Adicione peso apenas quando executar
-              com técnica perfeita.</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+    </section>
+  @endforeach
 
   <!-- ==================== PAGE 8: DIET SECTION ==================== -->
   <section class="pdf-page">

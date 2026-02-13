@@ -1436,7 +1436,7 @@ html, body {
 }
 
 .workout-card-header.upper {
-  background: linear-gradient(135deg, var(--indigo-50) 0%, var(--indigo-100) 100%);
+  background: linear-gradient(135deg, var(--indigo-50) 0%, var(--indigo-200) 100%);
   border-bottom-color: var(--indigo-200);
 }
 
