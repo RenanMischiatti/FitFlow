@@ -43,7 +43,7 @@
       <!-- Nome do Usuário -->
       <div>
         <p class="cover-user-label">Desenvolvido exclusivamente para</p>
-        <p class="cover-user-name">João Carlos Silva</p>
+        <p class="cover-user-name">{{$user->nome}}</p>
       </div>
 
       <!-- Pilares do Plano -->
@@ -132,13 +132,16 @@
 
       <!-- Informações do Plano -->
       <div class="cover-info">
-        <div class="cover-info-item"><strong>Data de Emissão:</strong> 29 de Janeiro de 2026</div>
-        <div class="cover-info-item"><strong>Duração do Plano:</strong> 90 dias</div>
+        <div class="cover-info-item">
+            <strong>Data de Emissão:</strong>
+            {{ now()->translatedFormat('d \\d\\e F \\d\\e Y') }}
+        </div>
+        <div class="cover-info-item"><strong>Duração do Plano:</strong> {{$user->prazoPlanejado}}</div>
       </div>
     </div>
   </section>
 
-  <!-- ==================== PÁGINA: CONHECENDO O PROTOCOLO - VERSÃO MELHORADA ==================== -->
+  <!-- ==================== PÁGINA 2: CONHECENDO O PROTOCOLO - VERSÃO MELHORADA ==================== -->
   <section class="pdf-page">
     <!-- Header Premium com Gradiente -->
     <div class="protocol-header">
@@ -233,7 +236,7 @@
     </div>
   </section>
 
-  <!-- ==================== PÁGINA: ESTRATÉGIA NUTRICIONAL - VERSÃO MELHORADA ==================== -->
+  <!-- ==================== PÁGINA 3: ESTRATÉGIA NUTRICIONAL - VERSÃO MELHORADA ==================== -->
   <section class="pdf-page">
     <!-- Header Premium -->
     <div class="calorie-header-improved">
@@ -250,16 +253,8 @@
 
     <!-- Card Hero com Informação Principal -->
     <div class="calorie-hero-card">
-      {{-- <div class="calorie-hero-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none"
-          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="12" cy="12" r="10" />
-          <circle cx="12" cy="12" r="6" />
-          <circle cx="12" cy="12" r="2" />
-        </svg>
-      </div> --}}
       <h3>Balanço Energético Calculado</h3>
-      <p>Seu plano foi desenvolvido com base no seu gasto energético total diário (TDEE) e ajustado estrategicamente para criar um déficit calórico moderado que maximiza a perda de gordura preservando massa muscular.</p>
+      <p>{{ $data->estrategia_nutricional->descricao_balanco_energetico }}</p>
     </div>
 
     <!-- Grid de Cards de Calorias -->
@@ -281,7 +276,7 @@
           </div>
         </div>
         <div class="calorie-stat-value">
-          <span class="calorie-number">2.600</span>
+          <span class="calorie-number">{{ $data->estrategia_nutricional->gasto_diario_tdee }}</span>
           <span class="calorie-unit">kcal</span>
         </div>
       </div>
@@ -301,7 +296,7 @@
           </div>
         </div>
         <div class="calorie-stat-value featured">
-          <span class="calorie-number">2.100</span>
+          <span class="calorie-number">{{ $data->estrategia_nutricional->meta_calorica_diaria }}</span>
           <span class="calorie-unit">kcal</span>
         </div>
       </div>
@@ -317,12 +312,12 @@
             </svg>
           </div>
           <div class="calorie-stat-info">
-            <p class="calorie-stat-label">Déficit Calórico</p>
-            <p class="calorie-stat-sublabel">Perda de gordura</p>
+            <p class="calorie-stat-label">{{ $data->estrategia_nutricional->tipo_objetivo_calorico }}</p>
+            <p class="calorie-stat-sublabel">{{ $data->estrategia_nutricional->descricao_tipo_objetivo}}</p>
           </div>
         </div>
         <div class="calorie-stat-value">
-          <span class="calorie-number">-500</span>
+          <span class="calorie-number">{{ $data->estrategia_nutricional->diferenca_calorica }}</span>
           <span class="calorie-unit">kcal</span>
         </div>
       </div>
@@ -344,19 +339,32 @@
         </div>
       </div>
 
+      @php
+        $radius = 40;
+        $circumference = 2 * pi() * $radius;
+      @endphp
+
       <!-- Grid de Macros com Círculos -->
       <div class="macros-grid-improved">
         <!-- Proteínas -->
         <div class="macro-card-improved protein">
           <div class="macro-circle-improved">
             <svg class="macro-progress-ring" viewBox="0 0 100 100">
-              <circle class="macro-progress-bg" cx="50" cy="50" r="40" />
-              <circle class="macro-progress-bar" cx="50" cy="50" r="40"
-                style="stroke-dasharray: 251; stroke-dashoffset: 171;" />
+              <circle class="macro-progress-bg" cx="50" cy="50" r="{{ $radius }}" />
+              <circle
+                class="macro-progress-bar"
+                cx="50"
+                cy="50"
+                r="{{ $radius }}"
+                style="
+                  stroke-dasharray: {{ $circumference }};
+                  stroke-dashoffset: {{ circleProgressOffset($data->estrategia_nutricional->macronutrientes->proteina->percentual) }};
+                "
+              />
             </svg>
             <div class="macro-circle-content">
-              <span class="macro-value">170g</span>
-              <span class="macro-percent">32%</span>
+              <span class="macro-value">{{ $data->estrategia_nutricional->macronutrientes->proteina->gramas }}g</span>
+              <span class="macro-percent">{{ $data->estrategia_nutricional->macronutrientes->proteina->percentual }}%</span>
             </div>
           </div>
           <div class="macro-label-improved">
@@ -370,45 +378,85 @@
 
         <!-- Carboidratos -->
         <div class="macro-card-improved carbs">
+          @php
+            $carb = $data->estrategia_nutricional->macronutrientes->carboidrato;
+          @endphp
           <div class="macro-circle-improved">
             <svg class="macro-progress-ring" viewBox="0 0 100 100">
-              <circle class="macro-progress-bg" cx="50" cy="50" r="40" />
-              <circle class="macro-progress-bar" cx="50" cy="50" r="40"
-                style="stroke-dasharray: 251; stroke-dashoffset: 156;" />
+              <circle
+                class="macro-progress-bg"
+                cx="50"
+                cy="50"
+                r="{{ $radius }}"
+              />
+
+              <circle
+                class="macro-progress-bar"
+                cx="50"
+                cy="50"
+                r="{{ $radius }}"
+                style="
+                  stroke-dasharray: {{ $circumference }};
+                  stroke-dashoffset: {{ circleProgressOffset($carb->percentual, $radius) }};
+                "
+              />
             </svg>
+
             <div class="macro-circle-content">
-              <span class="macro-value">200g</span>
-              <span class="macro-percent">38%</span>
+              <span class="macro-value">{{ $carb->gramas }}g</span>
+              <span class="macro-percent">{{ $carb->percentual }}%</span>
             </div>
           </div>
+
           <div class="macro-label-improved">
             <svg width="22" height="22" fill="var(--accent)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
               <path d="M240 104C240 90.7 250.7 80 264 80L280 80C293.3 80 304 90.7 304 104C304 117.3 293.3 128 280 128L264 128C250.7 128 240 117.3 240 104zM264 152L280 152C293.3 152 304 162.7 304 176C304 189.3 293.3 200 280 200L264 200C250.7 200 240 189.3 240 176C240 162.7 250.7 152 264 152zM120 224L136 224C149.3 224 160 234.7 160 248C160 261.3 149.3 272 136 272L120 272C106.7 272 96 261.3 96 248C96 234.7 106.7 224 120 224zM64 347.4C64 332.3 76.3 320 91.4 320L548.5 320C563.6 320 575.9 332.3 575.9 347.4C575.9 417.9 531.5 478.1 469.2 501.5L467.5 516C465.5 532 451.9 544 435.7 544L204.2 544C188.1 544 174.4 532 172.4 516L170.6 501.6C108.4 478.1 64 417.9 64 347.4zM288 248C288 234.7 298.7 224 312 224L328 224C341.3 224 352 234.7 352 248C352 261.3 341.3 272 328 272L312 272C298.7 272 288 261.3 288 248zM192 248C192 234.7 202.7 224 216 224L232 224C245.3 224 256 234.7 256 248C256 261.3 245.3 272 232 272L216 272C202.7 272 192 261.3 192 248zM168 152L184 152C197.3 152 208 162.7 208 176C208 189.3 197.3 200 184 200L168 200C154.7 200 144 189.3 144 176C144 162.7 154.7 152 168 152zM384 248C384 234.7 394.7 224 408 224L424 224C437.3 224 448 234.7 448 248C448 261.3 437.3 272 424 272L408 272C394.7 272 384 261.3 384 248zM360 152L376 152C389.3 152 400 162.7 400 176C400 189.3 389.3 200 376 200L360 200C346.7 200 336 189.3 336 176C336 162.7 346.7 152 360 152zM480 248C480 234.7 490.7 224 504 224L520 224C533.3 224 544 234.7 544 248C544 261.3 533.3 272 520 272L504 272C490.7 272 480 261.3 480 248zM456 152L472 152C485.3 152 496 162.7 496 176C496 189.3 485.3 200 472 200L456 200C442.7 200 432 189.3 432 176C432 162.7 442.7 152 456 152zM360 80L376 80C389.3 80 400 90.7 400 104C400 117.3 389.3 128 376 128L360 128C346.7 128 336 117.3 336 104C336 90.7 346.7 80 360 80z"/>
             </svg>
             <span>Carboidratos</span>
           </div>
+
           <p class="macro-description">Energia para treinos intensos</p>
         </div>
 
         <!-- Gorduras -->
         <div class="macro-card-improved fat">
+          @php
+            $fat = $data->estrategia_nutricional->macronutrientes->gordura;
+          @endphp
           <div class="macro-circle-improved">
             <svg class="macro-progress-ring" viewBox="0 0 100 100">
-              <circle class="macro-progress-bg" cx="50" cy="50" r="40" />
-              <circle class="macro-progress-bar" cx="50" cy="50" r="40"
-                style="stroke-dasharray: 251; stroke-dashoffset: 176;" />
+              <circle
+                class="macro-progress-bg"
+                cx="50"
+                cy="50"
+                r="{{ $radius }}"
+              />
+
+              <circle
+                class="macro-progress-bar"
+                cx="50"
+                cy="50"
+                r="{{ $radius }}"
+                style="
+                  stroke-dasharray: {{ $circumference }};
+                  stroke-dashoffset: {{ circleProgressOffset($fat->percentual, $radius) }};
+                "
+              />
             </svg>
+
             <div class="macro-circle-content">
-              <span class="macro-value">70g</span>
-              <span class="macro-percent">30%</span>
+              <span class="macro-value">{{ $fat->gramas }}g</span>
+              <span class="macro-percent">{{ $fat->percentual }}%</span>
             </div>
           </div>
+
           <div class="macro-label-improved">
             <svg width="22" height="22" fill="var(--gold)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
               <path d="M589 160.7C603.4 175.1 601.4 199.1 584.7 210.9L520.1 256.6C476.4 287.5 440.9 328.5 416.7 376.2L391.4 426C366.3 475.3 329.3 517.5 283.6 548.6L209.5 599.2C196.4 608.1 178.8 606.5 167.7 595.3L122.8 550.4L209.3 483.9C251.6 451.4 286 409.6 309.9 361.9L334.4 312.8C358.9 263.8 396.2 222.2 442.3 192.6L551 122.7L589 160.7zM516.2 87.9L416.3 152.2C362.9 186.5 319.8 234.6 291.4 291.3L266.9 340.4C246.3 381.7 216.6 417.7 180 445.8L88.6 516.1L51.7 479.2C37.3 464.8 39.3 440.8 56 429L120.6 383.3C164.3 352.4 199.8 311.4 224 263.7L249.3 213.9C274.3 164.8 311.3 122.6 357 91.4L431.1 40.8C444.2 31.9 461.7 33.5 472.9 44.7L516.2 88z"/>
             </svg>
             <span>Gorduras</span>
           </div>
+
           <p class="macro-description">Saúde hormonal e saciedade</p>
         </div>
       </div>
@@ -418,20 +466,20 @@
         <div class="macros-summary-left">
           <span class="macros-summary-item">
             <span class="macros-dot protein"></span>
-            Prot: <strong>170g</strong>
+            Prot: <strong>{{ $data->estrategia_nutricional->macronutrientes->proteina->gramas }}g</strong>
           </span>
           <span class="macros-summary-item">
             <span class="macros-dot carbs"></span>
-            Carb: <strong>200g</strong>
+            Carb: <strong>{{ $data->estrategia_nutricional->macronutrientes->carboidrato->gramas }}g</strong>
           </span>
           <span class="macros-summary-item">
             <span class="macros-dot fat"></span>
-            Gord: <strong>70g</strong>
+            Gord: <strong>{{ $data->estrategia_nutricional->macronutrientes->gordura->gramas }}g</strong>
           </span>
         </div>
         <div class="macros-summary-total">
           <span>Total Diário:</span>
-          <strong>2.100 kcal</strong>
+          <strong>{{ $data->estrategia_nutricional->meta_calorica_diaria }} kcal</strong>
         </div>
       </div>
     </div>
@@ -457,9 +505,9 @@
                 <path d="M18.657 21.485a2 2 0 1 1-2.829-2.828l-1.767 1.768a2 2 0 1 1-2.829-2.829l6.364-6.364a2 2 0 1 1 2.829 2.829l-1.768 1.767a2 2 0 1 1 2.828 2.829z" />
               </svg>
             </div>
-            <h4>Alta Proteína</h4>
+            <h4>{{ $data->estrategia_nutricional->beneficios_distribuicao_macros->proteina_titulo }}</h4>
           </div>
-          <p>Preserva massa muscular durante o déficit calórico</p>
+          <p>{{ $data->estrategia_nutricional->beneficios_distribuicao_macros->proteina_descricao }}</p>
         </div>
 
         <!-- Carboidratos -->
@@ -471,9 +519,9 @@
                 <path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z" />
               </svg>
             </div>
-            <h4>Carboidratos Estratégicos</h4>
+            <h4>{{ $data->estrategia_nutricional->beneficios_distribuicao_macros->carboidrato_titulo }}</h4>
           </div>
-          <p>Garantem energia para treinos de alta intensidade</p>
+          <p>{{ $data->estrategia_nutricional->beneficios_distribuicao_macros->carboidrato_descricao }}</p>
         </div>
 
         <!-- Gorduras -->
@@ -487,15 +535,15 @@
                 <path d="m9 19-3-3 3-3" />
               </svg>
             </div>
-            <h4>Gorduras Saudáveis</h4>
+            <h4>{{ $data->estrategia_nutricional->beneficios_distribuicao_macros->gordura_titulo }}</h4>
           </div>
-          <p>Mantêm produção hormonal e aumentam saciedade</p>
+          <p>{{ $data->estrategia_nutricional->beneficios_distribuicao_macros->gordura_descricao }}</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ==================== PAGE 3: PROGRESSION TIMELINE - VERSÃO REVOLUCIONÁRIA ==================== -->
+  <!-- ==================== PAGE 4: PROGRESSION TIMELINE - VERSÃO REVOLUCIONÁRIA ==================== -->
   <section class="pdf-page">
     <!-- Header Premium -->
     <div class="progression-header-premium">
@@ -804,7 +852,7 @@
     </div>
   </section>
 
-  <!-- ==================== PAGE 4: WORKOUT OVERVIEW ==================== -->
+  <!-- ==================== PAGE 5: WORKOUT OVERVIEW ==================== -->
   <section class="pdf-page">
       <!-- Header Premium -->
       <div class="treino-header">
@@ -981,7 +1029,7 @@
       </div>
   </section>
 
-  <!-- ==================== PAGE 5: WORKOUT UPPER A ==================== -->
+  <!-- ==================== PAGE 6: WORKOUT UPPER A ==================== -->
   <section class="pdf-page">
     <div class="workout-card">
       <div class="workout-card-header upper">
@@ -1107,7 +1155,7 @@
     </div>
   </section>
 
-  <!-- ==================== PAGE 6: WORKOUT LOWER A ==================== -->
+  <!-- ==================== PAGE 7: WORKOUT LOWER A ==================== -->
   <section class="pdf-page">
     <div class="workout-card shadow-card">
       <div class="workout-card-header lower">
@@ -1259,7 +1307,7 @@
     </div>
   </section>
 
-  <!-- ==================== PAGE 7: DIET SECTION ==================== -->
+  <!-- ==================== PAGE 8: DIET SECTION ==================== -->
   <section class="pdf-page">
       <div class="nutri-header">
         <div class="nutri-badge">
@@ -1384,7 +1432,7 @@
 
   </section>
 
-  <!-- ==================== PAGE 8: MEALS ==================== -->
+  <!-- ==================== PAGE 9: MEALS ==================== -->
   <section class="pdf-page">
       <div class="meals-page-container">
         <!-- Refeição 1 -->
@@ -1501,7 +1549,7 @@
     </div>
   </section>
 
-  <!-- ==================== PAGE: HYDRATION - VERSÃO PREMIUM ==================== -->
+  <!-- ==================== PAGE 10: HYDRATION - VERSÃO PREMIUM ==================== -->
   <section class="pdf-page">
     <div class="hydration-premium-card">
       <div class="hydration-wave-deco wave-1"></div>
@@ -1708,7 +1756,7 @@
     </div>
   </section>
 
-  <!-- ==================== PAGE 9: CARDIO ==================== -->
+  <!-- ==================== PAGE 11: CARDIO ==================== -->
   <section class="pdf-page">
       <div class="cardio-container">
           <!-- HEADER PREMIUM -->
@@ -1891,7 +1939,7 @@
       </div>
   </section>
 
-  <!-- ==================== PAGE 10: REST DAYS ==================== -->
+  <!-- ==================== PAGE 12: REST DAYS ==================== -->
   <div class="pdf-page rest-container">
       <!-- HEADER PREMIUM -->
       <div class="rest-header-premium">
@@ -2152,7 +2200,7 @@
       </div>
   </div>
 
-  <!-- ==================== PAGE 11: INSIGHTS ==================== -->
+  <!-- ==================== PAGE 13: INSIGHTS ==================== -->
   <section class="pdf-page">
       <!-- HEADER PREMIUM -->
       <div class="insights-header-premium">
@@ -2364,7 +2412,7 @@
       </div>
   </section>
 
-  <!-- ==================== PAGE 12: COMPLETED ==================== -->
+  <!-- ==================== PAGE 14: COMPLETED ==================== -->
   <section class="pdf-page victory-page">
     <div class="victory-trophy">
       <svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">

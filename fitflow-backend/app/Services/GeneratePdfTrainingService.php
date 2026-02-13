@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Order;
+use Carbon\Carbon;
 use Spatie\Browsershot\Browsershot;
 
 class GeneratePdfTrainingService
@@ -17,9 +18,10 @@ class GeneratePdfTrainingService
             mkdir($directory, 0755, true);
         }
 
+        Carbon::setLocale(config('app.locale'));
         $html = view('pdf.pdf_training', [
-            'profile' => json_decode($order->profile, true),
-            'data' => json_decode($order->plan_gpt, true),
+            'user' => json_decode($order->profile),
+            'data' => json_decode($order->plan_gpt),
         ])->render();
 
 
