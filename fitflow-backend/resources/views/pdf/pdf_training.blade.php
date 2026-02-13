@@ -656,6 +656,9 @@
       <div class="timeline-phases">
         <!-- Fase 1: 30 Dias -->
         <div class="timeline-phase phase-1">
+          @if($data->projecao_resultados->prazo_escolhido == 30)
+            <div class="phase-featured-badge">META!</div>
+          @endif
           <div class="phase-header">
             <div class="phase-badge">FASE 1</div>
             <div class="phase-days">
@@ -675,7 +678,9 @@
               </svg>
               <div class="phase-result-info">
                 <span class="result-label">Peso</span>
-                <span class="result-value">-2kg</span>
+                <span class="result-value">
+                  {{ $data->projecao_resultados->fase_30_dias->variacao_peso_kg }}
+                </span>
               </div>
             </div>
             
@@ -687,7 +692,9 @@
               </svg>
               <div class="phase-result-info">
                 <span class="result-label">Gordura</span>
-                <span class="result-value">-1.5%</span>
+                <span class="result-value">
+                  {{ $data->projecao_resultados->fase_30_dias->variacao_gordura_percentual }}
+                </span>
               </div>
             </div>
             
@@ -698,142 +705,161 @@
               </svg>
               <div class="phase-result-info">
                 <span class="result-label">Músculo</span>
-                <span class="result-value maintain">≈0kg</span>
+                <span class="result-value maintain">
+                  {{ $data->projecao_resultados->fase_30_dias->variacao_massa_magra_kg }}
+                </span>
               </div>
             </div>
           </div>
           
           <div class="phase-description">
-            <p>Adaptação metabólica e estabelecimento de rotina consistente</p>
+            <p>{{ $data->projecao_resultados->fase_30_dias->descricao_fase }}</p>
           </div>
         </div>
 
-        <!-- Seta -->
-        <div class="timeline-arrow">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="2">
-            <path d="M5 12h14" />
-            <path d="m12 5 7 7-7 7" />
-          </svg>
-        </div>
+        @if($data->projecao_resultados->prazo_escolhido > 30)
+          <!-- Seta -->
+          <div class="timeline-arrow">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14" />
+              <path d="m12 5 7 7-7 7" />
+            </svg>
+          </div>
 
-        <!-- Fase 2: 60 Dias -->
-        <div class="timeline-phase phase-2">
-          <div class="phase-header">
-            <div class="phase-badge">FASE 2</div>
-            <div class="phase-days">
-              <span class="phase-days-number">60</span>
-              <span class="phase-days-label">DIAS</span>
-            </div>
-          </div>
-          
-          <div class="phase-results">
-            <div class="phase-result-item">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" stroke-width="2">
-                <path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z" />
-                <path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z" />
-                <path d="M7 21h10" />
-                <path d="M12 3v18" />
-              </svg>
-              <div class="phase-result-info">
-                <span class="result-label">Peso</span>
-                <span class="result-value">-4kg</span>
+          <!-- Fase 2: 60 Dias -->
+          <div class="timeline-phase phase-2">
+            @if($data->projecao_resultados->prazo_escolhido == 60)
+              <div class="phase-featured-badge">META!</div>
+            @endif
+            <div class="phase-header">
+              <div class="phase-badge">FASE 2</div>
+              <div class="phase-days">
+                <span class="phase-days-number">60</span>
+                <span class="phase-days-label">DIAS</span>
               </div>
             </div>
             
-            <div class="phase-result-item">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" stroke-width="2">
-                <line x1="19" x2="5" y1="5" y2="19" />
-                <circle cx="6.5" cy="6.5" r="2.5" />
-              </svg>
-              <div class="phase-result-info">
-                <span class="result-label">Gordura</span>
-                <span class="result-value">-3%</span>
+            <div class="phase-results">
+              <div class="phase-result-item">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2">
+                  <path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z" />
+                  <path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z" />
+                  <path d="M7 21h10" />
+                  <path d="M12 3v18" />
+                </svg>
+                <div class="phase-result-info">
+                  <span class="result-label">Peso</span>
+                  <span class="result-value">
+                    {{ $data->projecao_resultados->fase_60_dias->variacao_peso_kg }}
+                  </span>
+                </div>
+              </div>
+              
+              <div class="phase-result-item">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2">
+                  <line x1="19" x2="5" y1="5" y2="19" />
+                  <circle cx="6.5" cy="6.5" r="2.5" />
+                </svg>
+                <div class="phase-result-info">
+                  <span class="result-label">Gordura</span>
+                  <span class="result-value">{{ $data->projecao_resultados->fase_60_dias->variacao_gordura_percentual }}</span>
+                </div>
+              </div>
+              
+              <div class="phase-result-item">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2">
+                  <path d="M14.4 14.4 9.6 9.6" />
+                </svg>
+                <div class="phase-result-info">
+                  <span class="result-label">Músculo</span>
+                  <span class="result-value maintain">{{ $data->projecao_resultados->fase_60_dias->variacao_massa_magra_kg }}</span>
+                </div>
               </div>
             </div>
             
-            <div class="phase-result-item">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" stroke-width="2">
-                <path d="M14.4 14.4 9.6 9.6" />
-              </svg>
-              <div class="phase-result-info">
-                <span class="result-label">Músculo</span>
-                <span class="result-value maintain">≈0kg</span>
-              </div>
+            <div class="phase-description">
+              <p>
+                {{ $data->projecao_resultados->fase_60_dias->descricao_fase }}
+              </p>
             </div>
           </div>
-          
-          <div class="phase-description">
-            <p>Definição muscular visível e maior ritmo de perda de gordura</p>
-          </div>
-        </div>
+        @endif
 
-        <!-- Seta -->
-        <div class="timeline-arrow">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="2">
-            <path d="M5 12h14" />
-            <path d="m12 5 7 7-7 7" />
-          </svg>
-        </div>
+        @if ($data->projecao_resultados->prazo_escolhido > 60)
+          <!-- Seta -->
+          <div class="timeline-arrow">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14" />
+              <path d="m12 5 7 7-7 7" />
+            </svg>
+          </div>
 
-        <!-- Fase 3: 90 Dias (DESTAQUE) -->
-        <div class="timeline-phase phase-3 featured">
-          <div class="phase-featured-badge">META!</div>
-          <div class="phase-header">
-            <div class="phase-badge">FASE 3</div>
-            <div class="phase-days">
-              <span class="phase-days-number">90</span>
-              <span class="phase-days-label">DIAS</span>
-            </div>
-          </div>
-          
-          <div class="phase-results">
-            <div class="phase-result-item">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" stroke-width="2">
-                <path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z" />
-                <path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z" />
-                <path d="M7 21h10" />
-                <path d="M12 3v18" />
-              </svg>
-              <div class="phase-result-info">
-                <span class="result-label">Peso</span>
-                <span class="result-value">-6kg</span>
+          <!-- Fase 3: 90 Dias (DESTAQUE) -->
+          <div class="timeline-phase phase-3 featured">
+            <div class="phase-featured-badge">META!</div>
+            <div class="phase-header">
+              <div class="phase-badge">FASE 3</div>
+              <div class="phase-days">
+                <span class="phase-days-number">90</span>
+                <span class="phase-days-label">DIAS</span>
               </div>
             </div>
             
-            <div class="phase-result-item">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" stroke-width="2">
-                <line x1="19" x2="5" y1="5" y2="19" />
-                <circle cx="6.5" cy="6.5" r="2.5" />
-              </svg>
-              <div class="phase-result-info">
-                <span class="result-label">Gordura</span>
-                <span class="result-value">-4.5%</span>
+            <div class="phase-results">
+              <div class="phase-result-item">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2">
+                  <path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z" />
+                  <path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z" />
+                  <path d="M7 21h10" />
+                  <path d="M12 3v18" />
+                </svg>
+                <div class="phase-result-info">
+                  <span class="result-label">Peso</span>
+                  <span class="result-value">
+                    {{ $data->projecao_resultados->fase_90_dias->variacao_peso_kg }}
+                  </span>
+                </div>
+              </div>
+              
+              <div class="phase-result-item">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2">
+                  <line x1="19" x2="5" y1="5" y2="19" />
+                  <circle cx="6.5" cy="6.5" r="2.5" />
+                </svg>
+                <div class="phase-result-info">
+                  <span class="result-label">Gordura</span>
+                  <span class="result-value">
+                    {{ $data->projecao_resultados->fase_90_dias->variacao_gordura_percentual }}
+                  </span>
+                </div>
+              </div>
+              
+              <div class="phase-result-item">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2">
+                  <path d="M14.4 14.4 9.6 9.6" />
+                </svg>
+                <div class="phase-result-info">
+                  <span class="result-label">Músculo</span>
+                  <span class="result-value gain">
+                    {{ $data->projecao_resultados->fase_90_dias->variacao_massa_magra_kg }}
+                  </span>
+                </div>
               </div>
             </div>
             
-            <div class="phase-result-item">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" stroke-width="2">
-                <path d="M14.4 14.4 9.6 9.6" />
-              </svg>
-              <div class="phase-result-info">
-                <span class="result-label">Músculo</span>
-                <span class="result-value gain">+0.5kg</span>
-              </div>
+            <div class="phase-description">
+              <p>{{ $data->projecao_resultados->fase_90_dias->descricao_fase }}</p>
             </div>
           </div>
-          
-          <div class="phase-description">
-            <p>Transformação completa: corpo definido, força aumentada e confiança máxima</p>
-          </div>
-        </div>
+        @endif
       </div>
     </div>
 

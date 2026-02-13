@@ -5688,6 +5688,7 @@ html, body {
 
 .timeline-phases {
   display: flex;
+  justify-content: center;
   align-items: stretch;
   gap: 0.625rem;
 }
@@ -5695,6 +5696,7 @@ html, body {
 /* ========== CARDS DAS FASES ========== */
 .timeline-phase {
   flex: 1;
+  max-width: 250px;
   padding: 1rem;
   border-radius: 1.125rem;
   border: 2px solid;
@@ -5736,6 +5738,14 @@ html, body {
   font-size: 0.625rem;
   font-weight: 800;
   letter-spacing: 0.1em;
+}
+
+.phase-1 .phase-featured-badge {
+  background: hsla(142, 71%, 45%, 1);
+}
+
+.phase-2 .phase-featured-badge {
+  background: hsla(221, 83%, 53%, 1);
 }
 
 /* Header da Fase */
