@@ -1776,6 +1776,41 @@
 
       <!-- NUTRITION COMPARISON -->
       <div class="rest-nutrition-section">
+        @php
+            function macroBadge($treino, $descanso) {
+                if ($treino == 0) {
+                    return ['label' => '—', 'class' => 'kept'];
+                }
+
+                $percent = round((($descanso - $treino) / $treino) * 100);
+
+                if ($percent == 0) {
+                    return ['label' => 'Mantida', 'class' => 'kept'];
+                }
+
+                if ($percent > 0) {
+                    return ['label' => '+' . $percent . '%', 'class' => 'increased'];
+                }
+
+                return ['label' => $percent . '%', 'class' => 'reduced'];
+            }
+
+            $proteina = macroBadge(
+                $data->ajuste_dias_descanso->proteina_dia_treino,
+                $data->ajuste_dias_descanso->proteina_dia_descanso
+            );
+
+            $carbo = macroBadge(
+                $data->ajuste_dias_descanso->carboidrato_dia_treino,
+                $data->ajuste_dias_descanso->carboidrato_dia_descanso
+            );
+
+            $gordura = macroBadge(
+                $data->ajuste_dias_descanso->gordura_dia_treino,
+                $data->ajuste_dias_descanso->gordura_dia_descanso
+            );
+        @endphp
+
           <h3 class="rest-section-title">Ajuste Nutricional: Treino vs Descanso</h3>
           <div class="rest-nutrition-comparison">
               <div class="rest-nutrition-column training">
@@ -1822,17 +1857,17 @@
                       <div class="rest-macro-row">
                           <span class="rest-macro-name">Proteína</span>
                           <span class="rest-macro-amount">{{$data->ajuste_dias_descanso->proteina_dia_descanso}}g</span>
-                          <span class="rest-macro-badge kept">Mantida</span>
+                          <span class="rest-macro-badge {{ $proteina['class'] }}">{{ $proteina['label'] }}</span>
                       </div>
                       <div class="rest-macro-row">
                           <span class="rest-macro-name">Carboidratos</span>
                           <span class="rest-macro-amount highlight">{{$data->ajuste_dias_descanso->carboidrato_dia_descanso}}g</span>
-                          <span class="rest-macro-badge reduced">-25%</span>
+                          <span class="rest-macro-badge {{ $carbo['class'] }}">{{ $carbo['label'] }}</span>
                       </div>
                       <div class="rest-macro-row">
                           <span class="rest-macro-name">Gorduras</span>
                           <span class="rest-macro-amount">{{$data->ajuste_dias_descanso->gordura_dia_descanso}}g</span>
-                          <span class="rest-macro-badge increased">+10%</span>
+                          <span class="rest-macro-badge {{ $gordura['class'] }}">{{ $gordura['label'] }}</span>
                       </div>
                   </div>
                   <div class="rest-nutrition-total rest">
