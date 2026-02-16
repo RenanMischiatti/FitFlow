@@ -1168,12 +1168,12 @@
           <span>Plano Nutricional</span>
         </div>
         <h2 class="nutri-title">Sua Estratégia Alimentar</h2>
-        <p class="nutri-subtitle">Nutrição otimizada para definição muscular com preservação de massa magra</p>
+        <p class="nutri-subtitle">{{$data->plano_alimentar->descricao_dieta}}</p>
       </div>
 
       <div class="nutri-hero">
-        <h3>Conceito do Plano: Déficit Inteligente</h3>
-        <p>Este plano foi desenhado com um <strong>déficit calórico moderado (-500 kcal)</strong> que maximiza a queima de gordura enquanto preserva massa muscular. A distribuição estratégica de macronutrientes garante energia para treinos intensos, recuperação adequada e saciedade ao longo do dia. Cada refeição é planejada com propósito.</p>
+        <h3>Conceito do Plano: {{$data->plano_alimentar->conceito_plano}}</h3>
+        <p>{{$data->plano_alimentar->descricao_conceito}}</p>
       </div>
 
       <div class="nutri-objective">
@@ -1181,11 +1181,11 @@
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
         </div>
         <div>
-          <h4>Definição Muscular com Preservação de Massa</h4>
-          <p>Hipocalórico, alto em proteínas, carboidratos estratégicos e gorduras saudáveis</p>
+          <h4>{{$data->plano_alimentar->titulo_explicacao}}</h4>
+          <p>{{$data->plano_alimentar->descricao_explicacao}}</p>
         </div>
         <div class="nutri-objective-badges">
-          <span class="nutri-obj-badge">📋 4 refeições/dia</span>
+          <span class="nutri-obj-badge">📋 {{$data->plano_alimentar->total_refeicoes}} refeições/dia</span>
           <span class="nutri-obj-badge">⏰ Horários fixos</span>
         </div>
       </div>
@@ -1195,22 +1195,22 @@
           <div class="nutri-pillar-icon protein">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.4 14.4 9.6 9.6"/><path d="M18.657 21.485a2 2 0 1 1-2.829-2.828l-1.767 1.768a2 2 0 1 1-2.829-2.829l6.364-6.364a2 2 0 1 1 2.829 2.829l-1.768 1.767a2 2 0 1 1 2.828 2.829z"/></svg>
           </div>
-          <h4>Proteína Alta</h4>
-          <p>1.8-2.2g/kg para preservar massa muscular durante o déficit</p>
+          <h4>{{$data->plano_alimentar->proteina_titulo}}</h4>
+          <p>{{$data->plano_alimentar->proteina_descricao}}</p>
         </div>
         <div class="nutri-pillar">
           <div class="nutri-pillar-icon carbs">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/></svg>
           </div>
-          <h4>Carbs Estratégicos</h4>
-          <p>Concentrados pré e pós-treino para máxima performance</p>
+          <h4>{{$data->plano_alimentar->carbo_titulo}}</h4>
+          <p>{{$data->plano_alimentar->carbo_descricao}}</p>
         </div>
         <div class="nutri-pillar">
           <div class="nutri-pillar-icon fat">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20"/><path d="m15 5 3 3-3 3"/><path d="m9 19-3-3 3-3"/></svg>
           </div>
-          <h4>Gorduras Saudáveis</h4>
-          <p>Equilíbrio hormonal, saciedade e absorção de vitaminas</p>
+          <h4>{{$data->plano_alimentar->gordura_titulo}}</h4>
+          <p>{{$data->plano_alimentar->gordura_descricao}}</p>
         </div>
         <div class="nutri-pillar">
           <div class="nutri-pillar-icon timing">
@@ -1224,22 +1224,22 @@
       <div class="nutri-macros-grid">
         <div class="nutri-macro-card protein">
           <div class="nutri-macro-emoji">💪</div>
-          <span class="nutri-macro-value">161g</span>
+          <span class="nutri-macro-value">{{$data->estrategia_nutricional->macronutrientes->proteina->gramas}}g</span>
           <span class="nutri-macro-label">Proteínas</span>
         </div>
         <div class="nutri-macro-card carbs">
           <div class="nutri-macro-emoji">⚡</div>
-          <span class="nutri-macro-value">159g</span>
+          <span class="nutri-macro-value">{{$data->estrategia_nutricional->macronutrientes->carboidrato->gramas}}g</span>
           <span class="nutri-macro-label">Carboidratos</span>
         </div>
         <div class="nutri-macro-card fat">
           <div class="nutri-macro-emoji">🥑</div>
-          <span class="nutri-macro-value">67g</span>
+          <span class="nutri-macro-value">{{$data->estrategia_nutricional->macronutrientes->gordura->gramas}}g</span>
           <span class="nutri-macro-label">Gorduras</span>
         </div>
         <div class="nutri-macro-card calories">
           <div class="nutri-macro-emoji">🔥</div>
-          <span class="nutri-macro-value">1842</span>
+          <span class="nutri-macro-value">{{$data->estrategia_nutricional->meta_calorica_diaria}}</span>
           <span class="nutri-macro-label">kcal Total</span>
         </div>
       </div>
@@ -1249,21 +1249,21 @@
           <div class="nutri-tip-num">1</div>
           <div>
             <h4>Prepare com Antecedência</h4>
-            <p>Faça meal prep no domingo para garantir refeições da semana inteira.</p>
+            <p>Organize e prepare as refeições da semana com antecedência. Planejamento reduz erros e facilita a consistência.</p>
           </div>
         </div>
         <div class="nutri-tip-card">
           <div class="nutri-tip-num">2</div>
           <div>
             <h4>Hidratação Constante</h4>
-            <p>Beba no mínimo 3L de água/dia. Água é essencial para o metabolismo.</p>
+            <p>Beba cerca de 3L de água por dia. A hidratação adequada melhora desempenho, digestão, recuperação muscular e controle do apetite.</p>
           </div>
         </div>
         <div class="nutri-tip-card">
           <div class="nutri-tip-num">3</div>
           <div>
-            <h4>Suplementação Básica</h4>
-            <p>Creatina 5g/dia e Whey pós-treino completam a dieta com eficiência.</p>
+            <h4>Qualidade dos Alimentos</h4>
+            <p>Priorize alimentos naturais e pouco processados. A base da dieta deve ser comida de verdade.</p>
           </div>
         </div>
       </div>
@@ -1274,133 +1274,106 @@
             <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/>
             <polyline points="16 7 22 7 22 13"/>
           </svg>
-          <h4>Como Manter a Dieta no Longo Prazo</h4>
+          <h4>Consistência e Ajustes Inteligentes</h4>
         </div>
         <p>
-          A dieta funciona quando ela se encaixa na sua rotina. 
-          Organize suas refeições, tenha opções práticas à disposição e evite decisões de última hora. 
-          <strong>Constância vence motivação</strong>. Pequenos deslizes não anulam o progresso — desistir sim.
+          Resultados duradouros vêm da constância e de ajustes graduais. 
+          Acompanhe seu progresso, mantenha regularidade nas refeições e adapte a dieta conforme sua evolução. 
+          <strong>Pequenos ajustes sustentáveis geram grandes resultados</strong>.
         </p>
-    </div>
-
+      </div>
   </section>
 
   <!-- ==================== PAGE 9: MEALS ==================== -->
-  <section class="pdf-page">
+  @foreach(collect($data->plano_alimentar->refeicoes)->chunk(2) as $grupoRefeicoes)
+    <section class="pdf-page">
       <div class="meals-page-container">
-        <!-- Refeição 1 -->
-        <div class="meal-card">
-          <div class="meal-card-header green">
-            <div class="meal-header-left">
-              <div class="meal-icon">🌅</div>
-              <div>
-                <h3 class="meal-title">Café da Manhã</h3>
-                <p class="meal-desc">Primeira refeição do dia — energia e proteína</p>
+        @foreach($grupoRefeicoes as $refeicao)
+          <div class="meal-card">
+            <!-- Header -->
+            <div class="meal-card-header-improved">
+              <div class="meal-header-left">
+                <div class="meal-icon">
+                  {!! getMealSvgIcon($refeicao->horario) !!}
+                </div>
+                <div>
+                  <h3 class="meal-title">{{ $refeicao->nome_refeicao }}</h3>
+                  <p class="meal-desc">{{ $refeicao->descricao }}</p>
+                </div>
+              </div>
+              <div class="meal-time">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10"/>
+                  <polyline points="12 6 12 12 16 14"/>
+                </svg>
+                {{ $refeicao->horario }}
               </div>
             </div>
-            <div class="meal-time">
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-              07:00
-            </div>
-          </div>
-          <div class="meal-body">
-            <table class="food-table">
-              <thead>
-                <tr>
-                  <th>Alimento</th>
-                  <th class="center">Qtd</th>
-                  <th class="center"><span class="macro-header protein">P</span></th>
-                  <th class="center"><span class="macro-header carbs">C</span></th>
-                  <th class="center"><span class="macro-header fat">G</span></th>
-                  <th class="center"><span class="macro-header kcal">Kcal</span></th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr><td class="food-name">Ovos inteiros</td><td class="food-quantity">3 un</td><td class="food-protein">18</td><td class="food-carbs">1</td><td class="food-fat">15</td><td class="food-calories">210</td></tr>
-                <tr><td class="food-name">Pão integral</td><td class="food-quantity">2 fatias</td><td class="food-protein">6</td><td class="food-carbs">24</td><td class="food-fat">2</td><td class="food-calories">140</td></tr>
-                <tr><td class="food-name">Queijo cottage</td><td class="food-quantity">60g</td><td class="food-protein">16</td><td class="food-carbs">5</td><td class="food-fat">2</td><td class="food-calories">80</td></tr>
-                <tr><td class="food-name">Mamão papaia</td><td class="food-quantity">150g</td><td class="food-protein">1</td><td class="food-carbs">14</td><td class="food-fat">0</td><td class="food-calories">56</td></tr>
-                <tr><td class="food-name">Granola</td><td class="food-quantity">30g</td><td class="food-protein">3</td><td class="food-carbs">18</td><td class="food-fat">4</td><td class="food-calories">116</td></tr>
-                <tr><td class="food-name">Iogurte natural</td><td class="food-quantity">200g</td><td class="food-protein">10</td><td class="food-carbs">12</td><td class="food-fat">4</td><td class="food-calories">128</td></tr>
-                <tr><td class="food-name">Mel</td><td class="food-quantity">10g</td><td class="food-protein">0</td><td class="food-carbs">8</td><td class="food-fat">0</td><td class="food-calories">32</td></tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <td colspan="2"><strong>TOTAL</strong></td>
-                  <td class="food-protein"><strong>54</strong></td>
-                  <td class="food-carbs"><strong>82</strong></td>
-                  <td class="food-fat"><strong>27</strong></td>
-                  <td class="food-calories"><strong>762</strong></td>
-                </tr>
-              </tfoot>
-            </table>
-          </div>
-          <div class="meal-card-footer green">
-            <div class="meal-footer-macros">
-              <div class="meal-footer-macro protein"><span class="meal-footer-dot"></span>Proteína: <strong>54g</strong></div>
-              <div class="meal-footer-macro carbs"><span class="meal-footer-dot"></span>Carbos: <strong>82g</strong></div>
-              <div class="meal-footer-macro fat"><span class="meal-footer-dot"></span>Gordura: <strong>27g</strong></div>
-            </div>
-            <div class="meal-footer-kcal">762 kcal</div>
-          </div>
-        </div>
 
-        <!-- Refeição 2 -->
-        <div class="meal-card">
-          <div class="meal-card-header blue">
-            <div class="meal-header-left">
-              <div class="meal-icon">🍽️</div>
-              <div>
-                <h3 class="meal-title">Almoço</h3>
-                <p class="meal-desc">Refeição principal — maior volume calórico</p>
+            <!-- Body -->
+            <div class="meal-body-flex">
+              <div class="meal-body">
+                <table class="food-table-improved">
+                  <thead>
+                    <tr>
+                      <th class="food-col">Alimento</th>
+                      <th class="qty-col">Quantidade</th>
+                      <th class="macro-col">Proteína</th>
+                      <th class="macro-col">Carboidrato</th>
+                      <th class="macro-col">Gordura</th>
+                      <th class="kcal-col">Calorias</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    @foreach($refeicao->alimentos as $alimento)
+                    <tr>
+                      <td class="food-col">
+                        <span class="food-name">{{ $alimento->nome }}</span>
+                      </td>
+                      <td class="qty-col">{{ $alimento->quantidade }}</td>
+                      <td class="macro-col protein-value">{{ $alimento->proteina_g }}g</td>
+                      <td class="macro-col carbs-value">{{ $alimento->carboidrato_g }}g</td>
+                      <td class="macro-col fat-value">{{ $alimento->gordura_g }}g</td>
+                      <td class="kcal-col">{{ $alimento->calorias }}</td>
+                    </tr>
+                    @endforeach
+                  </tbody>
+                </table>
+              </div>
+
+              <!-- Total Footer (fora da tabela) -->
+              <div class="meal-total-footer">
+                <div class="total-row-content">
+                  <div class="total-label">
+                    <strong>TOTAL</strong>
+                  </div>
+                  <div class="total-values">
+                    <div class="total-value protein-value">
+                      <span class="total-macro-label">Proteína</span>
+                      <strong>{{ $refeicao->totais_refeicao->proteina_g }}g</strong>
+                    </div>
+                    <div class="total-value carbs-value">
+                      <span class="total-macro-label">Carboidrato</span>
+                      <strong>{{ $refeicao->totais_refeicao->carboidrato_g }}g</strong>
+                    </div>
+                    <div class="total-value fat-value">
+                      <span class="total-macro-label">Gordura</span>
+                      <strong>{{ $refeicao->totais_refeicao->gordura_g }}g</strong>
+                    </div>
+                    <div class="total-value kcal-value">
+                      <span class="total-macro-label">Calorias</span>
+                      <strong>{{ $refeicao->totais_refeicao->calorias }}</strong>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
-            <div class="meal-time">
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-              12:00
-            </div>
           </div>
-          <div class="meal-body">
-            <table class="food-table">
-              <thead>
-                <tr>
-                  <th>Alimento</th>
-                  <th class="center">Qtd</th>
-                  <th class="center"><span class="macro-header protein">P</span></th>
-                  <th class="center"><span class="macro-header carbs">C</span></th>
-                  <th class="center"><span class="macro-header fat">G</span></th>
-                  <th class="center"><span class="macro-header kcal">Kcal</span></th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr><td class="food-name">Peito de frango</td><td class="food-quantity">180g</td><td class="food-protein">45</td><td class="food-carbs">0</td><td class="food-fat">4</td><td class="food-calories">216</td></tr>
-                <tr><td class="food-name">Arroz integral</td><td class="food-quantity">120g</td><td class="food-protein">3</td><td class="food-carbs">30</td><td class="food-fat">1</td><td class="food-calories">144</td></tr>
-                <tr><td class="food-name">Feijão preto</td><td class="food-quantity">80g</td><td class="food-protein">6</td><td class="food-carbs">15</td><td class="food-fat">0</td><td class="food-calories">80</td></tr>
-                <tr><td class="food-name">Brócolis</td><td class="food-quantity">100g</td><td class="food-protein">3</td><td class="food-carbs">7</td><td class="food-fat">0</td><td class="food-calories">34</td></tr>
-                <tr><td class="food-name">Azeite extra virgem</td><td class="food-quantity">10ml</td><td class="food-protein">0</td><td class="food-carbs">0</td><td class="food-fat">10</td><td class="food-calories">90</td></tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <td colspan="2"><strong>TOTAL</strong></td>
-                  <td class="food-protein"><strong>57</strong></td>
-                  <td class="food-carbs"><strong>52</strong></td>
-                  <td class="food-fat"><strong>15</strong></td>
-                  <td class="food-calories"><strong>564</strong></td>
-                </tr>
-              </tfoot>
-            </table>
-          </div>
-          <div class="meal-card-footer blue">
-            <div class="meal-footer-macros">
-              <div class="meal-footer-macro protein"><span class="meal-footer-dot"></span>Proteína: <strong>57g</strong></div>
-              <div class="meal-footer-macro carbs"><span class="meal-footer-dot"></span>Carbos: <strong>52g</strong></div>
-              <div class="meal-footer-macro fat"><span class="meal-footer-dot"></span>Gordura: <strong>15g</strong></div>
-            </div>
-            <div class="meal-footer-kcal">564 kcal</div>
-          </div>
-        </div>
-    </div>
-  </section>
+        @endforeach
+      </div>
+    </section>
+  @endforeach
+
 
   <!-- ==================== PAGE 10: HYDRATION - VERSÃO PREMIUM ==================== -->
   <section class="pdf-page">
@@ -1434,7 +1407,10 @@
                         fill="url(#waterGradient)" opacity="0.8" style="clip-path: inset(30% 0 0 0);"/>
                 </svg>
                 <div class="hydration-droplet-content">
-                  <span class="hydration-main-number">3L</span>
+                  <span class="hydration-main-number">
+                      {{ ceil(($user->peso * 35) / 1000) }}L
+                  </span>
+
                   <span class="hydration-main-label">Meta Diária</span>
                 </div>
               </div>
@@ -1447,7 +1423,7 @@
               <div class="hydration-calc-formula">
                 <div class="hydration-calc-item">
                   <span class="hydration-calc-label">Peso Corporal</span>
-                  <span class="hydration-calc-value">85kg</span>
+                  <span class="hydration-calc-value">{{$user->peso}}</span>
                 </div>
                 <div class="hydration-calc-symbol">×</div>
                 <div class="hydration-calc-item">
@@ -1457,7 +1433,7 @@
                 <div class="hydration-calc-symbol">=</div>
                 <div class="hydration-calc-item result">
                   <span class="hydration-calc-label">Necessidade</span>
-                  <span class="hydration-calc-value highlight">2.975ml</span>
+                  <span class="hydration-calc-value highlight">{{$user->peso * 35}}ml</span>
                 </div>
               </div>
             </div>
@@ -1622,7 +1598,7 @@
               </div>
               <h1 class="cardio-title-premium">Cardio Estratégico</h1>
               <p class="cardio-subtitle-premium">
-                  Maximizar queima de gordura sem comprometer ganhos musculares
+                  {{$data->cardio_estrategico->resumo_cardio}}
               </p>
           </div>
 
@@ -1635,7 +1611,7 @@
               </div>
               <div>
                   <h3>Por Que Cardio Estratégico?</h3>
-                  <p>Durante um cutting, queremos queimar gordura enquanto preservamos ao máximo os músculos conquistados. Cardio em excesso ou mal planejado pode catabolizar massa muscular. Nossa abordagem prioriza LISS moderado, com HIIT opcional apenas quando bem recuperado.</p>
+                  <p>{{$data->cardio_estrategico->cardio_estrategico}}</p>
               </div>
           </div>
 
@@ -1649,7 +1625,7 @@
                   </div>
                   <div class="cardio-stat-content-premium">
                       <div class="cardio-stat-label-premium">Meta Semanal</div>
-                      <div class="cardio-stat-value-premium">90-120min</div>
+                      <div class="cardio-stat-value-premium">{{$data->cardio_estrategico->meta_semanal_minutos}}</div>
                   </div>
               </div>
               <div class="cardio-stat-premium burn">
@@ -1661,125 +1637,76 @@
                   </div>
                   <div class="cardio-stat-content-premium">
                       <div class="cardio-stat-label-premium">Queima Extra</div>
-                      <div class="cardio-stat-value-premium">800-1200kcal</div>
+                      <div class="cardio-stat-value-premium">{{$data->cardio_estrategico->queima_caloria_semanal}}kcal</div>
                   </div>
               </div>
           </div>
 
           <!-- ACTIVITY GRID 2x2 -->
           <div class="cardio-activity-grid">
-              <!-- Card 1: Caminhada em Jejum -->
-              <div class="cardio-activity-card">
-                  <div class="cardio-activity-header">
-                      <div class="cardio-activity-icon green">
-                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                              <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
-                          </svg>
-                      </div>
-                      <div style="flex: 1;">
-                          <h4>Caminhada em Jejum</h4>
-                          <div class="cardio-activity-badges">
-                              <span class="cardio-badge frequency">3x/semana</span>
-                              <span class="cardio-badge duration">30-40min</span>
-                              <span class="cardio-badge intensity light">Leve</span>
-                          </div>
-                      </div>
-                  </div>
-                  <p class="cardio-activity-notes">
-                      Logo ao acordar, antes do café da manhã. Ritmo confortável, FC 60-70% da máxima. Ideal para mobilizar gordura armazenada.
-                  </p>
-                  <div class="cardio-activity-benefits">
-                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                          <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                      </svg>
-                      <span>Máxima oxidação de gordura</span>
-                  </div>
-              </div>
 
-              <!-- Card 2: Bicicleta Ergométrica -->
-              <div class="cardio-activity-card">
-                  <div class="cardio-activity-header">
-                      <div class="cardio-activity-icon blue">
-                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                              <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.213-9.193 2.056 2.056 0 00-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 00-10.026 0 1.106 1.106 0 00-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12" />
-                          </svg>
-                      </div>
-                      <div style="flex: 1;">
-                          <h4>Bicicleta Ergométrica</h4>
-                          <div class="cardio-activity-badges">
-                              <span class="cardio-badge frequency">2x/semana</span>
-                              <span class="cardio-badge duration">20-30min</span>
-                              <span class="cardio-badge intensity moderate">Moderada</span>
+              @php
+                  $icons = [
+                      [
+                          'color' => 'green',
+                          'svg' => '<path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />'
+                      ],
+                      [
+                          'color' => 'blue',
+                          'svg' => '<path stroke-linecap="round" stroke-linejoin="round" d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.213-9.193 2.056 2.056 0 00-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 00-10.026 0 1.106 1.106 0 00-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12" />'
+                      ],
+                      [
+                          'color' => 'red',
+                          'svg' => '<path stroke-linecap="round" stroke-linejoin="round" d="M15.362 5.214A8.252 8.252 0 0112 21 8.25 8.25 0 016.038 7.048 8.287 8.287 0 009 9.6a8.983 8.983 0 013.361-6.867 8.21 8.21 0 003 2.48z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 18a3.75 3.75 0 00.495-7.467 5.99 5.99 0 00-1.925 3.546 5.974 5.974 0 01-2.133-1A3.75 3.75 0 0012 18z" />'
+                      ],
+                      [
+                          'color' => 'gold',
+                          'svg' => '<path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941" />'
+                      ],
+                  ];
+              @endphp
+              @foreach ($data->cardio_estrategico->atividades as $atividade)
+                  @php
+                      $icon = $icons[$loop->index % count($icons)];
+                  @endphp
+                  <!-- Card 1: Caminhada em Jejum -->
+                  <div class="cardio-activity-card">
+                      <div class="cardio-activity-header">
+                          <div class="cardio-activity-icon {{ $icon['color'] }}">
+                              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                                  {!! $icon['svg'] !!}
+                              </svg>
                           </div>
-                      </div>
-                  </div>
-                  <p class="cardio-activity-notes">
-                      Pós-treino de superiores ou em dias off. FC 70-80%. Baixo impacto nas articulações, ideal para recovery ativo.
-                  </p>
-                  <div class="cardio-activity-benefits">
-                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                          <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                      </svg>
-                      <span>Baixo impacto, alta eficiência</span>
-                  </div>
-              </div>
+                          <div style="flex: 1;">
+                              <h4>{{$atividade->nome}}</h4>
+                              <div class="cardio-activity-badges">
+                                  <span class="cardio-badge frequency">{{$atividade->frequencia_semanal}}x/semana</span>
+                                  <span class="cardio-badge duration">{{$atividade->duracao_minutos}}</span>
+                                  <span class="cardio-badge intensity 
+                                    {{ 
+                                        $atividade->intensidade === 'Leve' ? 'light' : 
+                                        ($atividade->intensidade === 'Moderada' ? 'moderate' : 
+                                        ($atividade->intensidade === 'Alta' ? 'high' : '')) 
+                                    }}">
+                                    {{ $atividade->intensidade }}
+                                </span>
 
-              <!-- Card 3: HIIT Opcional -->
-              <div class="cardio-activity-card">
-                  <div class="cardio-activity-header">
-                      <div class="cardio-activity-icon red">
-                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                              <path stroke-linecap="round" stroke-linejoin="round" d="M15.362 5.214A8.252 8.252 0 0112 21 8.25 8.25 0 016.038 7.048 8.287 8.287 0 009 9.6a8.983 8.983 0 013.361-6.867 8.21 8.21 0 003 2.48z" />
-                              <path stroke-linecap="round" stroke-linejoin="round" d="M12 18a3.75 3.75 0 00.495-7.467 5.99 5.99 0 00-1.925 3.546 5.974 5.974 0 01-2.133-1A3.75 3.75 0 0012 18z" />
-                          </svg>
-                      </div>
-                      <div style="flex: 1;">
-                          <h4>HIIT Opcional</h4>
-                          <div class="cardio-activity-badges">
-                              <span class="cardio-badge frequency">1x/semana</span>
-                              <span class="cardio-badge duration">15-20min</span>
-                              <span class="cardio-badge intensity high">Alta</span>
+                              </div>
                           </div>
                       </div>
+                      <p class="cardio-activity-notes">
+                          {{$atividade->notas}}
+                      </p>
+                      <div class="cardio-activity-benefits">
+                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                          </svg>
+                          <span>{{ $atividade->beneficio_principal }}</span>
+                      </div>
                   </div>
-                  <p class="cardio-activity-notes">
-                      Apenas se bem recuperado. Sprints 30seg on/90seg off. Nunca em dias de perna ou no dia seguinte. Prioriza EPOC e metabolismo.
-                  </p>
-                  <div class="cardio-activity-benefits">
-                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                          <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                      </svg>
-                      <span>Pós-queima de 24-48h</span>
-                  </div>
-              </div>
+              @endforeach
 
-              <!-- Card 4: Escada/Stairmaster -->
-              <div class="cardio-activity-card">
-                  <div class="cardio-activity-header">
-                      <div class="cardio-activity-icon gold">
-                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                              <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941" />
-                          </svg>
-                      </div>
-                      <div style="flex: 1;">
-                          <h4>Escada/Stairmaster</h4>
-                          <div class="cardio-activity-badges">
-                              <span class="cardio-badge frequency">1-2x/semana</span>
-                              <span class="cardio-badge duration">15-25min</span>
-                              <span class="cardio-badge intensity moderate">Moderada</span>
-                          </div>
-                      </div>
-                  </div>
-                  <p class="cardio-activity-notes">
-                      Ótimo para glúteos e posterior de coxa. Ritmo constante, sem segurar o corrimão. Pode substituir uma sessão de caminhada.
-                  </p>
-                  <div class="cardio-activity-benefits">
-                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                          <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                      </svg>
-                      <span>Tonifica membros inferiores</span>
-                  </div>
-              </div>
           </div>
 
           <!-- WARNING BANNER -->
@@ -1861,20 +1788,20 @@
                   <div class="rest-nutrition-macros">
                       <div class="rest-macro-row">
                           <span class="rest-macro-name">Proteína</span>
-                          <span class="rest-macro-amount">170g</span>
+                          <span class="rest-macro-amount">{{$data->ajuste_dias_descanso->proteina_dia_treino}}g</span>
                       </div>
                       <div class="rest-macro-row">
                           <span class="rest-macro-name">Carboidratos</span>
-                          <span class="rest-macro-amount highlight">200g</span>
+                          <span class="rest-macro-amount highlight">{{$data->ajuste_dias_descanso->carboidrato_dia_treino}}g</span>
                       </div>
                       <div class="rest-macro-row">
                           <span class="rest-macro-name">Gorduras</span>
-                          <span class="rest-macro-amount">70g</span>
+                          <span class="rest-macro-amount">{{$data->ajuste_dias_descanso->gordura_dia_treino}}g</span>
                       </div>
                   </div>
                   <div class="rest-nutrition-total training">
                       <span>Total</span>
-                      <strong>2100 kcal</strong>
+                      <strong>{{$data->ajuste_dias_descanso->calorias_dia_treino}} kcal</strong>
                   </div>
               </div>
 
@@ -1894,23 +1821,23 @@
                   <div class="rest-nutrition-macros">
                       <div class="rest-macro-row">
                           <span class="rest-macro-name">Proteína</span>
-                          <span class="rest-macro-amount">170g</span>
+                          <span class="rest-macro-amount">{{$data->ajuste_dias_descanso->proteina_dia_descanso}}g</span>
                           <span class="rest-macro-badge kept">Mantida</span>
                       </div>
                       <div class="rest-macro-row">
                           <span class="rest-macro-name">Carboidratos</span>
-                          <span class="rest-macro-amount highlight">150g</span>
+                          <span class="rest-macro-amount highlight">{{$data->ajuste_dias_descanso->carboidrato_dia_descanso}}g</span>
                           <span class="rest-macro-badge reduced">-25%</span>
                       </div>
                       <div class="rest-macro-row">
                           <span class="rest-macro-name">Gorduras</span>
-                          <span class="rest-macro-amount">77g</span>
+                          <span class="rest-macro-amount">{{$data->ajuste_dias_descanso->gordura_dia_descanso}}g</span>
                           <span class="rest-macro-badge increased">+10%</span>
                       </div>
                   </div>
                   <div class="rest-nutrition-total rest">
                       <span>Total</span>
-                      <strong>1890 kcal</strong>
+                      <strong>{{$data->ajuste_dias_descanso->calorias_dia_descanso}} kcal</strong>
                   </div>
               </div>
           </div>
@@ -2284,9 +2211,9 @@
     <p class="victory-subtitle">Você tem em mãos todas as ferramentas para sua transformação. Agora é hora de executar.</p>
 
     <div class="victory-stats">
-      <div class="victory-stat"><div class="victory-stat-value">4</div><div class="victory-stat-label">Treinos/Semana</div></div>
-      <div class="victory-stat"><div class="victory-stat-value">1842</div><div class="victory-stat-label">Kcal/Dia</div></div>
-      <div class="victory-stat"><div class="victory-stat-value">90</div><div class="victory-stat-label">Dias de Plano</div></div>
+      <div class="victory-stat"><div class="victory-stat-value">{{$data->programa_treino->frequencia_semanal}}</div><div class="victory-stat-label">Treinos/Semana</div></div>
+      <div class="victory-stat"><div class="victory-stat-value">{{$data->estrategia_nutricional->meta_calorica_diaria}}</div><div class="victory-stat-label">Kcal/Dia</div></div>
+      <div class="victory-stat"><div class="victory-stat-value">{{$data->projecao_resultados->prazo_escolhido}}</div><div class="victory-stat-label">Dias de Plano</div></div>
     </div>
 
     <div class="victory-quote">
@@ -2294,7 +2221,7 @@
     </div>
 
     <div class="victory-steps">
-      <div class="victory-step"><div class="victory-step-num">01</div><div class="victory-step-text">Siga o plano com consistência por 90 dias</div></div>
+      <div class="victory-step"><div class="victory-step-num">01</div><div class="victory-step-text">Siga o plano com consistência por {{$data->projecao_resultados->prazo_escolhido}} dias</div></div>
       <div class="victory-step"><div class="victory-step-num">02</div><div class="victory-step-text">Registre progresso com fotos e medidas semanais</div></div>
       <div class="victory-step"><div class="victory-step-num">03</div><div class="victory-step-text">Ajuste conforme evolução e reavalie ao final</div></div>
     </div>
@@ -2306,8 +2233,8 @@
 
     <div class="victory-meta">
       <span class="victory-meta-item"><strong>Versão:</strong> 1.0</span>
-      <span class="victory-meta-item"><strong>Emitido em:</strong> 29/01/2026</span>
-      <span class="victory-meta-item"><strong>Validade:</strong> 90 dias</span>
+      <span class="victory-meta-item"><strong>Emitido em:</strong> {{ now()->format('d/m/Y') }}</span>
+      <span class="victory-meta-item"><strong>Validade:</strong> {{$data->projecao_resultados->prazo_escolhido}} dias</span>
     </div>
   </section>
 

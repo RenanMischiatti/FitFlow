@@ -79,7 +79,7 @@
 
   /* Macro Colors */
   --macro-protein: hsl(221, 83%, 53%);
-  --macro-carbs: hsl(142, 71%, 45%);
+  --macro-carbs: #1b8d45;
   --macro-fat: hsl(38, 92%, 50%);
   --macro-calories: hsl(0, 84%, 60%);
 
@@ -7096,7 +7096,7 @@ html, body {
   font-weight: bolder;
   color: #f3f4f6;
   line-height: 1;
-  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.795);
+  -webkit-text-stroke: 1px rgba(0, 0, 0, 0.8);
 }
 
 .hydration-main-label {
@@ -9451,4 +9451,207 @@ html, body {
 /* Ajuste no padding do card de cardio quando tem badge */
 .treino-day.cardio {
   padding-top: 1.625rem;
+}
+
+/* ==================================================================================
+   MEAL CARD - VERSÃO PROFISSIONAL MELHORADA COM FOOTER FIXO
+   ================================================================================== */
+
+.meal-card-header-improved {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.25rem;
+  background: linear-gradient(135deg, hsla(220, 14%, 96%, 0.6) 0%, hsla(220, 14%, 98%, 0.8) 100%);
+  border-bottom: 1px solid hsla(220, 13%, 91%, 0.8);
+}
+
+/* ========== BODY COM FLEX ========== */
+
+.meal-body-flex {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+}
+
+.meal-body {
+  padding: 0;
+  flex: 1;
+  overflow-y: auto;
+  min-height: 0;
+}
+
+/* ========== TABELA MELHORADA ========== */
+
+.food-table-improved {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 0.8125rem;
+}
+
+.food-table-improved thead {
+  background-color: hsla(220, 14%, 96%, 0.5);
+}
+
+.food-table-improved thead tr {
+  border-bottom: 2px solid hsla(220, 13%, 91%, 0.6);
+}
+
+.food-table-improved th {
+  padding: 0.625rem 0.75rem;
+  text-align: left;
+  font-weight: 700;
+  color: hsla(220, 20%, 30%, 0.85);
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-bottom: 2px solid hsla(220, 13%, 91%, 0.6);
+}
+
+.food-table-improved th.food-col {
+  width: 35%;
+}
+
+.food-table-improved th.qty-col {
+  width: 18%;
+  text-align: center;
+}
+
+.food-table-improved th.macro-col {
+  width: 11%;
+  text-align: center;
+}
+
+.food-table-improved th.kcal-col {
+  width: 14%;
+  text-align: center;
+  font-weight: 800;
+}
+
+.food-table-improved tbody tr {
+  border-bottom: 1px solid hsla(220, 13%, 91%, 0.4);
+  transition: background-color 0.15s ease;
+}
+
+.food-table-improved tbody tr:last-child {
+  border-bottom: none;
+}
+
+.food-table-improved tbody tr:hover {
+  background-color: hsla(220, 14%, 96%, 0.3);
+}
+
+.food-table-improved tbody tr:nth-child(even) {
+  background-color: hsla(220, 14%, 96%, 0.25);
+}
+
+.food-table-improved td {
+  padding: 0.6875rem 0.75rem;
+  vertical-align: middle;
+}
+
+.food-table-improved td.food-col {
+  font-weight: 600;
+  color: var(--foreground);
+}
+
+.food-table-improved td.qty-col {
+  text-align: center;
+  color: hsla(220, 20%, 30%, 0.7);
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.food-table-improved td.macro-col {
+  text-align: center;
+  font-weight: 700;
+  font-size: 0.8125rem;
+}
+
+.food-table-improved td.protein-value {
+  color: hsla(221, 83%, 53%, 0.85);
+}
+
+.food-table-improved td.carbs-value {
+  color: #1b8d45;
+}
+
+.food-table-improved td.fat-value {
+  color: hsla(38, 92%, 50%, 0.85);
+}
+
+.food-table-improved td.kcal-col {
+  text-align: center;
+  font-weight: 700;
+  color: hsla(0, 84%, 60%, 0.85);
+  font-size: 0.8125rem;
+}
+
+/* ========== FOOTER TOTAL (FORA DA TABELA) ========== */
+
+.meal-total-footer {
+  padding: 0.875rem 1.25rem;
+  background: linear-gradient(135deg, hsla(220, 14%, 96%, 0.6) 0%, hsla(220, 14%, 98%, 0.8) 100%);
+  border-top: 2px solid hsla(220, 13%, 91%, 0.6);
+  margin-top: auto;
+  flex-shrink: 0;
+}
+
+.total-row-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.total-label {
+  font-size: 0.875rem;
+  font-weight: 800;
+  color: var(--foreground);
+  letter-spacing: 0.05em;
+}
+
+.total-values {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.total-value {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.125rem;
+}
+
+.total-macro-label {
+  font-size: 0.625rem;
+  font-weight: 600;
+  color: hsla(220, 20%, 30%, 0.7);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.total-value strong {
+  font-size: 0.9375rem;
+  font-weight: 800;
+}
+
+.total-value.protein-value strong {
+  color: var(--macro-protein);
+}
+
+.total-value.carbs-value strong {
+  color: var(--macro-carbs);
+}
+
+.total-value.fat-value strong {
+  color: var(--macro-fat);
+}
+
+.total-value.kcal-value strong {
+  color: var(--macro-calories);
+  font-size: 1rem;
 }
