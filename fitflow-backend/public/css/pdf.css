@@ -1886,13 +1886,13 @@ html, body {
 
 .meal-header-left {
   display: flex;
-  align-items: center;
+  align-items: start;
   gap: 0.75rem;
 }
 
-.meal-icon {
-  font-size: 1.5rem;
-  flex-shrink: 0;
+.meal-icon svg {
+  width: 2rem;
+  height: 2rem;
 }
 
 .meal-title {
@@ -6684,7 +6684,7 @@ html, body {
 
 /* Hero */
 .nutri-hero {
-  padding: 0.7;
+  padding: 0.7rem;
   background: linear-gradient(135deg, hsla(142, 71%, 45%, 0.08) 0%, hsla(160, 84%, 39%, 0.12) 100%);
   border: 2px solid hsla(142, 74%, 35%, 0.144);
   border-radius: 1.25rem;
@@ -6783,13 +6783,13 @@ html, body {
 .nutri-pillar-icon.timing { background-color: hsla(270, 100%, 70%, 0.12); }
 
 .nutri-pillar-icon svg { width: 1.25rem; height: 1.25rem; }
-.nutri-pillar-icon.protein svg { color: var(--macro-protein); }
+.nutri-pillar-icon.protein svg { fill: var(--macro-protein); }
 .nutri-pillar-icon.carbs svg { color: var(--macro-carbs); }
 .nutri-pillar-icon.fat svg { color: var(--macro-fat); }
 .nutri-pillar-icon.timing svg { color: hsl(270, 100%, 60%); }
 
 .nutri-pillar h4 { font-size: 0.875rem; font-weight: 700; margin-bottom: 0.25rem; }
-.nutri-pillar p { font-size: 0.75rem; color: var(--muted-foreground); line-height: 1.4; }
+.nutri-pillar p { font-size: 0.75rem; color: var(--muted-foreground); line-height: 1.4; text-align: justify; word-break: break-all;}
 
 /* Macros Summary */
 .nutri-macros-grid {
@@ -6801,10 +6801,14 @@ html, body {
 }
 
 .nutri-macro-card {
-  padding: 0.875rem;
+  padding: 0.2rem;
   border-radius: 0.875rem;
   text-align: center;
   border: 2px solid;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .nutri-macro-card.protein { background-color: hsla(221, 83%, 53%, 0.08); border-color: hsla(221, 83%, 53%, 0.2); }
@@ -6815,8 +6819,11 @@ html, body {
 .nutri-macro-emoji { font-size: 1.5rem; margin-bottom: 0.25rem; }
 
 .nutri-macro-value {
-  display: block;
-  font-size: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.0rem;
   font-weight: 800;
   line-height: 1;
   margin-bottom: 0.25rem;
@@ -6827,14 +6834,14 @@ html, body {
 .nutri-macro-card.fat .nutri-macro-value { color: var(--macro-fat); }
 .nutri-macro-card.calories .nutri-macro-value { color: var(--macro-calories); }
 
-.nutri-macro-label { font-size: 0.75rem; color: var(--muted-foreground); font-weight: 600; }
+.nutri-macro-label { font-size: 0.75rem; color: var(--muted-foreground); font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 0.4rem; }
 
 /* Tips */
 .nutri-tips-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 0.625rem;
-  margin-bottom: 1rem;
+  margin-bottom: auto;
 }
 
 .nutri-tip-card {
@@ -9654,4 +9661,54 @@ html, body {
 .total-value.kcal-value strong {
   color: var(--macro-calories);
   font-size: 1rem;
+}
+.treino-schedule-grid {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  /* grid-template-rows: 1fr 1fr; */
+  gap: 0.375rem;
+}
+
+/* Segunda a Sexta */
+.treino-day:nth-child(1),
+.treino-day:nth-child(2),
+.treino-day:nth-child(3),
+.treino-day:nth-child(4),
+.treino-day:nth-child(5) {
+  grid-column: span 2;
+}
+
+/* Sábado e Domingo — horizontal */
+.treino-day:nth-child(6),
+.treino-day:nth-child(7) {
+  grid-column: span 5;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 0.5rem 1rem;
+  text-align: left;
+  margin-top: 0.7rem;
+}
+
+.treino-day:nth-child(6) .treino-day-label,
+.treino-day:nth-child(7) .treino-day-label {
+  display: inline;
+  margin-bottom: 0;
+}
+
+.treino-day:nth-child(6) .treino-day-icon,
+.treino-day:nth-child(7) .treino-day-icon {
+  margin: 0;
+  flex-shrink: 0;
+}
+
+/* Badge cardio */
+.treino-day {
+  position: relative;
+}
+
+.treino-day.cardio {
+  padding-top: 1.5rem;
 }
