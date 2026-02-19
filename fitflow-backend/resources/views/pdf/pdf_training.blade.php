@@ -13,130 +13,142 @@
 
   <!-- ==================== PAGE 1: COVER ==================== -->
   <section class="pdf-page cover">
+    <!-- Sidebar accent stripe -->
+    <div class="cover-sidebar"></div>
+    <div class="cover-sidebar-right"></div>
+
+    <!-- Top accent bar -->
+    <div class="cover-topbar">
+      <div class="cover-topbar-inner">
+        <span class="cover-topbar-text">HIGHFIT AI</span>
+        <span class="cover-topbar-divider">|</span>
+        <span class="cover-topbar-text">PLANO PREMIUM</span>
+        <span class="cover-topbar-divider">|</span>
+        <span class="cover-topbar-text">{{ now()->translatedFormat('Y') }}</span>
+      </div>
+    </div>
+
     <div class="cover-content">
       <!-- Badge Premium -->
       <div class="cover-badge">
+        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z" />
+        </svg>
         <span>Plano Premium Personalizado</span>
       </div>
 
-      <!-- Icon Principal -->
-      <div class="cover-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none"
-          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M14.4 14.4 9.6 9.6" />
-          <path
-            d="M18.657 21.485a2 2 0 1 1-2.829-2.828l-1.767 1.768a2 2 0 1 1-2.829-2.829l6.364-6.364a2 2 0 1 1 2.829 2.829l-1.768 1.767a2 2 0 1 1 2.828 2.829z" />
-          <path d="m21.5 21.5-1.4-1.4" />
-          <path d="M3.9 3.9 2.5 2.5" />
-          <path
-            d="M6.404 12.768a2 2 0 1 1-2.829-2.829l1.768-1.767a2 2 0 1 1-2.828-2.829l2.828-2.828a2 2 0 1 1 2.829 2.828l1.767-1.768a2 2 0 1 1 2.829 2.829z" />
-        </svg>
+      <!-- Título Principal -->
+      <div class="cover-hero">
+        <h1 class="cover-title-line1">PLANO</h1>
+        <h1 class="cover-title-line2">PERSONALIZADO</h1>
+        <div class="cover-title-accent">
+          <div class="cover-title-line"></div>
+          <span class="cover-title-de">DE</span>
+          <div class="cover-title-line"></div>
+        </div>
+        <h2 class="cover-subtitle">TREINO <span class="cover-amp">&</span> NUTRIÇÃO</h2>
       </div>
 
-      <!-- Título Principal -->
-      <h1 class="cover-title">PLANO PERSONALIZADO DE</h1>
-      <h2 class="cover-subtitle">TREINO & NUTRIÇÃO</h2>
+      <!-- Divider decorativo -->
+      <div class="cover-ornament">
+        <div class="cover-ornament-wing left"></div>
+        <div class="cover-ornament-center">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14.4 14.4 9.6 9.6" />
+            <path d="M18.657 21.485a2 2 0 1 1-2.829-2.828l-1.767 1.768a2 2 0 1 1-2.829-2.829l6.364-6.364a2 2 0 1 1 2.829 2.829l-1.768 1.767a2 2 0 1 1 2.828 2.829z" />
+            <path d="m21.5 21.5-1.4-1.4" />
+            <path d="M3.9 3.9 2.5 2.5" />
+            <path d="M6.404 12.768a2 2 0 1 1-2.829-2.829l1.768-1.767a2 2 0 1 1-2.828-2.829l2.828-2.828a2 2 0 1 1 2.829 2.828l1.767-1.768a2 2 0 1 1 2.829 2.829z" />
+          </svg>
+        </div>
+        <div class="cover-ornament-wing right"></div>
+      </div>
 
-      <!-- Linha Decorativa -->
-      <div class="cover-divider"></div>
-
-      <!-- Nome do Usuário -->
-      <div>
+      <!-- Card do Usuário -->
+      <div class="cover-user-card">
         <p class="cover-user-label">Desenvolvido exclusivamente para</p>
         <p class="cover-user-name">{{$user->nome}}</p>
+        <div class="cover-user-underline"></div>
       </div>
 
-      <!-- Pilares do Plano -->
-      <div class="cover-pillars">
-        <div class="cover-pillar">
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-            style="color: var(--accent);">
-            <circle cx="12" cy="12" r="10" />
-            <circle cx="12" cy="12" r="6" />
-            <circle cx="12" cy="12" r="2" />
-          </svg>
-          <span>Transformação Corporal</span>
-        </div>
-        <div class="cover-pillar">
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-            style="color: var(--warning);">
-            <path
-              d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z" />
-          </svg>
-          <span>Performance Otimizada</span>
-        </div>
-        <div class="cover-pillar">
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-            style="color: var(--energy);">
-            <path d="M3 3v16a2 2 0 0 0 2 2h16" />
-            <path
-              d="M7 11.207a.5.5 0 0 1 .146-.353l2-2a.5.5 0 0 1 .708 0l3.292 3.292a.5.5 0 0 0 .708 0l4.292-4.292a.5.5 0 0 1 .854.353V16a1 1 0 0 1-1 1H8a1 1 0 0 1-1-1z" />
-          </svg>
-          <span>Resultados Mensuráveis</span>
-        </div>
-      </div>
-
-      <!-- Citação Motivacional -->
-      <div class="cover-quote">
-        <p>"Seu corpo é o reflexo das suas escolhas diárias. Cada treino, cada refeição, cada decisão te aproxima do seu
-          objetivo."</p>
-      </div>
-
-      <!-- Ícones de Seções -->
-      <div class="cover-icons">
-        <div class="cover-icon-item">
-          <div class="cover-icon-circle">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-              style="color: var(--accent);">
+      <!-- 3 Features em colunas -->
+      <div class="cover-features">
+        <div class="cover-feature">
+          <div class="cover-feature-icon" style="border-color: hsla(160, 84%, 39%, 0.5);">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: hsl(160, 84%, 39%);">
               <path d="M14.4 14.4 9.6 9.6" />
-              <path
-                d="M18.657 21.485a2 2 0 1 1-2.829-2.828l-1.767 1.768a2 2 0 1 1-2.829-2.829l6.364-6.364a2 2 0 1 1 2.829 2.829l-1.768 1.767a2 2 0 1 1 2.828 2.829z" />
+              <path d="M18.657 21.485a2 2 0 1 1-2.829-2.828l-1.767 1.768a2 2 0 1 1-2.829-2.829l6.364-6.364a2 2 0 1 1 2.829 2.829l-1.768 1.767a2 2 0 1 1 2.828 2.829z" />
               <path d="m21.5 21.5-1.4-1.4" />
               <path d="M3.9 3.9 2.5 2.5" />
-              <path
-                d="M6.404 12.768a2 2 0 1 1-2.829-2.829l1.768-1.767a2 2 0 1 1-2.828-2.829l2.828-2.828a2 2 0 1 1 2.829 2.828l1.767-1.768a2 2 0 1 1 2.829 2.829z" />
+              <path d="M6.404 12.768a2 2 0 1 1-2.829-2.829l1.768-1.767a2 2 0 1 1-2.828-2.829l2.828-2.828a2 2 0 1 1 2.829 2.828l1.767-1.768a2 2 0 1 1 2.829 2.829z" />
             </svg>
           </div>
-          <span class="cover-icon-label">Treino</span>
+          <span class="cover-feature-title">Treino</span>
+          <span class="cover-feature-desc">Periodização científica</span>
         </div>
-        <div class="cover-icon-separator"></div>
-        <div class="cover-icon-item">
-          <div class="cover-icon-circle">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-              style="color: var(--energy);">
-              <path
-                d="M12 20.94c1.5 0 2.75 1.06 4 1.06 3 0 6-8 6-12.22A4.91 4.91 0 0 0 17 5c-2.22 0-4 1.44-5 3-1-1.56-2.78-3-5-3a4.9 4.9 0 0 0-5 4.78C2 14 5 22 8 22c1.25 0 2.5-1.06 4-1.06Z" />
+
+        <div class="cover-feature-divider"></div>
+
+        <div class="cover-feature">
+          <div class="cover-feature-icon" style="border-color: hsla(142, 71%, 45%, 0.5);">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: hsl(142, 71%, 45%);">
+              <path d="M12 20.94c1.5 0 2.75 1.06 4 1.06 3 0 6-8 6-12.22A4.91 4.91 0 0 0 17 5c-2.22 0-4 1.44-5 3-1-1.56-2.78-3-5-3a4.9 4.9 0 0 0-5 4.78C2 14 5 22 8 22c1.25 0 2.5-1.06 4-1.06Z" />
               <path d="M10 2c1 .5 2 2 2 5" />
             </svg>
           </div>
-          <span class="cover-icon-label">Nutrição</span>
+          <span class="cover-feature-title">Nutrição</span>
+          <span class="cover-feature-desc">Macros otimizados</span>
         </div>
-        <div class="cover-icon-separator"></div>
-        <div class="cover-icon-item">
-          <div class="cover-icon-circle">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-              style="color: var(--gold);">
+
+        <div class="cover-feature-divider"></div>
+
+        <div class="cover-feature">
+          <div class="cover-feature-icon" style="border-color: hsla(38, 92%, 50%, 0.5);">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: hsl(38, 92%, 50%);">
               <polyline points="22 7 13.5 15.5 8.5 10.5 2 17" />
               <polyline points="16 7 22 7 22 13" />
             </svg>
           </div>
-          <span class="cover-icon-label">Evolução</span>
+          <span class="cover-feature-title">Evolução</span>
+          <span class="cover-feature-desc">Resultados mensuráveis</span>
         </div>
       </div>
 
-      <!-- Informações do Plano -->
-      <div class="cover-info">
-        <div class="cover-info-item">
-            <strong>Data de Emissão:</strong>
-            {{ now()->translatedFormat('d \\d\\e F \\d\\e Y') }}
+      <!-- Citação -->
+      <div class="cover-quote">
+        <span class="cover-quote-open">"</span>
+        <p>Seu corpo é o reflexo das suas escolhas diárias. Cada treino, cada refeição, cada decisão te aproxima do seu objetivo.</p>
+        <span class="cover-quote-close">"</span>
+      </div>
+    </div>
+
+    <!-- Footer bar -->
+    <div class="cover-footer">
+      <div class="cover-footer-inner">
+        <div class="cover-footer-item">
+          <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect width="18" height="18" x="3" y="4" rx="2" ry="2" />
+            <line x1="16" x2="16" y1="2" y2="6" />
+            <line x1="8" x2="8" y1="2" y2="6" />
+            <line x1="3" x2="21" y1="10" y2="10" />
+          </svg>
+          <span>{{ now()->translatedFormat('d \\d\\e F \\d\\e Y') }}</span>
         </div>
-        <div class="cover-info-item"><strong>Duração do Plano:</strong> {{$user->prazoPlanejado}}</div>
+        <div class="cover-footer-dot">◆</div>
+        <div class="cover-footer-item">
+          <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10" />
+            <polyline points="12 6 12 12 16 14" />
+          </svg>
+          <span>Programa de {{$user->prazoPlanejado}}</span>
+        </div>
       </div>
     </div>
   </section>
