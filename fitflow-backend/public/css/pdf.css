@@ -1827,10 +1827,10 @@ body {
 }
 
 .muscle-badge {
-  display: inline-block;
-  padding: 0.2rem 0.5rem;
+  display: inline;
+  padding: 0.1rem 0.2rem;
   border-radius: 0.25rem;
-  font-size: 0.65rem;
+  font-size: 0.45rem;
   font-weight: 500;
 }
 
@@ -7090,12 +7090,19 @@ body {
   border: 1px solid hsla(0, 0%, 0%, 0.06);
 }
 
-/* Exercise Table - Improved */
 .exercise-table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 0.875rem;
+  font-size: 0.8rem;
   flex: 1;
+  table-layout: fixed;
+}
+
+.exercise-name {
+  font-weight: 600;
+  color: var(--foreground);
+  display: block;
+  word-break: break-word; /* ← evita overflow */
 }
 
 .exercise-table thead {

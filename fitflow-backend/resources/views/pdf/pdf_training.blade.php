@@ -1071,15 +1071,22 @@
         </div>
 
         <table class="exercise-table">
+          <colgroup>
+            <col style="width: 2.5rem">       <!-- # -->
+            <col style="width: auto">          <!-- Exercício (cresce livremente) -->
+            <col style="width: 4rem">          <!-- Séries -->
+            <col style="width: 5rem">          <!-- Reps -->
+            <col style="width: 5rem">        <!-- Descanso -->
+            <col style="width: 4.5rem">        <!-- RPE -->
+          </colgroup>
           <thead>
             <tr>
-              <th style="width: 2.5rem;">#</th>
+              <th>#</th>
               <th>Exercício</th>
-              <th style="width: 5.5rem;">Músculo</th>
-              <th class="center" style="width: 4rem;">Séries</th>
-              <th class="center" style="width: 4.5rem;">Reps</th>
-              <th class="center" style="width: 4.5rem;">Descanso</th>
-              <th class="center" style="width: 3.5rem;">RPE</th>
+              <th class="center">Séries</th>
+              <th class="center">Reps</th>
+              <th class="center">Descanso</th>
+              <th class="center">RPE</th>
             </tr>
           </thead>
           <tbody>
@@ -1087,13 +1094,15 @@
               <tr>
                 <td><span class="exercise-number upper">{{ $index + 1 }}</span></td>
                 <td>
-                  <span class="exercise-name">{{ $exercicio->nome }}</span>
+                  <span class="muscle-badge upper">{{ $exercicio->musculo_alvo }}</span>
+                  <span class="exercise-name">
+                    {{ $exercicio->nome }}
+                  </span>
                   <div class="exercise-tip">
                     <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" viewBox="0 0 640 640"><!--!Font Awesome Free v7.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2026 Fonticons, Inc.--><path d="M420.9 448C428.2 425.7 442.8 405.5 459.3 388.1C492 353.7 512 307.2 512 256C512 150 426 64 320 64C214 64 128 150 128 256C128 307.2 148 353.7 180.7 388.1C197.2 405.5 211.9 425.7 219.1 448L420.8 448zM416 496L224 496L224 512C224 556.2 259.8 592 304 592L336 592C380.2 592 416 556.2 416 512L416 496zM312 176C272.2 176 240 208.2 240 248C240 261.3 229.3 272 216 272C202.7 272 192 261.3 192 248C192 181.7 245.7 128 312 128C325.3 128 336 138.7 336 152C336 165.3 325.3 176 312 176z"/></svg>
                     <span>{{ $exercicio->dica_tecnica }}</span>
                   </div>
                 </td>
-                <td><span class="muscle-badge upper">{{ $exercicio->musculo_alvo }}</span></td>
                 <td class="center"><span class="exercise-sets">{{ $exercicio->series }}</span></td>
                 <td class="center"><span class="exercise-reps">{{ $exercicio->repeticoes }}</span></td>
                 <td class="center"><span class="exercise-rest">{{ $exercicio->descanso_segundos }}s</span></td>
@@ -1398,7 +1407,7 @@
                 </svg>
                 <div class="hydration-droplet-content">
                   <span class="hydration-main-number">
-                      {{ ceil(($user->peso * 35) / 1000) }}L
+                      {{ ceil(( ($user->peso * 35) / 1000) * 1.5) }}L
                   </span>
 
                   <span class="hydration-main-label">Meta Diária</span>
