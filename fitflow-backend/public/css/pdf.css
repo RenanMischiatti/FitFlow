@@ -106,6 +106,7 @@
   --purple-100: hsl(269, 100%, 92%);
 
   /* Cyan */
+  --cyan: hsl(189, 94%, 43%);
   --cyan-50: hsl(183, 100%, 96%);
   --cyan-100: hsl(185, 96%, 90%);
   --cyan-200: hsl(186, 94%, 82%);
@@ -12135,7 +12136,6 @@ body {
   color: white;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  box-shadow: 0 2px 4px hsla(0, 84%, 60%, 0.3);
   z-index: 2;
 }
 
