@@ -32,6 +32,7 @@
   --primary: #0b2c75;
   --primary-foreground: hsl(0, 0%, 100%);
   --primary-light: hsl(217, 91%, 60%);
+  --purple: hsla(280, 65%, 60%, 1);
 
   /* Secondary */
   --secondary: #f3f4f6;
@@ -7420,6 +7421,10 @@ body {
   font-weight: 600;
   color: var(--foreground);
   white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+  justify-content: center;
 }
 
 /* Pillars Grid */
@@ -8236,9 +8241,9 @@ body {
   font-weight: bolder;
   color: #f3f4f6;
   line-height: 1;
-  -webkit-text-stroke: 1px rgba(0, 0, 0, 0.8);
+  -webkit-text-stroke: 2px #000;
+  paint-order: stroke fill;
 }
-
 .hydration-main-label {
   display: block;
   font-size: 0.75rem;
@@ -11239,7 +11244,7 @@ body {
 }
 
 .rest-info-card.purple .rest-info-icon {
-  background: linear-gradient(135deg, var(--purple) 0%, hsl(280, 60%, 55%) 100%);
+  background: linear-gradient(135deg, hsla(280, 65%, 60%, 1) 0%, hsl(280, 60%, 55%) 100%);
 }
 
 .rest-info-card.blue .rest-info-icon {
@@ -11357,6 +11362,7 @@ body {
   font-size: 0.6875rem;
   font-weight: 600;
   color: var(--foreground);
+  margin-right: auto;
 }
 
 .rest-macro-amount {
@@ -11488,7 +11494,7 @@ body {
 }
 
 .rest-benefit-icon.purple {
-  background: linear-gradient(135deg, var(--purple) 0%, hsl(280, 60%, 55%) 100%);
+  background: linear-gradient(135deg, hsla(280, 65%, 60%, 1) 0%, hsl(280, 60%, 55%) 100%);
 }
 
 .rest-benefit-icon.gold {
